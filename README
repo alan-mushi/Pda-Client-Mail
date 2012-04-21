@@ -1,8 +1,14 @@
 --------------- Contenu ---------------
-	
-- JavaDoc de l'API
-- Diagramme de Classes de L'API Server
-- Énoncé ( '.mht' ouverture avec opera possible )
-- Archive du Pda donné par l'IUT
-
+.
+├── Doc
+│   ├── ap5_pda_27-03-2012.tar.gz
+│   ├── API Pda.dia
+│   ├── API PdaNetwork.dia
+│   ├── application_messagerie.mht
+│   ├── JavaDoc API
+│   └── JavaDoc API.tar
+├── README
+└── Spec
+    ├── Arbre_de_fonctionnalitees_Thibault.dia
+    └── Cas d'utilisation Guillaume.dia
 
