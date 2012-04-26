@@ -1,0 +1,3 @@
+class PingManager
+!!!136706.java!!!	run() : void
+	    sendPing ();

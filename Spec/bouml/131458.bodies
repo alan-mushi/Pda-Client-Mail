@@ -1,0 +1,39 @@
+class XMLMessage
+!!!145026.java!!!	XMLMessage(in xmlMessage : String, inout tokens : List<String>)
+
+	try {
+	    if (xmlMessage == null || xmlMessage.equals (""))
+		throw new ProtocolException ("xmlMessage ne doit pas etre vide");
+	    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance ();
+	    DocumentBuilder db = factory.newDocumentBuilder ();
+	    InputSource inStream = new InputSource ();
+	    inStream.setCharacterStream (new StringReader (xmlMessage));
+	    Document doc;
+	    doc = db.parse (inStream);
+	    doc.getDocumentElement ().normalize ();
+	    for (String token : tokens)
+		if (doc.getElementsByTagName (token).getLength () != 0) {
+		    typeReq = token;
+		    nodeLst = doc.getElementsByTagName (token);
+		    return;
+		}
+	    throw new ProtocolException ("type de message inconnu :"+xmlMessage);
+ 	} catch (ProtocolException e) {
+	    throw e;
+ 	} catch (Exception e) {
+	    throw new ProtocolException ("erreur de XML: " + e.getMessage (), e);
+	}
+!!!145154.java!!!	getTypeReq() : String
+	return typeReq;
+!!!145282.java!!!	getAttribute(in name : String) : String
+	Node fstNode = nodeLst.item (0);
+	if (fstNode.getNodeType () == Node.ELEMENT_NODE) {
+	    Element fstElmnt = (Element) fstNode;
+	    NodeList fstNmElmntLst = fstElmnt.getElementsByTagName (name);
+	    Element fstNmElmnt = (Element) fstNmElmntLst.item (0);
+	    if (fstNmElmnt != null){
+		NodeList fstNm = fstNmElmnt.getChildNodes ();
+		return fstNm.item (0).getNodeValue ();
+	    }
+	}
+	throw new ProtocolException ("erreur protocol: attribut " + name + "inexistant");

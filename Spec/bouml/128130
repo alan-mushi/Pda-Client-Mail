@@ -1,0 +1,1079 @@
+format 70
+"base" // pda::base
+  revision 1
+  modified_by 2 "root"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default show_stereotype_properties default
+  
+  java_dir "pda/base"
+  java_package "pda.base"
+  classview 128002 "base"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    class 128002 "IApplication"
+      visibility public stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment " Common interface for all plugable applications.
+
+@author F. Merciol, D. Deveaux 
+                     <{francois.merciol|daniel.deveaux}@univ-ubs.fr>
+@version $Revision: 27 $
+@date $Date: 2009-03-08 19:04:18 +0100 (dim 08 mar 2009) $
+"
+      operation 128002 "start"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "pda" type class_ref 128130 // IPda
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Start the application in the specified PDA"
+      end
+
+      operation 128130 "getAppliName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Return the application name as String"
+      end
+
+      operation 128258 "getAppliPanel"
+	public explicit_return_type "JPanel"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Return the panel that contains all the application display"
+      end
+
+      operation 128386 "close"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Clode the application ant its display panel
+@param false if the application denied to commit a suicide"
+      end
+    end
+
+    class 128130 "IPda"
+      visibility public stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment " Minimal interface of a PDA.
+
+ @author F. Merciol, D. Deveaux 
+                     <{francois.merciol|daniel.deveaux}@univ-ubs.fr>
+ @version $Revision: 27 $"
+      operation 128514 "launchAppli"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "appli" type class_ref 128002 // IApplication
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Launch the specified application"
+      end
+
+      operation 128642 "setSkin"
+	public explicit_return_type "void"
+	nparams 2
+	  param inout name "skin" explicit_type "ImageIcon"
+	  param inout name "pos" explicit_type "Point"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Change PDA look
+@param skin background image
+@param pos screen position on skin"
+      end
+
+      operation 128770 "getApplicationsName"
+	public explicit_return_type "Vector<String>"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Get names of application already launch
+@return names"
+      end
+
+      operation 128898 "selectApplication"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "name" explicit_type "String"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Set application foreground
+@param name of the chosen application"
+      end
+
+      operation 129026 "exitApplication"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "appli" type class_ref 128002 // IApplication
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Kill an application
+@param appli application reference"
+      end
+    end
+
+    class 128258 "PdaEngine"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment " The base class of PDA simulator.
+
+ This class displays the PDA emulator and manage all the applications
+
+ @author F. Merciol, D. Deveaux 
+                     <{francois.merciol|daniel.deveaux}@univ-ubs.fr>
+ @version $Revision: 27 $"
+      operation 129154 "PdaEngine"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Public ressources -----------------------------------------------------
+
+ Constructors
+
+
+ The PDASimu constructor."
+      end
+
+      operation 129282 "launchAppli"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "appli" type class_ref 128002 // IApplication
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " ------------------------------------------------------------ PDASimu()
+
+ Public methods
+
+ 
+ see interface documentation"
+      end
+
+      operation 129410 "closeAppli"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "idx" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " -------------------------------------------------------- launchAppli()
+
+ Close the current application"
+      end
+
+      operation 129538 "getApplicationsName"
+	public explicit_return_type "Vector<String>"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " --------------------------------------------------------- closeAppli()"
+      end
+
+      operation 129666 "getApplicationPanel"
+	public explicit_return_type "JPanel"
+	nparams 1
+	  param in name "name" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 129794 "exitApplication"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "appli" type class_ref 128002 // IApplication
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 128002 // startedApplications (<unidirectional association>)
+	relation 128002 --->
+	  stereotype "Vector"
+	  a role_name "startedApplications" init_value " 
+                                                    new Vector<IApplication>()" protected
+	    comment "Private implementation -------------------------------------------------
+
+ the vector that stores the running applications "
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 128002 // startedApplications (<unidirectional association>)
+	  b parent class_ref 128002 // IApplication
+      end
+    end
+
+    class 128386 "PdaScreen"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment " The base class of PDA simulator.
+
+ This class displays the PDA emulator and manage all the applications
+
+ @author F. Merciol, D. Deveaux 
+                     <{francois.merciol|daniel.deveaux}@univ-ubs.fr>
+ @version $Revision: 32 $"
+      classrelation 128130 // <generalisation>
+	relation 128130 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 128130 // <generalisation>
+	  b parent class_ref 128514 // JFrame
+      end
+
+      attribute 128002 "screenX"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 22"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Public ressources -----------------------------------------------------
+
+ Constants
+
+ X position of the screen's left corner "
+      end
+
+      attribute 128130 "screenY"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 78"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Y position of the screen's left corner "
+      end
+
+      attribute 128258 "screenW"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 322"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " width of the screen "
+      end
+
+      attribute 128386 "screenH"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 346"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " height of the screen "
+      end
+
+      operation 129922 "PdaScreen"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "anEngine" type class_ref 128258 // PdaEngine
+	  param inout name "aPda" type class_ref 128642 // PdaSimu
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Constructors
+
+
+ The PDASimu constructor."
+      end
+
+      operation 130050 "addAppli"
+	public explicit_return_type "void"
+	nparams 2
+	  param in name "appliName" explicit_type "String"
+	  param inout name "appliPanel" explicit_type "JPanel"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " ---------------------------------------------------------- PdaScreen()
+
+ Public methods
+
+ 
+ see interface documentation"
+      end
+
+      operation 130178 "getAppliIndex"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " ----------------------------------------------------------- addAppli()
+
+ Return the index of the selected application.
+
+@return the required index"
+      end
+
+      operation 130306 "getAppliIndex"
+	public explicit_return_type "int"
+	nparams 1
+	  param inout name "appliPanel" explicit_type "JPanel"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " ------------------------------------------------------ getAppliIndex()"
+      end
+
+      operation 130434 "closeAppli"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "idx" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Close the current application"
+      end
+
+      operation 130562 "quit"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " --------------------------------------------------------- closeAppli()
+
+ Quit the PDA program
+
+ Attention pas de synchronized sinon le thread de la machine virtuelle qui gère l'IHM se cloque"
+      end
+
+      operation 130690 "selectApplication"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "appliPanel" explicit_type "JPanel"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " --------------------------------------------------------------- quit()"
+      end
+
+      operation 130818 "guiInit"
+	protected explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Private implementation -------------------------------------------------
+
+
+ Initialization of the GUI"
+      end
+
+      operation 130946 "setSkin"
+	public explicit_return_type "void"
+	nparams 2
+	  param inout name "skinIcon" explicit_type "ImageIcon"
+	  param inout name "pos" explicit_type "Point"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " ------------------------------------------------------------ guiInit()"
+      end
+
+      attribute 128514 "serialVersionUID"
+	class_attribute const_attribute protected explicit_type "long"
+	init_value " 0L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Class is serializable, it must define a serial version "
+      end
+
+      attribute 128642 "fileMenu"
+	protected explicit_type "JMenu"
+	init_value " new JMenu(\"File\")"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " file menu item "
+      end
+
+      attribute 128770 "helpMenu"
+	protected explicit_type "JMenu"
+	init_value " new JMenu(\"Help\")"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " help menu item "
+      end
+
+      attribute 128898 "startMI"
+	protected explicit_type "JMenuItem"
+	init_value " new JMenuItem(\"start Launcher\")"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " start menu item "
+      end
+
+      attribute 129026 "closeMI"
+	protected explicit_type "JMenuItem"
+	init_value " new JMenuItem(\"close application\")"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " close menu item "
+      end
+
+      attribute 129154 "quitMI"
+	protected explicit_type "JMenuItem"
+	init_value " new JMenuItem(\"quit\")"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " quit menu item "
+      end
+
+      attribute 129282 "skin"
+	protected explicit_type "JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " the skin ot the application "
+      end
+
+      attribute 129410 "tabbedPane"
+	protected explicit_type "JTabbedPane"
+	init_value " new JTabbedPane()"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " the tabbed pane "
+      end
+
+      classrelation 128258 // ctrl (<unidirectional association>)
+	relation 128258 --->
+	  a role_name "ctrl" protected
+	    comment " the view of the application 
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 128258 // ctrl (<unidirectional association>)
+	  b parent class_ref 128642 // PdaSimu
+      end
+
+      classrelation 128386 // engine (<unidirectional association>)
+	relation 128386 --->
+	  a role_name "engine" protected
+	    comment " the engine of the application 
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 128386 // engine (<unidirectional association>)
+	  b parent class_ref 128258 // PdaEngine
+      end
+    end
+
+    class 128642 "PdaSimu"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment " The base class of PDA simulator.
+
+ This class displays the PDA emulator and manage all the applications
+
+ @author F. Merciol, D. Deveaux 
+                     <{francois.merciol|daniel.deveaux}@univ-ubs.fr>
+ @version $Revision: 27 $"
+      classrelation 128514 // <realization>
+	relation 128514 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 128514 // <realization>
+	  b parent class_ref 128130 // IPda
+      end
+
+      classrelation 128642 // <realization>
+	relation 128642 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 128642 // <realization>
+	  b parent class_ref 128770 // ActionListener
+      end
+
+      attribute 129538 "screenX"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 25"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Public ressources -----------------------------------------------------
+
+ Constants
+
+ X position of the screen's left corner "
+      end
+
+      attribute 129666 "screenY"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 130"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Y position of the screen's left corner "
+      end
+
+      attribute 129794 "screenW"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 326"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " width of the screen "
+      end
+
+      attribute 129922 "screenH"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 326"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " height of the screen "
+      end
+
+      operation 131074 "PdaSimu"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Constructors
+
+
+ The PDASimu constructor."
+      end
+
+      operation 131202 "main"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param inout name "arg" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0}[] ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " ------------------------------------------------------------ PDASimu()
+
+ Public methods
+
+
+ The launcher of the PDA program."
+      end
+
+      operation 131330 "launchAppli"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "appli" type class_ref 128002 // IApplication
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " --------------------------------------------------------------- main()
+ 
+ see interface documentation"
+      end
+
+      operation 131458 "getApplicationsName"
+	public explicit_return_type "Vector<String>"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " -------------------------------------------------------- launchAppli()
+
+ see interface documentation"
+      end
+
+      operation 131586 "selectApplication"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "name" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " see interface documentation"
+      end
+
+      operation 131714 "exitApplication"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "appli" type class_ref 128002 // IApplication
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " see interface documentation"
+      end
+
+      operation 131842 "setSkin"
+	public explicit_return_type "void"
+	nparams 2
+	  param inout name "skinIcon" explicit_type "ImageIcon"
+	  param inout name "pos" explicit_type "Point"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " see interface documentation
+XXX ImageIcon ou URL ?"
+      end
+
+      operation 131970 "startLauncher"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Start the lancher application"
+      end
+
+      operation 132098 "closeAppli"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " ------------------------------------------------------ startLauncher()
+
+ Close the current application"
+      end
+
+      operation 132226 "quit"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent synchronized java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " --------------------------------------------------------- closeAppli()
+
+ Quit the PDA program"
+      end
+
+      operation 132354 "actionPerformed"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "e" explicit_type "ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " --------------------------------------------------------------- quit()
+
+ Callback function, reaction to button pushed."
+      end
+
+      classrelation 128770 // view (<unidirectional association>)
+	relation 128770 --->
+	  a role_name "view" protected
+	    comment " ---------------------------------------------------- actionPerformed()
+
+Private implementation -------------------------------------------------
+
+ the view of the application 
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 128770 // view (<unidirectional association>)
+	  b parent class_ref 128386 // PdaScreen
+      end
+
+      classrelation 128898 // engine (<unidirectional association>)
+	relation 128898 --->
+	  a role_name "engine" protected
+	    comment " the engine of the application 
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 128898 // engine (<unidirectional association>)
+	  b parent class_ref 128258 // PdaEngine
+      end
+    end
+
+    classdiagram 128002 "class diagram"
+      draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+      size A4
+    end
+  end
+
+  deploymentview 128002 "base"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    artifact 128002 "IApplication"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import pda.base.IPda;
+import javax.swing.*;
+${definition}"
+      associated_classes
+	class_ref 128002 // IApplication
+      end
+      comment " PDA project -- UBS/IUT de Vannes -- Dept Informatique
+
+ Copyright 2007-08 © IUT de Vannes
+ Ce logiciel pédagogique est diffusé sous licence GPL"
+    end
+
+    artifact 128130 "IPda"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import javax.swing.ImageIcon;
+import java.awt.Point;
+import java.util.Vector;
+import pda.base.IApplication;
+${definition}"
+      associated_classes
+	class_ref 128130 // IPda
+      end
+      comment " PDA project -- UBS/IUT de Vannes -- Dept Informatique
+
+ Copyright 2007-08 © IUT de Vannes
+ Ce logiciel pédagogique est diffusé sous licence GPL"
+    end
+
+    artifact 128258 "PdaEngine"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import pda.base.IApplication;
+import pda.base.IPda;
+import pda.launcher.Launcher;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.util.*;
+${definition}"
+      associated_classes
+	class_ref 128258 // PdaEngine
+      end
+      comment " PDA project -- UBS/IUT de Vannes -- Dept Informatique
+
+ $Id$
+
+ Copyright 2007-08 © IUT de Vannes
+ Ce logiciel pédagogique est diffusé sous licence GPL"
+    end
+
+    artifact 128386 "PdaScreen"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import pda.base.IApplication;
+import pda.base.IPda;
+import pda.launcher.Launcher;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.util.*;
+${definition}"
+      associated_classes
+	class_ref 128386 // PdaScreen
+      end
+      comment " PDA project -- UBS/IUT de Vannes -- Dept Informatique
+
+ $Id$
+
+ Copyright 2007-08 © IUT de Vannes
+ Ce logiciel pédagogique est diffusé sous licence GPL"
+    end
+
+    artifact 128514 "PdaSimu"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import pda.base.IApplication;
+import pda.base.IPda;
+import pda.launcher.Launcher;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.util.*;
+${definition}"
+      associated_classes
+	class_ref 128642 // PdaSimu
+      end
+      comment " PDA project -- UBS/IUT de Vannes -- Dept Informatique
+
+ $Id$
+
+ Copyright 2007-08 © IUT de Vannes
+ Ce logiciel pédagogique est diffusé sous licence GPL"
+    end
+  end
+
+end

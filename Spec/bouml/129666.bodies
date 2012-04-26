@@ -1,0 +1,166 @@
+class ClientPdaSocket
+!!!135298.java!!!	ClientPdaSocket(in username : String, in password : String, in service : String)
+	debug = ConfigConst.getDebug ();
+	if (debug)
+	    System.err.println ("ClientPdaSocket >>>");
+
+	if (username==null || username.equals (""))
+	    throw new ProtocolException ("Empty username");
+	if (password==null || password.equals (""))
+	    throw new ProtocolException ("Empty password");
+	if (service==null || service.equals (""))
+	    throw new ProtocolException ("Empty service");
+
+	this.username = username;
+	cipherPass = Md5.encode (password);
+	this.service = service;
+
+	remoteHost = ConfigConst.getRemoteHost ();
+	remotePort = ConfigConst.getRemotePort ();
+
+	isConnected = false;
+
+	timer = new Timer ();
+	timer.schedule (new PingManager (), 10000, 30000);
+
+	if (debug)
+	    System.err.println ("ClientPdaSocket <<<");
+!!!135426.java!!!	connect() : void
+	if (debug)
+	    System.err.println ("ClientPdaSocket:connect >>>");
+	if (isConnected ())
+	    //déja connecté
+	    return;
+	sendMessage ("<newconnect><user>"+username+"</user><cipherPass>"+cipherPass+"</cipherPass><service>"+service+"</service></newconnect>");	
+	if (debug)
+	    System.err.println ("ClientPdaSocket:connect <<<");
+!!!135554.java!!!	initSocket() : void
+	if (debug)
+	    System.err.println ("ClientPdaSocket:initSocket >>>");
+	try {
+	    servSock = new Socket (remoteHost, remotePort);
+	    out = new PrintStream (servSock.getOutputStream ());
+	    in = new BufferedReader (new InputStreamReader (servSock.getInputStream ()));
+	} catch (UnknownHostException e) {
+	    throw new ProtocolException ("Can't find server (or proxy) "+remoteHost+":"+remotePort);
+	} catch (IOException e) {
+	    throw new ProtocolException ("IOException with server (or proxy) "+remoteHost+":"+remotePort);
+	}
+	if (debug)
+	    System.err.println ("ClientPdaSocket:initSocket <<<");
+!!!135682.java!!!	closeSocket() : void
+	if (debug)
+	    System.err.println ("ClientPdaSocket:closeSocket >>>");
+	try {
+	    out.flush ();
+	    out.close ();
+	    in.close ();
+	    servSock.close ();
+	} catch (IOException e) {
+	    isConnected = false;
+	    throw new ProtocolException ("Can't close socket :", e);
+	}
+	if (debug)
+	    System.err.println ("ClientPdaSocket:closeSocket <<<");
+!!!135810.java!!!	sendMessage(in xmlMessage : String) : String
+	if (debug)
+	    System.err.println ("ClientPdaSocket:sendMessage >>>");
+	if (xmlMessage==null || xmlMessage.equals (""))
+	    throw new ProtocolException ("Empty xmlMessage");
+	if (!isConnected () && !xmlMessage.startsWith ("<newconnect>"))
+	    throw new ProtocolException ("Not connected");
+
+	initSocket ();
+	if (!xmlMessage.startsWith ("<newconnect>") && !xmlMessage.startsWith ("<ping>") && !xmlMessage.startsWith ("<close>"))
+	    xmlMessage = "<request><hash>" + hash + "</hash>" + xmlMessage + "</request>";
+	byte[] tmp=Base64.encodeBase64 (xmlMessage.getBytes ());
+	xmlMessage = new String (tmp);
+	xmlMessage = ConfigConst.getStartOfReq ()+xmlMessage+ConfigConst.getEndOfReq ();
+
+	// Différence avec WebClientPdaSocket
+	xmlMessage = addHTML (xmlMessage);
+
+	if (debug)
+	    System.err.println ("ClientPdaSocket:receiveMessage xmlMessage : "+xmlMessage);
+
+	out.println (xmlMessage);
+	out.flush ();
+	if (debug)
+	    System.err.println ("ClientPdaSocket:sendMessage <<<");
+	return receiveMessage ();
+!!!135938.java!!!	receiveMessage() : String
+	if (debug)
+	    System.err.println ("ClientPdaSocket:receiveMessage >>>");
+	try {
+	    String line = in.readLine ();
+	    if (line == null || line.equals (""))
+		closeSocket ();
+	    String tmp;
+	    while ( (tmp = in.readLine ()) != null)
+		line += tmp + "\n";
+
+	    if (debug)
+		System.err.println ("ClientPdaSocket:receiveMessage line : "+line);
+	    // Différence avec WebClientPdaSocket
+	    line = removeHTML (line);
+
+	    // pas de suppression de HTML
+	    if (!line.startsWith (ConfigConst.getStartOfReq ()) || !line.endsWith (ConfigConst.getEndOfReq ())) {
+		closeSocket ();
+		throw new ProtocolException ("Protocol Error: " + line);
+	    }
+	    line = line.substring (ConfigConst.getStartOfReq ().length (), line.length ()-ConfigConst.getEndOfReq ().length ());
+	    line = new String (Base64.decodeBase64 (line.getBytes ()));
+	    parseXml (line);
+	    closeSocket ();
+	    if (debug)
+		System.err.println ("ClientPdaSocket:receiveMessage <<<");
+	    return line;
+	} catch (IOException e) {
+	    closeSocket ();
+	    throw new ProtocolException ("Error with the listening of the socket", e);
+	}
+!!!136066.java!!!	addHTML(in xmlMessage : String) : String
+	if (debug)
+	    System.err.println ("ClientPdaSocket:addHTML : "+xmlMessage);
+	return xmlMessage;
+!!!136194.java!!!	removeHTML(in htmlMessage : String) : String
+	if (debug)
+	    System.err.println ("ClientPdaSocket:addHTML : "+htmlMessage);
+	return htmlMessage;
+!!!136322.java!!!	parseXml(in xmlMessage : String) : void
+	if (debug)
+	    System.err.println ("ClientPdaSocket:parseXml >>>");
+	XMLServerMessage xml = new XMLServerMessage (xmlMessage);
+	String typeReq = xml.getTypeReq ();
+	if (typeReq == null) {
+	    closeSocket ();
+	    throw new ProtocolException ("Unknown request type : " + typeReq);
+	}
+	//new connect
+	if (typeReq.equals ("newconnect")) {
+	    hash = xml.getAttribute ("hash");
+	    isConnected = true;
+	} else if (typeReq.equals ("error")) {
+	    if (xml.getAttribute ("type").equals ("session"))
+		isConnected = false;
+	    throw new ProtocolException (xml.getAttribute ("type") + " " + xml.getAttribute ("text"));
+	}
+!!!136450.java!!!	sendPing() : void
+	if (isConnected ()) {
+	    try {
+		sendMessage ("<ping><hash>" + hash + "</hash></ping>");
+	    } catch (ProtocolException e) {
+		System.err.println (e.getMessage ());
+	    }
+	}
+!!!136578.java!!!	isConnected() : boolean
+	return isConnected;
+!!!136834.java!!!	close() : void
+	timer.cancel ();
+	try {
+	    sendMessage ("<close><hash>" + hash + "</hash></close>");
+	} catch (ProtocolException e) {
+	    System.err.println (e.getMessage ());
+	}
+	isConnected = false;

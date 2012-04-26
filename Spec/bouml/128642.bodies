@@ -1,0 +1,48 @@
+class PdaSimu
+!!!131074.java!!!	PdaSimu()
+        engine = new PdaEngine();
+        view = new PdaScreen(engine, this);
+        startLauncher();
+!!!131202.java!!!	main(inout arg : String) : void
+	new pda.base.PdaSimu();
+!!!131330.java!!!	launchAppli(inout appli : IApplication) : void
+        view.addAppli(appli.getAppliName(), appli.getAppliPanel());
+	engine.launchAppli(appli);
+        appli.start(this);
+!!!131458.java!!!	getApplicationsName() : Vector<String>
+	return engine.getApplicationsName ();
+!!!131586.java!!!	selectApplication(in name : String) : void
+	view.selectApplication (engine.getApplicationPanel (name));
+!!!131714.java!!!	exitApplication(inout appli : IApplication) : void
+	if (appli == null)
+	    return;
+	if (!appli.close ())
+	    return;
+	int idx = view.getAppliIndex(appli.getAppliPanel ());
+	if(idx < 0) {
+	    return;
+        }
+        view.closeAppli(idx);
+        engine.closeAppli(idx);
+!!!131842.java!!!	setSkin(inout skinIcon : ImageIcon, inout pos : Point) : void
+	view.setSkin (skinIcon, pos);
+!!!131970.java!!!	startLauncher() : void
+	IApplication launcher = new Launcher();
+	launchAppli(launcher);
+!!!132098.java!!!	closeAppli() : void
+	int idx = view.getAppliIndex();
+	if(idx < 0) {
+	    return;
+        }
+        engine.closeAppli(idx);
+        view.closeAppli(idx);
+!!!132226.java!!!	quit() : void
+        view.quit();
+!!!132354.java!!!	actionPerformed(inout e : ActionEvent) : void
+	Object source = e.getSource();
+	if(source == view.quitMI)
+	    quit();
+	else if(source == view.startMI)
+	    startLauncher();
+	else if(source == view.closeMI)
+	    closeAppli();

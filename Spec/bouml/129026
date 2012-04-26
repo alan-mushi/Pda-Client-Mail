@@ -1,0 +1,1382 @@
+format 70
+"misc" // pdaNetwork::misc
+  revision 1
+  modified_by 2 "root"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default show_stereotype_properties default
+  
+  java_dir "pdaNetwork/misc"
+  java_package "pdaNetwork.misc"
+  classview 128642 "misc"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    class 129794 "ProtocolException"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Generals class of Connection exception for PdaNetwork
+
+@author @author PDA Server development team.
+"
+      classrelation 130946 // <generalisation>
+	relation 130946 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 130946 // <generalisation>
+	  b parent class_ref 131202 // Exception
+      end
+
+      attribute 135170 "serialVersionUID"
+	class_attribute const_attribute private explicit_type "long"
+	init_value " 1L"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 144642 "ProtocolException"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "message" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "
+Create a protocol exception with an error message.
+
+@param message The error message."
+      end
+
+      operation 144770 "ProtocolException"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "message" explicit_type "String"
+	  param inout name "cause" explicit_type "Exception"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "
+Create a protocol exception with an error and a cause.
+
+@param message The error message.
+@param cause The exception which is the cause of this exception."
+      end
+
+      operation 144898 "manageLog"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Write the error in the logs files."
+      end
+    end
+
+    class 130690 "MailContent"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Manage the content of a mail : recipient, object, date and text.
+<p>
+<pre>
+Usage Mailcontent in a MailClient instance :
+  MailContent mailContent = new MailContent(\"target user\",\"Object of the message\",\"the message\",\"expeditor user\"); 
+  mailClient.send(mailContent);
+</pre>
+@author PDA Server development team."
+      attribute 134402 "recipient"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Recipient of the mail
+"
+      end
+
+      attribute 134530 "object"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Mail object.
+"
+      end
+
+      attribute 134658 "text"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Text of the mail.
+"
+      end
+
+      attribute 134786 "expeditor"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Mail author.
+"
+      end
+
+      attribute 134914 "date"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 143106 "MailContent"
+	public explicit_return_type ""
+	nparams 3
+	  param in name "recipient" explicit_type "String"
+	  param in name "object" explicit_type "String"
+	  param in name "text" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Initialize the mail content. The date must be initilialize with setDate () method.
+
+@param recipient The personn who will receive the mail.
+@param object	The object of the mail.
+@param text		The text of the mail."
+      end
+
+      operation 143234 "MailContent"
+	public explicit_return_type ""
+	nparams 4
+	  param in name "recipient" explicit_type "String"
+	  param in name "object" explicit_type "String"
+	  param in name "text" explicit_type "String"
+	  param in name "expeditor" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Initialize the mail content. The date must be initilialize with setDate () method.
+
+@param recipient The personn who will receive the mail.
+@param object	The object of the mail.
+@param text		The text of the mail.
+@param expeditor The expeditor of the mail."
+      end
+
+      operation 143362 "MailContent"
+	public explicit_return_type ""
+	nparams 5
+	  param in name "recipient" explicit_type "String"
+	  param in name "object" explicit_type "String"
+	  param in name "text" explicit_type "String"
+	  param in name "expeditor" explicit_type "String"
+	  param in name "date" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Initialize the mail content. The date must be initilialize with setDate () method.
+
+@param recipient The personn who will receive the mail.
+@param object	The object of the mail.
+@param text		The text of the mail.
+@param expeditor The expeditor of the mail. Set to 'hiden' if null.
+@param date      The creation date of the mail. Set automatically if null."
+      end
+
+      operation 143490 "getRecipient"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "This method will return the recipient of the mail.
+
+@return The recipient of the mail."
+      end
+
+      operation 143618 "getExpeditor"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "
+@return The expeditor of the mail."
+      end
+
+      operation 143746 "getObject"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "This method will return the object of the mail.
+
+@return The object of the mail."
+      end
+
+      operation 143874 "getText"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "This method will return the text of the mail.
+
+@return The text of the mail."
+      end
+
+      operation 144002 "setExpeditor"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "expeditor" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "
+@param expeditor Define the expeditor of the mail."
+      end
+
+      operation 144130 "getDate"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Create and formate the current date to DD-MM-YYYY
+
+@return the date."
+      end
+
+      attribute 135042 "dateFormat"
+	class_attribute private explicit_type "SimpleDateFormat"
+	init_value " new SimpleDateFormat (\"dd/MM/yyyy HH:mm\")"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 144258 "setDate"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "
+Initialize the date of sent of the mail."
+      end
+
+      operation 144386 "setDate"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "date" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "
+Initialize the date of send the mail for a String object.
+
+@param date The date string."
+      end
+
+      operation 144514 "toXML"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "This method convert a message the mail to an XML formatted message containing the mail.
+
+@return A formatted XML Message."
+      end
+    end
+
+    class 130818 "ConfigConst"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "This class parse the XML configuration file.<br />
+Read a XML file which contain configs values.<br />
+<p>
+Exemple of XML file :<br />
+&lt;blockquote&gt;<br />
+&lt;config&gt;<br />
+
+  &lt;debug&gt;0&lt;/debug&gt;<br />
+
+  &lt;socketType&gt;WebSocket&lt;/socketType&gt;<br />
+
+  &lt;remoteHost&gt;projets.iut-info-vannes.net&lt;/remoteHost&gt;<br />
+  &lt;remotePort&gt;80&lt;/remotePort&gt;<br />
+  &lt;uri&gt;/pda-server/pdaNetwork.php&lt;/uri&gt;<br />
+
+  &lt;proxyHost&gt;squidva.univ-ubs.fr&lt;/proxyHost&gt;<br />
+  &lt;proxyPort&gt;3128&lt;/proxyPort&gt;<br />
+
+  &lt;startOfReq&gt;paquet&lt;/startOfReq&gt;<br />
+  &lt;endOfReq&gt;paquet&lt;/endOfReq&gt;<br />
+&lt;/config&gt;<br />
+</blockquote>
+</p>
+
+@author PDA Server Developement Team 
+"
+      attribute 133634 "communTokens"
+	class_attribute const_attribute private explicit_type "String"
+	init_value "
+	Arrays.asList (\"debug\", \"socketType\", \"startOfReq\", \"endOfReq\")"
+	stereotype "List"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 133762 "serverTokens"
+	class_attribute const_attribute private explicit_type "String"
+	init_value "
+	Arrays.asList (\"listenPort\", \"logPath\", \"userPath\", \"mailPath\")"
+	stereotype "List"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 133890 "clientTokens"
+	class_attribute const_attribute private explicit_type "String"
+	init_value "
+	Arrays.asList (\"remoteHost\", \"remotePort\", \"proxyHost\", \"proxyPort\", \"uri\")"
+	stereotype "List"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 134018 "values"
+	class_attribute private explicit_type "String,String"
+	init_value " new Hashtable<String,String> ()"
+	stereotype "Hashtable"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 139650 "getTokens"
+	class_operation public explicit_return_type "List<String>"
+	nparams 0
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 139778 "get"
+	class_operation public explicit_return_type "String"
+	nparams 1
+	  param in name "token" explicit_type "String"
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 139906 "readConfigFile"
+	class_operation public explicit_return_type "void"
+	nparams 2
+	  param in name "configFileName" explicit_type "String"
+	  param inout name "serverFlag" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 140034 "getValue"
+	class_operation private explicit_return_type "String"
+	nparams 2
+	  param inout name "fstNode" explicit_type "Node"
+	  param in name "valueName" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "
+@param fstNode
+@param valueName
+@return"
+      end
+
+      operation 140162 "getPort"
+	class_operation private explicit_return_type "int"
+	nparams 1
+	  param in name "portName" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 140290 "getDebug"
+	class_operation public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 140418 "getSocketType"
+	class_operation public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 140546 "getStartOfReq"
+	class_operation public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 140674 "getEndOfReq"
+	class_operation public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 140802 "getListenPort"
+	class_operation public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 140930 "getLogPath"
+	class_operation public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 141058 "getUserPath"
+	class_operation public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 141186 "getMailPath"
+	class_operation public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 141314 "getRemoteHost"
+	class_operation public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 141442 "getRemotePort"
+	class_operation public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 141570 "getProxyHost"
+	class_operation public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 141698 "getProxyPort"
+	class_operation public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 141826 "getUri"
+	class_operation public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 130946 "FileIn"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+This method is able to process the file.
+
+@author PDA Server Developement Team
+"
+      attribute 134146 "root"
+	package explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Path to the storage emplacement.
+"
+      end
+
+      operation 141954 "FileIn"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "root" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "
+Constructor of FileIn class.
+
+@param root Chemin vers la racine de l'espace de stockage."
+      end
+
+      operation 142082 "createDir"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param in name "dir" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "
+Create a directory.
+
+@param dir Path to the directory which will be create.
+
+@return It returns true if the creation succeeded, else false."
+      end
+
+      operation 142210 "deleteDir"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param in name "dir" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "
+Delete an empty directory.
+
+@param dir Path to the directory which will be delete.
+
+@return It returns true if the supression succeeded, else false."
+      end
+
+      operation 142338 "copy"
+	public explicit_return_type "boolean"
+	nparams 2
+	  param in name "start" explicit_type "String"
+	  param in name "end" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "
+Copy a file.
+
+@param start	Path to the file which will be copied.
+@param end	Path to the destination of the file.
+
+@return		It returns true if the copy succeeded, else false."
+      end
+
+      operation 142466 "move"
+	public explicit_return_type "boolean"
+	nparams 2
+	  param in name "start" explicit_type "String"
+	  param in name "end" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "
+This method move file.
+
+@param start	The path of the file you want to move.
+@param end	The path of destination.
+
+@return		It returns true if the move succeeded, else false."
+      end
+
+      operation 142594 "rename"
+	public explicit_return_type "boolean"
+	nparams 2
+	  param in name "start" explicit_type "String"
+	  param in name "end" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "
+This method rename file.
+
+@param start	The path of the file you want to move.
+@param end	The path of destination.
+
+@return		It returns true if the move succeeded, else false."
+      end
+
+      operation 142722 "getNameList"
+	public explicit_return_type "ArrayList<String>"
+	nparams 1
+	  param in name "dir" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "List file in the specified directory.
+
+@param dir Path of the directory you want to list.
+
+@return	An array list containing the name of all the file in the directory."
+      end
+
+      operation 142850 "getFileList"
+	public explicit_return_type "ArrayList<File>"
+	nparams 1
+	  param in name "dir" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "
+@param dir The directory of research.
+
+@return The file in the directory."
+      end
+    end
+
+    class 131074 "Log"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "This method is used to write log for the different service on the server.
+
+@author PDA Server development team."
+      attribute 134274 "dateFormat"
+	class_attribute private explicit_type "SimpleDateFormat"
+	init_value " new SimpleDateFormat (\"[yyyy/MM/dd HH:mm:ss] \")"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 142978 "writeLog"
+	class_operation public explicit_return_type "void"
+	nparams 2
+	  param in name "serviceName" explicit_type "String"
+	  param in name "message" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "This static method is used to write on a file, in a directory specified in the Configuration File, there will be different log file for each type of information.
+
+@param serviceName Service name, it will also be the File name (serviceName.log)
+@param message The message you want to save."
+      end
+    end
+
+    class 131330 "XMLChatMessage"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "This class parse the XML request he received.
+
+@author PDA Server development team."
+      classrelation 131074 // <generalisation>
+	relation 131074 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 131074 // <generalisation>
+	  b parent class_ref 131458 // XMLMessage
+      end
+
+      attribute 135554 "tokens"
+	class_attribute private explicit_type "String"
+	init_value "
+	Arrays.asList (\"chat\")"
+	stereotype "List"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 145410 "XMLChatMessage"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "xmlMessage" explicit_type "String"
+	nexceptions 1
+	  exception class_ref 129794 // ProtocolException
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "The constructor of XMLServerMessage.
+
+@param xmlMessage The XML Message you want to analyze.
+
+@throws ProtocolException If an error occured durant the parsing of a message, it's sent a ProtocolException. "
+      end
+    end
+
+    class 131458 "XMLMessage"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "This class parse the XML request he received.
+
+@author PDA Server development team."
+      attribute 135298 "typeReq"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "This string contains the type of the request.
+"
+      end
+
+      attribute 135426 "nodeLst"
+	private explicit_type "NodeList"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "The node list of the XML.
+"
+      end
+
+      operation 145026 "XMLMessage"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "xmlMessage" explicit_type "String"
+	  param inout name "tokens" explicit_type "List<String>"
+	nexceptions 1
+	  exception class_ref 129794 // ProtocolException
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "The constructor of XMLServerMessage.
+
+@param xmlMessage The XML Message you want to analyze.
+
+@throws ProtocolException If an error occured durant the parsing of a message, it's sent a ProtocolException. "
+      end
+
+      operation 145154 "getTypeReq"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accessor to the type of request.
+
+@return It returns the type of request."
+      end
+
+      operation 145282 "getAttribute"
+	public explicit_return_type "String"
+	nparams 1
+	  param in name "name" explicit_type "String"
+	nexceptions 1
+	  exception class_ref 129794 // ProtocolException
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accessor to the type of request.
+
+@param name Name of the attribute you want to have.
+
+@return	The attribute corresponding to the name you give.
+
+@throws ProtocolException If an error occured when the method get an attribute, it's send a ProtocolException. "
+      end
+    end
+
+    class 131586 "XMLMailMessage"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "This class parse the XML request he received.
+
+@author PDA Server development team."
+      classrelation 131202 // <generalisation>
+	relation 131202 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 131202 // <generalisation>
+	  b parent class_ref 131458 // XMLMessage
+      end
+
+      attribute 135682 "tokens"
+	class_attribute private explicit_type "String"
+	init_value "
+	Arrays.asList (\"mail\")"
+	stereotype "List"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 145538 "XMLMailMessage"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "xmlMessage" explicit_type "String"
+	nexceptions 1
+	  exception class_ref 129794 // ProtocolException
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "The constructor of XMLServerMessage.
+
+@param xmlMessage The XML Message you want to analyze.
+
+@throws ProtocolException If an error occured durant the parsing of a message, it's sent a ProtocolException. "
+      end
+    end
+
+    class 131714 "XMLServerMessage"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "This class parse the XML request he received.
+
+@author PDA Server development team."
+      classrelation 131330 // <generalisation>
+	relation 131330 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 131330 // <generalisation>
+	  b parent class_ref 131458 // XMLMessage
+      end
+
+      attribute 135810 "tokens"
+	class_attribute private explicit_type "String"
+	init_value "
+	Arrays.asList (\"newconnect\", \"request\", \"error\", \"ping\", \"close\")"
+	stereotype "List"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 145666 "XMLServerMessage"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "xmlMessage" explicit_type "String"
+	nexceptions 1
+	  exception class_ref 129794 // ProtocolException
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "The constructor of XML Message.
+
+@param xmlMessage The XML Message you want to analyze.
+
+@throws ProtocolException If an error occured durant the parsing of a message, it's sent a ProtocolException. "
+      end
+    end
+
+    classdiagram 128642 "class diagram"
+      draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+      size A0
+    end
+  end
+
+  deploymentview 128642 "misc"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    artifact 130050 "ConfigConst"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Hashtable;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.net.URISyntaxException;
+${definition}"
+      associated_classes
+	class_ref 130818 // ConfigConst
+      end
+    end
+
+    artifact 130178 "FileIn"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
+${definition}"
+      associated_classes
+	class_ref 130946 // FileIn
+      end
+    end
+
+    artifact 130306 "Log"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+${definition}"
+      associated_classes
+	class_ref 131074 // Log
+      end
+    end
+
+    artifact 130434 "MailContent"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.apache.commons.codec.binary.Base64;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+${definition}"
+      associated_classes
+	class_ref 130690 // MailContent
+      end
+    end
+
+    artifact 130562 "ProtocolException"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_classes
+	class_ref 129794 // ProtocolException
+      end
+    end
+
+    artifact 130690 "XMLMessage"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.io.IOException;
+import java.io.StringReader;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import java.util.List;
+${definition}"
+      associated_classes
+	class_ref 131458 // XMLMessage
+      end
+    end
+
+    artifact 130818 "XMLChatMessage"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.Arrays;
+import java.util.List;
+${definition}"
+      associated_classes
+	class_ref 131330 // XMLChatMessage
+      end
+    end
+
+    artifact 130946 "XMLMailMessage"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.Arrays;
+import java.util.List;
+${definition}"
+      associated_classes
+	class_ref 131586 // XMLMailMessage
+      end
+    end
+
+    artifact 131074 "XMLServerMessage"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.Arrays;
+import java.util.List;
+${definition}"
+      associated_classes
+	class_ref 131714 // XMLServerMessage
+      end
+    end
+  end
+end

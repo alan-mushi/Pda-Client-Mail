@@ -1,0 +1,13 @@
+class Log
+!!!142978.java!!!	writeLog(in serviceName : String, in message : String) : void
+
+		String path = ConfigConst.getLogPath ();
+
+		try {
+			BufferedWriter out = new BufferedWriter (new FileWriter (path + serviceName+".log", true));
+			out.write (dateFormat.format (new Date ())+message+"\n");
+			out.flush ();
+			out.close ();
+		} catch (IOException e) {
+			e.printStackTrace ();
+		}

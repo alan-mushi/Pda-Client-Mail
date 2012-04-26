@@ -1,0 +1,31 @@
+class LaunchEngine
+!!!133634.java!!!	LaunchEngine()
+        appArray[0] = "hello";
+	applications.put("hello", HelloWorld.class);
+        icons.put("hello", "hello.png");
+        appArray[1] = "launcher";
+	applications.put("launcher", Launcher.class);
+        icons.put("launcher", "launcher.png");
+
+!!!133762.java!!!	appCount() : int
+        return appArray.length;
+!!!133890.java!!!	appKeyAt(in i : int) : String
+        return appArray[i];
+!!!134018.java!!!	getAppli(in appName : String) : IApplication
+        IApplication ret;
+        
+        try {
+            ret = (IApplication) applications.get(appName).newInstance();
+	} catch(InstantiationException e2) {
+	    System.out.println("InstantiationException");
+            ret = null;
+	} catch(IllegalAccessException e2) {
+	    System.out.println("IllegalAccessException");
+	    // YYY message
+            ret = null;
+	}
+        return ret;
+!!!134146.java!!!	getIcon(in appName : String) : String
+        String ret;
+            ret = "./data/img/" + icons.get(appName);
+        return ret;

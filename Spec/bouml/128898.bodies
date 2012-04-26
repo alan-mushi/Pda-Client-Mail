@@ -1,0 +1,12 @@
+class HelloWorld
+!!!132482.java!!!	HelloWorld()
+        engine = new HWEngine();
+        view = new HWView(engine);
+!!!132610.java!!!	start(inout pda : IPda) : void
+        view.initLabel();
+!!!132738.java!!!	getAppliName() : String
+	return name;
+!!!132866.java!!!	getAppliPanel() : JPanel
+	return view.getPanel();
+!!!132994.java!!!	close() : boolean
+	return true;

@@ -1,0 +1,11 @@
+window_sizes 1600 827 375 1219 623 120
+windows_style
+show_stereotypes
+selected class_ref 129539 // LaunchView
+open
+  artifact_ref 128387 // PdaScreen
+  classview_ref 129027 // class view
+  class_ref 129411 // Launcher
+  deploymentview_ref 128259 // launcher
+end
+end

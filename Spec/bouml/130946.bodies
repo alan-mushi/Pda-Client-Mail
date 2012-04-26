@@ -1,0 +1,89 @@
+class FileIn
+!!!141954.java!!!	FileIn(in root : String)
+	this.root = root;
+!!!142082.java!!!	createDir(in dir : String) : boolean
+	File file = new File (root+File.separator+dir);
+	File path = file.getParentFile ();
+	//test que le chemin existe et que le dossier à créer n'existe pas déjà.
+	if (!path.exists () || file.exists ())
+	    return false;
+	return file.mkdirs ();
+!!!142210.java!!!	deleteDir(in dir : String) : boolean
+	File file = new File (root+File.separator+dir);
+	return file.exists () && file.isDirectory () && file.delete ();
+!!!142338.java!!!	copy(in start : String, in end : String) : boolean
+	// Declaration des flux
+	FileInputStream sourceFile = null;
+	FileOutputStream destinationFile = null;
+
+	try {
+	    File source = new File (root+File.separator+start);
+	    File destination = new File (root+File.separator+end);
+
+	    // Création du fichier :
+            destination.createNewFile ();
+            
+            // Ouverture des flux
+            sourceFile = new java.io.FileInputStream (source);
+            destinationFile = new java.io.FileOutputStream (destination);
+            
+            // Lecture par segment de 0.5Mo 
+            byte buffer[] = new byte[512*1024];
+	    for (;;) {
+		int nbLecture = sourceFile.read (buffer);
+		if (nbLecture < 0)
+		    break;
+            	destinationFile.write (buffer, 0, nbLecture);
+            }
+	    destinationFile.flush ();
+            // Copie réussie
+            return true;
+	} catch (java.io.FileNotFoundException f ) {
+	    System.err.println ("FileIn:copy FileNotFoundException");
+	} catch (java.io.IOException e ) {
+	    System.err.println ("FileIn:copy IOException");
+	} finally {
+            // Quoi qu'il arrive, on ferme les flux
+            try {
+		sourceFile.close ();
+            } catch (Exception e) {
+	    }
+            try {
+		destinationFile.close ();
+            }
+            catch (Exception e) {
+	    }
+	}
+	return false;
+!!!142466.java!!!	move(in start : String, in end : String) : boolean
+	File source = new File (root+File.separator+start);
+	File destination = new File (root+File.separator+end);
+	return
+	    !destination.exists () &&
+	    copy (start, end) &&
+	    source.delete ();
+!!!142594.java!!!	rename(in start : String, in end : String) : boolean
+
+	File source = new File (root+File.separator+start);
+	File destination = new File (root+File.separator+end);
+	return
+	    !destination.exists () &&
+	    source.renameTo (destination);
+!!!142722.java!!!	getNameList(in dir : String) : ArrayList<String>
+	File path = new File (root+File.separator+dir);
+	String[] files = path.list ();
+	ArrayList<String> ret = new ArrayList<String> ();
+
+	if (files != null)
+	    for (String file : files)
+		ret.add (file);
+	return ret;
+!!!142850.java!!!	getFileList(in dir : String) : ArrayList<File>
+	File path = new File (root+File.separator+dir);
+	File[] files = path.listFiles ();
+	ArrayList<File> ret = new ArrayList<File> ();
+
+	if (files != null)
+	    for (File file : files)
+		ret.add (file);
+	return ret;

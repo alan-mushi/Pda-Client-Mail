@@ -1,0 +1,3 @@
+class XMLServerMessage
+!!!145666.java!!!	XMLServerMessage(in xmlMessage : String)
+	super (xmlMessage, tokens);

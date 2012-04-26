@@ -1,0 +1,122 @@
+class ChatClient
+!!!137474.java!!!	ChatClient(in username : String, in cipherPass : String)
+	debug = ConfigConst.getDebug ();
+	if (debug)
+	    System.err.println ("ChatClient >>> "+username+ " "+cipherPass);
+
+	if (username==null || username.equals (""))
+	    throw new ProtocolException ("Username must be filled.");
+	this.username = username;
+	lastMessage = new ArrayList<String> ();
+	listUsers = new ArrayList<String> ();
+	try {
+	    if (ConfigConst.getSocketType ().equals ("socket"))
+		socket = new ClientPdaSocket (username, cipherPass, "chat");
+	    else
+		socket = new WebClientPdaSocket (username, cipherPass, "chat");
+	    socket.connect ();
+	    if (debug)
+		System.err.println ("ChatClient <<< ");
+	} catch (ProtocolException e) {
+	    throw new ProtocolException ("Error during the creation of the chat :  " + e.getMessage ());
+	}
+!!!137602.java!!!	sendMessage(in message : String) : void
+	if (debug)
+	    System.err.println ("ClientPdaSocket:sendMessage >>> "+message);
+	if (message==null || message.equals (""))
+	    throw new ProtocolException ("The message must not be empty.");
+	sendRequest ("<action>newmessage</action><text>" + new String (Base64.encodeBase64 (message.getBytes ())) + "</text>");
+	if (debug)
+	    System.err.println ("ClientPdaSocket:sendMessage <<< ");
+!!!137730.java!!!	getMessage() : ArrayList<String>
+	if (debug)
+	    System.err.println ("ClientPdaSocket:getMessage >>>");
+	lastMessage.clear ();
+	if (!socket.isConnected ()) {
+	    try {
+		socket.connect ();
+	    } catch (ProtocolException e) {
+		throw new ProtocolException ("Error during the discution with the server : " + e.getMessage ());
+	    }
+	}
+	sendRequest ("<action>getmessage</action>");
+	if (debug)
+	    System.err.println ("ClientPdaSocket:getMessage <<<");
+	return lastMessage;
+!!!137858.java!!!	getlistUser() : ArrayList<String>
+	if (debug)
+	    System.err.println ("ClientPdaSocket:getlistUser >>>");
+	listUsers.clear ();
+	if (!socket.isConnected ()) {
+	    try {
+		socket.connect ();
+	    } catch (ProtocolException e) {
+		throw new ProtocolException ("Error during the discution with the server :" + e.getMessage ());
+	    }
+	}
+	sendRequest ("<action>getlistusers</action>");
+	if (debug)
+	    System.err.println ("ClientPdaSocket:getlistusers <<<");
+	return listUsers;
+!!!137986.java!!!	parseXml(in xmlMessage : String) : void
+	if (debug)
+	    System.err.println ("ClientPdaSocket:parseXml >>> "+xmlMessage);
+	if (xmlMessage==null || xmlMessage.equals (""))
+	    throw new ProtocolException ("The xmlMessage must not be empty.");
+	XMLChatMessage xml = new XMLChatMessage (xmlMessage);
+	String typeReponse = xml.getAttribute ("reponse");
+	if ("newmessage".equals (typeReponse))
+	    ;
+	else if ("getmessage".equals (typeReponse)) {
+	    try {
+		String message;
+		for (int i = 1; ! (message = xml.getAttribute ("message" + i)).equals (""); i++) {
+		    lastMessage.add (new String (Base64.decodeBase64 (message.getBytes ())));
+		}
+	    } catch (ProtocolException e) {
+		// ne doit rien renvoyer : la boucle doit se terminer quand il n'y a plus de messages (cherche un message inexistant).
+		// L'exception sert de condition de sortie de boucle.
+	    }
+	} else if ("getlistusers".equals (typeReponse)) {
+	    try {
+		String message;
+		for (int i = 1; ! (message = xml.getAttribute ("user" + i)).equals (""); i++) {
+		    listUsers.add (message);
+		}
+	    } catch (ProtocolException e) {
+		// ne doit rien renvoyer : la boucle doit se terminer quand il n'y a plus de messages (cherche un message inexistant).
+		// L'exception sert de condition de sortie de boucle.
+	    }
+	}
+	if (debug)
+	    System.err.println ("ClientPdaSocket:parseXml <<<");
+!!!138114.java!!!	sendRequest(in request : String) : void
+	if (debug)
+	    System.err.println ("ClientPdaSocket:sendRequest >>> "+request);
+	if (request==null || request.equals (""))
+	    throw new ProtocolException ("The request must not be empty.");
+	try {
+	    if (!socket.isConnected ())
+		socket.connect ();
+	    parseXml (socket.sendMessage ("<chat>"+ request +"</chat>"));
+	} catch (ProtocolException e) {
+	    throw new ProtocolException ("Error during the discution with the server : " + e.getMessage ());
+	}
+	if (debug)
+	    System.err.println ("ClientPdaSocket:sendRequest <<<");
+!!!138242.java!!!	finalize() : void
+	if (debug)
+	    System.err.println ("ClientPdaSocket:finalize >>>");
+	if (socket != null)
+	    socket.close ();
+	socket.close ();
+	if (debug)
+	    System.err.println ("ClientPdaSocket:finalize <<<");
+!!!138370.java!!!	close() : void
+	if (debug)
+	    System.err.println ("ClientPdaSocket:close >>>");
+	if (socket != null)
+	    socket.close ();
+	socket.close ();
+	if (debug)
+	    System.err.println ("ClientPdaSocket:close >>>");

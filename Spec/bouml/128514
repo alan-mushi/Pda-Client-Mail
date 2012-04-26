@@ -1,0 +1,541 @@
+format 70
+"launcher" // pda::launcher
+  revision 1
+  modified_by 2 "root"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default show_stereotype_properties default
+  
+  java_dir "pda/launcher"
+  java_package "pda.launcher"
+  classview 128386 "launcher"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    class 129282 "LaunchEngine"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment " The \"LaunchEngine application that starts all others
+
+ @author F. Merciol, D. Deveaux 
+                     <{francois.merciol|daniel.deveaux}@univ-ubs.fr>
+ @version $Revision: 31 $"
+      operation 133634 "LaunchEngine"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Public ressources -----------------------------------------------------
+
+ Constructors
+
+ 
+ LaunchEngine constructor.
+
+ Initialize applications collection and the panel"
+      end
+
+      operation 133762 "appCount"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " ------------------------------------------------------- LaunchEngine()
+
+Public methods
+
+
+ Get the applications count
+
+@return the number of declared applications"
+      end
+
+      operation 133890 "appKeyAt"
+	public explicit_return_type "String"
+	nparams 1
+	  param in name "i" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Get the application name at index i.
+
+@param i : then index of the application
+@return the application name"
+      end
+
+      operation 134018 "getAppli"
+	public return_type class_ref 128002 // IApplication
+	nparams 1
+	  param in name "appName" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Get an application instance
+
+@param appName : name of the application to get
+@return an instance of the required application, null if not ok"
+      end
+
+      operation 134146 "getIcon"
+	public explicit_return_type "String"
+	nparams 1
+	  param in name "appName" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " ----------------------------------------------------------- getAppli()
+ 
+ Get the icon filename of an application.
+
+@param appName : name of the application
+@return the full name of the icon file"
+      end
+
+      attribute 130434 "appArray"
+	protected explicit_type "String"
+	multiplicity "[]"
+	init_value " new String[12]"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type}${multiplicity} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Private implementation -------------------------------------------------
+
+ The array of application names "
+      end
+
+      attribute 130562 "applications"
+	protected explicit_type "String, Class"
+	init_value " 
+                                                new Hashtable<String, Class>()"
+	stereotype "Hashtable"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " The list of application classes that can be launched "
+      end
+
+      attribute 130690 "icons"
+	protected explicit_type "String, String"
+	init_value " new Hashtable<String, String>()"
+	stereotype "Hashtable"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " The list of icons associated to applications "
+      end
+    end
+
+    class 129410 "Launcher"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment " The \"launcher application that starts all others
+
+ @author F. Merciol, D. Deveaux 
+                     <{francois.merciol|daniel.deveaux}@univ-ubs.fr>
+ @version $Revision: 29 $"
+      classrelation 129538 // <realization>
+	relation 129538 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 129538 // <realization>
+	  b parent class_ref 128002 // IApplication
+      end
+
+      classrelation 129666 // <realization>
+	relation 129666 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 129666 // <realization>
+	  b parent class_ref 128770 // ActionListener
+      end
+
+      operation 134274 "Launcher"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Public ressources -----------------------------------------------------
+
+ Constructors
+
+ 
+ Launcher constructor.
+
+ Initialize applications collection and the panel"
+      end
+
+      operation 134402 "start"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "pda" type class_ref 128130 // IPda
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " ----------------------------------------------------------- Launcher()
+
+Public methods
+
+ 
+ see interface documentation"
+      end
+
+      operation 134530 "getAppliName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " -------------------------------------------------------------- start()
+ 
+ see interface documentation"
+      end
+
+      operation 134658 "getAppliPanel"
+	public explicit_return_type "JPanel"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " ------------------------------------------------------- getAppliName()
+ 
+ see interface documentation"
+      end
+
+      operation 134786 "close"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " ------------------------------------------------------ getAppliPanel()
+ 
+ see interface documentation"
+      end
+
+      operation 134914 "actionPerformed"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "e" explicit_type "ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " -------------------------------------------------------------- close()
+
+ Callback method, reaction to button pushed"
+      end
+
+      attribute 130818 "name"
+	protected explicit_type "String"
+	init_value " \"Launcher\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " ---------------------------------------------------- actionPerformed()
+
+Private implementation -------------------------------------------------
+
+ Application name "
+      end
+
+      classrelation 129794 // pda (<unidirectional association>)
+	relation 129794 --->
+	  a role_name "pda" protected
+	    comment " Back link to the PDA that supports this launcher 
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 129794 // pda (<unidirectional association>)
+	  b parent class_ref 128130 // IPda
+      end
+
+      classrelation 129922 // view (<unidirectional association>)
+	relation 129922 --->
+	  a role_name "view" protected
+	    comment " the view of the application 
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 129922 // view (<unidirectional association>)
+	  b parent class_ref 129538 // LaunchView
+      end
+
+      classrelation 130050 // engine (<unidirectional association>)
+	relation 130050 --->
+	  a role_name "engine" protected
+	    comment " the engine of the application 
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 130050 // engine (<unidirectional association>)
+	  b parent class_ref 129282 // LaunchEngine
+      end
+    end
+
+    class 129538 "LaunchView"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment " The \"LaunchView application that starts all others
+
+ @author F. Merciol, D. Deveaux 
+                     <{francois.merciol|daniel.deveaux}@univ-ubs.fr>
+ @version $Revision: 29 $"
+      operation 135042 "LaunchView"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "ctrl" type class_ref 129410 // Launcher
+	  param inout name "theEngine" type class_ref 129282 // LaunchEngine
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Public ressources -----------------------------------------------------
+
+ Constructors
+
+ 
+ LaunchView constructor.
+
+ Initialize applications collection and the panel"
+      end
+
+      operation 135170 "getPanel"
+	public explicit_return_type "JPanel"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " --------------------------------------------------------- LaunchView()
+
+Public methods
+
+ 
+ see interface documentation"
+      end
+
+      attribute 130946 "panel"
+	protected explicit_type "JPanel"
+	init_value " new JPanel(new GridLayout(4, 3))"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " ------------------------------------------------------ getAppliPanel()
+
+Private implementation -------------------------------------------------
+
+ The panel associated to the LaunchView "
+      end
+
+      classrelation 130178 // engine (<unidirectional association>)
+	relation 130178 --->
+	  a role_name "engine" protected
+	    comment " the engine of the application 
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 130178 // engine (<unidirectional association>)
+	  b parent class_ref 129282 // LaunchEngine
+      end
+    end
+
+    classdiagram 128258 "class diagram"
+      draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+      size A0
+    end
+  end
+
+  deploymentview 128258 "launcher"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    artifact 129026 "LaunchEngine"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import pda.base.IApplication;
+import pda.helloworld.HelloWorld;
+import pda.launcher.Launcher;
+import java.util.Hashtable;
+${definition}"
+      associated_classes
+	class_ref 129282 // LaunchEngine
+      end
+      comment " PDA project -- UBS/IUT de Vannes -- Dept Informatique
+
+ $Id$
+
+ Copyright 2007-08 © IUT de Vannes
+ Ce logiciel pédagogique est diffusé sous licence GPL"
+    end
+
+    artifact 129154 "Launcher"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import pda.base.IPda;
+import pda.base.IApplication;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.util.*;
+${definition}"
+      associated_classes
+	class_ref 129410 // Launcher
+      end
+      comment " PDA project -- UBS/IUT de Vannes -- Dept Informatique
+
+ $Id$
+
+ Copyright 2007-08 © IUT de Vannes
+ Ce logiciel pédagogique est diffusé sous licence GPL"
+    end
+
+    artifact 129282 "LaunchView"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import pda.base.IApplication;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.util.*;
+${definition}"
+      associated_classes
+	class_ref 129538 // LaunchView
+      end
+      comment " PDA project -- UBS/IUT de Vannes -- Dept Informatique
+
+ $Id$
+
+ Copyright 2007-08 © IUT de Vannes
+ Ce logiciel pédagogique est diffusé sous licence GPL"
+    end
+  end
+end

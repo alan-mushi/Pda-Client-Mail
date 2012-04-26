@@ -1,0 +1,607 @@
+format 70
+"service" // pdaNetwork::client::service
+  revision 1
+  modified_by 2 "root"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default show_stereotype_properties default
+  
+  java_dir "pdaNetwork/client/service"
+  java_package "pdaNetwork.client.service"
+  classview 128770 "service"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    class 130434 "ChatClient"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "This class is the chat API.
+
+@author PDA Server development team."
+      attribute 132738 "username"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Name of the user on the chat.
+"
+      end
+
+      classrelation 130562 // socket (<unidirectional association>)
+	relation 130562 --->
+	  a role_name "socket" private
+	    comment "
+Socket of the chat
+
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 130562 // socket (<unidirectional association>)
+	  b parent class_ref 129666 // ClientPdaSocket
+      end
+
+      attribute 132866 "lastMessage"
+	private explicit_type "String"
+	stereotype "ArrayList"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "List of all message left
+"
+      end
+
+      attribute 132994 "listUsers"
+	private explicit_type "String"
+	stereotype "ArrayList"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Contain the list of the connected users. 
+"
+      end
+
+      attribute 133122 "debug"
+	private explicit_type "boolean"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 137474 "ChatClient"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "username" explicit_type "String"
+	  param in name "cipherPass" explicit_type "String"
+	nexceptions 1
+	  exception class_ref 129794 // ProtocolException
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Constructor of the chat method
+
+@param username Name of the user on the chat.
+@param cipherPass the encoded password of the user on the chat.
+
+@throws ProtocolException If an error occured when chat services is running, it's send with a ProtocolException. "
+      end
+
+      operation 137602 "sendMessage"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "message" explicit_type "String"
+	nexceptions 1
+	  exception class_ref 129794 // ProtocolException
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "This method send a message to the server.
+
+@param message The message you want to send.
+
+@throws ProtocolException If an error occured when a message is sent, it's send with a ProtocolException. "
+      end
+
+      operation 137730 "getMessage"
+	public explicit_return_type "ArrayList<String>"
+	nparams 0
+	nexceptions 1
+	  exception class_ref 129794 // ProtocolException
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "This method get the new message from the server.
+
+@return It returns the new message.
+
+@throws ProtocolException If an error occured during receiption of a message, it's send with a ProtocolException. "
+      end
+
+      operation 137858 "getlistUser"
+	public explicit_return_type "ArrayList<String>"
+	nparams 0
+	nexceptions 1
+	  exception class_ref 129794 // ProtocolException
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Get the list of the users who is connected to the chat services.
+
+@return The liste of the users.
+
+@throws ProtocolException If an error occured during the receiption of the liste of users, it's send with a ProtocolException."
+      end
+
+      operation 137986 "parseXml"
+	private explicit_return_type "void"
+	nparams 1
+	  param in name "xmlMessage" explicit_type "String"
+	nexceptions 1
+	  exception class_ref 129794 // ProtocolException
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "This method parse the XML.
+
+@param xmlMessage The message you want to parse.
+
+@throws ProtocolException If an error occured during the parsing of a message, it's send with a ProtocolException. "
+      end
+
+      operation 138114 "sendRequest"
+	private explicit_return_type "void"
+	nparams 1
+	  param in name "request" explicit_type "String"
+	nexceptions 1
+	  exception class_ref 129794 // ProtocolException
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "This method send a request to the server.
+
+@param request The request you want to send to the server.
+
+@throws ProtocolException If an error occured when a message is sent, it's send with a ProtocolException. "
+      end
+
+      operation 138242 "finalize"
+	protected explicit_return_type "void"
+	nparams 0
+	nexceptions 1
+	  explicit_exception "Throwable"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Method call when Mail objet is destroy by garbage collector."
+      end
+
+      operation 138370 "close"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Close the connection to the mail service."
+      end
+    end
+
+    class 130562 "MailClient"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "This class manages the Mail service on the client PDA.
+<p>
+Usage Mail Send:
+<pre>
+try {
+  MailClient sender = new MailClient (\"user1\", \"mdp\");
+  sender.send( new MailContent (\"user2\", \"Objet 1\", \"Le texte 1\"));
+  sender.send (new MailContent (\"user2\", \"Objet 2\", \"Le texte 2\"));
+  sender.close ();
+	} catch (ProtocolException e) {
+	    e.printStackTrace ();
+	}
+</pre>
+<p>
+Usage Mail Receive :
+<pre>
+try {
+	 MailClient receiver = new MailClient (\"user2\", \"mdp\");
+  for (String id : receiver.getHeaders ()) {
+	  	MailContent email = receiver.receive (id);
+		System.out.println (\"expediteur : \" + email.getExpeditor ());
+		System.out.println (\"recepteur : \" + email.getRecipient ());
+		System.out.println (\"date : \" + email.getDate ());
+		System.out.println (\"objet : \" + email.getObject ());
+		System.out.println (\"texte : \" + email.getText ());
+	    }
+  receiver.close ();
+	} catch (ProtocolException e) {
+	    e.printStackTrace ();
+	}
+</pre>
+<p>
+Usage Mail Clean :
+<pre>
+try {
+  System.out.println (\"destruction de tous les messages de user2\");
+	 MailClient receiver = new MailClient (\"user2\", \"mdp\");
+  for (String id : receiver.getHeaders ()) {
+		receiver.delete (id);
+	 }
+  receiver.close ();
+	} catch (ProtocolException e) {
+	    e.printStackTrace ();
+	}
+</pre>
+
+@author PDA Server development team.
+"
+      attribute 133250 "username"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Name of the user on the mail client.
+"
+      end
+
+      attribute 133378 "password"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Password of the user.
+"
+      end
+
+      classrelation 130690 // socket (<unidirectional association>)
+	relation 130690 --->
+	  a role_name "socket" private
+	    comment "
+Socket which is connected to the PdaServer.
+
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 130690 // socket (<unidirectional association>)
+	  b parent class_ref 129666 // ClientPdaSocket
+      end
+
+      classrelation 130818 // currentMail (<unidirectional association>)
+	relation 130818 --->
+	  a role_name "currentMail" private
+	    comment "
+Mail who is in preperation to be sent.
+
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 130818 // currentMail (<unidirectional association>)
+	  b parent class_ref 130690 // MailContent
+      end
+
+      attribute 133506 "listHeaders"
+	private explicit_type "String"
+	stereotype "ArrayList"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 138498 "MailClient"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "username" explicit_type "String"
+	  param in name "password" explicit_type "String"
+	nexceptions 1
+	  exception class_ref 129794 // ProtocolException
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "
+Constructor of the Mail service. Initialize the variable.
+
+@param username Username of the mail writer.
+@param password Password of the mail writer.
+
+@throws ProtocolException If an error occured during the reception of the mail, it's send with a ProtocolException."
+      end
+
+      operation 138626 "getHeaders"
+	public explicit_return_type "ArrayList<String>"
+	nparams 0
+	nexceptions 1
+	  exception class_ref 129794 // ProtocolException
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Retrieve header from the mail box.
+
+@throws ProtocolException If an error occured during the reception of the mail, it's send with a ProtocolException. "
+      end
+
+      operation 138754 "receive"
+	public return_type class_ref 130690 // MailContent
+	nparams 1
+	  param in name "id" explicit_type "String"
+	nexceptions 1
+	  exception class_ref 129794 // ProtocolException
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "
+Retrieve a mail.
+
+@param id ID of the mail you want.
+
+@throws ProtocolException If an error occured during the reception of the mail, it's send with a ProtocolException."
+      end
+
+      operation 138882 "send"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "mail" type class_ref 130690 // MailContent
+	nexceptions 1
+	  exception class_ref 129794 // ProtocolException
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Send a mail.
+
+@param mail The mail you want to send.
+
+@throws ProtocolException If an error occured during the reception of the mail, it's send with a ProtocolException."
+      end
+
+      operation 139010 "sendRequest"
+	private explicit_return_type "void"
+	nparams 1
+	  param in name "request" explicit_type "String"
+	nexceptions 1
+	  exception class_ref 129794 // ProtocolException
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Send a message on the server.
+@throws ProtocolException If an error occured during the reception of the mail, it's send with a ProtocolException.
+"
+      end
+
+      operation 139138 "parseXml"
+	private explicit_return_type "void"
+	nparams 1
+	  param in name "xmlMessage" explicit_type "String"
+	nexceptions 1
+	  exception class_ref 129794 // ProtocolException
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "
+Initialize variables with the content of xmlMessage.
+
+@param xmlMessage XML message who is analysed.
+
+@throws ProtocolException If an error occured during the reception of the mail, it's send with a ProtocolException."
+      end
+
+      operation 139266 "delete"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "id" explicit_type "String"
+	nexceptions 1
+	  exception class_ref 129794 // ProtocolException
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Delete a mail.
+
+@param id Id of the mail which is delete.
+
+@throws ProtocolException If an error occured during the reception of the mail, it's send with a ProtocolException."
+      end
+
+      operation 139394 "finalize"
+	protected explicit_return_type "void"
+	nparams 0
+	nexceptions 1
+	  explicit_exception "Throwable"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Method call when Mail objet is destroy by garbage collector."
+      end
+
+      operation 139522 "close"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Close the connection to the mail service."
+      end
+    end
+
+    classdiagram 128514 "class diagram"
+      draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+      size A0
+    end
+  end
+
+  deploymentview 128514 "service"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    artifact 129794 "ChatClient"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.ArrayList;
+import org.apache.commons.codec.binary.Base64;
+import pdaNetwork.misc.ConfigConst;
+import pdaNetwork.misc.ProtocolException;
+import pdaNetwork.misc.XMLChatMessage;
+import pdaNetwork.client.network.ClientPdaSocket;
+import pdaNetwork.client.network.WebClientPdaSocket;
+${definition}"
+      associated_classes
+	class_ref 130434 // ChatClient
+      end
+    end
+
+    artifact 129922 "MailClient"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.ArrayList;
+import org.apache.commons.codec.binary.Base64;
+import pdaNetwork.misc.XMLMailMessage;
+import pdaNetwork.misc.MailContent;
+import pdaNetwork.misc.ConfigConst;
+import pdaNetwork.misc.ProtocolException;
+import pdaNetwork.client.network.ClientPdaSocket;
+import pdaNetwork.client.network.WebClientPdaSocket;
+${definition}"
+      associated_classes
+	class_ref 130562 // MailClient
+      end
+    end
+  end
+end

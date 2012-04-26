@@ -1,0 +1,69 @@
+class PdaScreen
+!!!129922.java!!!	PdaScreen(inout anEngine : PdaEngine, inout aPda : PdaSimu)
+	super(" PDA Simu ");
+        engine = anEngine;
+        ctrl = aPda;
+	guiInit();
+!!!130050.java!!!	addAppli(in appliName : String, inout appliPanel : JPanel) : void
+        System.out.println("Add panel for " + appliName);
+	tabbedPane.addTab(appliName, null, appliPanel, appliName);
+	tabbedPane.setSelectedIndex (tabbedPane.getTabCount ()-1);
+!!!130178.java!!!	getAppliIndex() : int
+       return tabbedPane.getSelectedIndex(); 
+!!!130306.java!!!	getAppliIndex(inout appliPanel : JPanel) : int
+	return  tabbedPane.indexOfComponent(appliPanel);
+!!!130434.java!!!	closeAppli(in idx : int) : void
+	tabbedPane.removeTabAt(idx);
+!!!130562.java!!!	quit() : void
+	if ( JOptionPane.showConfirmDialog(this,
+	        "Voulez-vous vraiment quitter ?",
+		"Fermeture du programme",
+		JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION ) {
+	    System.exit(0);
+	}
+!!!130690.java!!!	selectApplication(inout appliPanel : JPanel) : void
+	if (appliPanel != null)
+	    tabbedPane.setSelectedComponent (appliPanel);
+!!!130818.java!!!	guiInit() : void
+	addWindowListener(new WindowAdapter() {
+		public void windowClosing(WindowEvent e) {
+		    quit();
+		}
+	    });
+	setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+	JMenuBar menubar = new JMenuBar();
+	menubar.setLayout(new BoxLayout(menubar, BoxLayout.X_AXIS));
+	menubar.add(fileMenu);
+	menubar.add(Box.createHorizontalGlue());
+	menubar.add(helpMenu);
+	setJMenuBar(menubar);
+
+	fileMenu.add(startMI);
+	fileMenu.add(closeMI);
+	fileMenu.add(quitMI);
+
+	startMI.addActionListener(ctrl);
+	closeMI.addActionListener(ctrl);
+	quitMI.addActionListener(ctrl);
+
+	JLayeredPane layeredPane = new JLayeredPane();
+	skin = new JLabel ();
+	skin.setLocation (0, 0);
+	layeredPane.add (skin, new Integer(0));
+	layeredPane.add (tabbedPane, new Integer(5));
+	tabbedPane.setSize (screenW, screenH);
+
+	setSkin (new ImageIcon ("data/img/palm.png"), new Point (screenX, screenY));
+
+	getContentPane().add(layeredPane, BorderLayout.CENTER);
+
+	pack();
+	setVisible(true);
+!!!130946.java!!!	setSkin(inout skinIcon : ImageIcon, inout pos : Point) : void
+	tabbedPane.setLocation (pos);
+
+	skin.setIcon (skinIcon);
+	int width = skinIcon.getIconWidth();
+	int height = skinIcon.getIconHeight();
+	skin.setSize(width, height);
+	skin.getParent ().setPreferredSize(new Dimension(width, height));

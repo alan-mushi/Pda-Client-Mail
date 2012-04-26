@@ -1,0 +1,3 @@
+class XMLChatMessage
+!!!145410.java!!!	XMLChatMessage(in xmlMessage : String)
+	super (xmlMessage, tokens);

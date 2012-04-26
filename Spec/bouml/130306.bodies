@@ -1,0 +1,33 @@
+class WebClientPdaSocket
+!!!137090.java!!!	WebClientPdaSocket(in username : String, in password : String, in service : String)
+	super (username, password, service);
+	if (debug)
+	    System.err.println ("WebClientPdaSocket: >>>");
+
+	// Différence avec ClientPdaSocket
+	String proxyHost = ConfigConst.getProxyHost ();
+	if ("noProxy".equals (proxyHost))
+	    httpRequest =
+		"POST "+ConfigConst.getUri ()+" HTTP/1.0\n"+
+		"Host: "+remoteHost+"\n";
+	else {
+	    httpRequest =
+		"POST http://"+remoteHost+":"+remotePort+ConfigConst.getUri ()+" HTTP/1.0\n"+
+		"Host: "+remoteHost+"\n";
+	    remoteHost = proxyHost;
+	    remotePort = ConfigConst.getProxyPort ();
+	}
+	if (debug)
+	    System.err.println ("WebClientPdaSocket: <<<");
+!!!137218.java!!!	addHTML(in xmlMessage : String) : String
+	if (debug)
+	    System.err.println ("WebClientPdaSocket:addHTML >>>");
+	return
+	    httpRequest+
+	    "Content-type: application/xml\n"+
+	    "Content-Length: "+xmlMessage.length ()+"\n"+
+	    "\n"+
+	    xmlMessage;
+!!!137346.java!!!	removeHTML(in htmlMessage : String) : String
+	String ret[] = htmlMessage.split ("\n");
+	return ret [ret.length-1];

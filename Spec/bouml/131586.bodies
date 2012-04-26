@@ -1,0 +1,3 @@
+class XMLMailMessage
+!!!145538.java!!!	XMLMailMessage(in xmlMessage : String)
+	super (xmlMessage, tokens);

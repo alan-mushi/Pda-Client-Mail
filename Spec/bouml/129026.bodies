@@ -1,0 +1,7 @@
+class HWView
+!!!133250.java!!!	HWView(inout anEngine : HWEngine)
+        engine = anEngine;
+!!!133378.java!!!	initLabel() : void
+	panel.add(new JLabel(engine.getLabel()));
+!!!133506.java!!!	getPanel() : JPanel
+	return panel;

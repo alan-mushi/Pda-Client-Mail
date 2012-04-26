@@ -1,0 +1,9 @@
+class ProtocolException
+!!!144642.java!!!	ProtocolException(in message : String)
+	super (message);
+!!!144770.java!!!	ProtocolException(in message : String, inout cause : Exception)
+	super (message, cause);
+!!!144898.java!!!	manageLog() : void
+	Log.writeLog ("error", getMessage ()+" <= "+getCause ().getMessage ());
+	if (ConfigConst.getDebug ())
+	    System.err.println ("error: "+getMessage ()+" <= "+getCause ().getMessage ());

@@ -1,0 +1,104 @@
+class ConfigConst
+!!!139650.java!!!	getTokens() : List<String>
+	ArrayList<String> tokens = new ArrayList<String> (communTokens);
+	tokens.addAll (serverTokens);
+	tokens.addAll (clientTokens);
+	return tokens;
+!!!139778.java!!!	get(in token : String) : String
+	return values.get (token);
+!!!139906.java!!!	readConfigFile(in configFileName : String, inout serverFlag : boolean) : void
+	try {
+	    Hashtable<String,String> newValues = new Hashtable<String,String> ();
+	    //Creating an Object File from the file designed by the path
+	    File sourceFile = new File (configFileName);
+
+	    //Defines a factory API that enables applications to obtain a parser that produces DOM object trees from XML documents.
+	    DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance ();
+	    //This object will be use to get a Document from the XML file
+	    DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder ();
+	    //Initialiazing the Document
+	    Document doc = docBuilder.parse (sourceFile);
+	    //Normalize the Document
+	    doc.getDocumentElement ().normalize ();
+	    //We create a NodeList, with all elements with the name: config
+	    NodeList nodeLst = doc.getElementsByTagName ("config");
+	    //Select the current Node
+	    Node fstNode = nodeLst.item (0);
+	    //We check the type
+	    if (fstNode.getNodeType () == Node.ELEMENT_NODE) {
+		for (String token : communTokens)
+		    newValues.put (token, getValue (fstNode, token));
+		for (String token : (serverFlag ? serverTokens : clientTokens))
+		    newValues.put (token, getValue (fstNode, token));
+	    }
+	    // XXX Attention à startOfReq et le endOfReq (pour le <>)
+	    values = newValues;
+	} catch (ParserConfigurationException e) {
+	    System.err.println ("Error in config file "+configFileName);
+	    System.exit (-1);
+	} catch (IOException e) {
+	    System.err.println ("IOException in config file "+configFileName);
+	    System.exit (-1);
+	} catch (SAXException e) {
+	    System.err.println ("Syntaxe error in config file "+configFileName);
+	    System.exit (-1);
+	}
+!!!140034.java!!!	getValue(inout fstNode : Node, in valueName : String) : String
+	//The Node become an Element
+	Element fstElmnt = (Element) fstNode;
+	//We create another NodeList from the Element, we select the socketType
+	NodeList fstNmElmntLst = fstElmnt.getElementsByTagName (valueName);
+	//We select the item (0) of this list
+	Element fstNmElmnt = (Element) fstNmElmntLst.item (0);
+	try {
+	    //We select the Child of this NodeList	
+	    NodeList fstNm = fstNmElmnt.getChildNodes ();
+	    return fstNm.item (0).getNodeValue ();
+	} catch (NullPointerException e) {
+	    System.err.println ("Invalid config file ("+valueName+" missing).");
+	    System.exit (-1);
+	}
+	return "";
+!!!140162.java!!!	getPort(in portName : String) : int
+	try {
+	    int port = Integer.parseInt (values.get (portName));
+	    if (port > 65535 || port < 1)
+		throw new NullPointerException ();
+	    return port;
+	} catch (NumberFormatException e) {                    
+	    System.err.println ("Port  ("+portName+") must be an integer in config file");
+	    System.exit (-1);                                                                    
+	}                                                                                           
+	return 0;
+!!!140290.java!!!	getDebug() : boolean
+	try {
+	    return Integer.parseInt (values.get ("debug")) != 0;
+	} catch (NumberFormatException e) {
+	}
+	return false;
+!!!140418.java!!!	getSocketType() : String
+	return values.get ("socketType");
+!!!140546.java!!!	getStartOfReq() : String
+	// XXX a revoir
+	return "<"+values.get ("startOfReq")+">";
+!!!140674.java!!!	getEndOfReq() : String
+	// XXX a revoir
+	return "</"+values.get ("endOfReq")+">";
+!!!140802.java!!!	getListenPort() : int
+	return getPort ("listenPort");
+!!!140930.java!!!	getLogPath() : String
+	return values.get ("logPath");
+!!!141058.java!!!	getUserPath() : String
+	return values.get ("userPath");
+!!!141186.java!!!	getMailPath() : String
+	return values.get ("mailPath");
+!!!141314.java!!!	getRemoteHost() : String
+	return values.get ("remoteHost");
+!!!141442.java!!!	getRemotePort() : int
+	return getPort ("remotePort");
+!!!141570.java!!!	getProxyHost() : String
+	return values.get ("proxyHost");
+!!!141698.java!!!	getProxyPort() : int
+	return getPort ("proxyPort");
+!!!141826.java!!!	getUri() : String
+	return values.get ("uri");

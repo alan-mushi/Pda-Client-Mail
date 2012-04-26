@@ -1,0 +1,17 @@
+class Launcher
+!!!134274.java!!!	Launcher()
+        engine = new LaunchEngine();
+        view = new LaunchView(this, engine);
+!!!134402.java!!!	start(inout pda : IPda) : void
+	this.pda = pda;
+!!!134530.java!!!	getAppliName() : String
+	return name;
+!!!134658.java!!!	getAppliPanel() : JPanel
+	return view.getPanel();
+!!!134786.java!!!	close() : boolean
+	return true;
+!!!134914.java!!!	actionPerformed(inout e : ActionEvent) : void
+        String cmd = e.getActionCommand();
+        IApplication appli = engine.getAppli(cmd);
+        System.out.println("Launch" + cmd + ":" + appli.getAppliName());
+        pda.launchAppli(appli);

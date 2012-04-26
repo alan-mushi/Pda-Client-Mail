@@ -1,0 +1,20 @@
+class PdaEngine
+!!!129282.java!!!	launchAppli(inout appli : IApplication) : void
+	startedApplications.add(appli);
+!!!129410.java!!!	closeAppli(in idx : int) : void
+	IApplication appli = startedApplications.elementAt(idx) ;
+	exitApplication (appli);
+!!!129538.java!!!	getApplicationsName() : Vector<String>
+	Vector<String> result = new Vector<String> ();
+	for (IApplication appli : startedApplications)
+	    result.add (appli.getAppliName ());
+	return result;
+!!!129666.java!!!	getApplicationPanel(in name : String) : JPanel
+	for (IApplication appli : startedApplications) {
+	    if (name.equals (appli.getAppliName ())) {
+		return appli.getAppliPanel ();
+	    }
+	}
+	return null;
+!!!129794.java!!!	exitApplication(inout appli : IApplication) : void
+	startedApplications.remove (appli);

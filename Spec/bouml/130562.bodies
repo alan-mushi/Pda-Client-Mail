@@ -1,0 +1,77 @@
+class MailClient
+!!!138498.java!!!	MailClient(in username : String, in password : String)
+
+	this.username = username;
+	this.password = password;
+	currentMail = null;
+	socket = null;
+
+	listHeaders = new ArrayList<String> ();
+
+	try {
+	    if (ConfigConst.getSocketType ().equals ("socket"))
+		socket = new ClientPdaSocket (username, password, "mail");
+	    else
+		socket = new WebClientPdaSocket (username, password, "mail");
+	    socket.connect ();
+	} catch (ProtocolException e) {
+	    e.printStackTrace ();
+	    throw new ProtocolException ("Erreur lors de la creation du client de mail: " + e.getMessage ());
+	}
+!!!138626.java!!!	getHeaders() : ArrayList<String>
+	listHeaders.clear ();
+	sendRequest ("<action>getheaders</action>");
+	return listHeaders;
+!!!138754.java!!!	receive(in id : String) : MailContent
+	sendRequest ("<action>receive</action><id>" + id + "</id>");
+	return currentMail;
+!!!138882.java!!!	send(inout mail : MailContent) : void
+	mail.setExpeditor (username);
+	sendRequest ("<action>sendmail</action>" +
+		     "<recipient>" + new String (Base64.encodeBase64 (mail.getRecipient ().getBytes ())) + "</recipient>" +
+		     "<expeditor>"+new String (Base64.encodeBase64 (mail.getExpeditor ().getBytes ())) + "</expeditor>" +
+		     "<object>"+new String (Base64.encodeBase64 (mail.getObject ().getBytes ()))+"</object>" + 
+		     "<text>"+new String (Base64.encodeBase64 (mail.getText ().getBytes ())) + "</text>");
+!!!139010.java!!!	sendRequest(in request : String) : void
+	if (request==null || request.equals (""))
+	    throw new ProtocolException ("La requette ne doit pas etre vide");
+	try {
+	    if (!socket.isConnected ())
+		socket.connect ();
+	    parseXml (socket.sendMessage ("<mail>"+ request +"</mail>"));
+	} catch (ProtocolException e) {
+	    throw new ProtocolException ("Erreur lors de l'envois du message: " + e.getMessage ());
+	}
+!!!139138.java!!!	parseXml(in xmlMessage : String) : void
+	XMLMailMessage xml = new XMLMailMessage (xmlMessage);
+	String typeReponse = xml.getAttribute ("reponse");
+	if ("receive".equals (typeReponse)) {
+	    String recipient = new String (Base64.decodeBase64 (xml.getAttribute ("recipient").getBytes ()));
+	    String object = new String (Base64.decodeBase64 (xml.getAttribute ("object").getBytes ()));
+	    String text = new String (Base64.decodeBase64 (xml.getAttribute ("text").getBytes ()));
+	    String expeditor = new String (Base64.decodeBase64 (xml.getAttribute ("expeditor").getBytes ()));
+	    String date = new String (Base64.decodeBase64 (xml.getAttribute ("date").getBytes ()));
+
+	    MailContent mail = new MailContent (recipient, object, text, expeditor, date);
+	    currentMail = mail;
+	} else if ("getheaders".equals (typeReponse)) {
+	    try {
+		String message;
+		for (int i = 1; ! (message = xml.getAttribute ("id" + i)).equals (""); i++)
+		    listHeaders.add (message);
+	    } catch (ProtocolException e) {
+		// ne doit rien renvoyer : la boucle doit se terminer quand il n'y a plus de messages (cherche un message inexistant).
+		// L'exception sert de condition de sortie de boucle.
+	    }
+	} else if ("error".equals (typeReponse))
+	    throw new ProtocolException (xml.getAttribute ("text"));
+!!!139266.java!!!	delete(in id : String) : void
+	sendRequest ("<action>delete</action><id>"+ id +"</id>");
+!!!139394.java!!!	finalize() : void
+	if (socket != null)
+	    socket.close ();
+	socket = null;
+!!!139522.java!!!	close() : void
+	if (socket != null)
+	    socket.close ();
+	socket = null;

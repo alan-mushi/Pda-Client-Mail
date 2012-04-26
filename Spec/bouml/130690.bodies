@@ -1,0 +1,39 @@
+class MailContent
+!!!143106.java!!!	MailContent(in recipient : String, in object : String, in text : String)
+    	this (recipient, object, text, null, null);
+!!!143234.java!!!	MailContent(in recipient : String, in object : String, in text : String, in expeditor : String)
+	this (recipient, object, text, expeditor, null);
+!!!143362.java!!!	MailContent(in recipient : String, in object : String, in text : String, in expeditor : String, in date : String)
+	this.recipient = recipient;
+	this.object = object;
+	this.text = text;
+	this.expeditor = expeditor;
+	if (expeditor == null || "".equals (expeditor))
+	    this.expeditor = "hiden";
+	this.date = date;
+	if (date == null || "".equals (date))
+	    setDate ();
+!!!143490.java!!!	getRecipient() : String
+	return recipient;
+!!!143618.java!!!	getExpeditor() : String
+	return expeditor;
+!!!143746.java!!!	getObject() : String
+	return object;
+!!!143874.java!!!	getText() : String
+	return text;
+!!!144002.java!!!	setExpeditor(in expeditor : String) : void
+	this.expeditor = expeditor;
+!!!144130.java!!!	getDate() : String
+	return date;
+!!!144258.java!!!	setDate() : void
+	date = dateFormat.format (new Date ());
+!!!144386.java!!!	setDate(in date : String) : void
+	this.date = date;
+		
+!!!144514.java!!!	toXML() : String
+	return
+	    "<recipient>"+new String (Base64.encodeBase64 (recipient.getBytes ()))+"</recipient>"+
+	    "<expeditor>"+new String (Base64.encodeBase64 (expeditor.getBytes ()))+"</expeditor>"+
+	    "<object>"+new String (Base64.encodeBase64 (object.getBytes ()))+"</object>"+
+	    "<date>"+new String (Base64.encodeBase64 (date.getBytes ()))+"</date>"+
+	    "<text>"+new String (Base64.encodeBase64 (text.getBytes ()))+"</text>";

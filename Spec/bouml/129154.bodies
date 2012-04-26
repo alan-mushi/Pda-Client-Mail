@@ -1,0 +1,3 @@
+class HWEngine
+!!!133122.java!!!	getLabel() : String
+        return label;        
