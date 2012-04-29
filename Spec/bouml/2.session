@@ -1,5 +1,12 @@
-window_sizes 1500 787 375 1119 593 120
+window_sizes 1440 848 375 1119 593 120
+diagrams
+  active  usecasediagram_ref 135170 // Cas d'utilisations
+    1059 654 60 0 13 16
+end
 show_stereotypes
-selected 
-  package_ref 129 // bouml
+open
+  classview_ref 128002 // base
+  deploymentview_ref 128002 // base
+  usecaseview_ref 128002 // Cas d'utilisation
+end
 end
