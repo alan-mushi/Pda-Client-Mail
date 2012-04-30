@@ -1,7 +1,7 @@
 window_sizes 1440 848 375 1119 593 120
 diagrams
   active  usecasediagram_ref 135170 // Cas d'utilisations
-    1059 654 60 0 13 16
+    1059 654 60 0 49 22
 end
 show_stereotypes
 open
