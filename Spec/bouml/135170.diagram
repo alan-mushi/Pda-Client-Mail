@@ -2,59 +2,62 @@ format 75
 
 classcanvas 128002 class_ref 138370 // Utilisateur
   class_drawing_mode default show_context_mode default show_stereotype_properties default
-  xyz 63.2 519.2 2000
+  xyz 63.7 519.2 2000
 end
 classcanvas 128130 class_ref 138498 // Serveur
   class_drawing_mode default show_context_mode default show_stereotype_properties default
-  xyz 1628.2 294 2000
+  xyz 1628.9 294.5 2000
 end
 classcanvas 128258 class_ref 138626 // Sauvegarde_Locale
   class_drawing_mode default show_context_mode default show_stereotype_properties default
-  xyz 1638.6 804.8 2000
+  xyz 1638.9 804.3 2000
 end
 subject 128386 ""
-  xyzwh 276.2 101.4 2000 578 995
+  xyzwh 275.8 101.6 2000 578 995
 usecasecanvas 128642 usecase_ref 128130 // Sauvegarde des brouillons sur le serveur (si(connexion))
-  xyzwh 382.6 153.4 3005 351 51 label_xy 399 167
+  xyzwh 382.3 153.2 3005 351 51 label_xy 399 167
 end
 usecasecanvas 128770 usecase_ref 128258 // Réceptionner un mail
-  xyzwh 436.6 255.2 3005 173 39 label_xy 464 264
+  xyzwh 436.8 255.6 3005 173 39 label_xy 464 264
 end
 usecasecanvas 128898 usecase_ref 128386 // Suppression d'un mail
-  xyzwh 441.6 334.8 3005 183 35 label_xy 470 341
+  xyzwh 441.8 334.9 3005 183 35 label_xy 470 341
 end
 usecasecanvas 129026 usecase_ref 128514 // Consulter un mail
-  xyzwh 467.4 400.4 3005 133 37 label_xy 483 408
+  xyzwh 467.7 400.2 3005 133 37 label_xy 483 408
 end
 usecasecanvas 129154 usecase_ref 128642 // Synchroniser les mails sur le serveur et sur le client
-  xyzwh 385.2 471.2 3005 329 37 label_xy 407 479
+  xyzwh 385.1 471.1 3005 329 37 label_xy 407 479
 end
 usecasecanvas 129282 usecase_ref 128770 // Enregistrer un brouillon
-  xyzwh 460.4 542 3005 177 37 label_xy 483 549
+  xyzwh 460.2 542 3005 177 37 label_xy 483 549
 end
 usecasecanvas 129410 usecase_ref 128898 // Afficher la liste des contacts
-  xyzwh 353 633.4 3005 185 41 label_xy 367 644
+  xyzwh 353.5 633.7 3005 185 41 label_xy 367 644
 end
 usecasecanvas 129538 usecase_ref 129026 // Ajouter un contact
-  xyzwh 680.8 631.4 3005 121 43 label_xy 692 645
+  xyzwh 680 631.8 3005 121 43 label_xy 692 645
 end
 usecasecanvas 129794 usecase_ref 129154 // Modifier un contact
-  xyzwh 666.8 703.6 3005 139 35 label_xy 686 710
+  xyzwh 666.5 703 3005 139 35 label_xy 686 710
 end
 usecasecanvas 130050 usecase_ref 129282 // Supprimer un contact
-  xyzwh 667.2 778.2 3005 145 33 label_xy 682 786
+  xyzwh 667.1 778.6 3005 145 33 label_xy 682 786
 end
 usecasecanvas 130306 usecase_ref 129410 // Ecrire à un contact sélectionné
-  xyzwh 541.8 834.8 3005 201 45 label_xy 557 849
+  xyzwh 541.9 834.4 3005 201 45 label_xy 557 849
 end
 usecasecanvas 131202 usecase_ref 129538 // Rédiger un mail (mise en forme, adresse...etc)
-  xyzwh 341 898 3005 289 45 label_xy 352 911
+  xyzwh 341.5 898 3005 289 45 label_xy 352 911
 end
 usecasecanvas 131586 usecase_ref 129666 // Modifier les paramètres de l'application
-  xyzwh 294.8 1026 3005 245 39 label_xy 306 1037
+  xyzwh 294.4 1026.5 3005 245 39 label_xy 306 1037
 end
 usecasecanvas 132098 usecase_ref 129794 // Envoyer un mail
-  xyzwh 691.6 944.2 3011 143 31 label_xy 710 952
+  xyzwh 691.8 944.1 3011 143 31 label_xy 710 952
+end
+usecasecanvas 134018 usecase_ref 136322 // Login
+  xyzwh 523.5 593.4 3011 64 32 label_xy 539 601
 end
 line 129666 --->
   from ref 129410 z 3006 to ref 129538
@@ -108,4 +111,8 @@ line 133762 --->
   from ref 129794 z 3006 to ref 128258
 line 133890 --->
   from ref 130050 z 3006 to ref 128258
+line 134146 --->
+  from ref 128002 z 3012 to ref 134018
+line 134274 --->
+  from ref 134018 z 3012 to ref 128130
 end
