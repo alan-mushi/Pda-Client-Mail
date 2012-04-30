@@ -1,3 +1,10 @@
-1) Le menu principal du smartphone (Launcher)
-2) Le login de l'application
-3) Le menu principal de l'application
+Fichiers :
+
+	1.jpg : Le menu principal du smartphone (Launcher)
+	2.jpg : Le login de l'application
+	3.jpg : Le menu principal de l'application
+
+
+Dossiers :
+
+	xcf : Les sauvegardes au format Gimp, pour pouvoir modifier les images
