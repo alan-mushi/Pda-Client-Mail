@@ -14,13 +14,19 @@
     ├── Automate_a_etats_Login.dia
     ├── bouml
     ├── Cas d'utilisation Guillaume.dia
+    ├── Diagramme_de_sequence_afficher_brouillons.dia
     ├── Diagramme_de_sequence_afficher_contacts.dia
-    ├── Diagramme_de_sequence_consulter_un_mail.dia
+    ├── Diagramme_de_sequence_afficher_mails.dia
+    ├── Diagramme_de_sequence_consulter_brouillon.dia
+    ├── Diagramme_de_sequence_consulter_mail.dia
     ├── Diagramme_de_sequence_login.dia
     ├── Diagramme_de_sequence_recevoir_mail.dia
+    ├── Diagramme_de_sequence_r\303\251diger_brouillon.dia
     ├── Diagramme_de_sequence_r\303\251diger_mail.dia
     ├── Diagramme_de_sequence_sauvegarde_msg_brouillons.dia
+    ├── Diagramme_de_sequence_supprimer_brouillon.dia
     ├── Diagramme_de_sequence_supprimer_mail.dia
+    ├── Diagramme_de_sequence_synchroniser_mails.dia
     ├── Diag_seq_TODO.txt
     └── Maquette_IHM
 
