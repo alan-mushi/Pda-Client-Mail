@@ -17,6 +17,7 @@
     ├── Diagramme_de_sequence_afficher_brouillons.dia
     ├── Diagramme_de_sequence_afficher_contacts.dia
     ├── Diagramme_de_sequence_afficher_mails.dia
+    ├── Diagramme_de_sequence_ajouter_un_contact.dia
     ├── Diagramme_de_sequence_consulter_brouillon.dia
     ├── Diagramme_de_sequence_consulter_mail.dia
     ├── Diagramme_de_sequence_login.dia
@@ -27,6 +28,9 @@
     ├── Diagramme_de_sequence_supprimer_brouillon.dia
     ├── Diagramme_de_sequence_supprimer_mail.dia
     ├── Diagramme_de_sequence_synchroniser_mails.dia
+    ├── Diagramme_de_sequence_transfert_brouillon-mail.dia
+    ├── Diagramme_de_sequence_transfert_brouillon-mail.dia~
+    ├── Diagramme_de_sequence_transfert_brouillon-mail.dia.autosave
     ├── Diag_seq_TODO.txt
     └── Maquette_IHM
 

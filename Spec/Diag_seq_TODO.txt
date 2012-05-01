@@ -11,8 +11,8 @@
 ø rédiger un mail - thibault
 ø rédiger un brouillon - thibault
 ø synchroniser les mails : serveur <=> client - guillaume
+ø ajouter un contact - eflamm
 
-x ajouter un contact - eflamm
 x modifier un contact - eflam
 x supprimer un contact - eflamm
 x écrire à un contact - eflamm
