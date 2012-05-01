@@ -1,12 +1,12 @@
-ø login
-ø recevoir mail
-ø consulter mail
-ø supprimer mail
+ø login - guillaume - thibault
+ø recevoir mail - guillaume
+ø consulter mail - guillaume - thibault
+ø supprimer mail - guillaume
+ø afficher les contacts - guillaume
 
 x sauvegarde des messages/brouillons
 x synchroniser les mails : serveur <=> client
 x enregistrer un brouillon
-x afficher les contacts - guillaume
 x ajouter un contact - eflamm
 x modifier un contact - eflam
 x supprimer un contact - eflamm
