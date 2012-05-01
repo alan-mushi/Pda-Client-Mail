@@ -3,14 +3,14 @@
 ø consulter mail
 ø supprimer mail
 
-x sauvegarde des messges/brouillons
+x sauvegarde des messages/brouillons
 x synchroniser les mails : serveur <=> client
 x enregistrer un brouillon
-x afficher les contacts
-x ajouter un contact
-x modifier un contact
-x supprimer un contact
-x écrire à un contact
+x afficher les contacts - guillaume
+x ajouter un contact - eflamm
+x modifier un contact - eflam
+x supprimer un contact - eflamm
+x écrire à un contact - eflamm
 x rédiger un mail
 x envoyer un mail
 
