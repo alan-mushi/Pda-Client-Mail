@@ -6,6 +6,7 @@
 │   ├── API PdaNetwork.dia
 │   ├── application_messagerie.mht
 │   ├── JavaDoc API
+│		└...
 │   └── JavaDoc API.tar
 ├── README
 └── Spec
@@ -13,7 +14,31 @@
     ├── Automate_a_etats_Contacts.dia
     ├── Automate_a_etats_Login.dia
     ├── bouml
-    ├── Cas d'utilisation Guillaume.dia
+	│	└...
+    ├── Cas_d'utilisation_Guillaume.dia
     ├── Diagrammes_de_sequences
+    │   ├── afficher_brouillons.dia
+    │   ├── afficher_contacts.dia
+    │   ├── afficher_mails.dia
+    │   ├── ajouter_un_contact.dia
+    │   ├── consulter_brouillon.dia
+    │   ├── consulter_mail.dia
+    │   ├── Diag_seq_TODO.txt
+    │   ├── login.dia
+    │   ├── recevoir_mails.dia
+    │   ├── r\303\251diger_brouillon.dia
+    │   ├── r\303\251diger_mail.dia
+    │   ├── sauvegarde_msg_brouillons.dia
+    │   ├── supprimer_brouillon.dia
+    │   ├── supprimer_mail.dia
+    │   ├── synchroniser_mails.dia
+    │   └── transfert_brouillon-mail.dia
     └── Maquette_IHM
-
+        ├── 1.jpg
+        ├── 2.jpg
+        ├── 3-1-2.jpg
+        ├── 3-1.jpg
+        ├── 3.jpg
+        ├── description.txt
+        └── xcf
+            └...

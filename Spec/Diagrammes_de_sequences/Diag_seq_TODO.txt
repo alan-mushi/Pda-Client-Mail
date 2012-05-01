@@ -12,6 +12,7 @@
 ø rédiger un brouillon - thibault
 ø synchroniser les mails : serveur <=> client - guillaume
 ø ajouter un contact - eflamm
+ø transfert brouillon -> mail - thibault
 
 x modifier un contact - eflam
 x supprimer un contact - eflamm
