@@ -3,8 +3,8 @@
 ø consulter mail - guillaume - thibault
 ø supprimer mail - guillaume
 ø afficher les contacts - guillaume
+ø sauvegarde des messages/brouillons - thibault
 
-x sauvegarde des messages/brouillons - thibault
 x synchroniser les mails : serveur <=> client
 x enregistrer un brouillon
 x ajouter un contact - eflamm
