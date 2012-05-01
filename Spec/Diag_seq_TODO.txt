@@ -1,0 +1,21 @@
+ø login
+ø recevoir mail
+ø consulter mail
+ø supprimer mail
+
+x sauvegarde des messges/brouillons
+x synchroniser les mails : serveur <=> client
+x enregistrer un brouillon
+x afficher les contacts
+x ajouter un contact
+x modifier un contact
+x supprimer un contact
+x écrire à un contact
+x rédiger un mail
+x envoyer un mail
+
+-------------------
+Légende :
+
+ø : OK
+x : à faire
