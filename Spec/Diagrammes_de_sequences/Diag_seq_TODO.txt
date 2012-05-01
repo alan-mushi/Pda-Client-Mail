@@ -13,11 +13,10 @@
 ø synchroniser les mails : serveur <=> client - guillaume
 ø ajouter un contact - eflamm
 ø transfert brouillon -> mail - thibault
-
-x modifier un contact - eflam
-x supprimer un contact - eflamm
-x écrire à un contact - eflamm
-x envoyer un mail
+ø modifier un contact - eflam
+ø supprimer un contact - eflamm
+ø écrire à un contact - eflamm
+ø envoyer un mail - thibault
 
 -------------------
 Légende :
