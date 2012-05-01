@@ -1,5 +1,4 @@
 --------------- Contenu ---------------
-
 .
 ├── Doc
 │   ├── ap5_pda_27-03-2012.tar.gz
@@ -19,6 +18,7 @@
     ├── Diagramme_de_sequence_consulter_un_mail.dia
     ├── Diagramme_de_sequence_login.dia
     ├── Diagramme_de_sequence_recevoir_mail.dia
+    ├── Diagramme_de_sequence_r\303\251diger_mail.dia
     ├── Diagramme_de_sequence_sauvegarde_msg_brouillons.dia
     ├── Diagramme_de_sequence_supprimer_mail.dia
     ├── Diag_seq_TODO.txt

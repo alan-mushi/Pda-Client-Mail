@@ -4,6 +4,7 @@
 ø supprimer mail - guillaume
 ø afficher les contacts - guillaume
 ø sauvegarde des messages/brouillons - thibault
+ø rédiger un mail - thibault
 
 x synchroniser les mails : serveur <=> client
 x enregistrer un brouillon
@@ -11,7 +12,6 @@ x ajouter un contact - eflamm
 x modifier un contact - eflam
 x supprimer un contact - eflamm
 x écrire à un contact - eflamm
-x rédiger un mail
 x envoyer un mail
 
 -------------------
