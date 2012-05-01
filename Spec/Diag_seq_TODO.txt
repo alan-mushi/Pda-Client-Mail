@@ -10,8 +10,8 @@
 ø sauvegarde des messages/brouillons - thibault
 ø rédiger un mail - thibault
 ø rédiger un brouillon - thibault
+ø synchroniser les mails : serveur <=> client - guillaume
 
-x synchroniser les mails : serveur <=> client - guillaume
 x ajouter un contact - eflamm
 x modifier un contact - eflam
 x supprimer un contact - eflamm
