@@ -1,18 +1,14 @@
-# =======================================
-# =   Spécifications de l'application   =
-# ==        Client Mail pour Pda       ==
-# =======================================
+# Spécifications de l'application Client Mail pour Pda
 
 
-## --------------- Membres du groupe ---------------
+## Membres du groupe
 
-Guillame Claudic
-Titouan De Kerautem
-Thibault Guittet
-Eflamm Olivier
+* Titouan De Kerautem (TitouanDeKerautem)
+* Guillaume Claudic (zipang29)
+* Thibault Guittet (alan-mushi)
+* Eflamm Olivier (Capitaineflamm)
 
-
-## --------------- Repository GitHub ---------------
+## Repository GitHub
 
 Pour ce projet nous avons utilisé GitHub. Tous les éléments (commits, diagrammes Dia ...) sont disponibles :
 
@@ -21,17 +17,17 @@ Pour ce projet nous avons utilisé GitHub. Tous les éléments (commits, diagram
 * [Page principal du repository](https://github.com/alan-mushi/Pda-Client-Mail-Conception)
 
 
-## --------------- Problème avec bouml ---------------
+## Problème avec bouml
 
-<p>	Nous avons eu le profond désagrément d'utiliser bouml. En effet ce logiciel est maintenant payant, ce qui signifie
-que toutes les anciennes versions sont très difficiles à trouver sur internet.</p>
-<p>	Le problème majeur que nous ayons rencontré est le fait que justement une version identique pour tous nos poste n'était
-pas disponible (postes : Windows, ubuntu de 2 versions distinctes). Or les versions ne sont pas compatibles entre elles, ce qui
-signifie que nous ne pouvions pas tous consulter ni modifier les diagrammes produits.</p>
-<p>	Pour remédier à ces désagréments nous avons utilisé Dia pour créer nos diagrammes. Les documents produits par Dia ne sont pas disponibles dans ce tarball mais sont disponibles sur GitHub. Nous avons donc join les images exportées depuis Dia.</p>
+	Nous avons eu le profond désagrément d'utiliser bouml. En effet ce logiciel est maintenant payant, ce qui signifie
+que toutes les anciennes versions sont très difficiles à trouver sur internet.
+
+	Le problème majeur que nous ayons rencontré est le fait que justement une version identique pour tous nos poste n'était pas disponible (postes : Windows, ubuntu de 2 versions distinctes). Or les versions ne sont pas compatibles entre elles, ce qui signifie que nous ne pouvions pas tous consulter ni modifier les diagrammes produits.
+	
+	Pour remédier à ces désagréments nous avons utilisé Dia pour créer nos diagrammes. Les documents produits par Dia ne sont pas disponibles dans ce tarball mais sont disponibles sur GitHub. Nous avons donc join les images exportées depuis Dia.
 
 
-## --------------- Contenu ---------------
+## Contenu
 <pre>
 .
 ├── Doc/
