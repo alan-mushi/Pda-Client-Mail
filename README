@@ -10,13 +10,14 @@
 │   └── JavaDoc API.tar
 ├── README
 └── Spec/
-    ├── Arbre_de_fonctionnalitees_Thibault.dia
+    ├── Arbre_de_fonctionnalitees.dia
     ├── Automate_a_etats_Contacts.dia
     ├── Automate_a_etats_Login.dia
+    ├── Automate_a_etats_Messagerie_feedback.dia
     ├── bouml/
     │   └── ...
     ├── Cahier_des_charges.odt
-    ├── Cas_d'utilisation_Guillaume.dia
+    ├── Cas_d'utilisation.dia
     ├── Description_format_fichiers_de_donnees.odt
     ├── Description_format_sauvegarde_user.dia
     ├── Diagramme_de_classe.dia
@@ -33,8 +34,7 @@
     │   ├── login.dia
     │   ├── modifier_un_contact.dia
     │   ├── recevoir_mails.dia
-    │   ├── r\303\251diger_brouillon.dia
-    │   ├── r\303\251diger_mail.dia
+    │   ├── rediger_mail.dia
     │   ├── sauvegarde_msg_brouillons.dia
     │   ├── supprimer_brouillon.dia
     │   ├── supprimer_mail.dia
@@ -50,4 +50,5 @@
     │   ├── login.jpg
     │   ├── svg/
     │   └── xcf/
-    └── Presentation_application.odp
+    ├── Presentation_application.odp
+    └── scenario_global_test.odt
