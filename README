@@ -1,3 +1,8 @@
+=======================================
+=   Spécifications de l'application   =
+==        Client Mail pour Pda       ==
+=======================================
+
 --------------- Contenu ---------------
 .
 ├── Doc/
@@ -28,7 +33,6 @@
     │   ├── ajouter_un_contact.dia
     │   ├── consulter_brouillon.dia
     │   ├── consulter_mail.dia
-    │   ├── Diag_seq_TODO.txt
     │   ├── ecrire_a_un_contact.dia
     │   ├── envoyer_mail.dia
     │   ├── login.dia
