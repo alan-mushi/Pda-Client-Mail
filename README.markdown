@@ -1,0 +1,88 @@
+# =======================================
+# =   Spécifications de l'application   =
+# ==        Client Mail pour Pda       ==
+# =======================================
+
+
+## --------------- Membres du groupe ---------------
+
+Guillame Claudic
+Titouan De Kerautem
+Thibault Guittet
+Eflamm Olivier
+
+
+## --------------- Repository GitHub ---------------
+
+Pour ce projet nous avons utilisé GitHub. Tous les éléments (commits, diagrammes Dia ...) sont disponibles :
+
+* [Page de présentation](http://alan-mushi.github.com/Pda-Client-Mail-Conception/)
+
+* [Page principal du repository](https://github.com/alan-mushi/Pda-Client-Mail-Conception)
+
+
+## --------------- Problème avec bouml ---------------
+
+<p>	Nous avons eu le profond désagrément d'utiliser bouml. En effet ce logiciel est maintenant payant, ce qui signifie
+que toutes les anciennes versions sont très difficiles à trouver sur internet.</p>
+<p>	Le problème majeur que nous ayons rencontré est le fait que justement une version identique pour tous nos poste n'était
+pas disponible (postes : Windows, ubuntu de 2 versions distinctes). Or les versions ne sont pas compatibles entre elles, ce qui
+signifie que nous ne pouvions pas tous consulter ni modifier les diagrammes produits.</p>
+<p>	Pour remédier à ces désagréments nous avons utilisé Dia pour créer nos diagrammes. Les documents produits par Dia ne sont pas disponibles dans ce tarball mais sont disponibles sur GitHub. Nous avons donc join les images exportées depuis Dia.</p>
+
+
+## --------------- Contenu ---------------
+<pre>
+.
+├── Doc/
+│   ├── ap5_pda_27-03-2012.tar.gz
+│   ├── API Pda.dia
+│   ├── API PdaNetwork.dia
+│   ├── application_messagerie.mht
+│   ├── JavaDoc API/
+│   │   └── ...
+│   └── JavaDoc API.tar
+├── README
+└── Spec/
+    ├── Arbre_de_fonctionnalitees.dia
+    ├── Automate_a_etats_Contacts.dia
+    ├── Automate_a_etats_Login.dia
+    ├── Automate_a_etats_Messagerie_feedback.dia
+    ├── bouml/
+    │   └── ...
+    ├── Cahier_des_charges.odt
+    ├── Cas_d'utilisation.dia
+    ├── Description_format_fichiers_de_donnees.odt
+    ├── Description_format_sauvegarde_user.dia
+    ├── Diagramme_de_classe.dia
+    ├── Diagrammes_de_sequences/
+    │   ├── afficher_brouillons.dia
+    │   ├── afficher_contacts.dia
+    │   ├── afficher_mails.dia
+    │   ├── ajouter_un_contact.dia
+    │   ├── consulter_brouillon.dia
+    │   ├── consulter_mail.dia
+    │   ├── ecrire_a_un_contact.dia
+    │   ├── envoyer_mail.dia
+    │   ├── login.dia
+    │   ├── modifier_un_contact.dia
+    │   ├── recevoir_mails.dia
+    │   ├── rediger_mail.dia
+    │   ├── sauvegarde_msg_brouillons.dia
+    │   ├── supprimer_brouillon.dia
+    │   ├── supprimer_mail.dia
+    │   ├── supprimer_un_contact.dia
+    │   ├── synchroniser_mails.dia
+    │   └── transfert_brouillon-mail.dia
+    ├── Maquette_IHM/
+    │   ├── boite_envoi.png
+    │   ├── boite_reception.png
+    │   ├── brouillons.png
+    │   ├── contacts.png
+    │   ├── launcher.jpg
+    │   ├── login.jpg
+    │   ├── svg/
+    │   └── xcf/
+    ├── Presentation_application.odp
+    └── scenario_global_test.odt
+</pre>
