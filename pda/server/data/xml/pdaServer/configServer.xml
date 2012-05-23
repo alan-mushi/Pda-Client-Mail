@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+
+<!-- Information de debug : oui(1)/non(0) -->
+
+  <debug>0</debug>
+
+<!--
+	A utiliser s'il s'agit d'un serveur Web
+	<socketType>WebSocket</socketType>
+	<listenPort>80</listenPort>
+-->
+
+<!-- A utiliser s'il s'agit d'un dialogue par socket simple -->
+
+  <socketType>socket</socketType>
+  <listenPort>8888</listenPort>
+
+<!-- Sans réelle importance -->
+  <startOfReq>paquet</startOfReq>
+  <endOfReq>paquet</endOfReq>
+
+<!-- A créer obligatoirement -->
+  <logPath>data/pdaServer/</logPath>
+  <userPath>data/pdaServer/xml/users</userPath>
+  <mailPath>data/pdaServer/mail</mailPath>
+
+</config>
