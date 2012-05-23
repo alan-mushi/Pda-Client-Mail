@@ -1,3 +1,5 @@
+
+
 # Spécifications de l'application Client Mail pour Pda
 
 
@@ -14,7 +16,7 @@ Pour ce projet nous avons utilisé GitHub. Tous les éléments (commits, diagram
 
 * [Page de présentation](http://alan-mushi.github.com/Pda-Client-Mail-Conception/)
 
-* [Page principal du repository](https://github.com/alan-mushi/Pda-Client-Mail-Conception)
+* [Page principale du repository](https://github.com/alan-mushi/Pda-Client-Mail-Conception)
 
 
 ## Problème avec bouml
@@ -80,3 +82,5 @@ Pour remédier à ces désagréments nous avons utilisé Dia pour créer nos dia
     ├── Presentation_application.odp
     └── scenario_global_test.odt
 </pre>
+
+# Réalisation de la messagerie
