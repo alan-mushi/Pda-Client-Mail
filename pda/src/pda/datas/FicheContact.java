@@ -4,7 +4,7 @@ package datas ;
  * Cette classe gère une somme d'informations sur une personne à savoir
  * son nom, prenom et son email.
  */
-public class Fiche implements java.io.Serializable {
+public class FicheContact implements java.io.Serializable {
 
 	/** Attributs d'une Fiche. */
 	private String nom , prenom , email ;
@@ -18,10 +18,10 @@ public class Fiche implements java.io.Serializable {
 	 * @throws IllegalArgumentException Un des paramètres n'est pas valide, le message d'exception
 	 * contient le paramètre fautif.
 	 */
-	public Fiche( String leNom , String lePrenom , String lemail ) throws IllegalArgumentException {
+	public FicheContact( String leNom , String lePrenom , String lemail ) throws IllegalArgumentException {
 		if ( leNom == null || leNom.isEmpty() ) { throw new IllegalArgumentException( "Le nom n'est pas valide ") ; }
 		else if ( lePrenom == null || lePrenom.isEmpty() ) { throw new IllegalArgumentException( "Le prenom n'est pas valide ") ; }
-		else if ( lemail == null || leTel.isEmpty() ) { throw new IllegalArgumentException( "L'email n'est pas valide ") ; }
+		else if ( lemail == null || lemail.isEmpty() ) { throw new IllegalArgumentException( "L'email n'est pas valide ") ; }
 		this.nom = leNom ;
 		this.prenom = lePrenom ;
 		this.email = lemail ;
