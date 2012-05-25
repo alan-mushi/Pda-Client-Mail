@@ -1,10 +1,12 @@
 package datas;
 
+import pdaNetwork.misc.MailContent ;
+
 public class MailType extends MailContent {
 	private String type;
 	
 	public MailType() {
-		super();
+		super( "" , "" , "");
 	}
 	
 	public String getType() {

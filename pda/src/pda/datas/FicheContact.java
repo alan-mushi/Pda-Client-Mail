@@ -6,6 +6,8 @@ package datas ;
  */
 public class FicheContact implements java.io.Serializable {
 
+	/** Champ pour l'interface Serializable. */
+	private static final long serialVersionUID = 2L ;
 	/** Attributs d'une Fiche. */
 	private String nom , prenom , email ;
 
