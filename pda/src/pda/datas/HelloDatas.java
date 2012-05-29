@@ -31,7 +31,7 @@ public class HelloDatas {
 	 *
 	 */
 	public HelloDatas() {
-		this.label = new String ( "Bonjour le monde" );
+		this.label = new String ( "Bonjour le monde\nXD\nHello World!" );
 	}
     
     	/**
