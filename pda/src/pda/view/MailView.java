@@ -10,14 +10,16 @@ public class MailView {
 	//Panel principal de l'application Mail Client qui s'intègre dans le PDA
 	private JPanel mainPanel;
 	private JLabel labLogin, labMdp;
-	private JTextField login, mdp;
+	private JTextField login;
+	private JPasswordField mdp;
 	private JButton valider;
 	
 	public MailView() {
 		initialiserGui();
+		attacherReactions();
 	}
 	
-	public void initialiserGui() {
+	private void initialiserGui() {
 		mainPanel = new JPanel(new BorderLayout(50, 50));
 		JPanel panelCentre = new JPanel(new GridLayout(5, 1, 10, 10));
 		JPanel panelGauche = new JPanel();
@@ -32,7 +34,7 @@ public class MailView {
 		
 		login = new JTextField();
 		login.setHorizontalAlignment(SwingConstants.CENTER);
-		mdp = new JTextField();
+		mdp = new JPasswordField();
 		mdp.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		valider = new JButton("Valider");
@@ -51,7 +53,15 @@ public class MailView {
 		mainPanel.add(panelHaut, BorderLayout.NORTH);
 	}
 	
+	private void attacherReactions() {
+		valider.addActionListener(new MailMenuView(getMainPanel()));
+	}
+	
 	public JPanel getMainPanel() {
 		return this.mainPanel;
+	}
+	
+	public JButton getBoutonValider() {
+		return this.valider;
 	}
 }

@@ -3,8 +3,10 @@ package pda.control;
 import pda.view.*;
 import pda.datas.*;
 import javax.swing.*;
+import java.awt.event.*;
 
-public class MailCtrl implements IApplication {
+
+public class MailCtrl implements IApplication, ActionListener {
 	
 	/* Attributs */
 	private String name;
@@ -31,5 +33,12 @@ public class MailCtrl implements IApplication {
 	}
 	public void setAppliName(String theName) {
 		this.name = theName;
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		Object src = e.getSource();
+		if(src == this.view.getBoutonValider()) {
+			new MailMenuView(this.view.getMainPanel());
+		}
 	}
 }
