@@ -52,6 +52,10 @@ public class MailCtrl implements IApplication, ActionListener {
 			if(src == this.view.getBoutonValider()) {
 				MailMenuView test = new MailMenuView(this.view.getMainPanel());
 			}
+			// Si la touche enter est pressée sur le champ mdp ou login
+			else if ( src == this.view.getFieldMDP() || src == this.view.getFieldLogin() ) {
+				MailMenuView test = new MailMenuView(this.view.getMainPanel());
+			}
 			else
 				throw new Exception("La classe n'est pas utilitée correctement. Utilisez le bon constructeur pour l'utilisation de la classe pour que la classe fonctionne normalement.");
 		}

@@ -57,6 +57,8 @@ public class MailView {
 	
 	private void attacherReactions() {
 		valider.addActionListener( this.mailCtrl );
+		mdp.addActionListener( this.mailCtrl ) ;
+		login.addActionListener( this.mailCtrl ) ;
 	}
 	
 	public JPanel getMainPanel() {
@@ -65,5 +67,13 @@ public class MailView {
 	
 	public JButton getBoutonValider() {
 		return this.valider;
+	}
+
+	public JPasswordField getFieldMDP() { 
+		return ( this.mdp ) ; 
+	}
+
+	public JTextField getFieldLogin() {
+		return ( this.login ) ;
 	}
 }
