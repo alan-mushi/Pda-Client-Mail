@@ -28,7 +28,7 @@ public class LaunchDatas {
 	 * The CONSTANT array of application names.
 	 * ADD HERE THE UNIQUE NAME OF A RUNNABLE APPLICATION (!! application name must be unique : it's a key !!).
 	 */
-	public static final String[] appArray = { "hello" };
+	public static final String[] appArray = { "hello", "Mail Client" };
 
 	/** The list of applications classes that can be launched */
 	private Hashtable<String, Class> applications;
@@ -59,6 +59,7 @@ public class LaunchDatas {
 		// pour les 2 Hashtable "applications" et "icons"
 		applications.put ( appArray[0], HelloCtrl.class ); // !! la classe compilée HelloCtrl.class DOIT EXISTER
 		icons.put ( appArray[0], "hello.png" );
+		applications.put(appArray[1], MailCtrl.class);
 
 	} // ------------------------------------------------------- LaunchDatas()
 
