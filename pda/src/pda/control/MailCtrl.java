@@ -13,21 +13,21 @@ public class MailCtrl implements IApplication, ActionListener {
 	
 	private MailView view;
 	
-	private MailView instance;
+	// private MailView instance;
 
 	/* Constructeur(s) */
 	
 	//Constructeur utilisé pour pouvoir lancer l'application dans le launcher
 	public MailCtrl() {
-		view = new MailView();
-		instance = null;
+		view = new MailView( this );
+	//	instance = null;
 	}
 	
 	//Constructeur pour pouvoir gérer les réactions notament à l'identification
-	public MailCtrl(MailView instance) {
-		view = null;
-		this.instance = instance;
-	}
+	// public MailCtrl(MailView instance) {
+	// 	view = null;
+	// 	this.instance = instance;
+	// }
 
 	/* Méthodes */
 	public void start(PdaCtrl pda) {
@@ -49,8 +49,8 @@ public class MailCtrl implements IApplication, ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		try {
 			Object src = e.getSource();
-			if(src == this.instance.getBoutonValider()) {
-				MailMenuView test = new MailMenuView(this.instance.getMainPanel());
+			if(src == this.view.getBoutonValider()) {
+				MailMenuView test = new MailMenuView(this.view.getMainPanel());
 			}
 			else
 				throw new Exception("La classe n'est pas utilitée correctement. Utilisez le bon constructeur pour l'utilisation de la classe pour que la classe fonctionne normalement.");

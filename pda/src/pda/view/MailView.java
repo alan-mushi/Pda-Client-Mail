@@ -13,8 +13,10 @@ public class MailView {
 	private JTextField login;
 	private JPasswordField mdp;
 	private JButton valider;
+	private MailCtrl mailCtrl ;
 	
-	public MailView() {
+	public MailView( MailCtrl thisControl ) {
+		this.mailCtrl = thisControl ;
 		initialiserGui();
 		attacherReactions();
 	}
@@ -54,7 +56,7 @@ public class MailView {
 	}
 	
 	private void attacherReactions() {
-		valider.addActionListener(new MailCtrl(this));
+		valider.addActionListener( this.mailCtrl );
 	}
 	
 	public JPanel getMainPanel() {
