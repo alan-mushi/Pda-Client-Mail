@@ -54,7 +54,7 @@ public class MailView {
 	}
 	
 	private void attacherReactions() {
-		valider.addActionListener(new MailMenuView(getMainPanel()));
+		valider.addActionListener(new MailCtrl(this));
 	}
 	
 	public JPanel getMainPanel() {

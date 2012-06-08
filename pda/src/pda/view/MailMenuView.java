@@ -11,5 +11,6 @@ public class MailMenuView {
 	public MailMenuView(JPanel thePanel) {
 		this.mainPanel = thePanel;
 		mainPanel.removeAll();
+		mainPanel.updateUI();
 	}
 }
