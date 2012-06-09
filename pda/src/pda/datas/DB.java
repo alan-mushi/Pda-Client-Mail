@@ -19,14 +19,15 @@ public class DB {
 	 * @param obj L'objet que l'on souhaite écrire.
 	 * @param fileName Le fichier de destination.
 	 * @return <code>true</code> si tout c'est bien passé, <code>false</code> sinon.
+	 * @throws IllegalArgumentException Si les paramètre ne sont pas valides.
 	 */
-	public boolean sauvegarder( Object obj , String fileName ) {
+	public boolean sauvegarder( Object obj , String fileName ) throws IllegalArgumentException {
 		boolean res = false ;
 		if ( fileName == null || fileName.isEmpty() ) {
-			System.err.println( "[-] @DB.sauvegarder : Le nom du fichier est vide ou null." ) ;
+			throw new IllegalArgumentException( "Le nom du fichier est vide ou null." ) ;
 		}
 		else if ( obj == null ) {
-			System.err.println( "[-] @DB.sauvegarder : La référence sur l'objet est nulle." ) ;
+			throw new IllegalArgumentException( "La référence sur l'objet est nulle." ) ;
 		}
 		else {
 			try {
@@ -38,10 +39,10 @@ public class DB {
 				res = true ;
 			}
 			catch ( FileNotFoundException e ) {
-				System.err.println( "[-] @DB.sauvegarder : \n" + e.getMessage() ) ;
+				System.err.println( e.getMessage() ) ;
 			}
 			catch ( IOException e ) {
-				System.err.println( "[-] @DB.sauvegarder : \n" + e.getMessage() ) ;
+				System.err.println( e.getMessage() ) ;
 			}
 		}
 		return ( res ) ;
@@ -52,11 +53,12 @@ public class DB {
 	 * la non nullité et pour la présence d'au moins un caractère.
 	 * @param fileName Le nom du fichier dans lequel l'objet est sauvegardé.
 	 * @return L'objet chargé.
+	 * @throws IllegalArgumentException Si le paramètre n'est pas valide.
 	 */
-	public Object charger( String fileName ) {
+	public Object charger( String fileName ) throws IllegalArgumentException {
 		Object res = null ;
 		if ( fileName == null || fileName.isEmpty() ) {
-			System.err.println( "[-] @DB.charger : Le nom du fichier est vide ou null." ) ;
+			throw new IllegalArgumentException( "Le nom du fichier est vide ou null." ) ;
 		}
 		else {
 			try {
@@ -67,13 +69,13 @@ public class DB {
 				in.close() ;
 			}
 			catch ( FileNotFoundException e ) {
-				System.err.println( "[-] @DB.charger : \n" + e.getMessage() ) ;
+				System.err.println( e.getMessage() ) ;
 			}
 			catch ( IOException e ) {
-				System.err.println( "[-] @DB.charger : \n" + e.getMessage() ) ;
+				System.err.println( e.getMessage() ) ;
 			}
 			catch ( ClassNotFoundException e ) {
-				System.err.println( "[-] @DB.charger : \n" + e.getMessage() ) ;
+				System.err.println( e.getMessage() ) ;
 			}
 		}
 		return ( res ) ;
@@ -84,11 +86,12 @@ public class DB {
 	 * la non nullité et pour la présence d'au moins un caractère.
 	 * @param fileName Le fichier à supprimer.
 	 * @return <code>true</code> si le fichier a bien été supprimé, <code>false</code> sinon.
+	 * @throws IllegalArgumentException Si le paramètre est invalide.
 	 */
-	public boolean supprimer( String fileName ) {
+	public boolean supprimer( String fileName ) throws IllegalArgumentException {
 		boolean res = false ;
 		if ( fileName == null || fileName.isEmpty() ) {
-			System.err.println( "[-] @DB.supprimer : Le nom du fichier est vide ou null." ) ;
+			throw new IllegalArgumentException( "Le nom du fichier est vide ou null." ) ;
 		}
 		else {
 			File monFichier = new File( fileName ) ;

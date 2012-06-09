@@ -108,7 +108,7 @@ public class Contacts implements java.io.Serializable , StaticRefs {
 		boolean res = false ;
 		this.checkFiche( uneFicheContact ) ;
 		this.supprimer( cle ) ;
-		this.ajouter( cle , uneFicheContact ) ;
+		this.ajouter( uneFicheContact.getNom() , uneFicheContact ) ;
 		res = true ;
 		return ( res ) ;
 	}

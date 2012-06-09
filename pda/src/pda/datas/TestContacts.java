@@ -206,10 +206,10 @@ public class TestContacts implements StaticRefs {
 			System.out.println( "OK : \n" + e.getMessage() ) ;
 		}
 
-		System.out.print( "\n[*] Test basé SANS erreur (clé nulle cf doc) ... " ) ;
+		System.out.print( "\n[*] Test basé SANS erreurs (clé variable : originale -> tmpFiche.getNom()) ... " ) ;
 		try {
 			FicheContact tmpFiche = new FicheContact( "nomModif" , "prenomModif" , "emailModif" ) ;
-			cont.modifier( "jhfdsjhfsdf" , tmpFiche ) ;
+			cont.modifier( "nom" , tmpFiche ) ;
 			System.out.println( "OK" ) ;
 		}
 		catch ( IllegalArgumentException e ) {
@@ -237,6 +237,14 @@ public class TestContacts implements StaticRefs {
 		}
 		else {
 			System.out.println( "\n[-] Les deux Set sont différents : la sauvegarde n'est PAS valide." ) ;
+		}
+
+		//------------------------------Suppression du fichier généré--------------------------------------
+		try {
+			myDB.supprimer( contactsFile ) ;
+		}
+		catch ( IllegalArgumentException e ) {
+			System.err.println( e.getMessage() ) ;
 		}
 
 		System.out.println( "\n\n######################################" ) ;

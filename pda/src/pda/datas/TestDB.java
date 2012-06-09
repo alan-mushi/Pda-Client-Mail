@@ -5,7 +5,7 @@ package pda.datas ;
  * @see pda.datas.DB
  */
 public class TestDB implements java.io.Serializable , StaticRefs {
-	
+
 	/** Utilisé pour tester la validité de l'objet chargé. */
 	private static String champ ;
 	/** Utilisé pour compiler sans warnings. */
@@ -22,68 +22,123 @@ public class TestDB implements java.io.Serializable , StaticRefs {
 	 * Méthode qui contient les tests.
 	 */
 	public static void main( String[] args ) {
-		
+
 		TestDB obj = new TestDB() ;
 		// Ecriture de l'objet courant dans un fichier
 		System.out.println( "\n--------------------------------------\n	Tests de sauvegarder" ) ;
 		System.out.println( "\n[*] Test basé sur une erreur (nom du fichier vide) ... " ) ;
-		myDB.sauvegarder( obj , "" ) ;
-		
+		try {
+			myDB.sauvegarder( obj , "" ) ;
+		}
+		catch ( IllegalArgumentException e ) {
+			System.err.println( e.getMessage() ) ;
+		}
+
 		System.out.println( "\n[*] Test basé sur une erreur (nom du fichier null) ... " ) ;
-		myDB.sauvegarder( obj , null ) ;
+		try {
+			myDB.sauvegarder( obj , null ) ;
+		}
+		catch ( IllegalArgumentException e ) {
+			System.err.println( e.getMessage() ) ;
+		}
 
 		System.out.println( "\n[*] Test basé sur une erreur (objet null) ... " ) ;
-		myDB.sauvegarder( null , "test" ) ;
+		try {
+			myDB.sauvegarder( null , "test" ) ;
+		}
+		catch ( IllegalArgumentException e ) {
+			System.err.println( e.getMessage() ) ;
+		}
 
 		System.out.print( "\n[*] Test basé SANS erreurs ... " ) ;
-		boolean save = myDB.sauvegarder( obj , "file.bin" ) ;
-		if ( save ) {
-			System.out.println( "OK" ) ;
+		try {
+			boolean save = myDB.sauvegarder( obj , "file.bin" ) ;
+			if ( save ) {
+				System.out.println( "OK" ) ;
+			}
+			else {
+				System.out.println( "FAIL" ) ;
+			}
 		}
-		else {
-			System.out.println( "FAIL" ) ;
+		catch ( IllegalArgumentException e ) {
+			System.err.println( e.getMessage() ) ;
 		}
 
 		System.out.println( "\n--------------------------------------\n	Tests de charger" ) ;
 		System.out.println( "\n[*] Test basé sur une erreur (nom du fichier null) ... " ) ;
-		myDB.charger( null ) ;
+		try {
+			myDB.charger( null ) ;
+		}
+		catch ( IllegalArgumentException e ) {
+			System.err.println( e.getMessage() ) ;
+		}
 
 		System.out.println( "\n[*] Test basé sur une erreur (nom du fichier vide) ... " ) ;
-		myDB.charger( "" ) ;
+		try {
+			myDB.charger( "" ) ;
+		}
+		catch ( IllegalArgumentException e ) {
+			System.err.println( e.getMessage() ) ;
+		}
 
 		System.out.print( "\n[*] Test basé SANS erreurs ... " ) ;
-		TestDB loaded = (TestDB) myDB.charger( "file.bin" ) ;
-		String tmpChamp = loaded.getChamp() ;
-		if ( ! tmpChamp.equals( champ ) ) {
-			System.out.println( "FAIL" ) ;
+		try {
+			TestDB loaded = (TestDB) myDB.charger( "file.bin" ) ;
+			String tmpChamp = loaded.getChamp() ;
+			if ( ! tmpChamp.equals( champ ) ) {
+				System.out.println( "FAIL" ) ;
+			}
+			else {
+				System.out.println( "OK" ) ;
+			}
 		}
-		else {
-			System.out.println( "OK" ) ;
+		catch ( IllegalArgumentException e ) {
+			System.err.println( e.getMessage() ) ;
 		}
 
 		System.out.println( "\n--------------------------------------\n	Test de supprimer" ) ;
 		System.out.println( "\n[*] Test basé sur une erreur (nom du fichier null) ... " ) ;
-		myDB.supprimer( null ) ;
+		try {
+			myDB.supprimer( null ) ;
+		}
+		catch ( IllegalArgumentException e ) {
+			System.err.println( e.getMessage() ) ;
+		}
 
 		System.out.println( "\n[*] Test basé sur une erreur (nom du fichier vide) ... " ) ;
-		myDB.supprimer( "" ) ;
+		try {
+			myDB.supprimer( "" ) ;
+		}
+		catch ( IllegalArgumentException e ) {
+			System.err.println( e.getMessage() ) ;
+		}
 
 		System.out.print( "\n[*] Test basé SANS erreurs ... " ) ;
-		boolean suppr = myDB.supprimer( "file.bin" ) ;
-		if ( suppr ) {
-			System.out.println( "OK" ) ;
+		try {
+			boolean suppr = myDB.supprimer( "file.bin" ) ;
+			if ( suppr ) {
+				System.out.println( "OK" ) ;
+			}
+			else {
+				System.out.println( "FAIL" ) ;
+			}
 		}
-		else {
-			System.out.println( "FAIL" ) ;
+		catch ( IllegalArgumentException e ) {
+			System.err.println( e.getMessage() ) ;
 		}
 
 		System.out.print( "\n[*] Test basé sur une erreur (fichier absent) ... " ) ;
-		suppr = myDB.supprimer( "fichier inconnu" ) ;
-		if ( ! suppr ) {
-			System.out.println( "OK" ) ;
+		try {
+			boolean suppr = myDB.supprimer( "fichier inconnu" ) ;
+			if ( ! suppr ) {
+				System.out.println( "OK" ) ;
+			}
+			else {
+				System.out.println( "FAIL" ) ;
+			}
 		}
-		else {
-			System.out.println( "FAIL" ) ;
+		catch ( IllegalArgumentException e ) {
+			System.err.println( e.getMessage() ) ;
 		}
 
 		System.out.println( "\n\n######################################" ) ;
