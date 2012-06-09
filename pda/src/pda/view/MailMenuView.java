@@ -9,13 +9,17 @@ public class MailMenuView {
 	/** Le JPanel principal récupéré de la classe parente*/
 	private JPanel mainPanel;
 	
+	private MailCtrl mailCtrl;
+	
 	private JButton envoie, reception, parametre, brouillons, contacts, notification;
 
-	public MailMenuView(JPanel thePanel) {
+	public MailMenuView(JPanel thePanel, MailCtrl theCtrl) {
 		this.mainPanel = thePanel;
+		this.mailCtrl = theCtrl;
 		mainPanel.removeAll();
 		mainPanel.updateUI();
 		initialiserGui();
+		attacherReactions();
 	}
 	
 	public void initialiserGui() {
@@ -47,5 +51,33 @@ public class MailMenuView {
 		panelBouton.add(panelLigne1);
 		panelBouton.add(panelLigne2);
 		panelBouton.add(contacts);
+	}
+	
+	public void attacherReactions() {
+		reception.addActionListener(this.mailCtrl);
+	}
+	
+	public JButton getBoutonReception() {
+		return this.reception;
+	}
+	
+	public JButton getBoutonEnvoie() {
+		return this.envoie;
+	}
+	
+	public JButton getBoutonParametre() {
+		return this.parametre;
+	}
+	
+	public JButton getBoutonBrouillons() {
+		return this.brouillons;
+	}
+	
+	public JButton getBoutonContacts() {
+		return this.contacts;
+	}
+	
+	public JButton getBoutonNotification() {
+		return this.notification;
 	}
 }

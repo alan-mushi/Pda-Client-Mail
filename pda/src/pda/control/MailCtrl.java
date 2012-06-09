@@ -45,6 +45,9 @@ public class MailCtrl implements IApplication, ActionListener {
 			else if ( src == this.view.getFieldMDP() || src == this.view.getFieldLogin() ) {
 				MailMenuView test = new MailMenuView(this.view.getMainPanel());
 			}
+			else if(src == this.view.getBoutonReception()) {
+				System.out.println("Ok");
+			}
 			else
 				throw new Exception("Une erreur indéterminée est survenue lors d'une tentative d'action sur un élément du programme.");
 		}
