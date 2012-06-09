@@ -36,20 +36,13 @@ public class MailCtrl implements IApplication, ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		try {
-			Object src = e.getSource();
-			if(src == this.view.getBoutonValider()) {
-				MailMenuView test = new MailMenuView(this.view.getMainPanel());
-			}
-			// Si la touche enter est pressée sur le champ mdp ou login
-			else if ( src == this.view.getFieldMDP() || src == this.view.getFieldLogin() ) {
-				MailMenuView test = new MailMenuView(this.view.getMainPanel());
-			}
-			else
-				throw new Exception("Une erreur indéterminée est survenue lors d'une tentative d'action sur un élément du programme.");
+		Object src = e.getSource();
+		if(src == this.view.getBoutonValider()) {
+			new MailMenuView(this.view.getMainPanel());
 		}
-		catch(Exception erreur) {
-			System.out.println(erreur.getMessage());
+		// Si la touche enter est pressée sur le champ mdp ou login
+		else if ( src == this.view.getFieldMDP() || src == this.view.getFieldLogin() ) {
+			new MailMenuView(this.view.getMainPanel());
 		}
 	}
 }

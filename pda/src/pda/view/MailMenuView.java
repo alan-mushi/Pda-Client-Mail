@@ -16,6 +16,7 @@ public class MailMenuView {
 		mainPanel.removeAll();
 		mainPanel.updateUI();
 		initialiserGui();
+		attacherReactions();
 	}
 	
 	public void initialiserGui() {
@@ -38,8 +39,8 @@ public class MailMenuView {
 		mainPanel.add(new JPanel(), BorderLayout.EAST);
 		mainPanel.add(new JPanel(), BorderLayout.NORTH);
 		
-		panelLigne1.add(envoie);
 		panelLigne1.add(reception);
+		panelLigne1.add(envoie);
 		
 		panelLigne2.add(parametre);
 		panelLigne2.add(brouillons);
@@ -47,5 +48,37 @@ public class MailMenuView {
 		panelBouton.add(panelLigne1);
 		panelBouton.add(panelLigne2);
 		panelBouton.add(contacts);
+	}
+	
+	public void attacherReactions() {
+		reception.addActionListener(new MailMenuCtrl(this));
+	}
+	
+	public JButton getBoutonReception() {
+		return this.reception;
+	}
+	
+	public JButton getBoutonEnvoie() {
+		return this.envoie;
+	}
+	
+	public JButton getBoutonParametre() {
+		return this.parametre;
+	}
+	
+	public JButton getBoutonBrouillons() {
+		return this.brouillons;
+	}
+	
+	public JButton getBoutonContacts() {
+		return this.contacts;
+	}
+	
+	public JButton getBoutonNotification() {
+		return this.notification;
+	}
+	
+	public JPanel getMainPanel() {
+		return this.mainPanel;
 	}
 }
