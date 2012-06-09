@@ -52,7 +52,7 @@ public class FicheContact implements java.io.Serializable {
 	 * @return Les paramètres de la Fiche.
 	 */
 	public String toString() {
-		String res = "---------------------\nNom : " + this.nom ;
+		String res = "Nom : " + this.nom ;
 		res += "\nPrenom : " + this.prenom ;
 		res += "\nEmail : " + this.email ;
 		return ( res ) ;
