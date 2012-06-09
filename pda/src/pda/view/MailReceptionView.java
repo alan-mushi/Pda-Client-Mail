@@ -26,8 +26,12 @@ public class MailReceptionView {
 		
 		ImageIcon icon = new ImageIcon("data/img/mail/nonLu.png");
 		
-		JButton test1 = new JButton("test1", icon);
+		JButton test1 = new JButton("<html>Bienvenue sur Mail Client<br /><h5>Guillaume Claudic</h5></html>", icon);
+		test1.setBackground(Color.WHITE);
+		
 		JButton test2 = new JButton("test1", icon);
+		test2.setBackground(Color.WHITE);
+		
 		JButton test3 = new JButton("test1", icon);
 		JButton test4 = new JButton("test1", icon);
 		JButton test5 = new JButton("test1", icon);
