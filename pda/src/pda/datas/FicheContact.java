@@ -1,4 +1,4 @@
-package datas ;
+package pda.datas ;
 
 /**
  * Cette classe gère une somme d'informations sur une personne à savoir

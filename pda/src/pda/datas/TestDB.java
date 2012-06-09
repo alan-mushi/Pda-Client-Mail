@@ -4,15 +4,15 @@ package pda.datas ;
  * Cette classe teste entièrement les méthodes de la classee DB.
  * @see pda.datas.DB
  */
-public class TestDB implements java.io.Serializable {
+public class TestDB implements java.io.Serializable , StaticRefs {
 	
 	/** Utilisé pour tester la validité de l'objet chargé. */
 	private static String champ ;
 	/** Utilisé pour compiler sans warnings. */
-	private static final long serialVersionUID = 354054054054L ;
+	private static final long serialVersionUID = 1L ;
 
 	/**
-	 *
+	 * Le constructeur initialise le champ.
 	 */
 	public TestDB() {
 		champ = "Ceci est le champ originel." ;
@@ -25,19 +25,18 @@ public class TestDB implements java.io.Serializable {
 		
 		TestDB obj = new TestDB() ;
 		// Ecriture de l'objet courant dans un fichier
-		DB dataB = new DB() ;
 		System.out.println( "\n--------------------------------------\n	Tests de sauvegarder" ) ;
 		System.out.println( "\n[*] Test basé sur une erreur (nom du fichier vide) ... " ) ;
-		dataB.sauvegarder( obj , "" ) ;
+		myDB.sauvegarder( obj , "" ) ;
 		
 		System.out.println( "\n[*] Test basé sur une erreur (nom du fichier null) ... " ) ;
-		dataB.sauvegarder( obj , null ) ;
+		myDB.sauvegarder( obj , null ) ;
 
 		System.out.println( "\n[*] Test basé sur une erreur (objet null) ... " ) ;
-		dataB.sauvegarder( null , "test" ) ;
+		myDB.sauvegarder( null , "test" ) ;
 
 		System.out.print( "\n[*] Test basé SANS erreurs ... " ) ;
-		boolean save = dataB.sauvegarder( obj , "file.bin" ) ;
+		boolean save = myDB.sauvegarder( obj , "file.bin" ) ;
 		if ( save ) {
 			System.out.println( "OK" ) ;
 		}
@@ -47,13 +46,13 @@ public class TestDB implements java.io.Serializable {
 
 		System.out.println( "\n--------------------------------------\n	Tests de charger" ) ;
 		System.out.println( "\n[*] Test basé sur une erreur (nom du fichier null) ... " ) ;
-		dataB.charger( null ) ;
+		myDB.charger( null ) ;
 
 		System.out.println( "\n[*] Test basé sur une erreur (nom du fichier vide) ... " ) ;
-		dataB.charger( "" ) ;
+		myDB.charger( "" ) ;
 
 		System.out.print( "\n[*] Test basé SANS erreurs ... " ) ;
-		TestDB loaded = (TestDB) dataB.charger( "file.bin" ) ;
+		TestDB loaded = (TestDB) myDB.charger( "file.bin" ) ;
 		String tmpChamp = loaded.getChamp() ;
 		if ( ! tmpChamp.equals( champ ) ) {
 			System.out.println( "FAIL" ) ;
@@ -64,13 +63,13 @@ public class TestDB implements java.io.Serializable {
 
 		System.out.println( "\n--------------------------------------\n	Test de supprimer" ) ;
 		System.out.println( "\n[*] Test basé sur une erreur (nom du fichier null) ... " ) ;
-		dataB.supprimer( null ) ;
+		myDB.supprimer( null ) ;
 
 		System.out.println( "\n[*] Test basé sur une erreur (nom du fichier vide) ... " ) ;
-		dataB.supprimer( "" ) ;
+		myDB.supprimer( "" ) ;
 
 		System.out.print( "\n[*] Test basé SANS erreurs ... " ) ;
-		boolean suppr = dataB.supprimer( "file.bin" ) ;
+		boolean suppr = myDB.supprimer( "file.bin" ) ;
 		if ( suppr ) {
 			System.out.println( "OK" ) ;
 		}
@@ -79,7 +78,7 @@ public class TestDB implements java.io.Serializable {
 		}
 
 		System.out.print( "\n[*] Test basé sur une erreur (fichier absent) ... " ) ;
-		suppr = dataB.supprimer( "fichier inconnu" ) ;
+		suppr = myDB.supprimer( "fichier inconnu" ) ;
 		if ( ! suppr ) {
 			System.out.println( "OK" ) ;
 		}
