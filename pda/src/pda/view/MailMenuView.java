@@ -9,13 +9,10 @@ public class MailMenuView {
 	/** Le JPanel principal récupéré de la classe parente*/
 	private JPanel mainPanel;
 	
-	private MailCtrl mailCtrl;
-	
 	private JButton envoie, reception, parametre, brouillons, contacts, notification;
 
-	public MailMenuView(JPanel thePanel, MailCtrl theCtrl) {
+	public MailMenuView(JPanel thePanel) {
 		this.mainPanel = thePanel;
-		this.mailCtrl = theCtrl;
 		mainPanel.removeAll();
 		mainPanel.updateUI();
 		initialiserGui();
@@ -54,7 +51,7 @@ public class MailMenuView {
 	}
 	
 	public void attacherReactions() {
-		reception.addActionListener(this.mailCtrl);
+		reception.addActionListener(new MailMenuCtrl());
 	}
 	
 	public JButton getBoutonReception() {
