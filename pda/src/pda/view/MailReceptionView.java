@@ -10,8 +10,6 @@ public class MailReceptionView {
 	private JPanel mainPanel;
 	
 	private JButton nouveau, supprimer;
-	private JList listeMailGUI;
-	private DefaultListModel listeMail;
 	
 	public MailReceptionView(JPanel thePanel) {
 		this.mainPanel = thePanel;
@@ -22,34 +20,84 @@ public class MailReceptionView {
 	public void initialiserGui() {
 		mainPanel.setLayout(new BorderLayout());
 	
+		JPanel panelCentre = new JPanel(new GridLayout(22, 1));
+		JScrollPane defilement = new JScrollPane(panelCentre);
+		mainPanel.add(defilement, BorderLayout.CENTER);
+		
+		ImageIcon icon = new ImageIcon("data/img/mail/nonLu.png");
+		
+		JButton test1 = new JButton("test1", icon);
+		JButton test2 = new JButton("test1", icon);
+		JButton test3 = new JButton("test1", icon);
+		JButton test4 = new JButton("test1", icon);
+		JButton test5 = new JButton("test1", icon);
+		JButton test6 = new JButton("test1", icon);
+		JButton test7 = new JButton("test1", icon);
+		JButton test8 = new JButton("test1", icon);
+		JButton test9 = new JButton("test1", icon);
+		JButton test10 = new JButton("test1", icon);
+		JButton test11 = new JButton("test1", icon);
+		JButton test12 = new JButton("test1", icon);
+		JButton test13 = new JButton("test1", icon);
+		JButton test14 = new JButton("test1", icon);
+		JButton test15 = new JButton("test1", icon);
+		JButton test16 = new JButton("test1", icon);
+		JButton test17 = new JButton("test1", icon);
+		JButton test18 = new JButton("test1", icon);
+		JButton test19 = new JButton("test1", icon);
+		JButton test20 = new JButton("test1", icon);
+		JButton test21 = new JButton("test1", icon);
+		JButton test22 = new JButton("test1", icon);
+		
+		test1.setHorizontalAlignment(SwingConstants.LEFT);
+		test2.setHorizontalAlignment(SwingConstants.LEFT);
+		test3.setHorizontalAlignment(SwingConstants.LEFT);
+		test4.setHorizontalAlignment(SwingConstants.LEFT);
+		test5.setHorizontalAlignment(SwingConstants.LEFT);
+		test6.setHorizontalAlignment(SwingConstants.LEFT);
+		test7.setHorizontalAlignment(SwingConstants.LEFT);
+		test8.setHorizontalAlignment(SwingConstants.LEFT);
+		test9.setHorizontalAlignment(SwingConstants.LEFT);
+		test10.setHorizontalAlignment(SwingConstants.LEFT);
+		test11.setHorizontalAlignment(SwingConstants.LEFT);
+		test12.setHorizontalAlignment(SwingConstants.LEFT);
+		test13.setHorizontalAlignment(SwingConstants.LEFT);
+		test14.setHorizontalAlignment(SwingConstants.LEFT);
+		test15.setHorizontalAlignment(SwingConstants.LEFT);
+		test16.setHorizontalAlignment(SwingConstants.LEFT);
+		test17.setHorizontalAlignment(SwingConstants.LEFT);
+		test18.setHorizontalAlignment(SwingConstants.LEFT);
+		test19.setHorizontalAlignment(SwingConstants.LEFT);
+		test20.setHorizontalAlignment(SwingConstants.LEFT);
+		test21.setHorizontalAlignment(SwingConstants.LEFT);
+		test22.setHorizontalAlignment(SwingConstants.LEFT);
+		
+		panelCentre.add(test1);
+		panelCentre.add(test2);
+		panelCentre.add(test3);
+		panelCentre.add(test4);
+		panelCentre.add(test5);
+		panelCentre.add(test6);
+		panelCentre.add(test7);
+		panelCentre.add(test8);
+		panelCentre.add(test9);
+		panelCentre.add(test10);
+		panelCentre.add(test11);
+		panelCentre.add(test12);
+		panelCentre.add(test13);
+		panelCentre.add(test14);
+		panelCentre.add(test15);
+		panelCentre.add(test16);
+		panelCentre.add(test17);
+		panelCentre.add(test18);
+		panelCentre.add(test19);
+		panelCentre.add(test20);
+		panelCentre.add(test21);
+		panelCentre.add(test22);
+	
 		nouveau = new JButton("Nouveau");
 		supprimer = new JButton("Supprimer");
 		
-		listeMail = new DefaultListModel();
-		JLabel mail1 = new JLabel("Mail1", new ImageIcon("nonLu.png"), SwingConstants.LEFT);
-		listeMail.addElement(mail1);
-		listeMail.addElement("Mail2");
-		listeMail.addElement("Mail3");
-		listeMail.addElement("Mail4");
-		listeMail.addElement("Mail5");
-		listeMail.addElement("Mail6");
-		listeMail.addElement("Mail7");
-		listeMail.addElement("Mail8");
-		listeMail.addElement("Mail9");
-		listeMail.addElement("Mail10");
-		listeMail.addElement("Mail11");
-		listeMail.addElement("Mail12");
-		listeMail.addElement("Mail13");
-		listeMail.addElement("Mail14");
-		listeMail.addElement("Mail15");
-		listeMail.addElement("Mail16");
-		listeMail.addElement("Mail17");
-		listeMail.addElement("Mail18");
-		listeMailGUI = new JList(listeMail);
-		listeMailGUI.setFixedCellHeight(50);
-		JScrollPane listeScroll = new JScrollPane(listeMailGUI);
-		
-		mainPanel.add(listeScroll, BorderLayout.CENTER);
 		JPanel panelBas = new JPanel(new GridLayout(1, 2));
 		panelBas.add(nouveau);
 		panelBas.add(supprimer);
