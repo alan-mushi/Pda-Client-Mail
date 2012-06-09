@@ -25,6 +25,7 @@ public class MailMenuView {
 		brouillons = new JButton("Brouillons");
 		contacts = new JButton("Contacts");
 		notification = new JButton("Pas de nouveaux mails");
+		notification.setEnabled(false);
 	
 		mainPanel.setLayout(new BorderLayout(15, 30));
 		JPanel panelBouton = new JPanel(new GridLayout(3, 2, 30, 30));
