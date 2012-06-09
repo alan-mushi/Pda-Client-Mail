@@ -6,10 +6,16 @@ import javax.swing.*;
 import java.awt.event.*;
 
 public class MailMenuCtrl implements ActionListener {
-	public MailMenuCtrl() {
 	
+	private MailMenuView view;
+	
+	public MailMenuCtrl(MailMenuView view) {
+		this.view = view;
 	}
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("ok");
+		Object src = e.getSource();
+		if(src == this.view.getBoutonReception()) {
+			new MailReceptionView(view.getMainPanel());
+		}
 	}
 }

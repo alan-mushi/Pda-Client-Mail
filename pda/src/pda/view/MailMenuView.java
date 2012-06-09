@@ -51,7 +51,7 @@ public class MailMenuView {
 	}
 	
 	public void attacherReactions() {
-		reception.addActionListener(new MailMenuCtrl());
+		reception.addActionListener(new MailMenuCtrl(this));
 	}
 	
 	public JButton getBoutonReception() {
@@ -76,5 +76,9 @@ public class MailMenuView {
 	
 	public JButton getBoutonNotification() {
 		return this.notification;
+	}
+	
+	public JPanel getMainPanel() {
+		return this.mainPanel;
 	}
 }
