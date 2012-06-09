@@ -38,8 +38,8 @@ public class MailMenuView {
 		mainPanel.add(new JPanel(), BorderLayout.EAST);
 		mainPanel.add(new JPanel(), BorderLayout.NORTH);
 		
-		panelLigne1.add(envoie);
 		panelLigne1.add(reception);
+		panelLigne1.add(envoie);
 		
 		panelLigne2.add(parametre);
 		panelLigne2.add(brouillons);
