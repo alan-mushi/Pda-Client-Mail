@@ -22,7 +22,7 @@ public class MailCreerView {
 		attacherReactions();
 	}
 	
-	public void initialiserGui() {
+	private void initialiserGui() {
 		labTitre = new JLabel("Titre :");
 		labObjet = new JLabel("Objet :");
 		labMessage = new JLabel("Message :");
@@ -57,7 +57,7 @@ public class MailCreerView {
 		mainPanel.add(panelBas, BorderLayout.SOUTH);
 	}
 	
-	public void attacherReactions() {
+	private void attacherReactions() {
 		MailCreerCtrl creer = new MailCreerCtrl(this);
 		retour.addActionListener(creer);
 		selectContact.addActionListener(creer);

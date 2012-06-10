@@ -18,7 +18,7 @@ public class MailSelectContactView {
 		attacherReactions();
 	}
 	
-	public void initialiserGui() {
+	private void initialiserGui() {
 		mainPanel.setLayout(new BorderLayout());
 		
 		JCheckBox contact1 = new JCheckBox("Thibault Guittet");
@@ -80,7 +80,7 @@ public class MailSelectContactView {
 		mainPanel.add(panelBas, BorderLayout.SOUTH);
 	}
 	
-	public void attacherReactions() {
+	private void attacherReactions() {
 		MailSelectContactCtrl select = new MailSelectContactCtrl(this);
 		retour.addActionListener(select);
 	}

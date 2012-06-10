@@ -14,7 +14,7 @@ public class MailListeCtrl implements ActionListener {
 	}
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
-		if(src == this.view.getBoutonRediger()) {
+		if(src == this.view.getBoutonNouveau()) {
 			new MailCreerView(view.getMainPanel());
 		}
 		else if(src == this.view.getBoutonRetour()) {

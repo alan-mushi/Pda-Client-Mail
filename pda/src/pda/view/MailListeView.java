@@ -9,7 +9,7 @@ public class MailListeView {
 	
 	private JPanel mainPanel;
 	
-	private JButton rediger, supprimer, retour;
+	private JButton nouveau, editer, supprimer, retour;
 	
 	private int mode;
 	
@@ -26,7 +26,7 @@ public class MailListeView {
 		attacherReactions();
 	}
 	
-	public void initialiserGui() {
+	private void initialiserGui() {
 		mainPanel.setLayout(new BorderLayout());
 	
 		JPanel panelCentre = new JPanel(new GridLayout(22, 1));
@@ -111,25 +111,38 @@ public class MailListeView {
 		retour = new JButton("retour");
 		supprimer = new JButton("Suppr.");
 		
-		String texte = "UNDEFINED";
-		if(this.mode == MODE_BOITE_RECEPTION)
-			texte = "Nouveau";
-		else if(this.mode == MODE_BROUILLON)
-			texte = "Editer";
-			
-		rediger = new JButton(texte);
-		
 		JPanel panelBas = new JPanel(new GridLayout(1, 3));
 		panelBas.add(retour);
 		panelBas.add(supprimer);
-		panelBas.add(rediger);
+		try {
+			if(this.mode == MODE_BOITE_RECEPTION || this.mode == MODE_BOITE_ENVOIE) {
+				nouveau = new JButton("Nouveau");
+				panelBas.add(nouveau);
+				editer = null;
+			}
+			else if(this.mode == MODE_BROUILLON) {
+				editer = new JButton("Editer");
+				panelBas.add(editer);
+				nouveau = null;
+			}
+			else {
+				throw new Exception("Le type du bouton est indéterminé. Veuillez vérifier que vous avez spécifié le bon mode dans le constructeur.");
+			}
+		}
+		catch(Exception e) {
+			System.out.println("Une erreur est survenue :" + e.getMessage());
+		}
 		mainPanel.add(panelBas, BorderLayout.SOUTH);
 	}
 	
-	public void attacherReactions() {
+	private void attacherReactions() {
 		MailListeCtrl reception = new MailListeCtrl(this);
 		
-		rediger.addActionListener(reception);
+		if(this.mode == MODE_BOITE_RECEPTION || this.mode == MODE_BOITE_ENVOIE)
+			nouveau.addActionListener(reception);
+		else
+			editer.addActionListener(reception);
+		
 		retour.addActionListener(reception);
 	}
 	
@@ -137,8 +150,8 @@ public class MailListeView {
 		return this.retour;
 	}
 	
-	public JButton getBoutonRediger() {
-		return this.rediger;
+	public JButton getBoutonNouveau() {
+		return this.nouveau;
 	}
 	
 	public JButton getBoutonSupprimer() {
