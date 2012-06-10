@@ -43,7 +43,7 @@
 
 	<!-- Compilation de l'entièreté du projet -->
 	<target name="compileAll" description="compiles all the sources" >
-	  <javac destdir="${class}" debug="true" verbose="false" encoding="UTF-8">
+	  <javac destdir="${class}" debug="true" verbose="false" encoding="UTF-8" includeantruntime="false">
 	    <compilerarg value="-Xlint"/>
 	    <classpath refid="myCLASSPATH"/>
 	    <src path="${src}"/>
