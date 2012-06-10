@@ -16,6 +16,7 @@ public class MailReceptionView {
 		mainPanel.removeAll();
 		mainPanel.updateUI();
 		initialiserGui();
+		attacherReactions();
 	}
 	public void initialiserGui() {
 		mainPanel.setLayout(new BorderLayout());
@@ -106,5 +107,21 @@ public class MailReceptionView {
 		panelBas.add(nouveau);
 		panelBas.add(supprimer);
 		mainPanel.add(panelBas, BorderLayout.SOUTH);
+	}
+	
+	public void attacherReactions() {
+		nouveau.addActionListener(new MailReceptionCtrl(this));
+	}
+	
+	public JButton getBoutonNouveau() {
+		return this.nouveau;
+	}
+	
+	public JButton getBoutonSupprimer() {
+		return this.supprimer;
+	}
+	
+	public JPanel getMainPanel() {
+		return this.mainPanel;
 	}
 }
