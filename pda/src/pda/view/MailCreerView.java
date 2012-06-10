@@ -12,7 +12,7 @@ public class MailCreerView {
 	private JLabel labTitre, labObjet, labMessage;
 	private JTextField titre, objet;
 	private JTextArea message;
-	private JButton sauver, selectContact;
+	private JButton sauver, selectContact, retour;
 	
 	public MailCreerView(JPanel thePanel) {
 		this.mainPanel = thePanel;
@@ -29,20 +29,27 @@ public class MailCreerView {
 		titre = new JTextField();
 		objet = new JTextField();
 		message = new JTextArea();
+		JScrollPane defilementMessage = new JScrollPane(message);
 		sauver = new JButton("Sauver");
 		selectContact = new JButton("<html>Select.<br />contacts</html>");
+		retour = new JButton("Retour");
 		
 		mainPanel.setLayout(new BorderLayout());
 		
-		JPanel panelCentre = new JPanel(new GridLayout(6, 1));
-		panelCentre.add(labTitre);
-		panelCentre.add(titre);
-		panelCentre.add(labObjet);
-		panelCentre.add(objet);
-		panelCentre.add(labMessage);
-		panelCentre.add(message);
+		JPanel panelCentre = new JPanel(new GridLayout(2, 1));
+		JPanel panelChamps = new JPanel(new GridLayout(4, 1));
+		JPanel panelMessage = new JPanel(new GridLayout(2, 1));
+		panelChamps.add(labTitre);
+		panelChamps.add(titre);
+		panelChamps.add(labObjet);
+		panelChamps.add(objet);
+		panelMessage.add(labMessage);
+		panelMessage.add(defilementMessage);
+		panelCentre.add(panelChamps);
+		panelCentre.add(panelMessage);
 		
-		JPanel panelBas = new JPanel(new GridLayout(1, 2));
+		JPanel panelBas = new JPanel(new GridLayout(1, 3));
+		panelBas.add(retour);
 		panelBas.add(sauver);
 		panelBas.add(selectContact);
 		
