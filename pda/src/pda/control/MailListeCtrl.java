@@ -5,16 +5,16 @@ import pda.datas.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class MailReceptionCtrl implements ActionListener {
+public class MailListeCtrl implements ActionListener {
 	
-	private MailReceptionView view;
+	private MailListeView view;
 	
-	public MailReceptionCtrl(MailReceptionView view) {
+	public MailListeCtrl(MailListeView view) {
 		this.view = view;
 	}
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
-		if(src == this.view.getBoutonNouveau()) {
+		if(src == this.view.getBoutonRediger()) {
 			new MailCreerView(view.getMainPanel());
 		}
 		else if(src == this.view.getBoutonRetour()) {

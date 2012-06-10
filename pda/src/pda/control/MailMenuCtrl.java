@@ -15,7 +15,7 @@ public class MailMenuCtrl implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
 		if(src == this.view.getBoutonReception()) {
-			new MailReceptionView(view.getMainPanel());
+			new MailListeView(view.getMainPanel(), MailListeView.MODE_BOITE_RECEPTION);
 		}
 	}
 }

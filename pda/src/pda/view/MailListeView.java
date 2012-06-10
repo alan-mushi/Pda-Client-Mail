@@ -5,19 +5,27 @@ import pda.datas.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class MailReceptionView {
+public class MailListeView {
 	
 	private JPanel mainPanel;
 	
-	private JButton nouveau, supprimer, retour;
+	private JButton rediger, supprimer, retour;
 	
-	public MailReceptionView(JPanel thePanel) {
+	private int mode;
+	
+	public static final int MODE_BOITE_RECEPTION = 1;
+	public static final int MODE_BOITE_ENVOIE = 2;
+	public static final int MODE_BROUILLON = 3;
+	
+	public MailListeView(JPanel thePanel, int theMode) {
 		this.mainPanel = thePanel;
+		this.mode = theMode;
 		mainPanel.removeAll();
 		mainPanel.updateUI();
 		initialiserGui();
 		attacherReactions();
 	}
+	
 	public void initialiserGui() {
 		mainPanel.setLayout(new BorderLayout());
 	
@@ -102,19 +110,26 @@ public class MailReceptionView {
 	
 		retour = new JButton("retour");
 		supprimer = new JButton("Suppr.");
-		nouveau = new JButton("Nouveau");
+		
+		String texte = "UNDEFINED";
+		if(this.mode == MODE_BOITE_RECEPTION)
+			texte = "Nouveau";
+		else if(this.mode == MODE_BROUILLON)
+			texte = "Editer";
+			
+		rediger = new JButton(texte);
 		
 		JPanel panelBas = new JPanel(new GridLayout(1, 3));
 		panelBas.add(retour);
 		panelBas.add(supprimer);
-		panelBas.add(nouveau);
+		panelBas.add(rediger);
 		mainPanel.add(panelBas, BorderLayout.SOUTH);
 	}
 	
 	public void attacherReactions() {
-		MailReceptionCtrl reception = new MailReceptionCtrl(this);
+		MailListeCtrl reception = new MailListeCtrl(this);
 		
-		nouveau.addActionListener(reception);
+		rediger.addActionListener(reception);
 		retour.addActionListener(reception);
 	}
 	
@@ -122,8 +137,8 @@ public class MailReceptionView {
 		return this.retour;
 	}
 	
-	public JButton getBoutonNouveau() {
-		return this.nouveau;
+	public JButton getBoutonRediger() {
+		return this.rediger;
 	}
 	
 	public JButton getBoutonSupprimer() {
