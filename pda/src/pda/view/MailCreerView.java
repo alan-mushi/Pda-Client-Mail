@@ -58,6 +58,14 @@ public class MailCreerView {
 	}
 	
 	public void attacherReactions() {
-		
+		retour.addActionListener(new MailCreerCtrl(this));
+	}
+	
+	public JButton getBoutonRetour() {
+		return this.retour;
+	}
+	
+	public JPanel getMainPanel() {
+		return this.mainPanel;
 	}
 }
