@@ -81,6 +81,19 @@ public class MailSelectContactView {
 	}
 	
 	public void attacherReactions() {
-		
+		MailSelectContactCtrl select = new MailSelectContactCtrl(this);
+		retour.addActionListener(select);
+	}
+	
+	public JButton getBoutonRetour() {
+		return this.retour;
+	}
+	
+	public JPanel getMainPanel() {
+		return this.mainPanel;
+	}
+	
+	public JButton getBoutonEnvoyer() {
+		return this.envoyer;
 	}
 }
