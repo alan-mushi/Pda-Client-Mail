@@ -17,5 +17,8 @@ public class MailCreerCtrl implements ActionListener {
 		if(src == this.view.getBoutonRetour()) {
 			new MailReceptionView(view.getMainPanel());
 		}
+		else if(src == this.view.getBoutonSelectContact()) {
+			new MailSelectContactView(view.getMainPanel());
+		}
 	}
 }

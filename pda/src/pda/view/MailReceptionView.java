@@ -106,8 +106,8 @@ public class MailReceptionView {
 		
 		JPanel panelBas = new JPanel(new GridLayout(1, 3));
 		panelBas.add(retour);
-		panelBas.add(nouveau);
 		panelBas.add(supprimer);
+		panelBas.add(nouveau);
 		mainPanel.add(panelBas, BorderLayout.SOUTH);
 	}
 	

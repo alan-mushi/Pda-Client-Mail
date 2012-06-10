@@ -58,7 +58,13 @@ public class MailCreerView {
 	}
 	
 	public void attacherReactions() {
-		retour.addActionListener(new MailCreerCtrl(this));
+		MailCreerCtrl creer = new MailCreerCtrl(this);
+		retour.addActionListener(creer);
+		selectContact.addActionListener(creer);
+	}
+	
+	public JButton getBoutonSelectContact() {
+		return this.selectContact;
 	}
 	
 	public JButton getBoutonRetour() {
