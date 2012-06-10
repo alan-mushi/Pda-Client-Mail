@@ -9,7 +9,7 @@ public class MailReceptionView {
 	
 	private JPanel mainPanel;
 	
-	private JButton nouveau, supprimer;
+	private JButton nouveau, supprimer, retour;
 	
 	public MailReceptionView(JPanel thePanel) {
 		this.mainPanel = thePanel;
@@ -100,17 +100,26 @@ public class MailReceptionView {
 		panelCentre.add(test21);
 		panelCentre.add(test22);
 	
+		retour = new JButton("retour");
+		supprimer = new JButton("Suppr.");
 		nouveau = new JButton("Nouveau");
-		supprimer = new JButton("Supprimer");
 		
-		JPanel panelBas = new JPanel(new GridLayout(1, 2));
+		JPanel panelBas = new JPanel(new GridLayout(1, 3));
+		panelBas.add(retour);
 		panelBas.add(nouveau);
 		panelBas.add(supprimer);
 		mainPanel.add(panelBas, BorderLayout.SOUTH);
 	}
 	
 	public void attacherReactions() {
-		nouveau.addActionListener(new MailReceptionCtrl(this));
+		MailReceptionCtrl reception = new MailReceptionCtrl(this);
+		
+		nouveau.addActionListener(reception);
+		retour.addActionListener(reception);
+	}
+	
+	public JButton getBoutonRetour() {
+		return this.retour;
 	}
 	
 	public JButton getBoutonNouveau() {
