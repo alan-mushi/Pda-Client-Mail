@@ -55,6 +55,7 @@ public class MailMenuView {
 		reception.addActionListener(menuControle);
 		envoyes.addActionListener(menuControle);
 		brouillons.addActionListener(menuControle);
+		contacts.addActionListener(menuControle);
 	}
 	
 	public JButton getBoutonReception() {

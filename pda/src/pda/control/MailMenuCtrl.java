@@ -23,5 +23,8 @@ public class MailMenuCtrl implements ActionListener {
 		else if(src == this.view.getBoutonBrouillons()) {
 			new MailListeView(this.view.getMainPanel(), MailListeView.MODE_BROUILLON);
 		}
+		else if(src == this.view.getBoutonContacts()) {
+			new MailListeContactView(this.view.getMainPanel());
+		}
 	}
 }
