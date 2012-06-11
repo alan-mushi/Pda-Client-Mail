@@ -4,10 +4,9 @@ import pda.control.*;
 import pda.datas.*;
 import javax.swing.*;
 import java.awt.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.DefaultTableCellRenderer;
 
-public class MailListeView extends DefaultTableCellRenderer {
+
+public class MailListeView {
 	
 	private JPanel mainPanel;
 	
@@ -47,8 +46,7 @@ public class MailListeView extends DefaultTableCellRenderer {
 							{statut, "32 ans", "1.85 cm"}
 							};
 							
-		DefaultTableModel model = new DefaultTableModel(data, nomColones);
-		liste = new JTable(model);
+		liste = new JTable(data, nomColones);
 		
 		panelCentre.add(liste);
 		JScrollPane defilement = new JScrollPane(panelCentre);
