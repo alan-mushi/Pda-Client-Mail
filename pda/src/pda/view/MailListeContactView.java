@@ -28,8 +28,33 @@ public class MailListeContactView {
 		liste = new DefaultListModel();
 		liste.addElement("Guillaume Claudic");
 		liste.addElement("Thibault Guittet");
+		liste.addElement("Guillaume Claudic");
+		liste.addElement("Thibault Guittet");
+		liste.addElement("Guillaume Claudic");
+		liste.addElement("Thibault Guittet");
+		liste.addElement("Guillaume Claudic");
+		liste.addElement("Thibault Guittet");
+		liste.addElement("Guillaume Claudic");
+		liste.addElement("Thibault Guittet");
+		liste.addElement("Guillaume Claudic");
+		liste.addElement("Thibault Guittet");
+		liste.addElement("Guillaume Claudic");
+		liste.addElement("Thibault Guittet");
+		liste.addElement("Guillaume Claudic");
+		liste.addElement("Thibault Guittet");
+		liste.addElement("Guillaume Claudic");
+		liste.addElement("Thibault Guittet");
+		liste.addElement("Guillaume Claudic");
+		liste.addElement("Thibault Guittet");
+		liste.addElement("Guillaume Claudic");
+		liste.addElement("Thibault Guittet");
+		liste.addElement("Guillaume Claudic");
+		liste.addElement("Thibault Guittet");
+		liste.addElement("Guillaume Claudic");
+		liste.addElement("Thibault Guittet");
 
 		listeContactsGui = new JList(liste);
+		JScrollPane defilementContact = new JScrollPane(listeContactsGui);
 		
 		JPanel panelBas = new JPanel(new GridLayout(1, 3));
 		retour = new JButton("Retour");
@@ -40,7 +65,7 @@ public class MailListeContactView {
 		panelBas.add(supprimer);
 		panelBas.add(nouveau);
 		
-		mainPanel.add(listeContactsGui, BorderLayout.CENTER);
+		mainPanel.add(defilementContact, BorderLayout.CENTER);
 		mainPanel.add(panelBas, BorderLayout.SOUTH);
 	}
 	
