@@ -5,11 +5,14 @@ import pda.datas.*;
 import javax.swing.*;
 import java.awt.*;
 
+
 public class MailListeView {
 	
 	private JPanel mainPanel;
 	
 	private JButton nouveau, editer, supprimer, retour;
+	
+	private JTable liste;
 	
 	private int mode;
 	
@@ -29,11 +32,28 @@ public class MailListeView {
 	private void initialiserGui() {
 		mainPanel.setLayout(new BorderLayout());
 	
-		JPanel panelCentre = new JPanel(new GridLayout(22, 1));
-		JScrollPane defilement = new JScrollPane(panelCentre);
-		mainPanel.add(defilement, BorderLayout.CENTER);
+		JPanel panelCentre = new JPanel(new GridLayout(1, 1));
+		
+		Object[] nomColones = { "Statut", "Objet", "Expéditeur" };
 		
 		ImageIcon icon = new ImageIcon("data/img/mail/nonLu.png");
+		JLabel statut = new JLabel(icon);
+		statut.setIcon(icon);
+		
+		Object[][] data = {	{statut, "28 ans", "1.80 cm"},
+							{statut, "28 ans", "1.80 cm"},
+							{statut, "24 ans", "1.90 cm"},
+							{statut, "32 ans", "1.85 cm"}
+							};
+							
+		liste = new JTable(data, nomColones);
+		
+		panelCentre.add(liste);
+		JScrollPane defilement = new JScrollPane(panelCentre);
+		mainPanel.add(liste.getTableHeader(), BorderLayout.NORTH);
+		mainPanel.add(defilement, BorderLayout.CENTER);
+				
+		/*ImageIcon icon = new ImageIcon("data/img/mail/nonLu.png");
 		
 		JButton test1 = new JButton("<html>Bienvenue sur Mail Client<br /><h5>Guillaume Claudic</h5></html>", icon);
 		test1.setBackground(Color.WHITE);
@@ -106,7 +126,7 @@ public class MailListeView {
 		panelCentre.add(test19);
 		panelCentre.add(test20);
 		panelCentre.add(test21);
-		panelCentre.add(test22);
+		panelCentre.add(test22);*/
 	
 		retour = new JButton("retour");
 		supprimer = new JButton("Suppr.");
