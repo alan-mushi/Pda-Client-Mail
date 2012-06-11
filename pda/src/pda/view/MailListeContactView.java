@@ -9,7 +9,7 @@ public class MailListeContactView {
 
 	private JPanel mainPanel;
 	
-	private JButton retour, supprimer, nouveau;
+	private JButton retour, supprimer, nouveau, modifier;
 	private JList listeContactsGui;
 	private DefaultListModel liste;
 	
@@ -21,7 +21,7 @@ public class MailListeContactView {
 		attacherReactions();
 	}
 	
-	public void initialiserGui() {
+	private void initialiserGui() {
 		mainPanel.setLayout(new BorderLayout());
 		
 		
@@ -56,22 +56,25 @@ public class MailListeContactView {
 		listeContactsGui = new JList(liste);
 		JScrollPane defilementContact = new JScrollPane(listeContactsGui);
 		
-		JPanel panelBas = new JPanel(new GridLayout(1, 3));
-		retour = new JButton("Retour");
-		supprimer = new JButton("Suppr.");
-		nouveau = new JButton("Nouveau");
+		JPanel panelBas = new JPanel(new GridLayout(1, 4));
+		retour = new JButton("<-");
+		supprimer = new JButton("Sup.");
+		modifier = new JButton("Modif.");
+		nouveau = new JButton("Nouv.");
 		
 		panelBas.add(retour);
 		panelBas.add(supprimer);
+		panelBas.add(modifier);
 		panelBas.add(nouveau);
 		
 		mainPanel.add(defilementContact, BorderLayout.CENTER);
 		mainPanel.add(panelBas, BorderLayout.SOUTH);
 	}
 	
-	public void attacherReactions() {
+	private void attacherReactions() {
 		MailListeContactCtrl listeCtrl = new MailListeContactCtrl(this);
 		retour.addActionListener(listeCtrl);
+		supprimer.addActionListener(listeCtrl);
 	}
 	
 	public JButton getBoutonNouveau() {

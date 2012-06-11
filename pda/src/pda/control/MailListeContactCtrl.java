@@ -18,5 +18,8 @@ public class MailListeContactCtrl implements ActionListener {
 		if(src == this.view.getBoutonRetour()) {
 			new MailMenuView(this.view.getMainPanel());
 		}
+		else if(src == this.view.getBoutonSupprimer()) {
+			new MailSupprContactView(this.view.getMainPanel());
+		}
 	}
 }
