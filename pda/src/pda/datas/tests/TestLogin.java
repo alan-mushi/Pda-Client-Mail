@@ -19,26 +19,26 @@ public class TestLogin {
 
 		System.out.println( "\n[*] Test basé sur une erreur (utilisateur null) ... " ) ;
 		try {
-			monLogin.LogMe( null , "passwd" ) ;
+			monLogin.logMe( null , "passwd" ) ;
 		} catch ( IllegalArgumentException e ) {
 			System.out.println( e.getMessage() ) ;
 		}
 		System.out.println( "\n[*] Test basé sur une erreur (utilisateur vide) ... " ) ;
 		try {
-			monLogin.LogMe( "" , "passwd" ) ;
+			monLogin.logMe( "" , "passwd" ) ;
 		} catch ( IllegalArgumentException e ) {
 			System.out.println( e.getMessage() ) ;
 		}
 
 		System.out.println( "\n[*] Test basé sur une erreur (passwd null) ... " ) ;
 		try {
-			monLogin.LogMe( "user" , null ) ;
+			monLogin.logMe( "user" , null ) ;
 		} catch ( IllegalArgumentException e ) {
 			System.out.println( e.getMessage() ) ;
 		}
 		System.out.println( "\n[*] Test basé sur une erreur (passwd vide) ... " ) ;
 		try {
-			monLogin.LogMe( "user" , "" ) ;
+			monLogin.logMe( "user" , "" ) ;
 		} catch ( IllegalArgumentException e ) {
 			System.out.println( e.getMessage() ) ;
 		}
@@ -47,7 +47,7 @@ public class TestLogin {
 
 		System.out.print( "\n[*] Test basé SANS erreurs => création d'un utilisateur ... " ) ;
 		try {
-			monLogin.LogMe( "username1" , "passwd" ) ;
+			monLogin.logMe( "username1" , "passwd" ) ;
 			System.out.println( "OK" ) ;
 		} catch ( IllegalArgumentException e ) {
 			System.out.println( e.getMessage() ) ;
@@ -101,7 +101,7 @@ public class TestLogin {
 		System.out.print( "\n[*] Test SANS erreurs (changement du mot de passe) ... " ) ;
 		monLogin.modifyPasswd( "passwd2" );
 		try {
-			monLogin.LogMe( user , "passwd2" ) ;
+			monLogin.logMe( user , "passwd2" ) ;
 			System.out.println( "OK : passwd => passwd2" ) ;
 		}
 		catch ( IllegalArgumentException e ) { System.out.println( "FAIL" ) ; }
@@ -120,7 +120,7 @@ public class TestLogin {
 
 		System.out.print( "\n[*] Restauration des paramètres depuis le fichier ... " ) ;
 		Login tmpLogin = (Login) StaticRefs.myDB.charger( StaticRefs.loginFile ) ;
-		if ( tmpLogin.LogMe( "username2" , "passwd2" ) ) {
+		if ( tmpLogin.logMe( "username2" , "passwd2" ) ) {
 			System.out.println( "OK" ) ;
 		}
 		else { System.out.println( "FAIL" ) ; }

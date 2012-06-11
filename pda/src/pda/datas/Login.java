@@ -74,7 +74,7 @@ public class Login implements StaticRefs, java.io.Serializable {
 	 * @return <code>true</code> si le login est réussi, <code>false</code> sinon.
 	 * @throws IllegalArgumentException Si un des paramètres n'est pas valide.
 	 */
-	public boolean LogMe( String unUser , String clearPass ) throws IllegalArgumentException {
+	public boolean logMe( String unUser , String clearPass ) throws IllegalArgumentException {
 		this.loggedIn = false ;
 		if ( ! this.userCreated() ) {
 			this.loggedIn = true ;

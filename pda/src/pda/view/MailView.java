@@ -9,7 +9,7 @@ public class MailView {
 	
 	//Panel principal de l'application Mail Client qui s'intègre dans le PDA
 	private JPanel mainPanel;
-	private JLabel labLogin, labMdp;
+	private JLabel labLogin, labMdp, labErreur;
 	private JTextField login;
 	private JPasswordField mdp;
 	private JButton valider;
@@ -23,7 +23,7 @@ public class MailView {
 	
 	private void initialiserGui() {
 		mainPanel = new JPanel(new BorderLayout(50, 50));
-		JPanel panelCentre = new JPanel(new GridLayout(5, 1, 10, 10));
+		JPanel panelCentre = new JPanel(new GridLayout(6, 1, 10, 10));
 		JPanel panelGauche = new JPanel();
 		JPanel panelDroit = new JPanel();
 		JPanel panelHaut = new JPanel();
@@ -40,6 +40,9 @@ public class MailView {
 		mdp.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		valider = new JButton("Valider");
+		
+		labErreur = new JLabel();
+		
 		valider.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		panelCentre.add(labLogin, BorderLayout.CENTER);
@@ -47,6 +50,7 @@ public class MailView {
 		panelCentre.add(labMdp, BorderLayout.CENTER);
 		panelCentre.add(mdp, BorderLayout.CENTER);
 		panelCentre.add(valider, BorderLayout.CENTER);
+		panelCentre.add(labErreur, BorderLayout.CENTER);
 		
 		mainPanel.add(panelCentre, BorderLayout.CENTER);
 		mainPanel.add(panelDroit, BorderLayout.EAST);
@@ -75,5 +79,9 @@ public class MailView {
 
 	public JTextField getFieldLogin() {
 		return ( this.login ) ;
+	}
+	
+	public void setErreur(String e) {
+		labErreur.setText(e);
 	}
 }

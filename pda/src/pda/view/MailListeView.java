@@ -37,6 +37,7 @@ public class MailListeView {
 		
 		String[] nomColones = { "Statut", "Objet", "Expéditeur" };
 		
+		//La colone 0 doit comporter UNIQUEMENT des types Integer pour que les images puissent s'afficher correctement.
 		Object[][] data = {	{new Integer(0), "test", "Guillaume Claudic"},
 							{new Integer(0), "test", "Thibault Guittet"},
 							{new Integer(0), "test", "Un mec louche"},

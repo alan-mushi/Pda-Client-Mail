@@ -37,12 +37,25 @@ public class MailCtrl implements IApplication, ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
-		if(src == this.view.getBoutonValider()) {
-			new MailMenuView(this.view.getMainPanel());
-		}
-		// Si la touche enter est pressée sur le champ mdp ou login
-		else if ( src == this.view.getFieldMDP() || src == this.view.getFieldLogin() ) {
-			new MailMenuView(this.view.getMainPanel());
+		
+		// Si la touche enter est pressée sur le champ mdp ou login ou le bouton validé
+		if(src == this.view.getBoutonValider() || src == this.view.getFieldMDP() || src == this.view.getFieldLogin()) {
+			Login connexion = new Login();
+			
+			try {
+				char[] mdpRec = this.view.getFieldMDP().getPassword();
+				String mdp = new String(mdpRec);
+				if(connexion.logMe(this.view.getFieldLogin().getText(), mdp)) {
+					new MailMenuView(this.view.getMainPanel());
+				}
+				else {
+					this.view.setErreur("Identifiant/mot de passe incorrect.");
+					System.out.println("Impossible de se connecter au serveur. Identifiant ou mot de passe invalide.");
+				}
+			}
+			catch(IllegalArgumentException erreur) {
+				System.out.println(erreur.getMessage());
+			}
 		}
 	}
 }
