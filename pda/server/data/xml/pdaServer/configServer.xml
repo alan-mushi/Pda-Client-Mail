@@ -3,7 +3,7 @@
 
 <!-- Information de debug : oui(1)/non(0) -->
 
-  <debug>0</debug>
+  <debug>1</debug>
 
 <!--
 	A utiliser s'il s'agit d'un serveur Web

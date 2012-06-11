@@ -39,7 +39,8 @@ public class DB {
 				res = true ;
 			}
 			catch ( FileNotFoundException e ) {
-				System.err.println( e.getMessage() ) ;
+				// Le fichier peut ne pas être présent. Pour les tests
+				// les fichiers sont supprimés systématiquement.
 			}
 			catch ( IOException e ) {
 				System.err.println( e.getMessage() ) ;
