@@ -15,6 +15,7 @@ public class MailCtrl implements IApplication, ActionListener , StaticRefs {
 
 	private Login connexion ;
 	private boolean loginNotFound ;
+	public static String username ;
 
 	/* Constructeur */
 	public MailCtrl() {
@@ -22,6 +23,7 @@ public class MailCtrl implements IApplication, ActionListener , StaticRefs {
 		try {
 			connexion = (Login) myDB.charger( loginFile ) ;
 			loginNotFound = false ;
+			this.username = connexion.getUser() ;
 		}
 		catch ( java.io.FileNotFoundException e ) {
 			loginNotFound = true ;
@@ -57,6 +59,7 @@ public class MailCtrl implements IApplication, ActionListener , StaticRefs {
 				String mdp = new String(mdpRec);
 				connexion.logMe(this.view.getFieldLogin().getText(), mdp) ;
 				if ( loginNotFound ) { 
+					this.username = connexion.getUser() ;
 					myDB.sauvegarder( connexion , loginFile ) ;
 				}
 				new MailMenuView(this.view.getMainPanel());

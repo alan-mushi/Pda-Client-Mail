@@ -16,11 +16,11 @@ public class MailType extends MailContent implements java.io.Serializable , Stat
 	/**
 	 * Surcouche pour le constructeur de MailContent. Le type est vérifié, il doit
 	 * correspondre aux constantes <code>RECU, ENVOYE, BROUILLON ou LU</code>.
-	 * @see pdaNetwork.misc.MailContent.MailContent(java.lang.String recipient, java.lang.String object, java.lang.String text, java.lang.String expeditor, java.lang.String date)
+	 * @see pdaNetwork.misc.MailContent#MailContent(java.lang.String recipient, java.lang.String object, java.lang.String text, java.lang.String expeditor, java.lang.String date)
 	 * @throws IllegalArgumentException Si le paramètre tmpType n'est aps valide.
 	 */
 	public MailType( String recipient , String object , String text , String tmpType ) throws IllegalArgumentException {
-		super( recipient , object , text , user , null ) ;
+		super( recipient , object , text , pda.control.MailCtrl.username , null ) ;
 		if ( this.checkType( tmpType ) ) {
 			this.type = tmpType ;
 		}

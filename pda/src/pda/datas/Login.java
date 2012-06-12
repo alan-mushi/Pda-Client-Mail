@@ -4,7 +4,6 @@ import pdaNetwork.client.network.Md5 ;
 
 /**
  * Cette classe gère la connection à l'application.
- * Le login est indépendant des identifiants pour le serveur.
  */
 public class Login implements StaticRefs, java.io.Serializable {
 
