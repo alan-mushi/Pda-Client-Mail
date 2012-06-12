@@ -78,6 +78,7 @@ public class MailListeContactView {
 		MailListeContactCtrl listeCtrl = new MailListeContactCtrl(this);
 		retour.addActionListener(listeCtrl);
 		supprimer.addActionListener(listeCtrl);
+		nouveau.addActionListener(listeCtrl);
 	}
 	
 	public JButton getBoutonNouveau() {

@@ -21,5 +21,8 @@ public class MailListeContactCtrl implements ActionListener {
 		else if(src == this.view.getBoutonSupprimer()) {
 			new MailSupprContactView(this.view.getMainPanel());
 		}
+		else if(src == this.view.getBoutonNouveau()) {
+			new MailNewContactView(this.view.getMainPanel());
+		}
 	}
 }

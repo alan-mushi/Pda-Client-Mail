@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MailSupprContactView {
+
 	private JPanel mainPanel;
 	
 	private JButton retour, supprimer;
