@@ -7,6 +7,8 @@ public class ModeleTableau extends AbstractTableModel {
 	private Object[][] data;
 	private String[] title;
 	
+	private static final long serialVersionUID = 30L;
+	
 	public ModeleTableau(Object[][] data, String[] title) {
 		this.data = data;
 		this.title = title;

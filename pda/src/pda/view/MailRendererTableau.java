@@ -7,6 +7,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 public class MailRendererTableau extends DefaultTableCellRenderer {
     
     private Icon nonLu, lu, brouillon, envoye;
+    
+    private static final long serialVersionUID = 31L;
 
     public MailRendererTableau() {
         super();
