@@ -11,21 +11,31 @@ public class MailType extends MailContent implements java.io.Serializable , Stat
 	/** Le type du message. */
 	private String type;
 	private static final long serialVersionUID = 3L ;
-	public static final String RECU = "recu" , ENVOYE = "envoye" , BROUILLON = "brouillon" , LU = "lu" ;
+	public static final String RECU = "recu" , ENVOYE = "envoye" , BROUILLON = "brouillon" , LU = "lu" , SUPPR = "supprime" ;
 	
 	/**
 	 * Surcouche pour le constructeur de MailContent. Le type est vérifié, il doit
-	 * correspondre aux constantes <code>RECU, ENVOYE, BROUILLON ou LU</code>.
+	 * correspondre aux constantes <code>RECU, ENVOYE, BROUILLON, LU ou SUPPR</code>.
 	 * @see pdaNetwork.misc.MailContent#MailContent(java.lang.String recipient, java.lang.String object, java.lang.String text, java.lang.String expeditor, java.lang.String date)
-	 * @throws IllegalArgumentException Si le paramètre tmpType n'est aps valide.
+	 * @throws IllegalArgumentException Si le paramètre tmpType n'est pas valide.
 	 */
-	public MailType( String recipient , String object , String text , String tmpType ) throws IllegalArgumentException {
-		super( recipient , object , text , pda.control.MailCtrl.username , null ) ;
+	public MailType( String recipient , String object , String text , String exp , String tmpType ) throws IllegalArgumentException {
+		super( recipient , object , text , exp , null ) ;
 		if ( this.checkType( tmpType ) ) {
 			this.type = tmpType ;
 		}
 	}
 	
+	/**
+	 * Permet de créer un MailType à partir d'un objet MailContent.
+	 */
+	public MailType( MailContent mailC , String tmpType ) throws IllegalArgumentException {
+		super( mailC.getRecipient() , mailC.getObject() , mailC.getText() , mailC.getExpeditor() , null ) ;
+		if ( this.checkType( tmpType ) ) {
+			this.type = tmpType ;
+		}
+	}
+
 	/**
 	 * Retourne le type du mail.
 	 */
@@ -51,7 +61,7 @@ public class MailType extends MailContent implements java.io.Serializable , Stat
 		if ( tmpType == null || tmpType.isEmpty() ) {
 			throw new IllegalArgumentException( "Le type du message n'est pas défini." ) ;
 		}
-		else if ( tmpType.equals( RECU ) || tmpType.equals( ENVOYE ) || tmpType.equals( BROUILLON ) || tmpType.equals( LU ) ) {
+		else if ( tmpType.equals( RECU ) || tmpType.equals( ENVOYE ) || tmpType.equals( BROUILLON ) || tmpType.equals( LU ) || tmpType.equals( SUPPR ) ) {
 			res = true ; 
 		}
 		else { 
@@ -69,7 +79,7 @@ public class MailType extends MailContent implements java.io.Serializable , Stat
 		res += "\nexpéditeur : " + this.getExpeditor() ;
 		res += "\nobjet : " + this.getObject() ;
 		res += "\ndestinataire : " + this.getRecipient() ;
-		res += "\ndate création : " + this.getDate() ;
+		res += "\ndate création/réception : " + this.getDate() ;
 		res += "\n-----contenu du message-----\n" ;
 		res += this.getText() ;
 		res += "\n-------fin du message-------\n" ;

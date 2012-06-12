@@ -18,21 +18,21 @@ public class TestMailType {
 		System.out.println( "	Test du constructeur" ) ;
 		try {
 			System.out.print( "\n[*] Test basé sur une erreur (type null) ... " ) ;
-			mail = new MailType( "destinataire" , "juste un petit coucou" , "hello world !" , null ) ;
+			mail = new MailType( "destinataire" , "juste un petit coucou" , "hello world !" , "expéditeur" , null ) ;
 			System.out.println( "FAIL" ) ;
 		} catch ( IllegalArgumentException e ) {
 			System.out.println( "OK : " + e.getMessage() ) ;
 		}
 		try {
 			System.out.print( "\n[*] Test basé sur une erreur (type vide) ... " ) ;
-			mail = new MailType( "destinataire" , "juste un petit coucou" , "hello world !" , "" ) ;
+			mail = new MailType( "destinataire" , "juste un petit coucou" , "hello world !" , "expéditeur" , "" ) ;
 			System.out.println( "FAIL" ) ;
 		} catch ( IllegalArgumentException e ) {
 			System.out.println( "OK : " + e.getMessage() ) ;
 		}
 		try {
 			System.out.print( "\n[*] Test basé SANS erreurs ... " ) ;
-			mail = new MailType( "destinataire" , "juste un petit coucou" , "hello world !" , MailType.BROUILLON ) ;
+			mail = new MailType( "destinataire" , "juste un petit coucou" , "hello world !" , "expéditeur" , MailType.BROUILLON ) ;
 			System.out.println( "mail crée ... OK" ) ;
 
 			//------------------Test des méthodes-----------------
