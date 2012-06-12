@@ -119,11 +119,16 @@ public class TestLogin {
 		}
 
 		System.out.print( "\n[*] Restauration des paramètres depuis le fichier ... " ) ;
-		Login tmpLogin = (Login) StaticRefs.myDB.charger( StaticRefs.loginFile ) ;
-		if ( tmpLogin.logMe( "username2" , "passwd2" ) ) {
-			System.out.println( "OK" ) ;
+		try {
+			Login tmpLogin = (Login) StaticRefs.myDB.charger( StaticRefs.loginFile ) ;
+			if ( tmpLogin.logMe( "username2" , "passwd2" ) ) {
+				System.out.println( "OK" ) ;
+			}
+			else { System.out.println( "FAIL" ) ; }
 		}
-		else { System.out.println( "FAIL" ) ; }
+		catch ( java.io.FileNotFoundException e ) {
+			System.err.println( e.getMessage() ) ;
+		}
 
 		System.out.println( "\n[*] Suppression du fichier." ) ;
 		StaticRefs.myDB.supprimer( StaticRefs.loginFile ) ;

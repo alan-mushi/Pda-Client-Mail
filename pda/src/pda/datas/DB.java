@@ -55,8 +55,9 @@ public class DB {
 	 * @param fileName Le nom du fichier dans lequel l'objet est sauvegardé.
 	 * @return L'objet chargé.
 	 * @throws IllegalArgumentException Si le paramètre n'est pas valide.
+	 * @throws FileNotFoundException Si le fichier n'est pas trouvé.
 	 */
-	public Object charger( String fileName ) throws IllegalArgumentException {
+	public Object charger( String fileName ) throws IllegalArgumentException, FileNotFoundException {
 		Object res = null ;
 		if ( fileName == null || fileName.isEmpty() ) {
 			throw new IllegalArgumentException( "Le nom du fichier est vide ou null." ) ;
@@ -70,7 +71,7 @@ public class DB {
 				in.close() ;
 			}
 			catch ( FileNotFoundException e ) {
-				System.err.println( e.getMessage() ) ;
+				throw new FileNotFoundException( e.getMessage() ) ;
 			}
 			catch ( IOException e ) {
 				System.err.println( e.getMessage() ) ;

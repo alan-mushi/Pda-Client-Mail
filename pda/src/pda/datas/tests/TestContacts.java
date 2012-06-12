@@ -226,17 +226,21 @@ public class TestContacts implements StaticRefs {
 		System.out.println( "\n[*] Clés de la HashMap : " + oldSet ) ;
 
 		System.out.print( "\n[*] Restauration de l'objet Contacts depuis le fichier ... " ) ;
-		Contacts loaded = (Contacts) myDB.charger( contactsFile ) ;
-		System.out.println( "OK" ) ;
+		try {
+			Contacts loaded = (Contacts) myDB.charger( contactsFile ) ;
+			System.out.println( "OK" ) ;
 
-		java.util.Set<String> newSet = loaded.cles() ;
-		System.out.println( "\n[*] Cles présentes dans la HashMap de l'objet chargé : " + newSet ) ;
+			java.util.Set<String> newSet = loaded.cles() ;
+			System.out.println( "\n[*] Cles présentes dans la HashMap de l'objet chargé : " + newSet ) ;
 
-		if ( oldSet.equals( newSet ) ) {
-			System.out.println( "\n[+] Les deux Set sont identiques : la sauvegarde est valide." ) ;
-		}
-		else {
-			System.out.println( "\n[-] Les deux Set sont différents : la sauvegarde n'est PAS valide." ) ;
+			if ( oldSet.equals( newSet ) ) {
+				System.out.println( "\n[+] Les deux Set sont identiques : la sauvegarde est valide." ) ;
+			}
+			else {
+				System.out.println( "\n[-] Les deux Set sont différents : la sauvegarde n'est PAS valide." ) ;
+			}
+		} catch ( java.io.FileNotFoundException e ) {
+			System.out.println( e.getMessage() ) ;
 		}
 
 		//------------------------------Suppression du fichier généré--------------------------------------

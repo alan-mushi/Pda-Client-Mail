@@ -6,16 +6,28 @@ import javax.swing.*;
 import java.awt.event.*;
 
 
-public class MailCtrl implements IApplication, ActionListener {
-	
+public class MailCtrl implements IApplication, ActionListener , StaticRefs {
+
 	/* Attributs */
 	private String name;
-	
+
 	private MailView view;
+
+	private Login connexion ;
+	private boolean loginNotFound ;
 
 	/* Constructeur */
 	public MailCtrl() {
 		view = new MailView( this );
+		try {
+			connexion = (Login) myDB.charger( loginFile ) ;
+			loginNotFound = false ;
+		}
+		catch ( java.io.FileNotFoundException e ) {
+			loginNotFound = true ;
+			System.out.println( "[-] Le fichier login.bin n'a pas été trouvé, génération d'un nouveau fichier de login." ) ;
+			connexion = new Login() ;
+		}
 	}
 
 	/* Méthodes */
@@ -34,24 +46,20 @@ public class MailCtrl implements IApplication, ActionListener {
 	public void setAppliName(String theName) {
 		this.name = theName;
 	}
-	
+
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
-		
+
 		// Si la touche enter est pressée sur le champ mdp ou login ou le bouton validé
 		if(src == this.view.getBoutonValider() || src == this.view.getFieldMDP() || src == this.view.getFieldLogin()) {
-			Login connexion = new Login();
-			
 			try {
 				char[] mdpRec = this.view.getFieldMDP().getPassword();
 				String mdp = new String(mdpRec);
-				if(connexion.logMe(this.view.getFieldLogin().getText(), mdp)) {
-					new MailMenuView(this.view.getMainPanel());
+				connexion.logMe(this.view.getFieldLogin().getText(), mdp) ;
+				if ( loginNotFound ) { 
+					myDB.sauvegarder( connexion , loginFile ) ;
 				}
-				else {
-					this.view.setErreur("Identifiant/mot de passe incorrect.");
-					System.out.println("Impossible de se connecter au serveur. Identifiant ou mot de passe invalide.");
-				}
+				new MailMenuView(this.view.getMainPanel());
 			}
 			catch(IllegalArgumentException erreur) {
 				System.out.println(erreur.getMessage());

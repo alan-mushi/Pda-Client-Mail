@@ -72,12 +72,18 @@ public class TestDB implements java.io.Serializable , StaticRefs {
 		catch ( IllegalArgumentException e ) {
 			System.err.println( e.getMessage() ) ;
 		}
+		catch ( java.io.FileNotFoundException e ) {
+			System.err.println( e.getMessage() ) ;
+		}
 
 		System.out.println( "\n[*] Test basé sur une erreur (nom du fichier vide) ... " ) ;
 		try {
 			myDB.charger( "" ) ;
 		}
 		catch ( IllegalArgumentException e ) {
+			System.err.println( e.getMessage() ) ;
+		}
+		catch ( java.io.FileNotFoundException e ) {
 			System.err.println( e.getMessage() ) ;
 		}
 
@@ -93,6 +99,9 @@ public class TestDB implements java.io.Serializable , StaticRefs {
 			}
 		}
 		catch ( IllegalArgumentException e ) {
+			System.err.println( e.getMessage() ) ;
+		}
+		catch ( java.io.FileNotFoundException e ) {
 			System.err.println( e.getMessage() ) ;
 		}
 
