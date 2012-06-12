@@ -27,5 +27,8 @@ public class MailMenuCtrl implements ActionListener {
 		else if(src == this.view.getBoutonContacts()) {
 			new MailListeContactView(this.view.getMainPanel());
 		}
+		else if(src == this.view.getBoutonParametre()) {
+			new MailParamView(this.view.getMainPanel());
+		}
 	}
 }

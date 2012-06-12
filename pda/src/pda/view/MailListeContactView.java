@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
-*
+* Cette classe liste les contacts dans la partie GUI de l'application.
 */
 public class MailListeContactView {
 
