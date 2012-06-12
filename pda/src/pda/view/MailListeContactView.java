@@ -58,9 +58,12 @@ public class MailListeContactView {
 		
 		JPanel panelBas = new JPanel(new GridLayout(1, 4));
 		retour = new JButton("<-");
-		supprimer = new JButton("Sup.");
-		modifier = new JButton("Modif.");
-		nouveau = new JButton("Nouv.");
+		ImageIcon sup = new ImageIcon("data/img/mail/suppr.png");
+		supprimer = new JButton(sup);
+		ImageIcon edit = new ImageIcon("data/img/mail/edit.png");
+		modifier = new JButton(edit);
+		ImageIcon add = new ImageIcon("data/img/mail/nouveau.png");
+		nouveau = new JButton(add);
 		
 		panelBas.add(retour);
 		panelBas.add(supprimer);

@@ -81,7 +81,8 @@ public class MailSupprContactView {
 		
 		JPanel panelBas = new JPanel(new GridLayout(1, 2));
 		retour = new JButton("Retour");
-		supprimer = new JButton("Supprimer");
+		ImageIcon sup = new ImageIcon("data/img/mail/suppr.png");
+		supprimer = new JButton(sup);
 		panelBas.add(retour);
 		panelBas.add(supprimer);
 		

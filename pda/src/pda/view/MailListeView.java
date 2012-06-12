@@ -39,21 +39,21 @@ public class MailListeView {
 		
 		//La colone 0 doit comporter UNIQUEMENT des types Integer pour que les images puissent s'afficher correctement.
 		Object[][] data = {	{new Integer(0), "test", "Guillaume Claudic"},
-							{new Integer(0), "test", "Thibault Guittet"},
+							{new Integer(1), "test", "Thibault Guittet"},
+							{new Integer(2), "test", "Un mec louche"},
+							{new Integer(3), "test", "Un mec louche"},
 							{new Integer(0), "test", "Un mec louche"},
 							{new Integer(0), "test", "Un mec louche"},
 							{new Integer(0), "test", "Un mec louche"},
+							{new Integer(1), "test", "Un mec louche"},
 							{new Integer(0), "test", "Un mec louche"},
 							{new Integer(0), "test", "Un mec louche"},
+							{new Integer(3), "test", "Un mec louche"},
 							{new Integer(0), "test", "Un mec louche"},
 							{new Integer(0), "test", "Un mec louche"},
+							{new Integer(1), "test", "Un mec louche"},
 							{new Integer(0), "test", "Un mec louche"},
-							{new Integer(0), "test", "Un mec louche"},
-							{new Integer(0), "test", "Un mec louche"},
-							{new Integer(0), "test", "Un mec louche"},
-							{new Integer(0), "test", "Un mec louche"},
-							{new Integer(0), "test", "Un mec louche"},
-							{new Integer(0), "test", "Un mec louche"},
+							{new Integer(2), "test", "Un mec louche"},
 							{new Integer(0), "test", "Un fan"}
 							};
 							
@@ -71,19 +71,22 @@ public class MailListeView {
 		mainPanel.add(defilement, BorderLayout.CENTER);
 	
 		retour = new JButton("retour");
-		supprimer = new JButton("Suppr.");
+		ImageIcon sup = new ImageIcon("data/img/mail/suppr.png");
+		supprimer = new JButton(sup);
 		
 		JPanel panelBas = new JPanel(new GridLayout(1, 3));
 		panelBas.add(retour);
 		panelBas.add(supprimer);
 		try {
 			if(this.mode == MODE_BOITE_RECEPTION || this.mode == MODE_BOITE_ENVOIE) {
-				nouveau = new JButton("Nouveau");
+				ImageIcon icon = new ImageIcon("data/img/mail/nouveau.png");
+				nouveau = new JButton(icon);
 				panelBas.add(nouveau);
 				editer = null;
 			}
 			else if(this.mode == MODE_BROUILLON) {
-				editer = new JButton("Editer");
+				ImageIcon edit = new ImageIcon("data/img/mail/edit.png");
+				editer = new JButton(edit);
 				panelBas.add(editer);
 				nouveau = null;
 			}

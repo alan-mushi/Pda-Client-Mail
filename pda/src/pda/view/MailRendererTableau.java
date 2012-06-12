@@ -6,12 +6,15 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 public class MailRendererTableau extends DefaultTableCellRenderer {
     
-    private Icon icon;
+    private Icon nonLu, lu, brouillon, envoye;
 
     public MailRendererTableau() {
         super();
 
-        icon = new ImageIcon("data/img/mail/nonLu.png");
+        nonLu = new ImageIcon("data/img/mail/nonLu.png");
+        lu = new ImageIcon("data/img/mail/lu.png");
+        brouillon = new ImageIcon("data/img/mail/brouillon.png");
+        envoye = new ImageIcon("data/img/mail/envoye.png");
     }
 
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -22,9 +25,18 @@ public class MailRendererTableau extends DefaultTableCellRenderer {
         setText("");
 
         if(type.equals(new Integer(0))){
-            setIcon(icon);
+            setIcon(nonLu);
         }
-
+        else if(type.equals(new Integer(1))) {
+        	setIcon(lu);
+        }
+        else if(type.equals(new Integer(2))) {
+        	setIcon(brouillon);
+        }
+        else if(type.equals(new Integer(3))) {
+        	setIcon(envoye);
+        }
+        
         return this;
     }
 }
