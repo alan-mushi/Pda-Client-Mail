@@ -20,5 +20,16 @@ public class MailListeCtrl implements ActionListener {
 		else if(src == this.view.getBoutonRetour()) {
 			new MailMenuView(view.getMainPanel());
 		}
+		else if(src == this.view.getBoutonSupprimer()) {
+			if(this.view.getMode() == MailListeView.MODE_BOITE_RECEPTION) {
+				new MailSupprView(view.getMainPanel(), MailSupprView.MODE_SUPPRESSION_MAIL, MailListeView.MODE_BOITE_RECEPTION);
+			}
+			else if(this.view.getMode() == MailListeView.MODE_BOITE_ENVOIE) {
+				new MailSupprView(view.getMainPanel(), MailSupprView.MODE_SUPPRESSION_MAIL, MailListeView.MODE_BOITE_ENVOIE);
+			}
+			else if(this.view.getMode() == MailListeView.MODE_BROUILLON) {
+				new MailSupprView(view.getMainPanel(), MailSupprView.MODE_SUPPRESSION_MAIL, MailListeView.MODE_BROUILLON);
+			}
+		}
 	}
 }

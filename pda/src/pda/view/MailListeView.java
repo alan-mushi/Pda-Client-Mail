@@ -108,6 +108,8 @@ public class MailListeView {
 		else
 			editer.addActionListener(reception);
 		
+		supprimer.addActionListener(reception);
+		
 		retour.addActionListener(reception);
 	}
 	
@@ -125,5 +127,9 @@ public class MailListeView {
 	
 	public JPanel getMainPanel() {
 		return this.mainPanel;
+	}
+	
+	public int getMode() {
+		return this.mode;
 	}
 }

@@ -5,14 +5,22 @@ import pda.datas.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class MailSupprContactView {
+public class MailSupprView {
 
 	private JPanel mainPanel;
 	
 	private JButton retour, supprimer;
 	
-	public MailSupprContactView(JPanel thePanel) {
+	private int mode;
+	private int theLastMode;
+	
+	public static final int MODE_SUPPRESSION_MAIL = 1;
+	public static final int MODE_SUPPRESSION_CONTACT = 2;
+	
+	public MailSupprView(JPanel thePanel, int theMode, int theLastMode) {
 		this.mainPanel = thePanel;
+		this.mode = theMode;
+		this.theLastMode = theLastMode;
 		mainPanel.removeAll();
 		mainPanel.updateUI();
 		initialiserGui();
@@ -92,7 +100,7 @@ public class MailSupprContactView {
 	}
 	
 	private void attacherReactions() {
-		MailSupprContactCtrl supprCtrl = new MailSupprContactCtrl(this);
+		MailSupprCtrl supprCtrl = new MailSupprCtrl(this);
 		retour.addActionListener(supprCtrl);
 	}
 	
@@ -106,5 +114,13 @@ public class MailSupprContactView {
 	
 	public JPanel getMainPanel() {
 		return this.mainPanel;
+	}
+	
+	public int getMode() {
+		return this.mode;
+	}
+	
+	public int getTheLastMode() {
+		return this.theLastMode;
 	}
 }
