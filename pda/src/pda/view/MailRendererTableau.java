@@ -4,12 +4,20 @@ import java.awt.Component;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 
+/**
+* Classe permettant d'afficher des images (et éventuellement autres) dans la liste des mails reçut/envoyés/brouillon.
+*/
 public class MailRendererTableau extends DefaultTableCellRenderer {
     
+    /** Les images possibles */
     private Icon nonLu, lu, brouillon, envoye;
     
+    /** Le serialVersionUID */
     private static final long serialVersionUID = 31L;
 
+	/**
+	* Constructeur
+	*/
     public MailRendererTableau() {
         super();
 
@@ -18,7 +26,11 @@ public class MailRendererTableau extends DefaultTableCellRenderer {
         brouillon = new ImageIcon("data/img/mail/brouillon.png");
         envoye = new ImageIcon("data/img/mail/envoye.png");
     }
-
+	
+	/**
+	* Méthode redéfinit qui permet celon le nombre passé en paramètre d'afficher une certaine image dans le tableau
+	* Voir la doc de DefaultTableCellRenderer pour les paramètres.
+	*/
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 

@@ -16,12 +16,19 @@ public class MailParamView {
 	/** Boutons de navigation */;
 	private JButton retour, modifier;
 	
+	/** Les labels pour la champs du formulaire */
 	private JLabel labMdp, labHote, labPort, labAdresseProxy, labPortProxy;
 	
+	/** Les champs de textes permettant de modifier les paramètres */
 	private JTextField hote, port, adresseProxy, portProxy;
 	
+	/** Le champ "mot de passe" */
 	private JPasswordField mdp;
 	
+	/**
+	* Constructeur
+	* @param thePanel Le panel principal de l'application.
+	*/
 	public MailParamView(JPanel thePanel) {
 		this.mainPanel = thePanel;
 		mainPanel.removeAll();
@@ -30,6 +37,9 @@ public class MailParamView {
 		attacherReactions();
 	}
 	
+	/**
+	* Permet d'initialiser l'interface graphique.
+	*/
 	public void initialiserGui() {
 		mainPanel.setLayout(new BorderLayout());
 		
@@ -71,19 +81,34 @@ public class MailParamView {
 		mainPanel.add(panelBas, BorderLayout.SOUTH);
 	}
 	
+	/**
+	* Permet de faire le lien entre la vue (cette classe) et son controleur.
+	*/
 	public void attacherReactions() {
 		MailParamCtrl controleur = new MailParamCtrl(this);
 		retour.addActionListener(controleur);
 	}
 	
+	/**
+	* Permet de récupérer le bouton retour.
+	* @return Le bouton retour.
+	*/
 	public JButton getBoutonRetour() {
 		return this.retour;
 	}
 	
+	/**
+	* Permet de récupérer le bouton modifier.
+	* @return Le bouton modifier.
+	*/
 	public JButton getBoutonModifier() {
 		return this.modifier;
 	}
 	
+	/**
+	* Permet de retourner le panel principal de l'application.
+	* @return Le panel principal.
+	*/
 	public JPanel getMainPanel() {
 		return this.mainPanel;
 	}

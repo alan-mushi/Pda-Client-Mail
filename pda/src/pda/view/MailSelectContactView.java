@@ -5,11 +5,21 @@ import pda.datas.*;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+* Classe permettant de sélectionner des contacts avant d'envoyer un mail.
+*/
 public class MailSelectContactView {
+
+	/** Le panel principal de l'application */
 	private JPanel mainPanel;
 	
+	/** Boutons de navigation */
 	private JButton retour, envoyer;
 	
+	/**
+	* Constructeur
+	* @param thePanel Le panel principal de l'application.
+	*/
 	public MailSelectContactView(JPanel thePanel) {
 		this.mainPanel = thePanel;
 		mainPanel.removeAll();
@@ -18,6 +28,9 @@ public class MailSelectContactView {
 		attacherReactions();
 	}
 	
+	/**
+	* Permet d'initialiser l'interface graphique.
+	*/
 	private void initialiserGui() {
 		mainPanel.setLayout(new BorderLayout());
 		
@@ -80,19 +93,34 @@ public class MailSelectContactView {
 		mainPanel.add(panelBas, BorderLayout.SOUTH);
 	}
 	
+	/**
+	* Permet de faire le lien entre la vue (cette classe) et son controleur.
+	*/
 	private void attacherReactions() {
 		MailSelectContactCtrl select = new MailSelectContactCtrl(this);
 		retour.addActionListener(select);
 	}
 	
+	/**
+	* Permet de récupérer le bouton retour.
+	* @return Le bouton retour.
+	*/
 	public JButton getBoutonRetour() {
 		return this.retour;
 	}
 	
+	/**
+	* Permet de retourner le panel principal de l'application.
+	* @return Le panel principal.
+	*/
 	public JPanel getMainPanel() {
 		return this.mainPanel;
 	}
 	
+	/**
+	* Permet de récupérer le bouton envoyer.
+	* @return Le bouton envoyer.
+	*/
 	public JButton getBoutonEnvoyer() {
 		return this.envoyer;
 	}
