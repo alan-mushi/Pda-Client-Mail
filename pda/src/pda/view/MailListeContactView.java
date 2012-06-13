@@ -43,20 +43,8 @@ public class MailListeContactView implements StaticRefs {
 	*/
 	private void initialiserGui() {
 		mainPanel.setLayout(new BorderLayout());
-		
-		liste = new DefaultListModel();
-		
-		Contacts listeContacts = chargerContacts();
-		HashSet<String> l = new HashSet<String>();
-		l.addAll(listeContacts.cles());
-		
-		Iterator it = l.iterator();
-		while(it.hasNext()) {
-			String cle = (String) it.next();
-			liste.addElement(listeContacts.consulter(cle).getPrenom() + " " + listeContacts.consulter(cle).getNom());
-		}
 
-		listeContactsGui = new JList(liste);
+		listeContactsGui = new JList( this.chargerContacts().cles().toArray() ) ;
 		JScrollPane defilementContact = new JScrollPane(listeContactsGui);
 		
 		JPanel panelBas = new JPanel(new GridLayout(1, 4));
@@ -82,13 +70,9 @@ public class MailListeContactView implements StaticRefs {
 	* @return Renvoie la liste des contacts sinon null.
 	*/
 	private Contacts chargerContacts() {
-		DB dataBase = new DB();
 		Contacts retour = null;
 		try {
-			Object data = dataBase.charger(contactsFile);
-			if(data instanceof Contacts) {
-				Contacts dataContacts = (Contacts) data;
-			}
+			retour = (Contacts) myDB.charger( contactsFile ) ;
 		}
 		catch(IllegalArgumentException e) {
 			System.err.println(e.getMessage());
