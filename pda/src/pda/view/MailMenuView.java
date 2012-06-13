@@ -5,12 +5,21 @@ import pda.datas.*;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+* Classe gérant le menu principal de l'application
+*/
 public class MailMenuView {
+
 	/** Le JPanel principal récupéré de la classe parente*/
 	private JPanel mainPanel;
 	
+	/** Boutons du menu permettant de naviguer dans l'application */
 	private JButton envoyes, reception, parametre, brouillons, contacts, notification;
-
+	
+	/**
+	* Constructeur
+	* @param thePanel Le panel principal de l'application.
+	*/
 	public MailMenuView(JPanel thePanel) {
 		this.mainPanel = thePanel;
 		mainPanel.removeAll();
@@ -19,6 +28,9 @@ public class MailMenuView {
 		attacherReactions();
 	}
 	
+	/**
+	* Permet d'initialiser l'interface graphique.
+	*/
 	private void initialiserGui() {
 		envoyes = new JButton("Envoyés");
 		reception = new JButton("Réception");
@@ -50,6 +62,9 @@ public class MailMenuView {
 		panelBouton.add(contacts);
 	}
 	
+	/**
+	* Permet de faire le lien entre la vue (cette classe) et son controleur.
+	*/
 	private void attacherReactions() {
 		MailMenuCtrl menuControle = new MailMenuCtrl(this);
 		reception.addActionListener(menuControle);
@@ -59,30 +74,58 @@ public class MailMenuView {
 		parametre.addActionListener(menuControle);
 	}
 	
+	/**
+	* Récupère le bouton pour accèder à la boite de réception.
+	* @return Le bouton de la boite de réception.
+	*/
 	public JButton getBoutonReception() {
 		return this.reception;
 	}
 	
+	/**
+	* Récupère le bouton de la boite d'envoie.
+	* @return Le bouton de la boite d'envoie.
+	*/
 	public JButton getBoutonEnvoyes() {
 		return this.envoyes;
 	}
 	
+	/**
+	* Récupère le bouton pour accèder au paramètres de l'application.
+	* @return Le bouton des paramètres.
+	*/
 	public JButton getBoutonParametre() {
 		return this.parametre;
 	}
 	
+	/**
+	* Récupère le bouton pour accèder aux brouillons.
+	* @return Le boutons des brouillons.
+	*/
 	public JButton getBoutonBrouillons() {
 		return this.brouillons;
 	}
 	
+	/**
+	* Récupère le bouton pour accèder à la gestion des contacts.
+	* @return Le bouton des contacts.
+	*/
 	public JButton getBoutonContacts() {
 		return this.contacts;
 	}
 	
+	/**
+	* Récupère le bouton des notifications.
+	* @return le bouton des notifications.
+	*/
 	public JButton getBoutonNotification() {
 		return this.notification;
 	}
 	
+	/**
+	* Récupère le panel principal de l'application.
+	* @return Le panel principal.
+	*/
 	public JPanel getMainPanel() {
 		return this.mainPanel;
 	}

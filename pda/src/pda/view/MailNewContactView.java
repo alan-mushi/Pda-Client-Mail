@@ -5,15 +5,27 @@ import pda.datas.*;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+* Classe gérant l'ajout des contacts (partie graphique)
+*/
 public class MailNewContactView {
-
+	
+	/** Le panel principal de l'application. */
 	private JPanel mainPanel;
 	
+	/** Les labels des champs. */
 	private JLabel labNom, labPrenom, labEmail;
+	
+	/** Les champs de texte pour l'ajout de contacts. */
 	private JTextField nom, prenom, email;
 	
+	/** Les boutons de navigation */
 	private JButton retour, creer;
 	
+	/**
+	* Constructeur
+	* @param Le panel principal de l'application
+	*/
 	public MailNewContactView(JPanel thePanel) {
 		this.mainPanel = thePanel;
 		mainPanel.removeAll();
@@ -22,6 +34,9 @@ public class MailNewContactView {
 		attacherReactions();
 	}
 	
+	/**
+	* Permet d'initialiser l'interface graphique.
+	*/
 	public void initialiserGui() {
 		mainPanel.setLayout(new BorderLayout());
 		
@@ -67,20 +82,35 @@ public class MailNewContactView {
 		mainPanel.add(panelBas, BorderLayout.SOUTH);
 	}
 	
+	/**
+	* Permet de faire le lien entre la vue (cette classe) et son controleur.
+	*/
 	public void attacherReactions() {
 		MailNewContactCtrl ctrlAdd = new MailNewContactCtrl(this);
 		retour.addActionListener(ctrlAdd);
 		creer.addActionListener(ctrlAdd);
 	}
 	
+	/**
+	* Permet de récupéré le panel principal de l'application.
+	* @return Le panel principal.
+	*/
 	public JPanel getMainPanel() {
 		return this.mainPanel;
 	}
 	
+	/**
+	* Permet de récupérer le bouton retour.
+	* @return Le bouton retour.
+	*/
 	public JButton getBoutonRetour() {
 		return this.retour;
 	}
 	
+	/**
+	* Permet de récupérer le bouton créer.
+	* @return Le bouton créer.
+	*/
 	public JButton getBoutonCreer() {
 		return this.creer;
 	}

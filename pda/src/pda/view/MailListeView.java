@@ -6,21 +6,41 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.table.TableColumn;
 
-
+/**
+* Classe gérant la partie graphique de la boite de réception/envoie/brouillon
+*/
 public class MailListeView {
 	
+	/** Le panel principal de l'application */
 	private JPanel mainPanel;
 	
+	/** Boutons de navigation */
 	private JButton nouveau, editer, supprimer, retour;
 	
+	/** La liste des mails affiché sous forme de tableau */
 	private JTable liste;
 	
+	/** Le mode de la classe :
+	*	Boite de réception : 1
+	*	Boite d'envoie : 2
+	*	Brouiilon : 3
+	*/
 	private int mode;
 	
+	/** Pour spécifier le mode boite de réception */
 	public static final int MODE_BOITE_RECEPTION = 1;
+	
+	/** Pour spécifier le mode boite d'envoie */
 	public static final int MODE_BOITE_ENVOIE = 2;
+	
+	/** Pour spécifier le mode brouillon */
 	public static final int MODE_BROUILLON = 3;
 	
+	/**
+	* Constructeur
+	* @param thePanel Le panel principal de l'application
+	* @param theMode Le mode dans lequel la classe doit agir
+	*/
 	public MailListeView(JPanel thePanel, int theMode) {
 		this.mainPanel = thePanel;
 		this.mode = theMode;
@@ -30,6 +50,9 @@ public class MailListeView {
 		attacherReactions();
 	}
 	
+	/**
+	* Permet d'initialiser l'interface graphique.
+	*/
 	private void initialiserGui() {
 		mainPanel.setLayout(new BorderLayout());
 	
@@ -100,6 +123,9 @@ public class MailListeView {
 		mainPanel.add(panelBas, BorderLayout.SOUTH);
 	}
 	
+	/**
+	* Permet de faire le lien entre la vue (cette classe) et son controleur.
+	*/
 	private void attacherReactions() {
 		MailListeCtrl reception = new MailListeCtrl(this);
 		
@@ -113,22 +139,41 @@ public class MailListeView {
 		retour.addActionListener(reception);
 	}
 	
+	/**
+	* Retourne le bouton "retour".
+	* @return Le bouton retour.
+	*/
 	public JButton getBoutonRetour() {
 		return this.retour;
 	}
 	
+	/**
+	* Retourne le bouton "nouveau".
+	* @return Le bouton nouveau.
+	*/
 	public JButton getBoutonNouveau() {
 		return this.nouveau;
 	}
 	
+	/**
+	* Retourne le bouton "supprimer".
+	* @return Le bouton supprimer	*/.
 	public JButton getBoutonSupprimer() {
 		return this.supprimer;
 	}
 	
+	/**
+	* Retourne le panel principal de l'application
+	* @return Le panel de l'application
+	*/
 	public JPanel getMainPanel() {
 		return this.mainPanel;
 	}
 	
+	/**
+	* Renvoie le mode actuel de l'objet courant.
+	* @return Le mode de l'objet courant
+	*/
 	public int getMode() {
 		return this.mode;
 	}
