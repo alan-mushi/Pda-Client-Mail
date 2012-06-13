@@ -4,11 +4,14 @@ import pda.control.*;
 import pda.datas.*;
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.util.HashSet;
+import java.util.Iterator;
 
 /**
 * Cette classe liste les contacts dans la partie GUI de l'application.
 */
-public class MailListeContactView {
+public class MailListeContactView implements StaticRefs {
 
 	/** Panel principal de l'application */
 	private JPanel mainPanel;
@@ -41,34 +44,17 @@ public class MailListeContactView {
 	private void initialiserGui() {
 		mainPanel.setLayout(new BorderLayout());
 		
-		
 		liste = new DefaultListModel();
-		liste.addElement("Guillaume Claudic");
-		liste.addElement("Thibault Guittet");
-		liste.addElement("Guillaume Claudic");
-		liste.addElement("Thibault Guittet");
-		liste.addElement("Guillaume Claudic");
-		liste.addElement("Thibault Guittet");
-		liste.addElement("Guillaume Claudic");
-		liste.addElement("Thibault Guittet");
-		liste.addElement("Guillaume Claudic");
-		liste.addElement("Thibault Guittet");
-		liste.addElement("Guillaume Claudic");
-		liste.addElement("Thibault Guittet");
-		liste.addElement("Guillaume Claudic");
-		liste.addElement("Thibault Guittet");
-		liste.addElement("Guillaume Claudic");
-		liste.addElement("Thibault Guittet");
-		liste.addElement("Guillaume Claudic");
-		liste.addElement("Thibault Guittet");
-		liste.addElement("Guillaume Claudic");
-		liste.addElement("Thibault Guittet");
-		liste.addElement("Guillaume Claudic");
-		liste.addElement("Thibault Guittet");
-		liste.addElement("Guillaume Claudic");
-		liste.addElement("Thibault Guittet");
-		liste.addElement("Guillaume Claudic");
-		liste.addElement("Thibault Guittet");
+		
+		Contacts listeContacts = chargerContacts();
+		HashSet<String> l = new HashSet<String>();
+		l.addAll(listeContacts.cles());
+		
+		Iterator it = l.iterator();
+		while(it.hasNext()) {
+			String cle = (String) it.next();
+			liste.addElement(listeContacts.consulter(cle).getPrenom() + " " + listeContacts.consulter(cle).getNom());
+		}
 
 		listeContactsGui = new JList(liste);
 		JScrollPane defilementContact = new JScrollPane(listeContactsGui);
@@ -89,6 +75,31 @@ public class MailListeContactView {
 		
 		mainPanel.add(defilementContact, BorderLayout.CENTER);
 		mainPanel.add(panelBas, BorderLayout.SOUTH);
+	}
+	
+	/**
+	* Charge les contactsFile.
+	* @return Renvoie la liste des contacts sinon null.
+	*/
+	private Contacts chargerContacts() {
+		DB dataBase = new DB();
+		Contacts retour = null;
+		try {
+			Object data = dataBase.charger(contactsFile);
+			if(data instanceof Contacts) {
+				Contacts dataContacts = (Contacts) data;
+			}
+		}
+		catch(IllegalArgumentException e) {
+			System.err.println(e.getMessage());
+		}
+		catch(FileNotFoundException e) {
+			Contacts contacts = new Contacts();
+			contacts.sauver();
+			chargerContacts();
+		}
+		
+		return retour;
 	}
 	
 	/**
