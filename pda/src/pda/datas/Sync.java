@@ -1,6 +1,7 @@
 package pda.datas ;
 
 import pdaNetwork.client.service.MailClient ;
+import pdaNetwork.misc.MailContent ;
 import pdaNetwork.misc.ProtocolException ;
 import java.util.ArrayList ;
 
@@ -33,37 +34,29 @@ public class Sync implements StaticRefs {
 	/**
 	 * Supprime tous les messages du serveur supprimés en local.
 	 */
-	private void deleteOnServer() {
-		try {
-			ArrayList<String> toDel = this.myMail.getSupprList() ;
-			MailClient deleter = new MailClient( this.user , this.passwd ) ;
-			for ( int i = 0 ; i < toDel.size() ; i++ ) {
-				deleter.delete( toDel.get(i) ) ;
-			}
-			deleter.close() ;
-		} catch ( ProtocolException e ) {
-			this.lastConnectionSucced = false ;
+	private void deleteOnServer() throws ProtocolException {
+		ArrayList<String> toDel = this.myMail.getSupprList() ;
+		MailClient deleter = new MailClient( this.user , this.passwd ) ;
+		for ( int i = 0 ; i < toDel.size() ; i++ ) {
+			deleter.delete( toDel.get(i) ) ;
 		}
+		deleter.close() ;
 	}
 
 	/**
 	 * Ajoute les nouveaux mails en provenance du serveur à Mail.
 	 */
-	private void getNewMails() {
-		try {
-			MailClient receiver = new MailClient( this.user , this.passwd ) ;
-			ArrayList<String> newMails = receiver.getHeaders() ;
-			for ( int i = 0 ; i < newMails.size() ; i++ ) {
-				String id = newMails.get(i) ;
-				MailContent email = receiver.receive( id ) ;
-				this.myMail.add( id , email , MailType.RECU ) ;
-			}
-			receiver.close() ;
-		} catch ( ProtocolException e ) {
-			this.lastConnectionSucced = false ;
+	private void getNewMails() throws ProtocolException {
+		MailClient receiver = new MailClient( this.user , this.passwd ) ;
+		ArrayList<String> newMails = receiver.getHeaders() ;
+		for ( int i = 0 ; i < newMails.size() ; i++ ) {
+			String id = newMails.get(i) ;
+			MailContent email = receiver.receive( id ) ;
+			this.myMail.add( id , email , MailType.RECU ) ;
 		}
+		receiver.close() ;
 	}
-		
+
 	/**
 	 * Retourne si la dernière connection au serveur a été possible.
 	 */
