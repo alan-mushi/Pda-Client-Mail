@@ -157,7 +157,8 @@ public class MailListeView {
 	
 	/**
 	* Retourne le bouton "supprimer".
-	* @return Le bouton supprimer	*/.
+	* @return Le bouton supprimer.
+	*/
 	public JButton getBoutonSupprimer() {
 		return this.supprimer;
 	}

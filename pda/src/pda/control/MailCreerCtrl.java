@@ -5,13 +5,26 @@ import pda.datas.*;
 import javax.swing.*;
 import java.awt.event.*;
 
+/**
+* Classe controleur pour l'interface de rédaction de mail.
+*/
 public class MailCreerCtrl implements ActionListener {
 	
+	/** Une référence vers la vue */
 	private MailCreerView view;
 	
+	/**
+	* Constructeur
+	* @param view La référence vers la vue.
+	*/
 	public MailCreerCtrl(MailCreerView view) {
 		this.view = view;
 	}
+	
+	/**
+	* Méthode gérant les actions
+	* @param e L'action.
+	*/
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
 		if(src == this.view.getBoutonRetour()) {
