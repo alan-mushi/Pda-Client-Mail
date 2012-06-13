@@ -56,7 +56,7 @@ public class MailType extends MailContent implements java.io.Serializable , Stat
 	 * Etablit si le type passé en paramètre est conforme.
 	 * @return <code>true</code> si le tmpType est valide, <code>false</code> sinon.
 	 */
-	private boolean checkType( String tmpType ) throws IllegalArgumentException {
+	public static boolean checkType( String tmpType ) throws IllegalArgumentException {
 		boolean res = false ;
 		if ( tmpType == null || tmpType.isEmpty() ) {
 			throw new IllegalArgumentException( "Le type du message n'est pas défini." ) ;
