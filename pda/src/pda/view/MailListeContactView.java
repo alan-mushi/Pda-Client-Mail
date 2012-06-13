@@ -67,7 +67,8 @@ public class MailListeContactView implements StaticRefs {
 	
 	/**
 	* Charge les contactsFile.
-	* @return Renvoie la liste des contacts sinon null.
+	* @return Renvoie la liste des contacts si une liste est remplie,
+	* sinon une nouvelle liste est fabriquée avec un message d'avertissement.
 	*/
 	private Contacts chargerContacts() {
 		Contacts retour = null;
@@ -79,10 +80,12 @@ public class MailListeContactView implements StaticRefs {
 		}
 		catch(FileNotFoundException e) {
 			Contacts contacts = new Contacts();
+			try {
+				contacts.ajouter( "Pas de contacts" , "enregistrés." , "no Mail" ) ;
+			} catch ( IllegalArgumentException err ) { System.err.println( err.getMessage() ) ; }
 			contacts.sauver();
-			chargerContacts();
+			return ( contacts ) ;
 		}
-		
 		return retour;
 	}
 	
