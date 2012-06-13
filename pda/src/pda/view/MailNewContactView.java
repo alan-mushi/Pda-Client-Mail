@@ -22,11 +22,28 @@ public class MailNewContactView {
 	/** Les boutons de navigation */
 	private JButton retour, creer;
 	
+	/** Le contact à modifier */
+	FicheContact contact;
+	
 	/**
 	* Constructeur
 	* @param Le panel principal de l'application
 	*/
 	public MailNewContactView(JPanel thePanel) {
+		this.mainPanel = thePanel;
+		mainPanel.removeAll();
+		mainPanel.updateUI();
+		initialiserGui();
+		attacherReactions();
+	}
+	
+	/**
+	* Constructeur
+	* @param thePanel Le panel principal de l'application.
+	* @param selected Le contact à modifier.
+	*/
+	public MailNewContactView(JPanel thePanel, FicheContact selected) {
+		this.contact = selected;
 		this.mainPanel = thePanel;
 		mainPanel.removeAll();
 		mainPanel.updateUI();
@@ -47,6 +64,14 @@ public class MailNewContactView {
 		nom = new JTextField(15);
 		prenom = new JTextField(15);
 		email = new JTextField(15);
+		
+		if(contact != null) {
+			if(contact instanceof FicheContact) {
+				nom.setText(contact.getNom());
+				prenom.setText(contact.getPrenom());
+				email.setText(contact.getEmail());
+			}
+		}
 		
 		SpringLayout formulaire = new SpringLayout();
 		JPanel panelCentre = new JPanel(formulaire);

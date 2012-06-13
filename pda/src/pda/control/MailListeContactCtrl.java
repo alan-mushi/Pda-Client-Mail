@@ -37,5 +37,8 @@ public class MailListeContactCtrl implements ActionListener {
 		else if(src == this.view.getBoutonNouveau()) {
 			new MailNewContactView(this.view.getMainPanel());
 		}
+		else if(src == this.view.getBoutonModifier()) {
+			new MailNewContactView(this.view.getMainPanel(), new FicheContact("Claudic", "Guillaume", "guillaume.claudic@gmail.com"));
+		}
 	}
 }
