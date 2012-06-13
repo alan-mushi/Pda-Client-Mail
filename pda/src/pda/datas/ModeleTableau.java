@@ -19,7 +19,7 @@ public class ModeleTableau extends AbstractTableModel {
 	/**
 	* Constructeur
 	* @param data Les données du tableau.
-	* @param Les entêtes des colones du tableau.
+	* @param title Les entêtes des colones du tableau.
 	*/
 	public ModeleTableau(Object[][] data, String[] title) {
 		this.data = data;

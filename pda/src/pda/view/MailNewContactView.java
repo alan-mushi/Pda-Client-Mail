@@ -24,7 +24,7 @@ public class MailNewContactView {
 	
 	/**
 	* Constructeur
-	* @param Le panel principal de l'application
+	* @param thePanel Le panel principal de l'application
 	*/
 	public MailNewContactView(JPanel thePanel) {
 		this.mainPanel = thePanel;
