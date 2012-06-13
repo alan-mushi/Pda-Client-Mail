@@ -72,7 +72,7 @@ public class TestContacts implements StaticRefs {
 			System.out.println( "\n[*] Ajout des fiches générées (ces fiches ne peuvent pas être rejetées) ... " ) ;
 			try {
 				System.out.print( "	[*] Ajout d'une fiche sans renseigner la cle (pas d'erreurs cf doc) ... " ) ;
-				cont.ajouter( null , fiche1 ) ;
+				cont.ajouter( fiche1 ) ;
 				System.out.println( "OK" ) ;
 			}
 			catch ( IllegalArgumentException e ) {
@@ -80,7 +80,7 @@ public class TestContacts implements StaticRefs {
 			}
 			try {
 				System.out.print( "	[*] Ajout d'une fiche en renseignant la cle ... " ) ;
-				cont.ajouter( fiche2.getNom() , fiche2 ) ;
+				cont.ajouter( fiche2 ) ;
 				System.out.println( "OK" ) ;
 			}
 			catch ( IllegalArgumentException e ) {
@@ -88,7 +88,7 @@ public class TestContacts implements StaticRefs {
 			}
 			System.out.print( "\n[*] Test basé sur une erreur (ajout d'une fiche déjà présente dans la HashMap) ... " ) ;
 			try {
-				cont.ajouter( null , fiche2 ) ;
+				cont.ajouter( fiche2 ) ;
 				System.out.println( "FAIL" ) ;
 			}
 			catch ( IllegalArgumentException e ) {
@@ -120,7 +120,7 @@ public class TestContacts implements StaticRefs {
 
 		System.out.print( "\n[*] Test basé SANS erreurs ... " ) ;
 		try {
-			cont.existe( "nom1" ) ;
+			cont.existe( "nom1 prenom1" ) ;
 			System.out.println( "OK" ) ;
 		}
 		catch ( IllegalArgumentException e ) {
@@ -148,7 +148,7 @@ public class TestContacts implements StaticRefs {
 
 		System.out.print( "\n[*] Test basé SANS erreurs ... " ) ;
 		try {
-			cont.supprimer( "nom2" ) ;
+			cont.supprimer( "nom2 prenom2" ) ;
 			System.out.println( "OK" ) ;
 		}
 		catch ( IllegalArgumentException e ) {
@@ -178,7 +178,7 @@ public class TestContacts implements StaticRefs {
 
 		System.out.println( "\n[*] Test basé sur une erreur (clé non présente dans la HashMap) ... " ) ;
 		try {
-			cont.consulter( "nom2" ) ;
+			cont.consulter( "nom2 prenom2" ) ;
 		}
 		catch ( IllegalArgumentException e ) {
 			System.out.println( e.getMessage() ) ;
@@ -186,7 +186,7 @@ public class TestContacts implements StaticRefs {
 
 		System.out.print( "\n[*] Test basé SANS erreurs ... " ) ;
 		try {
-			FicheContact tmpFiche = cont.consulter( "nom" ) ;
+			FicheContact tmpFiche = cont.consulter( "nom prenom" ) ;
 			System.out.println( "OK : \n" + tmpFiche ) ;
 		}
 		catch ( IllegalArgumentException e ) {
@@ -206,10 +206,10 @@ public class TestContacts implements StaticRefs {
 			System.out.println( "OK : \n" + e.getMessage() ) ;
 		}
 
-		System.out.print( "\n[*] Test basé SANS erreurs (clé variable : originale -> tmpFiche.getNom()) ... " ) ;
+		System.out.print( "\n[*] Test basé SANS erreurs (modification de fiche dans la HashMap) ... " ) ;
 		try {
 			FicheContact tmpFiche = new FicheContact( "nomModif" , "prenomModif" , "emailModif" ) ;
-			cont.modifier( "nom" , tmpFiche ) ;
+			cont.modifier( "nom prenom" , tmpFiche ) ;
 			System.out.println( "OK" ) ;
 		}
 		catch ( IllegalArgumentException e ) {

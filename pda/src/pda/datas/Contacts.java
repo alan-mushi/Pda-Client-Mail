@@ -13,10 +13,10 @@ public class Contacts implements java.io.Serializable , StaticRefs {
 
 	/** 
 	 * Liste de toutes les fiches.<br />
-	 * Organisation : Nom contact , FicheContact.
+	 * Organisation : <code>Nom Prenom , FicheContact</code>.
 	 */
 	private HashMap<String , FicheContact> mapFiches ;
-	private static final long serialVersionUID = 2L ;
+	private static final long serialVersionUID = 6L ;
 
 	/**
 	 * Le constructeur ne fait qu'initialiser la HashMap avec une taille de 0.
@@ -51,18 +51,13 @@ public class Contacts implements java.io.Serializable , StaticRefs {
 
 	/**
 	 * Ajoute une FicheContact et sa clé correspondante à la HashMap.
-	 * @param cle La cle qui identifie la FicheContact. Si la cle est nulle
-	 * alors qu'uneFicheContact est intègre, la cle sera positionnée sur le nom
-	 * d'uneFicheContact.
 	 * @param uneFicheContact La FicheContact a ajouter.
 	 * @throws IllegalArgumentException Si l'intégritée des paramètres n'est pas valide.
 	 */
-	public boolean ajouter( String cle , FicheContact uneFicheContact ) throws IllegalArgumentException {
+	public boolean ajouter( FicheContact uneFicheContact ) throws IllegalArgumentException {
 		boolean res = false ;
 		this.checkFiche( uneFicheContact ) ;
-		if ( cle == null ) {
-			cle = uneFicheContact.getNom() ;
-		}
+		String cle = uneFicheContact.getNom().concat(" ").concat( uneFicheContact.getPrenom() ) ;
 		if ( ! this.existe( cle ) ) {
 			this.mapFiches.put( cle , uneFicheContact ) ;
 			res = true ;
@@ -78,7 +73,7 @@ public class Contacts implements java.io.Serializable , StaticRefs {
 	 * @see pda.datas.FicheContact#FicheContact(java.lang.String leNom, java.lang.String lePrenom, java.lang.String lemail)
 	 */
 	public void ajouter( String nom , String prenom , String mail ) throws IllegalArgumentException {
-		this.ajouter( nom , new FicheContact( nom , prenom , mail ) ) ;
+		this.ajouter( new FicheContact( nom , prenom , mail ) ) ;
 	}
 
 	/**
@@ -108,7 +103,7 @@ public class Contacts implements java.io.Serializable , StaticRefs {
 		boolean res = false ;
 		this.checkFiche( uneFicheContact ) ;
 		this.supprimer( cle ) ;
-		this.ajouter( uneFicheContact.getNom() , uneFicheContact ) ;
+		this.ajouter( uneFicheContact ) ;
 		res = true ;
 		return ( res ) ;
 	}
