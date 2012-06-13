@@ -42,7 +42,7 @@ public class MailView {
 	* Permet d'initialiser l'interface graphique.
 	*/
 	private void initialiserGui() {
-		mainPanel = new JPanel(new BorderLayout(50, 50));
+		mainPanel = new JPanel(new BorderLayout(45, 45));
 		JPanel panelCentre = new JPanel(new GridLayout(6, 1, 10, 10));
 		JPanel panelGauche = new JPanel();
 		JPanel panelDroit = new JPanel();

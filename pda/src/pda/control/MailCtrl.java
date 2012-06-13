@@ -91,10 +91,11 @@ public class MailCtrl implements IApplication, ActionListener , StaticRefs {
 
 		// Si la touche enter est pressée sur le champ mdp ou login ou le bouton validé
 		if(src == this.view.getBoutonValider() || src == this.view.getFieldMDP() || src == this.view.getFieldLogin()) {
+			boolean ok = false;
 			try {
 				char[] mdpRec = this.view.getFieldMDP().getPassword();
 				String mdp = new String(mdpRec);
-				connexion.logMe(this.view.getFieldLogin().getText(), mdp) ;
+				ok = connexion.logMe(this.view.getFieldLogin().getText(), mdp) ;
 				if ( loginNotFound ) { 
 					this.username = connexion.getUser() ;
 					myDB.sauvegarder( connexion , loginFile ) ;
@@ -103,6 +104,7 @@ public class MailCtrl implements IApplication, ActionListener , StaticRefs {
 			}
 			catch(IllegalArgumentException erreur) {
 				System.out.println(erreur.getMessage());
+				this.view.setErreur("Login/Mot de passe invalide");
 			}
 		}
 	}
