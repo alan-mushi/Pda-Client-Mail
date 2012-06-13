@@ -5,14 +5,26 @@ import pda.datas.*;
 import javax.swing.*;
 import java.awt.event.*;
 
+/**
+* Classe gérant les actions pour l'interface de suppression de mails et de contacts
+*/
 public class MailSupprCtrl implements ActionListener {
 	
+	/** Une référence vers la vue */
 	private MailSupprView view;
 	
+	/**
+	* Constructeur
+	* @param view Une référence vers la vue correspondante au controleur.
+	*/
 	public MailSupprCtrl(MailSupprView view) {
 		this.view = view;
 	}
 	
+	/**
+	* Gère les évènements pour l'interface lors de la sélection d'un contact avant l'envoie d'un mail.
+	* @param e L'évènement.
+	*/
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
 		if(src == this.view.getBoutonRetour() && this.view.getMode() == MailSupprView.MODE_SUPPRESSION_MAIL) {

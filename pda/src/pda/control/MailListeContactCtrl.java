@@ -5,14 +5,26 @@ import pda.datas.*;
 import javax.swing.*;
 import java.awt.event.*;
 
+/**
+* Classe gérant les évènements pour la liste des contacts
+*/
 public class MailListeContactCtrl implements ActionListener {
 	
+	/** Une référence vers la vue */
 	private MailListeContactView view;
 	
+	/**
+	* Constructeur
+	* @param view La vue correspondante au controleur.
+	*/
 	public MailListeContactCtrl(MailListeContactView view) {
 		this.view = view;
 	}
 	
+	/**
+	* Gère les évènements pour l'interface de la liste des contacts.
+	* @param e L'évènement.
+	*/
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
 		if(src == this.view.getBoutonRetour()) {
