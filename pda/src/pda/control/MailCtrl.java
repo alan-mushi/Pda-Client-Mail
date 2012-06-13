@@ -44,7 +44,7 @@ public class MailCtrl implements IApplication, ActionListener , StaticRefs {
 	/* Méthodes */
 	/** 
 	* Affiche un message dans la console lors du démarage dans le pda de l'application.
-	* @param Une référence vers le controleur du PDA.
+	* @param pda Une référence vers le controleur du PDA.
 	*/
 	public void start(PdaCtrl pda) {
 		System.out.println("Début de l'application Mail Client");
