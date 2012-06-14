@@ -21,12 +21,16 @@ public class MailSelectContactView implements StaticRefs {
 	/** Liste des CheckBox pour pouvoir facilement les identifier */
 	private JCheckBox[] listeCheckBox;
 	
+	/** Sauvegarde du mail le temps de la sélection des contacts */
+	private String objet, message;
 	/**
 	* Constructeur
 	* @param thePanel Le panel principal de l'application.
 	*/
-	public MailSelectContactView(JPanel thePanel) {
+	public MailSelectContactView(JPanel thePanel, String objet, String message) {
 		this.mainPanel = thePanel;
+		this.objet = objet;
+		this.message = message;
 		mainPanel.removeAll();
 		mainPanel.updateUI();
 		initialiserGui();
@@ -139,5 +143,21 @@ public class MailSelectContactView implements StaticRefs {
 	*/
 	public JCheckBox[] getCheckBox() {
 		return this.listeCheckBox;
+	}
+	
+	/**
+	* Retourne l'objet du message.
+	* @return L'objet du message.
+	*/
+	public String getObjet() {
+		return this.objet;
+	}
+	
+	/**
+	* Retourne le message.
+	* @return Le message a envoyer.
+	*/
+	public String getMessage() {
+		return this.message;
 	}
 }
