@@ -4,11 +4,13 @@ import pda.control.*;
 import pda.datas.*;
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.util.*;
 
 /**
 * Classe gérant la suppression dans l'application pour les contacts et pour les mails.
 */
-public class MailSupprView {
+public class MailSupprView implements StaticRefs {
 
 	/** Le panel principal de l'application */
 	private JPanel mainPanel;
@@ -57,63 +59,22 @@ public class MailSupprView {
 	private void initialiserGui() {
 		mainPanel.setLayout(new BorderLayout());
 		
-		JCheckBox b1 = new JCheckBox("Contact 1");
-		JCheckBox b2 = new JCheckBox("Contact 2");
-		JCheckBox b3 = new JCheckBox("Contact 3");
-		JCheckBox b4 = new JCheckBox("Contact 4");
-		JCheckBox b5 = new JCheckBox("Contact 5");
-		JCheckBox b6 = new JCheckBox("Contact 1");
-		JCheckBox b7 = new JCheckBox("Contact 2");
-		JCheckBox b8 = new JCheckBox("Contact 3");
-		JCheckBox b9 = new JCheckBox("Contact 4");
-		JCheckBox b10 = new JCheckBox("Contact 5");
-		JCheckBox b11 = new JCheckBox("Contact 1");
-		JCheckBox b12 = new JCheckBox("Contact 2");
-		JCheckBox b13 = new JCheckBox("Contact 3");
-		JCheckBox b14 = new JCheckBox("Contact 4");
-		JCheckBox b15 = new JCheckBox("Contact 5");
-		JCheckBox b16 = new JCheckBox("Contact 1");
-		JCheckBox b17 = new JCheckBox("Contact 2");
-		JCheckBox b18 = new JCheckBox("Contact 3");
-		JCheckBox b19 = new JCheckBox("Contact 4");
-		JCheckBox b20 = new JCheckBox("Contact 5");
-		JCheckBox b21 = new JCheckBox("Contact 1");
-		JCheckBox b22 = new JCheckBox("Contact 2");
-		JCheckBox b23 = new JCheckBox("Contact 3");
-		JCheckBox b24 = new JCheckBox("Contact 4");
-		JCheckBox b25 = new JCheckBox("Contact 5");
-		
 		JPanel panelCentre = new JPanel();
 		BoxLayout layoutCentre = new BoxLayout(panelCentre, BoxLayout.Y_AXIS);
 		panelCentre.setLayout(layoutCentre);
 		
 		JScrollPane defilementContact = new JScrollPane(panelCentre);
 		
-		panelCentre.add(b1);
-		panelCentre.add(b2);
-		panelCentre.add(b3);
-		panelCentre.add(b4);
-		panelCentre.add(b5);
-		panelCentre.add(b6);
-		panelCentre.add(b7);
-		panelCentre.add(b8);
-		panelCentre.add(b9);
-		panelCentre.add(b10);
-		panelCentre.add(b11);
-		panelCentre.add(b12);
-		panelCentre.add(b13);
-		panelCentre.add(b14);
-		panelCentre.add(b15);
-		panelCentre.add(b16);
-		panelCentre.add(b17);
-		panelCentre.add(b18);
-		panelCentre.add(b19);
-		panelCentre.add(b20);
-		panelCentre.add(b21);
-		panelCentre.add(b22);
-		panelCentre.add(b23);
-		panelCentre.add(b24);
-		panelCentre.add(b25);
+		Contacts contacts = chargerContacts();
+		ArrayList<Object> liste = new ArrayList<Object>();
+		Object[] ret = this.chargerContacts().cles().toArray();
+		for(int i=0; i<ret.length; i++)
+			liste.add(ret[i]);	
+		
+		for(int i=0; i<liste.size(); i++) {
+			JCheckBox b1 = new JCheckBox((String)liste.get(i));
+			panelCentre.add(b1);
+		}
 		
 		JPanel panelBas = new JPanel(new GridLayout(1, 2));
 		retour = new JButton("Retour");
@@ -124,6 +85,30 @@ public class MailSupprView {
 		
 		mainPanel.add(defilementContact, BorderLayout.CENTER);
 		mainPanel.add(panelBas, BorderLayout.SOUTH);
+	}
+	
+	/**
+	* Charge les contactsFile.
+	* @return Renvoie la liste des contacts si une liste est remplie,
+	* sinon une nouvelle liste est fabriquée avec un message d'avertissement.
+	*/
+	private Contacts chargerContacts() {
+		Contacts retour = null;
+		try {
+			retour = (Contacts) myDB.charger( contactsFile ) ;
+		}
+		catch(IllegalArgumentException e) {
+			System.err.println(e.getMessage());
+		}
+		catch(FileNotFoundException e) {
+			Contacts contacts = new Contacts();
+			try {
+				contacts.ajouter( "Pas de contacts" , "enregistrés." , "no Mail" ) ;
+			} catch ( IllegalArgumentException err ) { System.err.println( err.getMessage() ) ; }
+			contacts.sauver();
+			return ( contacts ) ;
+		}
+		return retour;
 	}
 	
 	/**
