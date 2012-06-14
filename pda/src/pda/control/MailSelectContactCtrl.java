@@ -40,10 +40,11 @@ public class MailSelectContactCtrl implements ActionListener, StaticRefs {
 				String config = "data/xml/pdaServer/configClient.xml";
 				ConfigConst.readConfigFile(config, false);
 				Login user = (Login) myDB.charger(loginFile);
-				
+				Contacts contacts = (Contacts) myDB.charger(contactsFile);
 				for(int i=0; i<listeCheckBox.length; i++) {
 					if(listeCheckBox[i].isSelected()) {
-						MailType mail = new MailType(listeCheckBox[i].getText(), this.view.getObjet(), this.view.getMessage(), user.getUser(), MailType.ENVOYE);
+						String email = contacts.consulter(listeCheckBox[i].getText()).getEmail();
+						MailType mail = new MailType(email, this.view.getObjet(), this.view.getMessage(), user.getUser(), MailType.ENVOYE);
 						MailClient sender = new MailClient(user.getUser(), user.getPasswd());
 						sender.send(mail);
 						System.out.println("Le mail a été envoyé à " + user.getUser() + ".");
