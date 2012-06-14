@@ -76,8 +76,57 @@
 	  </java>
 	</target>
 
+	<!-- Lancement du serveur -->
+	<target name="runServer" description="lanch the server on localhost">
+	  <echo message="Lancement du serveur en tâche de fond... ps/kill pour l'arrêter." />
+	  <java jar="server/pdaServer.jar" fork="true" dir="server" spawn="true" >
+	    <jvmarg value="-Djava.net.preferIPv4Stack=true"/>
+	  </java>
+	  <echo message="[+] Le serveur est lancé, pour plus d'infos cf logs." />
+	</target>
+
+	<!-- Exécution de tous les tests -->
+	<target name="runTests" depends="runTestClient,runTestDB,runTestFicheContact,runTestMail,runTestLogin,runTestMailType,runTestContacts,runTestSync" description="executes all the tests" >
+	  <echo message="[+] Tous les tests sont achevés." />
+	</target>
+
+	<!-- Exécution du test de MailType -->
+	<target name="runTestMailType" depends="compileAll" description="executes the test for the class MailType" >
+	  <java classname="pda.datas.TestMailType" fork="true" dir="${work}" />
+	</target>
+
+	<!-- Exécution du test de Contacts -->
+	<target name="runTestContacts" depends="compileAll" description="executes the test for the class Contacts" >
+	  <java classname="pda.datas.TestContacts" fork="true" dir="${work}" />
+	</target>
+
+	<!-- Exécution du test de Login -->
+	<target name="runTestLogin" depends="compileAll" description="executes the test for the class Login" >
+	  <java classname="pda.datas.TestLogin" fork="true" dir="${work}" />
+	</target>
+
+	<!-- Exécution du test de Mail -->
+	<target name="runTestMail" depends="compileAll" description="executes the test for the class Mail" >
+	  <java classname="pda.datas.TestMail" fork="true" dir="${work}" />
+	</target>
+
+	<!-- Exécution du test de FicheContact -->
+	<target name="runTestFicheContact" depends="compileAll" description="executes the test for the class FicheContact" >
+	  <java classname="pda.datas.TestFicheContact" fork="true" dir="${work}" />
+	</target>
+
+	<!-- Exécution du test de DB -->
+	<target name="runTestDB" depends="compileAll" description="executes the test for the class DB" >
+	  <java classname="pda.datas.TestDB" fork="true" dir="${work}" />
+	</target>
+
+	<!-- Exécution du test de Sync -->
+	<target name="runTestSync" depends="compileAll,runServer" description="executes the test for the class DB" >
+	  <java classname="pda.datas.TestSync" fork="true" dir="${work}" />
+	</target>
+
 	<!-- Exécution du test du client de messagerie -->
-	<target name="runTestClient" depends="compilePaqPdaNetwork" description="executes the test of client messenger" >
+	<target name="runTestClient" depends="compilePaqPdaNetwork , runServer" description="executes the test of client messenger" >
 	  <java classname="pdaNetwork.test.service.TestMailClient" fork="true" dir="${work}">
 	    <jvmarg value="-Djava.net.preferIPv4Stack=true"/>
 	    <classpath refid="myCLASSPATH"/>

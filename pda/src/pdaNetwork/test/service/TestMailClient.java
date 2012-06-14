@@ -43,10 +43,10 @@ public class TestMailClient {
 	    }
 
 	    // destruction éventuelle de tous les messages de user2 sur le serveur
-	    /*System.out.println ("destruction de tous les messages de user2");
+	    System.out.println ("destruction de tous les messages de user2");
 	    for (String id : receiver.getHeaders ()) {
 		receiver.delete (id);
-	    }*/
+	    }
 	    receiver.close ();
 
 	} catch (ProtocolException e) {
