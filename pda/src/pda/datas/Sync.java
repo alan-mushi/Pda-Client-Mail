@@ -4,6 +4,7 @@ import pdaNetwork.client.service.MailClient ;
 import pdaNetwork.misc.MailContent ;
 import pdaNetwork.misc.ProtocolException ;
 import java.util.ArrayList ;
+import java.util.HashMap ;
 
 /**
  * Syncronise la liste des messages en local avec le serveur.
@@ -29,6 +30,7 @@ public class Sync implements StaticRefs {
 			this.myMail = MailObject ;
 			this.deleteOnServer() ;
 			this.getNewMails() ;
+			this.sendNewMails() ;
 			this.lastConnectionSucced = true ;
 		} catch ( ProtocolException e ) {
 			this.lastConnectionSucced = false ;
@@ -59,6 +61,22 @@ public class Sync implements StaticRefs {
 			this.myMail.add( id , email , MailType.RECU ) ;
 		}
 		receiver.close() ;
+	}
+
+	/**
+	 * Envoit les nouveaux mails stockés dans la HashMap toSend.
+	 */
+	private void sendNewMails() throws ProtocolException {
+		HashMap<String , MailType> toSend = myMail.getToSendMap() ;
+		if ( toSend != null && toSend.size() > 0 ) {
+			MailClient sender = new MailClient( this.user , this.passwd ) ;
+			Object[] ids = toSend.keySet().toArray() ;
+			for ( int i = 0 ; i < toSend.size() ; i++ ) {
+				sender.send( (MailContent) toSend.get( (String) ids[i] ) ) ;
+				this.myMail.changeTo( (String) ids[i] , MailType.ENVOYE ) ;
+			}
+			sender.close() ;
+		}
 	}
 
 	/**

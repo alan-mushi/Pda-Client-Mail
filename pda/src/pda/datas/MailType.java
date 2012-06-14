@@ -11,11 +11,11 @@ public class MailType extends MailContent implements java.io.Serializable , Stat
 	/** Le type du message. */
 	private String type;
 	private static final long serialVersionUID = 3L ;
-	public static final String RECU = "recu" , ENVOYE = "envoye" , BROUILLON = "brouillon" , LU = "lu" , SUPPR = "supprime" ;
+	public static final String RECU = "recu" , ENVOYE = "envoye" , BROUILLON = "brouillon" , LU = "lu" , SUPPR = "supprime" , TOSEND = "toSend" ;
 	
 	/**
 	 * Surcouche pour le constructeur de MailContent. Le type est vérifié, il doit
-	 * correspondre aux constantes <code>RECU, ENVOYE, BROUILLON, LU ou SUPPR</code>.
+	 * correspondre aux constantes <code>RECU, ENVOYE, BROUILLON, LU, SUPPR ou TOSEND</code>.
 	 * @see pdaNetwork.misc.MailContent#MailContent(java.lang.String recipient, java.lang.String object, java.lang.String text, java.lang.String expeditor, java.lang.String date)
 	 * @throws IllegalArgumentException Si le paramètre tmpType n'est pas valide.
 	 */
@@ -61,7 +61,7 @@ public class MailType extends MailContent implements java.io.Serializable , Stat
 		if ( tmpType == null || tmpType.isEmpty() ) {
 			throw new IllegalArgumentException( "Le type du message n'est pas défini." ) ;
 		}
-		else if ( tmpType.equals( RECU ) || tmpType.equals( ENVOYE ) || tmpType.equals( BROUILLON ) || tmpType.equals( LU ) || tmpType.equals( SUPPR ) ) {
+		else if ( tmpType.equals( RECU ) || tmpType.equals( ENVOYE ) || tmpType.equals( BROUILLON ) || tmpType.equals( LU ) || tmpType.equals( SUPPR ) || tmpType.equals( TOSEND ) ) {
 			res = true ; 
 		}
 		else { 

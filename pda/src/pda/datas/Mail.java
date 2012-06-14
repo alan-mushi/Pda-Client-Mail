@@ -13,7 +13,7 @@ public class Mail implements StaticRefs , java.io.Serializable {
 	
 	private static final long serialVersionUID = 4L ;
 	/** HashMaps correspondantes aux différents types. */
-	private HashMap<String , MailType> recus , envoyes , brouillons , lus ;
+	private HashMap<String , MailType> recus , envoyes , brouillons , lus , toSend ;
 	/**
 	 * Pour les mails supprimés on ne garde que les id pour les supprimer sur le serveur.
 	 */
@@ -27,6 +27,7 @@ public class Mail implements StaticRefs , java.io.Serializable {
 		this.envoyes = new HashMap<String , MailType>(0) ;
 		this.brouillons = new HashMap<String , MailType>(0) ;
 		this.lus = new HashMap<String , MailType>(0) ;
+		this.toSend = new HashMap<String , MailType>(0) ;
 		this.supprimes = new ArrayList<String>(0) ;
 	}
 
@@ -40,6 +41,12 @@ public class Mail implements StaticRefs , java.io.Serializable {
 			throw new IllegalArgumentException( "La map correspondante n'a pas été trouvée." ) ;
 		}
 		dest.put( id , new MailType( email , type ) ) ;
+	}
+	/**
+	 * Ajoute un mail à la liste des messages a envoyer à la prochaine connection.
+	 */
+	public void addToSend( MailType email ) {
+		toSend.put( this.getNextMaxKey( MailType.TOSEND ) , email ) ;
 	}
 
 	/**
@@ -57,6 +64,9 @@ public class Mail implements StaticRefs , java.io.Serializable {
 		}
 		MailType tmpMail = origin.remove( id ) ;
 		tmpMail.setType( type ) ;
+		if ( dest.containsKey( id ) ) {
+			id = String.valueOf( this.getNextMaxKey( type ) ) ;
+		}
 		dest.put( id , tmpMail ) ;
 	}
 
@@ -85,6 +95,7 @@ public class Mail implements StaticRefs , java.io.Serializable {
 		else if ( type.equals( MailType.LU ) ) { res = this.lus ; }
 		else if ( type.equals( MailType.ENVOYE ) ) { res = this.envoyes ; }
 		else if ( type.equals( MailType.BROUILLON ) ) { res = this.brouillons ; }
+		else if ( type.equals( MailType.TOSEND ) ) { res = this.toSend ; }
 		else { res = null ; }
 		return ( res ) ;
 	}
@@ -128,6 +139,7 @@ public class Mail implements StaticRefs , java.io.Serializable {
 			else if ( this.lus.containsKey( id ) ) { res = this.lus ; }
 			else if ( this.envoyes.containsKey( id ) ) { res = this.envoyes ; }
 			else if ( this.brouillons.containsKey( id ) ) { res = this.brouillons ; }
+			else if ( this.toSend.containsKey( id ) ) { res = this.toSend ; }
 			else { res = null ; }
 		}
 		return ( res ) ;
@@ -159,6 +171,13 @@ public class Mail implements StaticRefs , java.io.Serializable {
 	 */
 	public HashMap<String , MailType> getBrouillonsMap() {
 		return ( this.brouillons ) ;
+	}
+
+	/**
+	 * Retourne la HashMap contenant les mails avec le type toSend.
+	 */
+	public HashMap<String , MailType> getToSendMap() {
+		return ( this.toSend ) ;
 	}
 
 	/**
