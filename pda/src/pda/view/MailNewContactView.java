@@ -97,7 +97,10 @@ public class MailNewContactView {
 		panelCentre.add(email);
 		
 		retour = new JButton("Retour");
-		creer = new JButton("Créer");
+		if(this.contact != null)
+			creer = new JButton("Editer");
+		else
+			creer = new JButton("Créer");
 		
 		JPanel panelBas = new JPanel(new GridLayout(1, 2));
 		panelBas.add(retour);
@@ -162,5 +165,13 @@ public class MailNewContactView {
 	*/
 	public JTextField getEmail() {
 		return this.email;
+	}
+	
+	/**
+	* Permet de récupérer la fiche contact à modifier.
+	* @return la fiche du contact à modifier.
+	*/
+	public FicheContact getFicheContact() {
+		return this.contact;
 	}
 }

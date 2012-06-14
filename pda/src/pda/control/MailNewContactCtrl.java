@@ -31,11 +31,12 @@ public class MailNewContactCtrl implements ActionListener, StaticRefs {
 		if(src == this.view.getBoutonRetour()) {
 			new MailListeContactView(view.getMainPanel());
 		}
-		else if(src == this.view.getBoutonCreer()) {
+		else if(src == this.view.getBoutonCreer() && this.view.getFicheContact() == null) {
 			try {
 				Contacts contacts = (Contacts) myDB.charger(contactsFile);
 				contacts.ajouter(this.view.getNom().getText(), this.view.getPrenom().getText(), this.view.getEmail().getText());
 				contacts.sauver();
+				new MailListeContactView(view.getMainPanel());
 			}
 			catch(IllegalArgumentException erreur) {
 				System.err.println(erreur.getMessage());
@@ -43,7 +44,22 @@ public class MailNewContactCtrl implements ActionListener, StaticRefs {
 			catch(FileNotFoundException erreur) {
 				System.err.println(erreur.getMessage());
 			}
-			new MailListeContactView(view.getMainPanel());
+		}
+		else if(src == this.view.getBoutonCreer() && this.view.getFicheContact() != null) {
+			try {
+				Contacts contacts = (Contacts) myDB.charger(contactsFile);
+				FicheContact leContact = new FicheContact(this.view.getNom().getText(), this.view.getPrenom().getText(), this.view.getEmail().getText());
+				String cle = this.view.getFicheContact().getNom() + " " + this.view.getFicheContact().getPrenom();
+				contacts.modifier(cle, leContact);
+				contacts.sauver();
+				new MailListeContactView(view.getMainPanel());
+			}
+			catch(IllegalArgumentException erreur) {
+				System.err.println(erreur.getMessage());
+			}
+			catch(FileNotFoundException erreur) {
+				System.err.println(erreur.getMessage());
+			}
 		}
 	}
 }
