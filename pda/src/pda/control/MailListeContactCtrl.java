@@ -4,11 +4,12 @@ import pda.view.*;
 import pda.datas.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.FileNotFoundException;
 
 /**
 * Classe gérant les évènements pour la liste des contacts
 */
-public class MailListeContactCtrl implements ActionListener {
+public class MailListeContactCtrl implements ActionListener, StaticRefs {
 	
 	/** Une référence vers la vue */
 	private MailListeContactView view;
@@ -38,7 +39,19 @@ public class MailListeContactCtrl implements ActionListener {
 			new MailNewContactView(this.view.getMainPanel());
 		}
 		else if(src == this.view.getBoutonModifier()) {
-			new MailNewContactView(this.view.getMainPanel(), new FicheContact("Claudic", "Guillaume", "guillaume.claudic@gmail.com"));
+			try {
+				String cle = (String) this.view.getListeGUI().getSelectedValue();
+				Contacts contacts = (Contacts) myDB.charger(contactsFile);
+				if(contacts.existe(cle)) {
+					new MailNewContactView(this.view.getMainPanel(), contacts.consulter(cle));	
+				}
+			}
+			catch(IllegalArgumentException erreur) {
+				System.err.println(erreur.getMessage());
+			}
+			catch(FileNotFoundException erreur) {
+				System.err.println(erreur.getMessage());
+			}
 		}
 	}
 }
