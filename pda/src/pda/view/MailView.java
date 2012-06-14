@@ -62,6 +62,7 @@ public class MailView {
 		valider = new JButton("Valider");
 		
 		labErreur = new JLabel();
+		labErreur.setForeground(Color.RED);
 		
 		valider.setHorizontalAlignment(SwingConstants.CENTER);
 		
