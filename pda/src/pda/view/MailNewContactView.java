@@ -139,4 +139,28 @@ public class MailNewContactView {
 	public JButton getBoutonCreer() {
 		return this.creer;
 	}
+	
+	/**
+	* Permet de récupérer le champs nom.
+	* @return Le nom.
+	*/
+	public JTextField getNom() {
+		return this.nom;
+	}
+	
+	/**
+	* Permet de récupérer le champs prénom.
+	* @return Le prénom.
+	*/
+	public JTextField getPrenom() {
+		return this.prenom;
+	}
+	
+	/**
+	* Permet de récupérer le champs email.
+	* @return L'email.
+	*/
+	public JTextField getEmail() {
+		return this.email;
+	}
 }
