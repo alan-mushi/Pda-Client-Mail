@@ -4,11 +4,12 @@ import pda.view.*;
 import pda.datas.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.FileNotFoundException;
 
 /**
 * Classe gérant les actions pour l'interface de suppression de mails et de contacts
 */
-public class MailSupprCtrl implements ActionListener {
+public class MailSupprCtrl implements ActionListener, StaticRefs {
 	
 	/** Une référence vers la vue */
 	private MailSupprView view;
@@ -40,6 +41,25 @@ public class MailSupprCtrl implements ActionListener {
 		}
 		else if(src == this.view.getBoutonRetour() && this.view.getMode() == MailSupprView.MODE_SUPPRESSION_CONTACT) {
 			new MailListeContactView(this.view.getMainPanel());
+		}
+		else if(src == this.view.getBoutonSupprimer() && this.view.getMode() == MailSupprView.MODE_SUPPRESSION_CONTACT) {
+			try {
+				JCheckBox[] listeCheckBox = this.view.getCheckBox();
+				Contacts contacts = (Contacts) myDB.charger(contactsFile);
+				for(int i=0; i < listeCheckBox.length; i++) {
+					if(listeCheckBox[i].isSelected()) {
+						contacts.supprimer(listeCheckBox[i].getText());
+					}
+				}
+				contacts.sauver();
+				new MailListeContactView(this.view.getMainPanel());
+			}
+			catch(IllegalArgumentException erreur) {
+				System.err.println(erreur.getMessage());
+			}
+			catch(FileNotFoundException erreur) {
+				System.err.println(erreur.getMessage());
+			}
 		}
 	}
 }

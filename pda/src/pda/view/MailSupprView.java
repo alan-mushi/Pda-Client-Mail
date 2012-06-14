@@ -31,6 +31,9 @@ public class MailSupprView implements StaticRefs {
 	*/
 	private int theLastMode;
 	
+	/** Les CheckBox sous forme de tableau pour pouvoir les identifier. */
+	private JCheckBox[] listeCheckBox;
+	
 	/** Permet de spécifier le mode de suppression de mails */
 	public static final int MODE_SUPPRESSION_MAIL = 1;
 	
@@ -65,15 +68,20 @@ public class MailSupprView implements StaticRefs {
 		
 		JScrollPane defilementContact = new JScrollPane(panelCentre);
 		
-		Contacts contacts = chargerContacts();
-		ArrayList<Object> liste = new ArrayList<Object>();
-		Object[] ret = this.chargerContacts().cles().toArray();
-		for(int i=0; i<ret.length; i++)
-			liste.add(ret[i]);	
+		if(mode == MODE_SUPPRESSION_CONTACT) {
+			Contacts contacts = chargerContacts();
+			ArrayList<Object> liste = new ArrayList<Object>();
+			Object[] ret = this.chargerContacts().cles().toArray();
+			int i = 0;
+			for(i=0; i<ret.length; i++)
+				liste.add(ret[i]);
+				
+			listeCheckBox = new JCheckBox[i];
 		
-		for(int i=0; i<liste.size(); i++) {
-			JCheckBox b1 = new JCheckBox((String)liste.get(i));
-			panelCentre.add(b1);
+			for(int j=0; j<liste.size(); j++) {
+				listeCheckBox[j] = new JCheckBox((String)liste.get(j));
+				panelCentre.add(listeCheckBox[j]);
+			}
 		}
 		
 		JPanel panelBas = new JPanel(new GridLayout(1, 2));
@@ -117,6 +125,7 @@ public class MailSupprView implements StaticRefs {
 	private void attacherReactions() {
 		MailSupprCtrl supprCtrl = new MailSupprCtrl(this);
 		retour.addActionListener(supprCtrl);
+		supprimer.addActionListener(supprCtrl);
 	}
 	
 	/**
@@ -157,5 +166,13 @@ public class MailSupprView implements StaticRefs {
 	*/
 	public int getTheLastMode() {
 		return this.theLastMode;
+	}
+	
+	/**
+	* Retourne la liste des JCheckBox.
+	* @return Un tableau de JCheckBox.
+	*/
+	public JCheckBox[] getCheckBox() {
+		return this.listeCheckBox;
 	}
 }
