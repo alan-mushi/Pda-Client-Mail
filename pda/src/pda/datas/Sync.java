@@ -22,9 +22,9 @@ public class Sync implements StaticRefs {
 	 * @param username Nom d'utilisateur pour le serveur.
 	 * @param password mot de passe pour le serveur.
 	 */
-	public Sync( Mail MailObject , String username , String password ) {
+	public Sync( Mail MailObject , Login myLog ) {
 		try {
-			this.user = username ;
+			this.user = myLog.getU
 			this.passwd = password ;
 			this.myMail = MailObject ;
 			this.deleteOnServer() ;

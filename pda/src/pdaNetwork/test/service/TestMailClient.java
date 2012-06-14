@@ -6,6 +6,7 @@ import java.util.Iterator;
 import pdaNetwork.misc.ConfigConst;
 import pdaNetwork.misc.MailContent;
 import pdaNetwork.misc.ProtocolException;
+import pdaNetwork.client.network.Md5 ;
 
 import pdaNetwork.client.service.MailClient;
 
@@ -24,13 +25,13 @@ public class TestMailClient {
 	    ConfigConst.readConfigFile (fileName, false);
 
 	    System.out.println ("Envoie de 2 messages de user1 à user2");
-	    MailClient sender = new MailClient ("user1", "mdp");
+	    MailClient sender = new MailClient ("user1", Md5.encode( "mdp" ) );
 	    sender.send (new MailContent ("user2", "Objet 1", "Le texte 1"));
 	    sender.send (new MailContent ("user2", "Objet 2", "Le texte 2"));
 	    sender.close ();
 
 	    System.out.println ("recuperation de tous les messages de user2");
-	    MailClient receiver = new MailClient ("user2", "mdp");
+	    MailClient receiver = new MailClient ("user2", Md5.encode( "mdp" ) );
 
 	    for (String id : receiver.getHeaders ()) {
 		MailContent email = receiver.receive (id);

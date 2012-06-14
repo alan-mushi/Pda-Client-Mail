@@ -1,10 +1,10 @@
-# Don't modify the lines above
-#
-# Userfile
-#
-# Format:
-#
-# user:MD5password: Real Name : email :service1, service2, ...
+#####################################################
+# Ce fichier a été modifier pour ne pas qu'un       #
+# utilisateur transmette en clair son mot de passe  #
+# sur le réseau.                                    #
+# Le fichier original est : user.bck                #
+#####################################################
+# Format du md5 : md5( md5 (passwd) )
 
-user2:aa36dc6e81e2ac7ad03e12fedcb6a2c0:::mail,chat
-user1:aa36dc6e81e2ac7ad03e12fedcb6a2c0:::mail,chat
+user2:7101427ac886f90030b230c9132d961d:::mail,chat
+user1:7101427ac886f90030b230c9132d961d:::mail,chat
