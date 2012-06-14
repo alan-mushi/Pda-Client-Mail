@@ -90,6 +90,31 @@ public class Mail implements StaticRefs , java.io.Serializable {
 	}
 
 	/**
+	 * Retourne la clé la plus grande de la HashMap spécifiée par son type.
+	 */
+	private int getMaxKey( String type ) throws IllegalArgumentException {
+		HashMap<String , MailType> myMap = this.witchMap( type ) ;
+		if ( myMap != null ) {
+			Object[] tab = myMap.keySet().toArray() ;
+			if ( tab != null && tab.length > 0 ) {
+				java.util.Arrays.sort( tab ) ;
+				return ( Integer.parseInt((String) tab[tab.length-1]) ) ;
+			}
+		}
+		return ( 0 ) ;
+	}
+
+	/**
+	 * Retourne la clé qui <b>sera</b> la plus grande de la HashMap.
+	 * @see pda.datas.Mail#getMaxKey( java.lang.String type )
+	 */
+	public String getNextMaxKey( String type ) throws IllegalArgumentException {
+		int res = this.getMaxKey( type ) ;
+		res++ ;
+		return ( String.valueOf( res ) ) ;
+	}
+
+	/**
 	 * Recherche dans quelle HashMap est l'id.
 	 * @return La HashMap correspondante ou <code>null</code> si elle n'a pas été établie.
 	 */
