@@ -19,9 +19,13 @@ public class Sync implements StaticRefs {
 
 	/**
 	 * Ce constructeur effectue la synchronisation des messages.
+	 * @param username Nom d'utilisateur pour le serveur.
+	 * @param password mot de passe pour le serveur.
 	 */
-	public Sync( Mail MailObject ) {
+	public Sync( Mail MailObject , String username , String password ) {
 		try {
+			this.user = username ;
+			this.passwd = password ;
 			this.myMail = MailObject ;
 			this.deleteOnServer() ;
 			this.getNewMails() ;

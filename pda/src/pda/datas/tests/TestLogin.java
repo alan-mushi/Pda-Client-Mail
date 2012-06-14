@@ -60,6 +60,11 @@ public class TestLogin {
 		}
 		else { System.out.println( "FAIL" ) ; }
 
+		String hash = monLogin.getPasswd() ;
+		System.out.print( "\n[*] Test de l'accesseur getPasswd : passwd (md5 hash) = " + hash + " ... " ) ;
+		if ( hash.equals( Md5.encode( "passwd" ) ) ) { System.out.println( "OK" ) ; }
+		else { System.out.println( "FAIL : hash différent de ce qu'il devrait..." ) ; }
+
 		System.out.println( "\n---------------------------------" ) ;
 		System.out.println( "	Test de modification du nom d'utilisateur." ) ;
 		System.out.println( "\n[*] Test basé sur une erreur (utilisateur null) ... " ) ;

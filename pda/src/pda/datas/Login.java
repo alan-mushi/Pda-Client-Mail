@@ -142,4 +142,15 @@ public class Login implements StaticRefs, java.io.Serializable {
 		return ( res ) ;
 	}
 
+	/**
+	 * Retourne le mot de passe en md5.
+	 */
+	public String getPasswd() {
+		String res ;
+		if ( this.loggedIn ) {
+			res = this.passwd ;
+		}
+		else { res = null ; }
+		return ( res ) ;
+	}
 }
