@@ -74,16 +74,18 @@ public class MailListeContactView implements StaticRefs {
 		Contacts retour = null;
 		try {
 			retour = (Contacts) myDB.charger( contactsFile ) ;
+			if(retour.taille() <= 0)
+				retour.ajouter( "Pas de contacts" , "enregistrés." , "no Mail" ) ;
 		}
 		catch(IllegalArgumentException e) {
 			System.err.println(e.getMessage());
 		}
 		catch(FileNotFoundException e) {
 			Contacts contacts = new Contacts();
+			contacts.sauver();
 			try {
 				contacts.ajouter( "Pas de contacts" , "enregistrés." , "no Mail" ) ;
 			} catch ( IllegalArgumentException err ) { System.err.println( err.getMessage() ) ; }
-			contacts.sauver();
 			return ( contacts ) ;
 		}
 		return retour;

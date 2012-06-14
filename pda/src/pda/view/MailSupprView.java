@@ -70,6 +70,10 @@ public class MailSupprView implements StaticRefs {
 		
 		if(mode == MODE_SUPPRESSION_CONTACT) {
 			Contacts contacts = chargerContacts();
+			if(contacts.taille() <= 0) {
+				JLabel RAS = new JLabel("Aucun contacts a supprimer.");
+				panelCentre.add(RAS);
+			}
 			ArrayList<Object> liste = new ArrayList<Object>();
 			Object[] ret = this.chargerContacts().cles().toArray();
 			int i = 0;
