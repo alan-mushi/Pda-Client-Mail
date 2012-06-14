@@ -4,17 +4,22 @@ import pda.control.*;
 import pda.datas.*;
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.util.*;
 
 /**
 * Classe permettant de sélectionner des contacts avant d'envoyer un mail.
 */
-public class MailSelectContactView {
+public class MailSelectContactView implements StaticRefs {
 
 	/** Le panel principal de l'application */
 	private JPanel mainPanel;
 	
 	/** Boutons de navigation */
 	private JButton retour, envoyer;
+	
+	/** Liste des CheckBox pour pouvoir facilement les identifier */
+	private JCheckBox[] listeCheckBox;
 	
 	/**
 	* Constructeur
@@ -34,52 +39,30 @@ public class MailSelectContactView {
 	private void initialiserGui() {
 		mainPanel.setLayout(new BorderLayout());
 		
-		JCheckBox contact1 = new JCheckBox("Thibault Guittet");
-		JCheckBox contact2 = new JCheckBox("Guillaume Claudic");
-		JCheckBox contact3 = new JCheckBox("Guillaume Claudic");
-		JCheckBox contact4 = new JCheckBox("Guillaume Claudic");
-		JCheckBox contact5 = new JCheckBox("Guillaume Claudic");
-		JCheckBox contact6 = new JCheckBox("Guillaume Claudic");
-		JCheckBox contact7 = new JCheckBox("Guillaume Claudic");
-		JCheckBox contact8 = new JCheckBox("Guillaume Claudic");
-		JCheckBox contact9 = new JCheckBox("Guillaume Claudic");
-		JCheckBox contact10 = new JCheckBox("Guillaume Claudic");
-		JCheckBox contact11 = new JCheckBox("Guillaume Claudic");
-		JCheckBox contact12 = new JCheckBox("Guillaume Claudic");
-		JCheckBox contact13 = new JCheckBox("Thibault Guittet");
-		JCheckBox contact14 = new JCheckBox("Thibault Guittet");
-		JCheckBox contact15 = new JCheckBox("Thibault Guittet");
-		JCheckBox contact16 = new JCheckBox("Thibault Guittet");
-		JCheckBox contact17 = new JCheckBox("Thibault Guittet");
-		JCheckBox contact18 = new JCheckBox("Thibault Guittet");
-		JCheckBox contact19 = new JCheckBox("Thibault Guittet");
-		JCheckBox contact20 = new JCheckBox("Thibault Guittet");
-		
 		JPanel panelCentre = new JPanel();
 		BoxLayout layoutCentre = new BoxLayout(panelCentre, BoxLayout.Y_AXIS);
 		panelCentre.setLayout(layoutCentre);
 		
 		JScrollPane defilementContact = new JScrollPane(panelCentre);
-		panelCentre.add(contact1);
-		panelCentre.add(contact2);
-		panelCentre.add(contact3);
-		panelCentre.add(contact4);
-		panelCentre.add(contact5);
-		panelCentre.add(contact6);
-		panelCentre.add(contact7);
-		panelCentre.add(contact8);
-		panelCentre.add(contact9);
-		panelCentre.add(contact10);
-		panelCentre.add(contact11);
-		panelCentre.add(contact12);
-		panelCentre.add(contact13);
-		panelCentre.add(contact14);
-		panelCentre.add(contact15);
-		panelCentre.add(contact16);
-		panelCentre.add(contact17);
-		panelCentre.add(contact18);
-		panelCentre.add(contact19);
-		panelCentre.add(contact20);
+		
+		Contacts contacts = chargerContacts();
+		if(contacts.taille() <= 0) {
+			JLabel RAS = new JLabel("<html>Aucun contacts a supprimer.<br />Veuillez en créer avant d'envoyer un mail.<html>");
+			panelCentre.add(RAS);
+		}
+		
+		ArrayList<Object> liste = new ArrayList<Object>();
+		Object[] ret = this.chargerContacts().cles().toArray();
+		int i = 0;
+		for(i=0; i<ret.length; i++)
+			liste.add(ret[i]);
+			
+		listeCheckBox = new JCheckBox[i];
+	
+		for(int j=0; j<liste.size(); j++) {
+			listeCheckBox[j] = new JCheckBox((String)liste.get(j));
+			panelCentre.add(listeCheckBox[j]);
+		}
 		
 		mainPanel.add(defilementContact, BorderLayout.CENTER);
 		
@@ -91,6 +74,30 @@ public class MailSelectContactView {
 		panelBas.add(envoyer);
 		
 		mainPanel.add(panelBas, BorderLayout.SOUTH);
+	}
+	
+	/**
+	* Charge les contactsFile.
+	* @return Renvoie la liste des contacts si une liste est remplie,
+	* sinon une nouvelle liste est fabriquée avec un message d'avertissement.
+	*/
+	private Contacts chargerContacts() {
+		Contacts retour = null;
+		try {
+			retour = (Contacts) myDB.charger( contactsFile ) ;
+		}
+		catch(IllegalArgumentException e) {
+			System.err.println(e.getMessage());
+		}
+		catch(FileNotFoundException e) {
+			Contacts contacts = new Contacts();
+			try {
+				contacts.ajouter( "Pas de contacts" , "enregistrés." , "no Mail" ) ;
+			} catch ( IllegalArgumentException err ) { System.err.println( err.getMessage() ) ; }
+			contacts.sauver();
+			return ( contacts ) ;
+		}
+		return retour;
 	}
 	
 	/**
@@ -123,5 +130,13 @@ public class MailSelectContactView {
 	*/
 	public JButton getBoutonEnvoyer() {
 		return this.envoyer;
+	}
+	
+	/**
+	* Retourne la liste des JCheckBox.
+	* @return Un tableau de JCheckBox.
+	*/
+	public JCheckBox[] getCheckBox() {
+		return this.listeCheckBox;
 	}
 }
