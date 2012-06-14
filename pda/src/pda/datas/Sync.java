@@ -24,8 +24,8 @@ public class Sync implements StaticRefs {
 	 */
 	public Sync( Mail MailObject , Login myLog ) {
 		try {
-			this.user = myLog.getU
-			this.passwd = password ;
+			this.user = myLog.getUser() ;
+			this.passwd = myLog.getPasswd() ;
 			this.myMail = MailObject ;
 			this.deleteOnServer() ;
 			this.getNewMails() ;
