@@ -30,5 +30,8 @@ public class MailSelectContactCtrl implements ActionListener {
 		if(src == this.view.getBoutonRetour()) {
 			new MailCreerView(view.getMainPanel());
 		}
+		else if(src == this.view.getBoutonEnvoyer()) {
+			
+		}
 	}
 }

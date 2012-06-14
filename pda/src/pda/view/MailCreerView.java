@@ -14,10 +14,10 @@ public class MailCreerView {
 	private JPanel mainPanel;
 	
 	/** Label de l'email */
-	private JLabel labTitre, labObjet, labMessage;
+	private JLabel labObjet, labMessage;
 	
 	/** Champs de textes pour l'email */
-	private JTextField titre, objet;
+	private JTextField objet;
 	
 	/** Champs de texte multiligne */
 	private JTextArea message;
@@ -41,12 +41,10 @@ public class MailCreerView {
 	* Méthode qui initialise l'interface graphique.
 	*/
 	private void initialiserGui() {
-		labTitre = new JLabel("Titre :");
 		labObjet = new JLabel("Objet :");
 		labMessage = new JLabel("Message :");
-		titre = new JTextField();
-		objet = new JTextField();
-		message = new JTextArea();
+		objet = new JTextField(20);
+		message = new JTextArea(15, 20);
 		JScrollPane defilementMessage = new JScrollPane(message);
 		sauver = new JButton("Sauver");
 		selectContact = new JButton("<html>Select.<br />contacts</html>");
@@ -54,17 +52,23 @@ public class MailCreerView {
 		
 		mainPanel.setLayout(new BorderLayout());
 		
-		JPanel panelCentre = new JPanel(new GridLayout(2, 1));
-		JPanel panelChamps = new JPanel(new GridLayout(4, 1));
-		JPanel panelMessage = new JPanel(new GridLayout(2, 1));
-		panelChamps.add(labTitre);
-		panelChamps.add(titre);
-		panelChamps.add(labObjet);
-		panelChamps.add(objet);
-		panelMessage.add(labMessage);
-		panelMessage.add(defilementMessage);
-		panelCentre.add(panelChamps);
-		panelCentre.add(panelMessage);
+		SpringLayout formulaire = new SpringLayout();
+		JPanel panelCentre = new JPanel(formulaire);
+		
+		formulaire.putConstraint(SpringLayout.WEST, labObjet, 10, SpringLayout.WEST, panelCentre);
+		formulaire.putConstraint(SpringLayout.NORTH, labObjet, 10, SpringLayout.WEST, panelCentre);
+		formulaire.putConstraint(SpringLayout.WEST, labMessage, 10, SpringLayout.WEST, panelCentre);
+		formulaire.putConstraint(SpringLayout.NORTH, labMessage, 50, SpringLayout.WEST, panelCentre);
+		
+		formulaire.putConstraint(SpringLayout.WEST, objet, 33, SpringLayout.EAST, labObjet);
+		formulaire.putConstraint(SpringLayout.NORTH, objet, 10, SpringLayout.NORTH, panelCentre);
+		formulaire.putConstraint(SpringLayout.WEST, defilementMessage, 10, SpringLayout.EAST, labMessage);
+		formulaire.putConstraint(SpringLayout.NORTH, defilementMessage, 50, SpringLayout.NORTH, panelCentre);
+
+		panelCentre.add(labObjet);
+		panelCentre.add(objet);
+		panelCentre.add(labMessage);
+		panelCentre.add(defilementMessage);
 		
 		JPanel panelBas = new JPanel(new GridLayout(1, 3));
 		panelBas.add(retour);
@@ -106,5 +110,21 @@ public class MailCreerView {
 	*/
 	public JPanel getMainPanel() {
 		return this.mainPanel;
+	}
+	
+	/**
+	* Retourne l'objet du message.
+	* @return L'objet du message.
+	*/
+	public JTextField getObjet() {
+		return this.objet;
+	}
+	
+	/**
+	* Retourne le message.
+	* @return Le message.
+	*/
+	public JTextArea getMessage() {
+		return this.message;
 	}
 }

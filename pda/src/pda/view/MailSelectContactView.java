@@ -106,6 +106,7 @@ public class MailSelectContactView implements StaticRefs {
 	private void attacherReactions() {
 		MailSelectContactCtrl select = new MailSelectContactCtrl(this);
 		retour.addActionListener(select);
+		envoyer.addActionListener(select);
 	}
 	
 	/**

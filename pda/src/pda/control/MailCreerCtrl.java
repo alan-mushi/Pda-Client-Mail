@@ -31,7 +31,7 @@ public class MailCreerCtrl implements ActionListener {
 			new MailListeView(view.getMainPanel(), MailListeView.MODE_BOITE_RECEPTION);
 		}
 		else if(src == this.view.getBoutonSelectContact()) {
-			new MailSelectContactView(view.getMainPanel());
+			//new MailSelectContactView(view.getMainPanel(), this.view.getTitre(), this.view this.view.getMessage());
 		}
 	}
 }
