@@ -8,7 +8,7 @@ import java.awt.event.*;
 /**
 * Classe controleur pour l'identification à la messagerie.
 */
-public class MailCtrl implements IApplication, ActionListener , StaticRefs {
+public class MailCtrl implements IApplication, ActionListener, StaticRefs {
 
 	/* Attributs */
 	/** Le nom de l'application */
