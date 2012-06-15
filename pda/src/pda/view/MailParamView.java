@@ -86,7 +86,6 @@ public class MailParamView implements ActionListener , StaticRefs {
 		portProxy = new JTextField( ConfigConst.getProxyPort() );
 		portProxy.setColumns(15);
 
-
 		proxyUsed = new JCheckBox( "Utiliser un proxy ?" ) ;
 		proxyUsed.setSelected( false ) ;
 
