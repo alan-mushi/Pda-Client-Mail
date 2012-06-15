@@ -92,37 +92,51 @@
 
 	<!-- Exécution du test de MailType -->
 	<target name="runTestMailType" depends="compileAll" description="executes the test for the class MailType" >
-	  <java classname="pda.datas.TestMailType" fork="true" dir="${work}" />
+	  <java classname="pda.datas.TestMailType" fork="true" dir="${work}" >
+	    <classpath refid="myCLASSPATH"/>
+	  </java>
 	</target>
 
 	<!-- Exécution du test de Contacts -->
 	<target name="runTestContacts" depends="compileAll" description="executes the test for the class Contacts" >
-	  <java classname="pda.datas.TestContacts" fork="true" dir="${work}" />
+	  <java classname="pda.datas.TestContacts" fork="true" dir="${work}" >
+	    <classpath refid="myCLASSPATH"/>
+	  </java>
 	</target>
 
 	<!-- Exécution du test de Login -->
 	<target name="runTestLogin" depends="compileAll" description="executes the test for the class Login" >
-	  <java classname="pda.datas.TestLogin" fork="true" dir="${work}" />
+	  <java classname="pda.datas.TestLogin" fork="true" dir="${work}" >
+	    <classpath refid="myCLASSPATH"/>
+	  </java>
 	</target>
 
 	<!-- Exécution du test de Mail -->
 	<target name="runTestMail" depends="compileAll" description="executes the test for the class Mail" >
-	  <java classname="pda.datas.TestMail" fork="true" dir="${work}" />
+	  <java classname="pda.datas.TestMail" fork="true" dir="${work}" >
+	    <classpath refid="myCLASSPATH"/>
+	  </java>
 	</target>
 
 	<!-- Exécution du test de FicheContact -->
 	<target name="runTestFicheContact" depends="compileAll" description="executes the test for the class FicheContact" >
-	  <java classname="pda.datas.TestFicheContact" fork="true" dir="${work}" />
+	  <java classname="pda.datas.TestFicheContact" fork="true" dir="${work}" >
+	    <classpath refid="myCLASSPATH"/>
+	  </java>
 	</target>
 
 	<!-- Exécution du test de DB -->
 	<target name="runTestDB" depends="compileAll" description="executes the test for the class DB" >
-	  <java classname="pda.datas.TestDB" fork="true" dir="${work}" />
+	  <java classname="pda.datas.TestDB" fork="true" dir="${work}" >
+	    <classpath refid="myCLASSPATH"/>
+	  </java>
 	</target>
 
 	<!-- Exécution du test de Sync -->
 	<target name="runTestSync" depends="compileAll,runServer" description="executes the test for the class DB" >
-	  <java classname="pda.datas.TestSync" fork="true" dir="${work}" />
+	  <java classname="pda.datas.TestSync" fork="true" dir="${work}" >
+	    <classpath refid="myCLASSPATH"/>
+	  </java>
 	</target>
 
 	<!-- Exécution du test du client de messagerie -->
