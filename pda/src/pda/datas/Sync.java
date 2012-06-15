@@ -20,8 +20,8 @@ public class Sync implements StaticRefs {
 
 	/**
 	 * Ce constructeur effectue la synchronisation des messages.
-	 * @param username Nom d'utilisateur pour le serveur.
-	 * @param password mot de passe pour le serveur.
+	 * @param MailObject Contient toutes les listes des messages.
+	 * @param myLog Objet Login qui contient les identifiants.
 	 */
 	public Sync( Mail MailObject , Login myLog ) {
 		try {
