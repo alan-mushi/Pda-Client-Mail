@@ -3,6 +3,7 @@ package pda.datas ;
 import pdaNetwork.client.service.MailClient ;
 import pdaNetwork.misc.MailContent ;
 import pdaNetwork.misc.ProtocolException ;
+import pdaNetwork.misc.ConfigConst ;
 import java.util.ArrayList ;
 import java.util.HashMap ;
 
