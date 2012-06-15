@@ -27,6 +27,7 @@ public class Sync implements StaticRefs {
 		try {
 			this.user = myLog.getUser() ;
 			this.passwd = myLog.getPasswd() ;
+			ConfigConst.readConfigFile( "data/xml/pdaServer/configClient.xml" , false ) ;
 			this.myMail = MailObject ;
 			this.deleteOnServer() ;
 			this.getNewMails() ;
