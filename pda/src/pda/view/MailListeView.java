@@ -145,7 +145,8 @@ public class MailListeView implements StaticRefs {
 			System.out.println( "[-] Le fichier mails.bin n'a pas été trouvé, génération d'un nouveau fichier de mails." ) ;
 			Mail listeMail = new Mail();
 			myDB.sauvegarder(listeMail, mailsFile);
-			this.listeReception();
+			//this.listeReception();
+			return ( new Object[0][0] ) ;
 		}
 		
 		Object[][] data;
