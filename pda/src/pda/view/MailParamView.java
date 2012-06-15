@@ -52,6 +52,13 @@ public class MailParamView implements ActionListener , StaticRefs {
 	public void initialiserGui() {
 		mainPanel.setLayout(new BorderLayout());
 
+		JPanel panelUser = new JPanel(new GridLayout(4, 1));
+		JPanel panelConnection = new JPanel(new GridLayout(4, 1));
+		JPanel panelProxy = new JPanel(new GridLayout(5, 1));
+		JPanel panelCentre = new JPanel(new GridLayout(3, 1));
+		JScrollPane defilement = new JScrollPane(panelCentre);
+
+
 		String infoLogin = "Utilisateur" ;
 		String infoConnection = "Connection" ;
 		String infoProxy = "Proxy" ;
@@ -67,20 +74,21 @@ public class MailParamView implements ActionListener , StaticRefs {
 		labPortProxy = new JLabel("Port :");
 
 		mdp = new JTextField(this.login.getPasswd());
+		mdp.setColumns(15);
 		username = new JTextField( this.login.getUser() ) ;
+		username.setColumns(15);
 		hote = new JTextField( ConfigConst.getRemoteHost() );
+		hote.setColumns(15);
 		port = new JTextField( ConfigConst.getRemotePort() );
+		port.setColumns(15);
 		adresseProxy = new JTextField( ConfigConst.getProxyHost() );
+		adresseProxy.setColumns(15);
 		portProxy = new JTextField( ConfigConst.getProxyPort() );
+		portProxy.setColumns(15);
 
 
 		proxyUsed = new JCheckBox( "Utiliser un proxy ?" ) ;
 		proxyUsed.setSelected( false ) ;
-
-		JPanel panelUser = new JPanel(new GridLayout(4, 1));
-		JPanel panelConnection = new JPanel(new GridLayout(4, 1));
-		JPanel panelProxy = new JPanel(new GridLayout(5, 1));
-		JPanel panelCentre = new JPanel(new GridLayout(3, 1)); 
 
 		panelUser.add( labUserName ) ;
 		panelUser.add( username ) ;
@@ -110,8 +118,8 @@ public class MailParamView implements ActionListener , StaticRefs {
 
 		panelBas.add(retour);
 		panelBas.add(modifier);
-
-		JScrollPane defilement = new JScrollPane(panelCentre);
+		
+		defilement.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		mainPanel.add(defilement, BorderLayout.CENTER);
 		mainPanel.add(panelBas, BorderLayout.SOUTH);
 	}
