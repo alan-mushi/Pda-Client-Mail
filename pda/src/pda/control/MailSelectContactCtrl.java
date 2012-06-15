@@ -49,6 +49,7 @@ public class MailSelectContactCtrl implements ActionListener, StaticRefs {
 					}
 				}
 				Sync synchronisation = new Sync(listeEnvoie, user);
+				myDB.supprimer(mailsFile);
 				myDB.sauvegarder(listeEnvoie, mailsFile);
 				new MailMenuView(this.view.getMainPanel());
 			}
