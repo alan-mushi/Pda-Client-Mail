@@ -30,9 +30,11 @@ public class Sync implements StaticRefs {
 			this.passwd = myLog.getPasswd() ;
 			ConfigConst.readConfigFile( "data/xml/pdaServer/configClient.xml" , false ) ;
 			this.myMail = MailObject ;
-			this.deleteOnServer() ;
-			this.getNewMails() ;
-			this.sendNewMails() ;
+			if ( this.myMail != null ) {
+				this.deleteOnServer() ;
+				this.getNewMails() ;
+				this.sendNewMails() ;
+			}
 			this.lastConnectionSucced = true ;
 		} catch ( ProtocolException e ) {
 			this.lastConnectionSucced = false ;
@@ -44,11 +46,13 @@ public class Sync implements StaticRefs {
 	 */
 	private void deleteOnServer() throws ProtocolException {
 		ArrayList<String> toDel = this.myMail.getSupprList() ;
-		MailClient deleter = new MailClient( this.user , this.passwd ) ;
-		for ( int i = 0 ; i < toDel.size() ; i++ ) {
-			deleter.delete( toDel.get(i) ) ;
+		if ( toDel != null ) {
+			MailClient deleter = new MailClient( this.user , this.passwd ) ;
+			for ( int i = 0 ; i < toDel.size() ; i++ ) {
+				deleter.delete( toDel.get(i) ) ;
+			}
+			deleter.close() ;
 		}
-		deleter.close() ;
 	}
 
 	/**
@@ -57,10 +61,12 @@ public class Sync implements StaticRefs {
 	private void getNewMails() throws ProtocolException {
 		MailClient receiver = new MailClient( this.user , this.passwd ) ;
 		ArrayList<String> newMails = receiver.getHeaders() ;
-		for ( int i = 0 ; i < newMails.size() ; i++ ) {
-			String id = newMails.get(i) ;
-			MailContent email = receiver.receive( id ) ;
-			this.myMail.add( id , email , MailType.RECU ) ;
+		if ( newMails != null ) {
+			for ( int i = 0 ; i < newMails.size() ; i++ ) {
+				String id = newMails.get(i) ;
+				MailContent email = receiver.receive( id ) ;
+				this.myMail.add( id , email , MailType.RECU ) ;
+			}
 		}
 		receiver.close() ;
 	}
