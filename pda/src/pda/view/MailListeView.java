@@ -5,11 +5,13 @@ import pda.datas.*;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.table.TableColumn;
+import java.util.HashMap;
+import java.io.FileNotFoundException;
 
 /**
 * Classe gérant la partie graphique de la boite de réception/envoie/brouillon
 */
-public class MailListeView {
+public class MailListeView implements StaticRefs {
 	
 	/** Le panel principal de l'application */
 	private JPanel mainPanel;
@@ -123,29 +125,51 @@ public class MailListeView {
 	}
 	
 	/**
-	* Retourne la liste des mails de la boite de réception sous forme de tableau à 2 dimension
+	* Retourne la liste des mails de la boite de réception sous forme de tableau à 2 dimension.
+	* @return Un tableau contenant le contenu du tableau graphique. Retourne <code>null</code> si la méthode à échouée.
 	*/
 	private Object[][] listeReception() {
+		int sizeTab = 0;
+		HashMap<String , MailType> mails = null;
+		try {
+			Login user = (Login) myDB.charger(loginFile);
+			Mail listeMail = (Mail) myDB.charger(mailsFile);
+			Sync synchronisation = new Sync(listeMail, user);
+			if(synchronisation.getLastConnectionSucced()) {
+				myDB.sauvegarder(listeMail, mailsFile);
+			}
+			mails = listeMail.getRecusMap();
+			sizeTab = mails.size();
+		}
+		catch(FileNotFoundException e) {
+			System.out.println( "[-] Le fichier mails.bin n'a pas été trouvé, génération d'un nouveau fichier de mails." ) ;
+			Mail listeMail = new Mail();
+			myDB.sauvegarder(listeMail, mailsFile);
+			this.listeReception();
+		}
 		
-		Object[][] data2 = {	{new Integer(0), "test", "Guillaume Claudic"},
-							{new Integer(1), "test", "Thibault Guittet"},
-							{new Integer(2), "test", "Un mec louche"},
-							{new Integer(3), "test", "Un mec louche"},
-							{new Integer(0), "test", "Un mec louche"},
-							{new Integer(0), "test", "Un mec louche"},
-							{new Integer(0), "test", "Un mec louche"},
-							{new Integer(1), "test", "Un mec louche"},
-							{new Integer(0), "test", "Un mec louche"},
-							{new Integer(0), "test", "Un mec louche"},
-							{new Integer(3), "test", "Un mec louche"},
-							{new Integer(0), "test", "Un mec louche"},
-							{new Integer(0), "test", "Un mec louche"},
-							{new Integer(1), "test", "Un mec louche"},
-							{new Integer(0), "test", "Un mec louche"},
-							{new Integer(2), "test", "Un mec louche"},
-							{new Integer(0), "test", "Un fan"}
-							};
-		return data2;
+		Object[][] data;
+		if(sizeTab > 0) {
+			data = new Object[2][sizeTab];
+			Integer nonLu = new Integer(0);
+			Integer lu = new Integer(1);
+			for(int i=0; i<sizeTab; i++) {
+				if(mails.get(i).getType() == MailType.LU) {
+					data[0][i] = lu;
+				}
+				else {
+					data[0][i] = nonLu;
+				}
+		
+				data[1][i] = mails.get(i - 1).getObject();
+				data[2][i] = mails.get(i - 1).getExpeditor();
+			}
+		}
+		else {
+			data = new Object[0][0];
+		}
+		
+		return data;
 	}
 	
 	/**

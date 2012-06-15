@@ -38,7 +38,7 @@ public class MailSelectContactCtrl implements ActionListener, StaticRefs {
 			try {
 				JCheckBox[] listeCheckBox = this.view.getCheckBox();
 				Login user = (Login) myDB.charger(loginFile);
-				Mail listeEnvoie = new Mail();
+				Mail listeEnvoie = (Mail) myDB.charger(mailsFile);
 				Contacts contacts = (Contacts) myDB.charger(contactsFile);
 				for(int i=0; i<listeCheckBox.length; i++) {
 					if(listeCheckBox[i].isSelected()) {
@@ -49,7 +49,7 @@ public class MailSelectContactCtrl implements ActionListener, StaticRefs {
 					}
 				}
 				Sync synchronisation = new Sync(listeEnvoie, user);
-				
+				myDB.sauvegarder(listeEnvoie, mailsFile);
 				new MailMenuView(this.view.getMainPanel());
 			}
 			catch(FileNotFoundException erreur) {
