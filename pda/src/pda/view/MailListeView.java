@@ -61,24 +61,7 @@ public class MailListeView {
 		String[] nomColones = { "Statut", "Objet", "Expéditeur" };
 		
 		//La colone 0 doit comporter UNIQUEMENT des types Integer pour que les images puissent s'afficher correctement.
-		Object[][] data = {	{new Integer(0), "test", "Guillaume Claudic"},
-							{new Integer(1), "test", "Thibault Guittet"},
-							{new Integer(2), "test", "Un mec louche"},
-							{new Integer(3), "test", "Un mec louche"},
-							{new Integer(0), "test", "Un mec louche"},
-							{new Integer(0), "test", "Un mec louche"},
-							{new Integer(0), "test", "Un mec louche"},
-							{new Integer(1), "test", "Un mec louche"},
-							{new Integer(0), "test", "Un mec louche"},
-							{new Integer(0), "test", "Un mec louche"},
-							{new Integer(3), "test", "Un mec louche"},
-							{new Integer(0), "test", "Un mec louche"},
-							{new Integer(0), "test", "Un mec louche"},
-							{new Integer(1), "test", "Un mec louche"},
-							{new Integer(0), "test", "Un mec louche"},
-							{new Integer(2), "test", "Un mec louche"},
-							{new Integer(0), "test", "Un fan"}
-							};
+		Object[][] data = listeReception();
 							
 		ModeleTableau model = new ModeleTableau(data, nomColones);
 							
@@ -137,6 +120,32 @@ public class MailListeView {
 		supprimer.addActionListener(reception);
 		
 		retour.addActionListener(reception);
+	}
+	
+	/**
+	* Retourne la liste des mails de la boite de réception sous forme de tableau à 2 dimension
+	*/
+	private Object[][] listeReception() {
+		
+		Object[][] data2 = {	{new Integer(0), "test", "Guillaume Claudic"},
+							{new Integer(1), "test", "Thibault Guittet"},
+							{new Integer(2), "test", "Un mec louche"},
+							{new Integer(3), "test", "Un mec louche"},
+							{new Integer(0), "test", "Un mec louche"},
+							{new Integer(0), "test", "Un mec louche"},
+							{new Integer(0), "test", "Un mec louche"},
+							{new Integer(1), "test", "Un mec louche"},
+							{new Integer(0), "test", "Un mec louche"},
+							{new Integer(0), "test", "Un mec louche"},
+							{new Integer(3), "test", "Un mec louche"},
+							{new Integer(0), "test", "Un mec louche"},
+							{new Integer(0), "test", "Un mec louche"},
+							{new Integer(1), "test", "Un mec louche"},
+							{new Integer(0), "test", "Un mec louche"},
+							{new Integer(2), "test", "Un mec louche"},
+							{new Integer(0), "test", "Un fan"}
+							};
+		return data2;
 	}
 	
 	/**
