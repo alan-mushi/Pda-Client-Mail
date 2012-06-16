@@ -151,9 +151,23 @@ public class MailListeView implements StaticRefs {
 		
 		Object[][] data;
 		if(sizeTab > 0) {
-			data = new Object[2][sizeTab];
+			data = new Object[3][sizeTab];
 			Integer nonLu = new Integer(0);
 			Integer lu = new Integer(1);
+			System.out.println( "mails : "+mails ) ;
+			Object[] ids = mails.keySet().toArray() ;
+			for ( int i = 0 ; i < sizeTab ; i++ ) {
+				MailType tmpEmail = mails.get( (String) ids[i] ) ;
+				if ( tmpEmail.getType().equals( MailType.LU ) ) {
+					data[0][i] = lu ;
+				}
+				else { data[0][i] = nonLu ; }
+				System.out.println( "email n°"+i+" : " + tmpEmail.getObject() ) ;
+				System.out.println( "email n°"+i+" : " + tmpEmail.getExpeditor() ) ;
+				data[1][i] = tmpEmail.getObject() ;
+				data[2][i] = tmpEmail.getExpeditor() ;
+			}
+			/*
 			for(int i=0; i<sizeTab; i++) {
 				if(mails.get(i).getType() == MailType.LU) {
 					data[0][i] = lu;
@@ -165,6 +179,7 @@ public class MailListeView implements StaticRefs {
 				data[1][i] = mails.get(i - 1).getObject();
 				data[2][i] = mails.get(i - 1).getExpeditor();
 			}
+			*/
 		}
 		else {
 			data = new Object[0][0];
