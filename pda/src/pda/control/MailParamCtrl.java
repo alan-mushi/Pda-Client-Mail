@@ -8,7 +8,7 @@ import java.awt.event.*;
 /**
 * Classe gérant les actions pour l'interface des paramètres.
 */
-public class MailParamCtrl implements ActionListener {
+public class MailParamCtrl implements ActionListener , StaticRefs {
 	
 	/** Une référence vers la vue */
 	private MailParamView view;
@@ -44,7 +44,35 @@ public class MailParamCtrl implements ActionListener {
 			catch(Exception erreur) {
 				System.err.println(erreur.getMessage());
 			}
-				
+			// Changements d'informations sur l'uilisateur
+			try {
+				Login myLog = (Login) myDB.charger( loginFile ) ;
+				if ( ! this.view.getUserName().getText().equals( myLog.getUser() ) ) {
+					try {
+						myLog.modifyUser( this.view.getUserName().getText() ) ;
+						myDB.sauvegarder( myLog , loginFile ) ;
+					} catch ( IllegalArgumentException err ) {
+						System.out.println( err.getMessage() ) ;
+					}
+				}
+				if ( ! this.view.getMdp().getText().equals( myLog.getPasswd() ) ) {
+					try {
+						myLog.modifyPasswd( this.view.getMdp().getText() ) ;
+						myDB.sauvegarder( myLog , loginFile ) ;
+					} catch ( IllegalArgumentException err ) {
+						System.out.println( err.getMessage() ) ;
+					}
+				}
+				System.out.println( "\n[+] Changements pour l'utilisateur enregistrés." ) ;
+				System.out.println( "[+] Pensez à changer les identifiants dans le fichier du serveur!\n" ) ;
+			}
+			catch ( IllegalArgumentException ex ) {
+				System.out.println( ex.getMessage() ) ;
+			}
+			catch ( java.io.FileNotFoundException ex ) {
+				System.out.println( ex.getMessage() ) ;
+			}
+
 			new MailMenuView(this.view.getMainPanel());
 		}
 		else if(src == this.view.getBoutonParamDefaut()) {

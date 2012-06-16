@@ -11,7 +11,7 @@ import java.awt.event.* ;
  * Cette classe affiche et laisse à l'utilisateur la possibilité de modifier les 
  * paramètres de l'application.
  */
-public class MailParamView implements StaticRefs {
+public class MailParamView implements StaticRefs , KeyListener {
 	/** Panel principal de l'application */
 	private JPanel mainPanel;
 
@@ -29,6 +29,10 @@ public class MailParamView implements StaticRefs {
 
 	/** Référence locale sur Login pour obtenir le nom d'utilisateur et le mot de passe. */
 	private Login login ;
+	//##################################
+	private JPasswordField clearPasswd ;
+	private JLabel motDePasseLabel ;
+	//##################################
 
 	/**
 	 * Constructeur
@@ -52,7 +56,10 @@ public class MailParamView implements StaticRefs {
 	public void initialiserGui() {
 		mainPanel.setLayout(new BorderLayout());
 
-		JPanel panelUser = new JPanel(new GridLayout(4, 1));
+		//##################################
+		JPanel panelUser = new JPanel(new GridLayout(6, 1));
+		//##################################
+		//JPanel panelUser = new JPanel(new GridLayout(4, 1));
 		JPanel panelConnection = new JPanel(new GridLayout(4, 1));
 		JPanel panelProxy = new JPanel(new GridLayout(5, 1));
 		JPanel panelCentre = new JPanel(new GridLayout(3, 1));
@@ -63,14 +70,21 @@ public class MailParamView implements StaticRefs {
 		modifier = new JButton("Appliquer");
 
 		labUserName = new JLabel( "Utilisateur :" ) ;
-		labMdp = new JLabel("Mot de passe :");
+		//##################################
+		motDePasseLabel = new JLabel( "Entrez votre nouveau mot de passe :" ) ;
+		//##################################
+		labMdp = new JLabel("Mot de passe (md5) :");
 		labHote = new JLabel("Adresse :");
 		labPort = new JLabel("Port :");
 		labAdresseProxy = new JLabel("Adresse :");
 		labPortProxy = new JLabel("Port :");
 
+		//##################################
+		clearPasswd = new JPasswordField( 15 ) ;
+		//##################################
 		mdp = new JTextField(this.login.getPasswd());
 		mdp.setColumns(15);
+		mdp.setEditable( false ) ;
 		username = new JTextField( this.login.getUser() ) ;
 		username.setColumns(15);
 		hote = new JTextField( ConfigConst.getRemoteHost() );
@@ -90,10 +104,18 @@ public class MailParamView implements StaticRefs {
 		}
 		else {
 			proxyUsed.setSelected(false);
+			labAdresseProxy.setEnabled( false ) ;
+			adresseProxy.setEnabled( false ) ;
+			labPortProxy.setEnabled( false ) ;
+			portProxy.setEnabled( false ) ;
 		}
 
 		panelUser.add( labUserName ) ;
 		panelUser.add( username ) ;
+		//##################################
+		panelUser.add( motDePasseLabel ) ;
+		panelUser.add( clearPasswd ) ;
+		//##################################
 		panelUser.add(labMdp);
 		panelUser.add(mdp);
 
@@ -135,7 +157,16 @@ public class MailParamView implements StaticRefs {
 		retour.addActionListener(controleur);
 		modifier.addActionListener(controleur);
 		paramDefaut.addActionListener(controleur);
+		clearPasswd.addKeyListener( this ) ;
 	}
+
+	public void keyPressed( KeyEvent evt ) { }
+
+	public void keyTyped( KeyEvent evt ) {
+		this.mdp.setText( pdaNetwork.client.network.Md5.encode( new String(this.clearPasswd.getPassword()) ) ) ;
+	}
+
+	public void keyReleased( KeyEvent evt ) { }
 	
 	/**
 	* Permet de récupérer le bouton des paramètres par défaut.
@@ -167,6 +198,14 @@ public class MailParamView implements StaticRefs {
 	*/
 	public JTextField getUserName() {
 		return this.username;
+	}
+	
+	/**
+	* Permet de récupérer le champs du mot de passe.
+	* @return Le champs du mot de passe.
+	*/
+	public JTextField getMdp() {
+		return this.mdp;
 	}
 	
 	/**
