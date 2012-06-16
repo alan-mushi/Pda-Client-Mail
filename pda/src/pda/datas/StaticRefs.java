@@ -30,5 +30,5 @@ public interface StaticRefs {
 	/** Nom du fichier de sauvegarde de la HashMap toSend. */
 	public static final String mapToSend = content + "toSend.bin" ;
 	/** Nom du fichier de sauvegarde de l'ArrayList Supprimes. */
-	public static final String lsitSuppr = content + "suppr.bin" ;
+	public static final String listSuppr = content + "suppr.bin" ;
 }
