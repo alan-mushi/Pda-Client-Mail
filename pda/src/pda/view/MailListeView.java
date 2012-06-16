@@ -135,14 +135,12 @@ public class MailListeView implements StaticRefs {
 			Login user = (Login) myDB.charger(loginFile);
 			Mail listeMail = (Mail) myDB.charger(mailsFile);
 			Sync synchronisation = new Sync(listeMail, user);
-			
-			// ==========>>>>>>>>>>>>>>>> c'est cette condition qui plante
 			if(synchronisation.getLastConnectionSucced()) {
 				myDB.sauvegarder(listeMail, mailsFile);
 			}
 			
 			mails = listeMail.getRecusMap();
-			sizeTab = mails.size();System.out.println("Test :" + mails.size());
+			sizeTab = mails.size();
 		}
 		catch(FileNotFoundException e) {
 			System.out.println( "[-] Le fichier mails.bin n'a pas été trouvé, génération d'un nouveau fichier de mails." ) ;
@@ -154,33 +152,21 @@ public class MailListeView implements StaticRefs {
 		
 		Object[][] data;
 		if(sizeTab > 0) {
-			data = new Object[3][sizeTab];
+			data = new Object[sizeTab][3];
 			Integer nonLu = new Integer(0);
 			Integer lu = new Integer(1);
 			System.out.println( "mails : "+mails ) ;
 			Object[] ids = mails.keySet().toArray() ;
-			for ( int i = 0 ; i < sizeTab ; i++ ) {
+			for ( int i = 0 ; i < sizeTab; i++ ) {
 				MailType tmpEmail = mails.get( (String) ids[i] ) ;
 				if ( tmpEmail.getType().equals( MailType.LU ) ) {
-					data[0][i] = lu ;
+					data[i][0] = lu ;
 				}
-				else { data[0][i] = nonLu ; }
+				else { data[i][0] = nonLu ; }
 				System.out.println( "email n°"+i+" : " + tmpEmail.getObject() ) ;
 				System.out.println( "email n°"+i+" : " + tmpEmail.getExpeditor() ) ;
-				data[1][i] = tmpEmail.getObject() ;
-				data[2][i] = tmpEmail.getExpeditor() ;
-			}
-			
-			for(int i=0; i<sizeTab; i++) {
-				if(mails.get(i).getType() == MailType.LU) {
-					data[0][i] = lu;
-				}
-				else {
-					data[0][i] = nonLu;
-				}
-		
-				data[1][i] = mails.get(i).getObject();
-				data[2][i] = mails.get(i).getExpeditor();
+				data[i][1] = tmpEmail.getObject() ;
+				data[i][2] = tmpEmail.getExpeditor() ;
 			}
 		}
 		else {
