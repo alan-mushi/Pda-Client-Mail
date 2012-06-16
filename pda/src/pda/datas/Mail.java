@@ -10,7 +10,7 @@ import pdaNetwork.misc.MailContent ;
  * @see pda.datas.MailType
  */
 public class Mail implements StaticRefs , java.io.Serializable {
-	
+
 	private static final long serialVersionUID = 4L ;
 	/** HashMaps correspondantes aux différents types. */
 	private HashMap<String , MailType> recus , envoyes , brouillons , lus , toSend ;
@@ -186,4 +186,21 @@ public class Mail implements StaticRefs , java.io.Serializable {
 	public ArrayList<String> getSupprList() {
 		return ( this.supprimes ) ;
 	}
+
+	/**
+	 * Utilisé pour avoir un peu plus qu'une simple adresse...
+	 */
+	public String toString() {
+		String res ;
+		res = "\n################ OBJET MAIL ####################\n" ;
+		res += "\n################ MAP RECUS #####################\n" + this.getRecusMap() ;
+		res += "\n################ MAP LUS #######################\n" + this.getLusMap() ;
+		res += "\n################ MAP ENVOYES ###################\n" + this.getEnvoyesMap() ;
+		res += "\n################ MAP BROUILLONS ################\n" + this.getBrouillonsMap() ;
+		res += "\n################ MAP TOSEND ####################\n" + this.getToSendMap() ;
+		res += "\n################ LIST SUPPRIMES ################\n" + this.getSupprList() ;
+		res += "\n################ END ###########################\n" ;
+		return ( res ) ;
+	}
+
 }
