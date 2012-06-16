@@ -3,6 +3,7 @@ package pda.view;
 import pda.control.*;
 import pda.datas.*;
 import pdaNetwork.misc.ConfigConst ;
+import pdaNetwork.client.network.Md5 ;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.* ;
@@ -11,7 +12,7 @@ import java.awt.event.* ;
  * Cette classe affiche et laisse à l'utilisateur la possibilité de modifier les 
  * paramètres de l'application.
  */
-public class MailParamView implements StaticRefs , KeyListener {
+public class MailParamView implements StaticRefs , KeyListener , ActionListener {
 	/** Panel principal de l'application */
 	private JPanel mainPanel;
 
@@ -19,7 +20,7 @@ public class MailParamView implements StaticRefs , KeyListener {
 	private JButton retour, modifier, paramDefaut;
 
 	/** Les labels pour la champs du formulaire */
-	private JLabel labUserName , labMdp, labHote, labPort, labAdresseProxy, labPortProxy;
+	private JLabel labUserName , labMdp, labHote, labPort, labAdresseProxy, labPortProxy , motDePasseLabel ;
 
 	/** Les champs de textes permettant de modifier les paramètres */
 	private JTextField username , hote, port, adresseProxy, portProxy, mdp;
@@ -29,10 +30,9 @@ public class MailParamView implements StaticRefs , KeyListener {
 
 	/** Référence locale sur Login pour obtenir le nom d'utilisateur et le mot de passe. */
 	private Login login ;
-	//##################################
+
+	/** Champ de mot de passe. */
 	private JPasswordField clearPasswd ;
-	private JLabel motDePasseLabel ;
-	//##################################
 
 	/**
 	 * Constructeur
@@ -104,10 +104,7 @@ public class MailParamView implements StaticRefs , KeyListener {
 		}
 		else {
 			proxyUsed.setSelected(false);
-			labAdresseProxy.setEnabled( false ) ;
-			adresseProxy.setEnabled( false ) ;
-			labPortProxy.setEnabled( false ) ;
-			portProxy.setEnabled( false ) ;
+			this.blurProxySettings() ;
 		}
 
 		panelUser.add( labUserName ) ;
@@ -158,15 +155,53 @@ public class MailParamView implements StaticRefs , KeyListener {
 		modifier.addActionListener(controleur);
 		paramDefaut.addActionListener(controleur);
 		clearPasswd.addKeyListener( this ) ;
+		proxyUsed.addActionListener( this ) ;
 	}
 
+	/** Redéfinition obligatoire pour KeyListener. */
 	public void keyPressed( KeyEvent evt ) { }
 
-	public void keyTyped( KeyEvent evt ) {
-		this.mdp.setText( pdaNetwork.client.network.Md5.encode( new String(this.clearPasswd.getPassword()) ) ) ;
+	/** Redéfinition obligatoire pour KeyListener. */
+	public void keyTyped( KeyEvent evt ) { }
+
+	/**
+	 * Si des caractères sont tappés dans le champ de mot de passe,
+	 * le champ présentant le hash md5 est mis à jour.
+	 */
+	public void keyReleased( KeyEvent evt ) {
+		String tmp = new String( this.clearPasswd.getPassword() ) ;
+		if ( ! tmp.isEmpty() ) {
+			this.mdp.setText( Md5.encode( new String(this.clearPasswd.getPassword()) ) ) ;
+		}
+		else {	
+			this.mdp.setText( login.getPasswd() ) ;
+		}
 	}
 
-	public void keyReleased( KeyEvent evt ) { }
+	/**
+	 * Active désactive les champs de configuration avancée pour le proxy.
+	 */
+	public void actionPerformed( ActionEvent e ) {
+		if ( proxyUsed.isSelected() ) {
+			labAdresseProxy.setEnabled( true ) ;
+			adresseProxy.setEnabled( true ) ;
+			labPortProxy.setEnabled( true ) ;
+			portProxy.setEnabled( true ) ;
+		}
+		else { this.blurProxySettings() ; }
+	}
+			
+
+	/**
+	 * Désactive les champs liés aux configurations avancées du proxy
+	 * si la case <code>proxyUsed</code> est utilisée.
+	 */
+	private void blurProxySettings() {
+		labAdresseProxy.setEnabled( false ) ;
+		adresseProxy.setEnabled( false ) ;
+		labPortProxy.setEnabled( false ) ;
+		portProxy.setEnabled( false ) ;
+	}
 	
 	/**
 	* Permet de récupérer le bouton des paramètres par défaut.

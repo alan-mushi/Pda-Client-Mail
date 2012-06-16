@@ -47,10 +47,12 @@ public class MailParamCtrl implements ActionListener , StaticRefs {
 			// Changements d'informations sur l'uilisateur
 			try {
 				Login myLog = (Login) myDB.charger( loginFile ) ;
+				boolean userLoginChanged = false ;
 				if ( ! this.view.getUserName().getText().equals( myLog.getUser() ) ) {
 					try {
 						myLog.modifyUser( this.view.getUserName().getText() ) ;
 						myDB.sauvegarder( myLog , loginFile ) ;
+						userLoginChanged = true ;
 					} catch ( IllegalArgumentException err ) {
 						System.out.println( err.getMessage() ) ;
 					}
@@ -59,12 +61,15 @@ public class MailParamCtrl implements ActionListener , StaticRefs {
 					try {
 						myLog.modifyPasswd( this.view.getMdp().getText() ) ;
 						myDB.sauvegarder( myLog , loginFile ) ;
+						userLoginChanged = true ;
 					} catch ( IllegalArgumentException err ) {
 						System.out.println( err.getMessage() ) ;
 					}
 				}
-				System.out.println( "\n[+] Changements pour l'utilisateur enregistrés." ) ;
-				System.out.println( "[+] Pensez à changer les identifiants dans le fichier du serveur!\n" ) ;
+				if ( userLoginChanged ) {
+					System.out.println( "\n[+] Changements pour l'utilisateur enregistrés." ) ;
+					System.out.println( "[+] Pensez à changer les identifiants dans le fichier du serveur!\n" ) ;
+				}
 			}
 			catch ( IllegalArgumentException ex ) {
 				System.out.println( ex.getMessage() ) ;
