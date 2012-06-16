@@ -129,6 +129,7 @@ public class MailParamView implements ActionListener , StaticRefs {
 	public void attacherReactions() {
 		MailParamCtrl controleur = new MailParamCtrl(this);
 		retour.addActionListener(controleur);
+		modifier.addActionListener(controleur);
 	}
 
 	/**

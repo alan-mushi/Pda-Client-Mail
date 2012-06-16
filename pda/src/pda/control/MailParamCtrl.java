@@ -30,5 +30,9 @@ public class MailParamCtrl implements ActionListener {
 		if(src == this.view.getBoutonRetour()) {
 			new MailMenuView(this.view.getMainPanel());
 		}
+		else if(src == this.view.getBoutonModifier()) {
+			
+			new MailMenuView(this.view.getMainPanel());
+		}
 	}
 }
