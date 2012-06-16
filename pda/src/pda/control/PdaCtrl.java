@@ -43,6 +43,8 @@ public class PdaCtrl implements ActionListener {
 	public PdaCtrl() {
 		datas = new PdaDatas();
 		view = new PdaView ( this );
+		// Pour ouvrir automatiquement le lanceur :
+		this.startLauncher() ;
 	} // ------------------------------------------------------------ PdaCtrl()
 
 	/*
