@@ -7,6 +7,7 @@ import java.io.ObjectInputStream ;
 import java.io.FileNotFoundException ;
 import java.io.IOException ;
 import java.io.File ;
+import java.io.PrintWriter;
 
 /**
  * Cette classe permet de gérer les fichiers pour l'application.
@@ -100,5 +101,34 @@ public class DB {
 			res = monFichier.delete() ;
 		}
 		return ( res ) ;
+	}
+	
+	/**
+	* Sauvegarde un fichier texte.
+	* @param contenu Le contenu du fichier à enregistrer
+	* @param fileName L'adresse/nom du fichier à enregistrer
+	* @throws IllegalArgumentException Si le paramètre fileName est invalide.
+	*/
+	public boolean sauvegarderTexte(String contenu, String fileName) throws IllegalArgumentException {
+		boolean res = false;
+		if(fileName == null || fileName.isEmpty()) {
+			throw new IllegalArgumentException( "Le nom du fichier est vide ou null." ) ; 
+		}
+		else {
+			PrintWriter fichier = null;
+			try {
+				fichier = new PrintWriter(fileName);
+				fichier.println(contenu);
+				res = true;
+			}
+			catch(FileNotFoundException e) {
+				System.out.println(e.getMessage());
+			}
+			finally {
+				fichier.close();
+			}
+		}
+		
+		return res;
 	}
 }
