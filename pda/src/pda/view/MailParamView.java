@@ -11,12 +11,12 @@ import java.awt.event.* ;
  * Cette classe affiche et laisse à l'utilisateur la possibilité de modifier les 
  * paramètres de l'application.
  */
-public class MailParamView implements ActionListener , StaticRefs {
+public class MailParamView implements StaticRefs {
 	/** Panel principal de l'application */
 	private JPanel mainPanel;
 
 	/** Boutons de navigation */;
-	private JButton retour, modifier;
+	private JButton retour, modifier, paramDefaut;
 
 	/** Les labels pour la champs du formulaire */
 	private JLabel labUserName , labMdp, labHote, labPort, labAdresseProxy, labPortProxy;
@@ -58,12 +58,8 @@ public class MailParamView implements ActionListener , StaticRefs {
 		JPanel panelCentre = new JPanel(new GridLayout(3, 1));
 		JScrollPane defilement = new JScrollPane(panelCentre);
 
-
-		String infoLogin = "Utilisateur" ;
-		String infoConnection = "Connection" ;
-		String infoProxy = "Proxy" ;
-
 		retour = new JButton("Retour");
+		paramDefaut = new JButton("Défaut");
 		modifier = new JButton("Appliquer");
 
 		labUserName = new JLabel( "Utilisateur :" ) ;
@@ -79,15 +75,22 @@ public class MailParamView implements ActionListener , StaticRefs {
 		username.setColumns(15);
 		hote = new JTextField( ConfigConst.getRemoteHost() );
 		hote.setColumns(15);
-		port = new JTextField( ConfigConst.getRemotePort() );
+		Integer portInt = new Integer(ConfigConst.getRemotePort());
+		port = new JTextField(portInt.toString());
 		port.setColumns(15);
 		adresseProxy = new JTextField( ConfigConst.getProxyHost() );
 		adresseProxy.setColumns(15);
-		portProxy = new JTextField( ConfigConst.getProxyPort() );
+		Integer portProxyInt = new Integer(ConfigConst.getProxyPort());
+		portProxy = new JTextField(portProxyInt.toString());
 		portProxy.setColumns(15);
 
 		proxyUsed = new JCheckBox( "Utiliser un proxy ?" ) ;
-		proxyUsed.setSelected( false ) ;
+		if(!ConfigConst.getProxyHost().equals("noProxy")) {
+			proxyUsed.setSelected(true);
+		}
+		else {
+			proxyUsed.setSelected(false);
+		}
 
 		panelUser.add( labUserName ) ;
 		panelUser.add( username ) ;
@@ -109,13 +112,14 @@ public class MailParamView implements ActionListener , StaticRefs {
 		panelCentre.add( panelConnection ) ;
 		panelCentre.add( panelProxy ) ;
 
-		JPanel panelBas = new JPanel(new GridLayout(1, 2));
+		JPanel panelBas = new JPanel(new GridLayout(1, 3));
 
 		panelUser.setBorder( BorderFactory.createCompoundBorder( BorderFactory.createTitledBorder("Utilisateur"), BorderFactory.createEmptyBorder(5,5,5,5) ) ) ;
 		panelConnection.setBorder( BorderFactory.createCompoundBorder( BorderFactory.createTitledBorder("Serveur"), BorderFactory.createEmptyBorder(5,5,5,5) ) ) ;
 		panelProxy.setBorder( BorderFactory.createCompoundBorder( BorderFactory.createTitledBorder("Proxy"), BorderFactory.createEmptyBorder(5,5,5,5) ) ) ;
 
 		panelBas.add(retour);
+		panelBas.add(paramDefaut);
 		panelBas.add(modifier);
 		
 		defilement.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -130,13 +134,15 @@ public class MailParamView implements ActionListener , StaticRefs {
 		MailParamCtrl controleur = new MailParamCtrl(this);
 		retour.addActionListener(controleur);
 		modifier.addActionListener(controleur);
+		paramDefaut.addActionListener(controleur);
 	}
-
+	
 	/**
-	 * Utilisé pour les JRadioButtons.
-	 */
-	public void actionPerformed( ActionEvent e ) {
-
+	* Permet de récupérer le bouton des paramètres par défaut.
+	* @return Le bouton des paramètres par défaut.
+	*/
+	public JButton getBoutonParamDefaut() {
+		return this.paramDefaut;
 	}
 
 	/**
@@ -153,6 +159,54 @@ public class MailParamView implements ActionListener , StaticRefs {
 	 */
 	public JButton getBoutonModifier() {
 		return this.modifier;
+	}
+	
+	/**
+	* Permet de récupérer le champs du login.
+	* @return Le champs du login.
+	*/
+	public JTextField getUserName() {
+		return this.username;
+	}
+	
+	/**
+	* Permet de récupérer le champs de l'hôte (adresse du serveur).
+	* @return Le champs de l'hote.
+	*/
+	public JTextField getHote() {
+		return this.hote;
+	}
+	
+	/**
+	* Permet de récupérer le champs du port.
+	* @return Le champs du port.
+	*/
+	public JTextField getPort() {
+		return this.port;
+	}
+	
+	/**
+	* Permet de récupérer le champs de l'adresse du proxy.
+	* @return Le champs du proxy
+	*/
+	public JTextField getAdresseProxy() {
+		return this.adresseProxy;
+	}
+	
+	/**
+	* Permet de récupérer le champs du port du proxy.
+	* @return Le champs du port du proxy.
+	*/
+	public JTextField getPortProxy() {
+		return this.portProxy;
+	}
+	
+	/**
+	* Retourne la case à cocher qui définit si on utilise un proxy ou non.
+	* @return La case à cocher qui définit si on utilise un proxy ou non.
+	*/
+	public JCheckBox getProxyUsed() {
+		return this.proxyUsed;
 	}
 
 	/**

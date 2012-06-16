@@ -3,7 +3,7 @@ package pda.datas;
 /**
 * Classe permettant de gérer les paramètres de l'application et de les mettres sous format XML.
 */
-public class Config {
+public class Config implements StaticRefs {
 
 	/** Les champs modifiable de la configuration */
 	private String adresseServeur, portServeur, adresseProxy, portProxy;
@@ -13,10 +13,10 @@ public class Config {
 	* Constructeur
 	*/
 	public Config() {
-		adresseServeur = "";
-		portServeur = "";
-		adresseProxy = "";
-		portProxy = "noProxy";
+		adresseServeur = "localhost";
+		portServeur = "8888";
+		adresseProxy = "noProxy";
+		portProxy = "3128";
 		statutProxy = false;
 	}
 	
@@ -97,7 +97,7 @@ public class Config {
 	* Permet de sauvegarder le fichier de configuration.
 	* @return Retourne <code>true</code> si la sauvegarde à réussie, sinon false.
 	*/
-	/*public boolean sauvegarderConfig() {
-		return myDB.sauvegarderXML(this.toXml());
-	}*/
+	public boolean sauvegarderConfig() {
+		return myDB.sauvegarderTexte(this.toXml(), "data/xml/pdaServer/configClient.xml");
+	}
 }
