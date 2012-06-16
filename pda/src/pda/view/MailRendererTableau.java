@@ -33,24 +33,24 @@ public class MailRendererTableau extends DefaultTableCellRenderer {
 	*/
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-	System.out.println( "heeelloooo value : " + value) ;
-        //Integer type = value;
-	Integer type = new Integer( String.valueOf( value ) ) ;
 
-        setText("");
+        if(value instanceof Integer) {
+			Integer type = (Integer) value;
+		    setText("");
 
-        if(type.equals(new Integer(0))){
-            setIcon(nonLu);
-        }
-        else if(type.equals(new Integer(1))) {
-        	setIcon(lu);
-        }
-        else if(type.equals(new Integer(2))) {
-        	setIcon(brouillon);
-        }
-        else if(type.equals(new Integer(3))) {
-        	setIcon(envoye);
-        }
+		    if(type.equals(new Integer(0))){
+		        setIcon(nonLu);
+		    }
+		    else if(type.equals(new Integer(1))) {
+		    	setIcon(lu);
+		    }
+		    else if(type.equals(new Integer(2))) {
+		    	setIcon(brouillon);
+		    }
+		    else if(type.equals(new Integer(3))) {
+		    	setIcon(envoye);
+		    }
+		}
         
         return this;
     }

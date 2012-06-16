@@ -1,13 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-<debug>0</debug>
-<socketType>socket</socketType>
-<remoteHost>localhost</remoteHost>
-<remotePort>8888</remotePort>
-<proxyHost>noProxy</proxyHost>
-<proxyPort>3128</proxyPort>
-<uri>/pda-server/pdaNetwork.php</uri><!-- others informations -->
-<startOfReq>paquet</startOfReq>
-<endOfReq>paquet</endOfReq>
-</config>
+  <!-- This parameter can provide useful information while debugging the application -->
+  <debug>0</debug>
 
+<!--
+  use the following parameters to operate on the WEB server hosted by OVH (extranet dept info)
+
+  <socketType>webSocket</socketType>
+  <remoteHost>projets.iut-info-vannes.net</remoteHost>
+  <remotePort>80</remotePort>
+  <uri>/pda-server/pdaNetwork.php</uri>
+  <proxyHost>squidva.univ-ubs.fr</proxyHost> OU <proxyHost>noProxy</proxyHost>
+  <proxyPort>3128</proxyPort>
+-->
+
+<!--
+  use the following parameters to operate on a local server (teaching network only)
+-->
+  <socketType>socket</socketType>
+  <remoteHost>localhost</remoteHost> 
+  <remotePort>8888</remotePort>
+  <proxyHost>noProxy</proxyHost>
+  <proxyPort>3128</proxyPort>
+  <uri>/pda-server/pdaNetwork.php</uri>
+
+<!-- others informations -->
+  <startOfReq>paquet</startOfReq>
+  <endOfReq>paquet</endOfReq>
+
+</config>

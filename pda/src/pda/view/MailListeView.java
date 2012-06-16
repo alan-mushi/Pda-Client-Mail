@@ -135,17 +135,20 @@ public class MailListeView implements StaticRefs {
 			Login user = (Login) myDB.charger(loginFile);
 			Mail listeMail = (Mail) myDB.charger(mailsFile);
 			Sync synchronisation = new Sync(listeMail, user);
+			
+			// ==========>>>>>>>>>>>>>>>> c'est cette condition qui plante
 			if(synchronisation.getLastConnectionSucced()) {
 				myDB.sauvegarder(listeMail, mailsFile);
 			}
+			
 			mails = listeMail.getRecusMap();
-			sizeTab = mails.size();
+			sizeTab = mails.size();System.out.println("Test :" + mails.size());
 		}
 		catch(FileNotFoundException e) {
 			System.out.println( "[-] Le fichier mails.bin n'a pas été trouvé, génération d'un nouveau fichier de mails." ) ;
 			Mail listeMail = new Mail();
 			myDB.sauvegarder(listeMail, mailsFile);
-			//this.listeReception();
+			this.listeReception();
 			return ( new Object[0][0] ) ;
 		}
 		
@@ -167,7 +170,7 @@ public class MailListeView implements StaticRefs {
 				data[1][i] = tmpEmail.getObject() ;
 				data[2][i] = tmpEmail.getExpeditor() ;
 			}
-			/*
+			
 			for(int i=0; i<sizeTab; i++) {
 				if(mails.get(i).getType() == MailType.LU) {
 					data[0][i] = lu;
@@ -176,10 +179,9 @@ public class MailListeView implements StaticRefs {
 					data[0][i] = nonLu;
 				}
 		
-				data[1][i] = mails.get(i - 1).getObject();
-				data[2][i] = mails.get(i - 1).getExpeditor();
+				data[1][i] = mails.get(i).getObject();
+				data[2][i] = mails.get(i).getExpeditor();
 			}
-			*/
 		}
 		else {
 			data = new Object[0][0];
