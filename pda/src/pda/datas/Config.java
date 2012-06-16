@@ -7,12 +7,17 @@ public class Config {
 
 	/** Les champs modifiable de la configuration */
 	private String adresseServeur, portServeur, adresseProxy, portProxy;
+	private boolean statutProxy;
 	
+	/**
+	* Constructeur
+	*/
 	public Config() {
 		adresseServeur = "";
 		portServeur = "";
 		adresseProxy = "";
 		portProxy = "noProxy";
+		statutProxy = false;
 	}
 	
 	/**
@@ -48,24 +53,51 @@ public class Config {
 	}
 	
 	/**
+	* Définit si un proxy est utilisé ou non. Par défaut, aucun proxy n'est utilisé.
+	* @param statut <code>true</code> si il y a un proxy, sinon <code>false</code>
+	*/
+	public void setProxy(boolean statut) {
+		this.statutProxy = statut;
+	}
+	
+	/**
 	* Permet de transformer en XML la configuration.
+	* @return Le contenu du fichier de configuration.
 	*/
 	public String toXml() {
-		String xml = "<?xml version="1.0" encoding="UTF-8"?>\n";
+		String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 		xml += "<config>\n";
 		xml += "<debug>0</debug>\n";
-		xml += "<socketType>socket</socketType>\n";
+		if(statutProxy) {
+			xml += "<socketType>webSocket</socketType>\n";
+		}
+		else {
+			xml += "<socketType>socket</socketType>\n";
+		}
 		xml += "<remoteHost>" + this.adresseServeur + "</remoteHost>\n";
 		xml += "<remotePort>" + this.portServeur + "</remotePort>\n";
-		xml += "";
+		if(this.statutProxy) {
+			xml += "<proxyHost>" + this.adresseProxy + "</proxyHost>\n";
+  			xml += "<proxyPort>" + this.portProxy + "</proxyPort>\n";
+  		}
+  		else {
+  			xml += "<proxyHost>noProxy</proxyHost>\n";
+  			xml += "<proxyPort>3128</proxyPort>\n";
+  		}
+		xml += "<uri>/pda-server/pdaNetwork.php</uri>";
+		xml += "<!-- others informations -->\n";
+		xml += "<startOfReq>paquet</startOfReq>\n";
+		xml += "<endOfReq>paquet</endOfReq>\n";
+		xml += "</config>\n";
 		
 		return xml;
 	}
 	
 	/**
 	* Permet de sauvegarder le fichier de configuration.
+	* @return Retourne <code>true</code> si la sauvegarde à réussie, sinon false.
 	*/
-	public boolean sauvegarderConfig() {
-		myDB.sauvegarderXML();
-	}
+	/*public boolean sauvegarderConfig() {
+		return myDB.sauvegarderXML(this.toXml());
+	}*/
 }
