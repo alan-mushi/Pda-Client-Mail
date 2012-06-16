@@ -138,6 +138,13 @@
 	    <classpath refid="myCLASSPATH"/>
 	  </java>
 	</target>
+	
+	<!-- Exécution du test de Config  -->
+	<target name="runTestConfig" depends="compileAll" description="executes the test for the class Config" >
+	  <java classname="pda.datas.TestConfig" fork="true" dir="${work}" >
+	    <classpath refid="myCLASSPATH"/>
+	  </java>
+	</target>
 
 	<!-- Exécution du test du client de messagerie -->
 	<target name="runTestClient" depends="compilePaqPdaNetwork , runServer" description="executes the test of client messenger" >
