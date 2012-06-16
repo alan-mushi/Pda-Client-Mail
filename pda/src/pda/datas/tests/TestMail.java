@@ -14,9 +14,6 @@ import pdaNetwork.misc.MailContent ;
  */
 public class TestMail implements StaticRefs {
 	
-	/**
-	 *
-	 */
 	public static void main( String[] args ) {
 		System.out.print( "[*] Création de l'objet Mail ... " ) ;
 		Mail myMail = new Mail() ;
@@ -80,5 +77,26 @@ public class TestMail implements StaticRefs {
 			ArrayList<String> supprL = myMail.getSupprList() ;
 			System.out.println( "	Contenu de la liste des mails supprimés : " + supprL ) ;
 		} catch ( IllegalArgumentException e ) { System.out.println( e.getMessage() ) ; }
+		//-----------------------------Test de sauvegarde/chargement---------------------------------
+		System.out.println( "\n-----------------------------------------" ) ;
+		System.out.println( "	Test de sauvegarde/chargement" ) ;
+
+		System.out.print( "\n[*] Test de sauvegarde ... " ) ;
+		try {
+			myDB.sauvegarder( myMail , mailsFile ) ;
+			System.out.println( "OK" ) ;
+		} catch ( IllegalArgumentException e ) { System.out.println( e.getMessage() ) ; }
+
+		System.out.println( "\n[*] Test de chargement ..." ) ;
+		try {
+			Mail newMails = (Mail) myDB.charger( mailsFile ) ;
+			System.out.println( "	[*] Affichage des mails sauvegardés : \n" +newMails ) ;
+		}
+		catch ( IllegalArgumentException e ) {
+			System.out.println( e.getMessage() ) ;
+		}
+		catch ( java.io.FileNotFoundException e ) {
+			System.out.println( e.getMessage() ) ;
+		}
 	}
 }

@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
  * </pre>
  * @author PDA Server development team.
  */
-public class MailContent {
+public class MailContent implements java.io.Serializable {
 
     /**
      * Recipient of the mail
