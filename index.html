@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Pda-client-mail - Partie Conception by alan-mushi</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>Pda-client-mail - Partie Conception</h1>
+        <p>Conception du Pda : Specifications et Documentation</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/alan-mushi/Pda-Client-Mail" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/alan-mushi/Pda-Client-Mail/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/alan-mushi/Pda-Client-Mail/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>Présentation du travail réalisé</h1>
+
+<p>L'intégrale du rendu concernant les spécifications est <a href="https://github.com/downloads/alan-mushi/Pda-Client-Mail/tarball.tar.gz">ici</a>. Dans la page ci dessous est exposé par ordre chronologique l'élaboration des documents que vous trouverez dans le tarball.
+Nous vous invitons à consulter le repository pour plus de renseignements et une chronologie plus détaillée. Le lien vers le repository se trouve sur la droite du bandeau.</p>
+
+<h2>Élaboration du cahier des charges</h2>
+
+<p>Pour constituer ce cahier des charges nous nous sommes basé sur les exigences disponibles sur l'extranet. Nous avons ensuite élaboré des hypothèses quand à l'utilisation de l'application. Cette phase a façonnée la vision que nous avions de l'application et de ses fonctionnalités. Le document complet est disponible <a href="https://github.com/downloads/alan-mushi/Pda-Client-Mail/Cahier_des_charges.pdf">ici</a>.</p>
+
+<h2>Arbre de fonctionnalités</h2>
+
+<p>L'arbre de fonctionnalités à été élaboré pour énumérer toutes les action possibles. Même si il ne se plie à aucune forme normée, il brille par son principal atout : être intelligible et sans fioritures.</p>
+
+<p>Voici une portion de l'arbre de fonctionnalités qui porte sur la gestion des paramètres de l'application :
+<img src="https://github.com/downloads/alan-mushi/Pda-Client-Mail/Arbre_de_fonctionnalitees_portion.png" alt="Portion de l'arbre de fonctionnalité : paramètres"></p>
+
+<h2>Automates à états</h2>
+
+<p>Les automates à états ont été réalisés au début du projet. Ils nous ont principalement servit à mieux nous approprier le fonctionnement général de certaines parties de l'application. Tous les automates à états n'ont pas été réalisés par manque de temps. Ils ont néanmoins aidé à une conception plus rapide des diagrammes de séquences.</p>
+
+<p>Voici l'image de l'automate à états associé à l'opération de login :</p>
+
+<p><img src="https://github.com/downloads/alan-mushi/Pda-Client-Mail/Automate_a_etats_Login.png" alt="Automate à états du Login"></p>
+
+<h2>Diagramme de cas d'utilisation</h2>
+
+<p>Le diagramme de cas d'utilisation est l'un des premiers documents que nous avons décidés de réaliser. En effet, il permet d'avoir une vue d'ensemble sur ce que nous allons devoir réaliser dans la phase de codage. Ces diagrammes nous ont étés particulièrement utiles pour réaliser les diagrammes de séquences.</p>
+
+<p>Le diagramme de cas d'utilisation complet est disponible <a href="https://github.com/downloads/alan-mushi/Pda-Client-Mail/Cas_d'utilisation.png">ici</a>.</p>
+
+<h2>Diagrammes de séquence</h2>
+
+<p>Les diagrammes de séquence ont étés répartis sur l'ensemble des personnes travaillant sur le projet. Ils nous a fallu beaucoup de temps pour les réaliser. Un diagramme n'est pas long à créer mais il faut réfléchir à tout les cas possibles. L'autre facteur qui a fait qu'on y a passé beaucoup de temps est le nombre de diagrammes. Même à 4, 18 diagramme de séquence, c'est plutôt long à réaliser. Cependant, ces diagrammes nous sont et nous seront surement encore nécessaires par la suite donc, le temps accordé à cette tâche sera bénéfique pour la phase de codage.</p>
+
+<p>Voici un exemple tiré de la liasse des diagrammes de séquence, il s'agit de l'opération d'envoi ou de sauvegarde (en fonction de la présence d'une connexion au serveur).</p>
+
+<p><img src="https://github.com/downloads/alan-mushi/Pda-Client-Mail/Diagramme_de_seq_envoyer_mail.png" alt="Diagramme de séquence - envoyer/sauvegarde un mail"></p>
+
+<h2>IHM</h2>
+
+<p>Le dessin de l'IHM à été réalisé d'après l'arbre de fonctionnalitées. Les logiciels de dessin Gimp et Inkscape ont étés utilisés pour dessiner l'IHM. L'IHM est simple et composée de boutons suffisament gros pour être lisible facilement sur un petit écran. Elle est également intuitive pour être facilement prise en main.</p>
+
+<p><img src="http://cloud.github.com/downloads/alan-mushi/Pda-Client-Mail/dessin_ihm.jpg" alt="Capture d'écran de la réalisation d'une IHM"></p>
+
+<h2>Diagramme de classes</h2>
+
+<p>Le diagramme de classe à prit beaucoup de temps à être fait car on ne pouvait pas commencer par ça. En effet, au début nous n'avions pas les idées assez clair sur ce que devait être ou ne pas être l'application. Il a donc fallu réaliser plusieurs autres documents intermédiaires notamment pour savoir comment on allait présenter l'application (son interface graphique), comment l'application allait sauvegarder les données... etc. Une fois tout cela définit, on a pu commencer le diagramme petit à petit. Nous avons eu l'occasion d'avoir de nombreuses (et longues !) discussions par Skype pour régler des petits détails (mais importants tout de même).</p>
+
+<p><img src="https://github.com/downloads/alan-mushi/Pda-Client-Mail/Diagramme_de_classes_portion.png" alt="Portion du diagramme de classes"></p>
+
+<blockquote>
+<p>La classe MailType hérite d'une classe de l'API fournie afin d'ajouter la gestion des types de mails. L'héritage nous permet de donner un type au mails parmi mails reçus, envoyés et brouillons. En outre, la classe MailType, qui implémentera l'interface Serializable, nous permet de sauvegarder l'objet MailType sans avoir recours à une serialization manuelle.</p>
+</blockquote>
+
+<h2>Présentation de l'application pour le client</h2>
+
+<p>Pour présenter l'application à un éventuel client nous sommes partit du fait que le client ne connaissait que très peu de choses techniques. Nous avons donc réalisé un diaporama qui expose de manière très imagée les principales fonctionnalités et les atouts majeurs de notre application.</p>
+
+<p>L'image ci dessous représente le fonctionnement hors connexion de notre application. Une explication orale reste nécessaire pour comprendre la symbolisation.</p>
+
+<p><img src="http://cloud.github.com/downloads/alan-mushi/Pda-Client-Mail/Presentation_application.png" alt="Mode hors connexion de l'application"></p>
+
+<p>Suggestion de présentation orale associée à l'image ci-dessus :</p>
+
+<blockquote>
+<p>Comme on peut le constater le serveur est inaccessible. Mais cela ne signifie pas pour autant que vous ne pouvez pas utiliser l'application. En effet, la gestion des messages et des brouillons est toujours disponible. Un des changements majeurs est la sauvegarde en local des mails. Ces mails enregistrés seront envoyés au serveur dès que la connexion pourra être rétablie.</p>
+</blockquote>
+
+<h2>Présentation des outils utilisés</h2>
+
+<p>Pour pourvoir mener à bien l'étape des spécifications nous avons utilisé plusieurs outils</p>
+
+<ul>
+<li>Skype nous a permis d'être en contact fréquent et de pouvoir débattre ainsi que de s'organiser rapidement et efficacement.</li>
+<li>Dia nous a permis de réaliser tous les diagrammes. Il était convenu d'utiliser bouml mais nous avons eu des péripéties insurmontables.</li>
+<li>Git &amp; GitHub nous on permis de centraliser toutes les données et d'établir une liste des choses à faire. Je ne vais pas m'attarder sur l'utilisation et les avantages de Git ni de GitHub. Cependant je voudrais vous exposer la "TODO List" que nous avons utilisé, elle est disponible <a href="https://github.com/alan-mushi/Pda-Client-Mail/issues?labels=&amp;milestone=&amp;page=1&amp;sort=updated&amp;state=closed">ici</a>.</li>
+</ul><p>L'utilisation du bug tracker intégré à GitHub nous a donc servi de système d'assignation de tâches. En effet il est suffisament flexible pour un usage en réalisations de tâches multiples :
+<img src="https://github.com/downloads/alan-mushi/Pda-Client-Mail/milestone.png" alt="Exemple utilisation de milestone"></p>
+
+<p>Il est également efficace car joindre une personne n'est pas utile pour savoir ce qui reste à faire :
+<img src="https://github.com/downloads/alan-mushi/Pda-Client-Mail/todo_list.png" alt="Exemple d'utilisation du bug tracker pour une todo list"></p>
+
+<h1>Auteurs</h1>
+
+<p>Nous étions 4 à travailler ensemble sur les spécifications de l'application</p>
+
+<ul>
+<li>Titouan De Kerautem (TitouanDeKerautem)</li>
+<li>Guillaume Claudic (zipang29)</li>
+<li>Thibault Guittet (alan-mushi)</li>
+<li>Eflamm Olivier (Capitaineflamm)</li>
+</ul><h2>Rédaction de la page et des articles</h2>
+
+<p>Guillaume Claudic :</p>
+
+<p><code>Diagramme de cas d'utilisation</code></p>
+
+<p><code>Diagrammes de séquences</code></p>
+
+<p><code>Diagramme de classes</code></p>
+
+<p>Thibault Guittet :</p>
+
+<p><code>Présentation du travail réalisé</code></p>
+
+<p><code>Élaboration du cahier des charges</code></p>
+
+<p><code>Arbre de fonctionnalités</code></p>
+
+<p><code>Automates à états</code></p>
+
+<p><code>Présentation de l'application pour le client</code></p>
+
+<p><code>Outils utilisés</code></p>
+
+<p><code>Mise en forme (contrainte des droits d'administration)</code></p>
+
+<p>Titouan De Kerautem :</p>
+
+<p><code>IHM</code></p>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/alan-mushi">alan-mushi</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+    
+  </body>
+</html>
