@@ -46,9 +46,13 @@ public class MailListeCtrl extends MouseAdapter implements ActionListener {
 		}
 	}
 	
+	/**
+	* Méthode gérant les évèments lors des clics dans le JTable.
+	* @param e L'évèment.
+	*/
 	public void mouseClicked(MouseEvent e) {
 		if(this.view.getTableau().isRowSelected(this.view.getTableau().getSelectedRow())) {
-			
+			new MailAffichageView(this.view.getMainPanel(), this.view.getTableau().getSelectedRow(), this.view.getMode());
 		}
 	}
 }

@@ -7,6 +7,7 @@ import java.awt.*;
 import javax.swing.table.TableColumn;
 import java.util.HashMap;
 import java.io.FileNotFoundException;
+import java.util.Iterator;
 
 /**
 * Classe gérant la partie graphique de la boite de réception/envoie/brouillon
@@ -29,6 +30,8 @@ public class MailListeView implements StaticRefs {
 	*/
 	private int mode;
 	
+	private long transitionIds[][];
+	
 	/** Pour spécifier le mode boite de réception */
 	public static final int MODE_BOITE_RECEPTION = 1;
 	
@@ -40,8 +43,8 @@ public class MailListeView implements StaticRefs {
 	
 	/**
 	* Constructeur
-	* @param thePanel Le panel principal de l'application
-	* @param theMode Le mode dans lequel la classe doit agir
+	* @param thePanel Le panel principal de l'application.
+	* @param theMode Le mode dans lequel la classe doit agir.
 	*/
 	public MailListeView(JPanel thePanel, int theMode) {
 		this.mainPanel = thePanel;
@@ -167,6 +170,9 @@ public class MailListeView implements StaticRefs {
 			Integer lu = new Integer(1);
 			System.out.println( "mails : "+mails ) ;
 			Object[] ids = mails.keySet().toArray() ;
+			transitionIds = new long[sizeTab][2];
+			Iterator iterator = mails.keySet().iterator();
+			
 			for ( int i = 0 ; i < sizeTab; i++ ) {
 				MailType tmpEmail = mails.get( (String) ids[i] ) ;
 				if ( tmpEmail.getType().equals( MailType.LU ) ) {
@@ -177,6 +183,9 @@ public class MailListeView implements StaticRefs {
 				System.out.println( "email n°"+i+" : " + tmpEmail.getExpeditor() ) ;
 				data[i][1] = tmpEmail.getObject() ;
 				data[i][2] = tmpEmail.getExpeditor() ;
+				transitionIds[i][0] = i;
+				long id = Long.parseLong((String)iterator.next());
+				transitionIds[i][1] = id;
 			}
 		}
 		else {
@@ -232,5 +241,9 @@ public class MailListeView implements StaticRefs {
 	*/
 	public JTable getTableau() {
 		return this.liste;
+	}
+	
+	public long[][] getTransitionIds() {
+		return this.transitionIds;
 	}
 }
