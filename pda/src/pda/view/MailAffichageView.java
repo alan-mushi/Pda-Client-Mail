@@ -7,19 +7,28 @@ import java.awt.*;
 import java.util.HashMap;
 import java.io.FileNotFoundException;
 
+/**
+* Classe gérant l'affichage des messages.
+*/
 public class MailAffichageView implements StaticRefs {
 	
+	/** Le panel principal de l'application */
 	private JPanel mainPanel;
 	
+	/** Une référence vers la vue de la liste des mails */
 	private MailListeView viewListe;
 	
+	/** Les labels du formulaire d'affichage */
 	private JLabel labObjet, labExpediteur;
 	
+	/** Les champs de texte */
 	private JTextField objet, expediteur;
 	
+	/** La zone de texte ou s'affichera le message */
 	private JTextArea message;
 	
-	private JButton retour;
+	/** Les boutons de navigation */
+	private JButton retour, repondre;
 	
 	/**
 	* Constructeur
@@ -35,6 +44,9 @@ public class MailAffichageView implements StaticRefs {
 		attacherReactions();
 	}
 	
+	/**
+	* Permet d'initialiser l'interface graphique.
+	*/
 	public void initialiserGui() {
 		mainPanel.setLayout(new BorderLayout());
 		
@@ -84,28 +96,53 @@ public class MailAffichageView implements StaticRefs {
 		panelCentre.add(moitier);
 		panelCentre.add(messageDef);
 	
-		JPanel panelBas = new JPanel(new GridLayout(1, 1));
+		JPanel panelBas = new JPanel(new GridLayout(1, 2));
 		retour = new JButton("Retour");
+		repondre = new JButton("Répondre");
 		panelBas.add(retour);
+		panelBas.add(repondre);
 		
 		mainPanel.add(panelCentre, BorderLayout.CENTER);
 		mainPanel.add(panelBas, BorderLayout.SOUTH);
 	}
 	
+	/**
+	* Permet de faire le lien entre la vue (cette classe) et son controleur.
+	*/
 	public void attacherReactions() {
 		MailAffichageCtrl controleur = new MailAffichageCtrl(this);
 		retour.addActionListener(controleur);
 	}
 	
+	/**
+	* Retourne le panel principal de l'application
+	* @return Le panel de l'application
+	*/
 	public JPanel getMainPanel() {
 		return this.mainPanel;
 	}
 	
+	/**
+	* Retourne le bouton "retour".
+	* @return Le bouton retour.
+	*/
 	public JButton getBoutonRetour() {
 		return this.retour;
 	}
 	
+	/**
+	* Permet de récupérer le mode de la liste des mails.
+	* @return Le mode utilisé par la liste des mails.
+	*/
 	public int getTheLastMode() {
 		return this.viewListe.getMode();
+	}
+	
+	/**
+	* Permet de récupérer le bouton répondre.
+	* @return Le bouton pour répondre au mail.
+	*/
+	public JButton getBoutonRepondre() {
+		return this.repondre;
 	}
 }
