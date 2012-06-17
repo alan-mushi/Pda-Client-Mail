@@ -56,10 +56,7 @@ public class MailParamView implements StaticRefs , KeyListener , ActionListener 
 	public void initialiserGui() {
 		mainPanel.setLayout(new BorderLayout());
 
-		//##################################
 		JPanel panelUser = new JPanel(new GridLayout(6, 1));
-		//##################################
-		//JPanel panelUser = new JPanel(new GridLayout(4, 1));
 		JPanel panelConnection = new JPanel(new GridLayout(4, 1));
 		JPanel panelProxy = new JPanel(new GridLayout(5, 1));
 		JPanel panelCentre = new JPanel(new GridLayout(3, 1));
@@ -70,18 +67,14 @@ public class MailParamView implements StaticRefs , KeyListener , ActionListener 
 		modifier = new JButton("Appliquer");
 
 		labUserName = new JLabel( "Utilisateur :" ) ;
-		//##################################
 		motDePasseLabel = new JLabel( "Entrez votre nouveau mot de passe :" ) ;
-		//##################################
 		labMdp = new JLabel("Mot de passe (md5) :");
 		labHote = new JLabel("Adresse :");
 		labPort = new JLabel("Port :");
 		labAdresseProxy = new JLabel("Adresse :");
 		labPortProxy = new JLabel("Port :");
 
-		//##################################
 		clearPasswd = new JPasswordField( 15 ) ;
-		//##################################
 		mdp = new JTextField(this.login.getPasswd());
 		mdp.setColumns(15);
 		mdp.setEditable( false ) ;
@@ -109,10 +102,8 @@ public class MailParamView implements StaticRefs , KeyListener , ActionListener 
 
 		panelUser.add( labUserName ) ;
 		panelUser.add( username ) ;
-		//##################################
 		panelUser.add( motDePasseLabel ) ;
 		panelUser.add( clearPasswd ) ;
-		//##################################
 		panelUser.add(labMdp);
 		panelUser.add(mdp);
 
