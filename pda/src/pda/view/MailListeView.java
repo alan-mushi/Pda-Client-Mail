@@ -30,6 +30,9 @@ public class MailListeView implements StaticRefs {
 	*/
 	private int mode;
 	
+	/**
+	 * Structure : [case affichage JTable] [id MailType]
+	 */
 	private long transitionIds[][];
 	
 	/** Pour spécifier le mode boite de réception */
@@ -243,6 +246,10 @@ public class MailListeView implements StaticRefs {
 		return this.liste;
 	}
 	
+	/**
+	 * Retourne la table des transitions entre la case et l'id des mails.
+	 * @see pda.view.MailListeView
+	 */
 	public long[][] getTransitionIds() {
 		return this.transitionIds;
 	}
