@@ -87,6 +87,35 @@ public class MailSupprView implements StaticRefs {
 				panelCentre.add(listeCheckBox[j]);
 			}
 		}
+		else if ( mode == MODE_SUPPRESSION_MAIL ) {
+			HashMap<String , MailType> mapEnvoyes = this.chargerMap() ;
+			if ( mapEnvoyes.size() == 0 ) {
+				JLabel RAS = new JLabel( "Aucun message a supprimer." ) ;
+				panelCentre.add( RAS ) ;
+			}
+			else {
+				listeCheckBox = new JCheckBox[mapEnvoyes.size()] ;
+				Object[] ids = mapEnvoyes.keySet().toArray() ;
+				for ( int i = 0 ; i < mapEnvoyes.size() ; i++ ) {
+					MailType email = mapEnvoyes.get((String) ids[i]) ;
+					// Si le seul mail est le message par défaut on ne l'affcihe pas
+					// La condition est longue car on vérifie que tous les champs 
+					// sont bien ceux du message par défaut.
+					if ( email.getObject().equals("object1") && email.getExpeditor().equals("from") && 
+						email.getRecipient().equals("to") && email.getText().equals("text") ) {
+						if ( mapEnvoyes.size() == 1 ) {
+							JLabel RAS = new JLabel( "Aucun message a supprimer." ) ;
+							panelCentre.add( RAS ) ;
+						}
+						continue ;
+					}
+					String toShow = email.getObject().concat( " ... Expéditeur : " ).concat( email.getExpeditor() ) ;
+					listeCheckBox[i] = new JCheckBox( toShow ) ;
+					panelCentre.add( listeCheckBox[i] ) ;
+				}
+			}
+		}
+		else { System.out.println( "[-] @MailSupprView : Mode inconnu : " + mode ) ; }
 		
 		JPanel panelBas = new JPanel(new GridLayout(1, 2));
 		retour = new JButton("Retour");
@@ -121,6 +150,32 @@ public class MailSupprView implements StaticRefs {
 			return ( contacts ) ;
 		}
 		return retour;
+	}
+
+	/**
+	 * Charge la HashMap adéquate en fonction de <code>theLastMode</code>.
+	 */
+	private HashMap<String , MailType> chargerMap() {
+		HashMap<String , MailType> res = null ;
+		try {
+			Mail myMail = (Mail) myDB.charger( mailsFile ) ;
+			if ( theLastMode == MailListeView.MODE_BOITE_ENVOIE ) {
+				res = myMail.getEnvoyesMap() ;
+			}
+			else if ( theLastMode == MailListeView.MODE_BROUILLON ) {
+				res = myMail.getBrouillonsMap() ;
+			}
+			else if ( theLastMode == MailListeView.MODE_BOITE_RECEPTION ) {
+				res = myMail.getLusMap() ;
+				res.putAll( myMail.getRecusMap() ) ;
+			}
+			else { res = null ; }
+		} catch ( IllegalArgumentException e ) {
+			System.err.println( e.getMessage() ) ;
+		} catch ( FileNotFoundException e ) {
+			System.err.println( e.getMessage() ) ;
+		}
+		return ( res ) ;
 	}
 	
 	/**
