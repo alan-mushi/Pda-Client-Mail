@@ -52,7 +52,7 @@ public class MailListeCtrl extends MouseAdapter implements ActionListener {
 	*/
 	public void mouseClicked(MouseEvent e) {
 		if(this.view.getTableau().isRowSelected(this.view.getTableau().getSelectedRow())) {
-			new MailAffichageView(this.view.getMainPanel(), this.view.getTableau().getSelectedRow(), this.view.getMode());
+			new MailAffichageView(this.view.getMainPanel(), this.view);
 		}
 	}
 }

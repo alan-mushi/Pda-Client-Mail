@@ -4,10 +4,14 @@ import pda.control.*;
 import pda.datas.*;
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
+import java.io.FileNotFoundException;
 
 public class MailAffichageView implements StaticRefs {
 	
 	private JPanel mainPanel;
+	
+	private MailListeView viewListe;
 	
 	private JLabel labObjet, labExpediteur;
 	
@@ -17,19 +21,14 @@ public class MailAffichageView implements StaticRefs {
 	
 	private JButton retour;
 	
-	private int idMail;
-	
-	private int theLastMode;
-	
 	/**
 	* Constructeur
 	* @param thePanel Le panel principal de l'application.
 	* @param idMail L'identifiant pour récupérer le mail dans la BDD.
 	*/
-	public MailAffichageView(JPanel thePanel, int idMail, int theLastMode) {
+	public MailAffichageView(JPanel thePanel, MailListeView viewListe) {
 		this.mainPanel = thePanel;
-		this.idMail = idMail;
-		this.theLastMode = theLastMode;
+		this.viewListe = viewListe;
 		mainPanel.removeAll();
 		mainPanel.updateUI();
 		initialiserGui();
@@ -42,21 +41,34 @@ public class MailAffichageView implements StaticRefs {
 		labObjet = new JLabel("Objet : ");
 		labExpediteur = new JLabel("Expéditeur : ");
 		
-		//myDB.charger()
-		/*HashMap<String , MailType> listeMail = null;
-		if(theLastMode == MailListeView.MODE_BOITE_RECEPTION) {
-			listeMail = getRecusMap();
-		}
-		else if(theLastMode == MailListeView.MODE_BOITE_ENVOIE) {
-			
-		}
-		else if(theLastMode == MailListeView.MODE_BROUILLON) {
-		
-		}*/
-		
 		objet = new JTextField();
 		expediteur = new JTextField();
 		message = new JTextArea();
+		
+		try {
+			Mail liste = (Mail) myDB.charger(mailsFile);
+			HashMap<String , MailType> listeMail = null;
+			if(this.viewListe.getMode() == MailListeView.MODE_BOITE_RECEPTION) {
+				listeMail = liste.getRecusMap();
+			}
+			else if(this.viewListe.getMode() == MailListeView.MODE_BOITE_ENVOIE) {
+				listeMail = liste.getEnvoyesMap();
+			}
+			else if(this.viewListe.getMode() == MailListeView.MODE_BROUILLON) {
+				listeMail = liste.getBrouillonsMap();
+			}
+		
+			long identifMails = this.viewListe.getTransitionIds()[this.viewListe.getTableau().getSelectedRow()][1];
+			MailType mail = listeMail.get(Long.toString(identifMails));
+			
+			objet.setText(mail.getObject());
+			expediteur.setText(mail.getExpeditor());
+			message.setText(mail.getText());
+		}
+		catch(FileNotFoundException e) {
+			System.err.println(e.getMessage());
+		}
+		
 		JScrollPane messageDef = new JScrollPane(message);
 		
 		JPanel panelCentre = new JPanel(new GridLayout(2, 1));
@@ -91,6 +103,6 @@ public class MailAffichageView implements StaticRefs {
 	}
 	
 	public int getTheLastMode() {
-		return this.theLastMode;
+		return this.viewListe.getMode();
 	}
 }
