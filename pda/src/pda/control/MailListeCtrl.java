@@ -8,7 +8,7 @@ import java.awt.event.*;
 /**
 * Classe gérant les évènements pour les listes de mails (reçut/envoyés/brouillons)
 */
-public class MailListeCtrl implements ActionListener {
+public class MailListeCtrl extends MouseAdapter implements ActionListener {
 	
 	/** Une référence vers la vue */
 	private MailListeView view;
@@ -43,6 +43,12 @@ public class MailListeCtrl implements ActionListener {
 			else if(this.view.getMode() == MailListeView.MODE_BROUILLON) {
 				new MailSupprView(view.getMainPanel(), MailSupprView.MODE_SUPPRESSION_MAIL, MailListeView.MODE_BROUILLON);
 			}
+		}
+	}
+	
+	public void mouseClicked(MouseEvent e) {
+		if(this.view.getTableau().isRowSelected(this.view.getTableau().getSelectedRow())) {
+			
 		}
 	}
 }

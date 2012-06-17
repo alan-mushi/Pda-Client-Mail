@@ -122,6 +122,8 @@ public class MailListeView implements StaticRefs {
 		supprimer.addActionListener(reception);
 		
 		retour.addActionListener(reception);
+		
+		liste.addMouseListener(reception);
 	}
 	
 	/**
@@ -222,5 +224,13 @@ public class MailListeView implements StaticRefs {
 	*/
 	public int getMode() {
 		return this.mode;
+	}
+	
+	/**
+	* Retourne le tableau graphique de la liste des mails.
+	* @return Le tableau de la liste des mails.
+	*/
+	public JTable getTableau() {
+		return this.liste;
 	}
 }
