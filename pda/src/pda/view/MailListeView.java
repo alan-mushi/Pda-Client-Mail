@@ -63,7 +63,7 @@ public class MailListeView implements StaticRefs {
 		String[] nomColones = { "Statut", "Objet", "Expéditeur" };
 		
 		//La colone 0 doit comporter UNIQUEMENT des types Integer pour que les images puissent s'afficher correctement.
-		Object[][] data = listeReception();
+		Object[][] data = liste();
 							
 		ModeleTableau model = new ModeleTableau(data, nomColones);
 							
@@ -128,7 +128,7 @@ public class MailListeView implements StaticRefs {
 	* Retourne la liste des mails de la boite de réception sous forme de tableau à 2 dimension.
 	* @return Un tableau contenant le contenu du tableau graphique. Retourne <code>null</code> si la méthode à échouée.
 	*/
-	private Object[][] listeReception() {
+	private Object[][] liste() {
 		int sizeTab = 0;
 		HashMap<String , MailType> mails = null;
 		try {
@@ -139,14 +139,22 @@ public class MailListeView implements StaticRefs {
 				myDB.sauvegarder(listeMail, mailsFile);
 			}
 			
-			mails = listeMail.getRecusMap();
+			if(mode == MODE_BOITE_RECEPTION) {
+				mails = listeMail.getRecusMap();
+			}
+			else if(mode == MODE_BOITE_ENVOIE) {
+				mails = listeMail.getEnvoyesMap();
+			}
+			else if(mode == MODE_BROUILLON) {
+				mails = listeMail.getBrouillonsMap();
+			}
 			sizeTab = mails.size();
 		}
 		catch(FileNotFoundException e) {
 			System.out.println( "[-] Le fichier mails.bin n'a pas été trouvé, génération d'un nouveau fichier de mails." ) ;
 			Mail listeMail = new Mail();
 			myDB.sauvegarder(listeMail, mailsFile);
-			this.listeReception();
+			this.liste();
 			return ( new Object[0][0] ) ;
 		}
 		
