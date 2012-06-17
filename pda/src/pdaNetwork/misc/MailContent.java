@@ -21,6 +21,9 @@ public class MailContent implements java.io.Serializable {
      * Recipient of the mail
      */
     private String recipient;
+
+    /** Pour la Serialization. */
+    private static final long serialVersionUID = -1935064617693813904L ;
 	
     /**
      * Mail object.
