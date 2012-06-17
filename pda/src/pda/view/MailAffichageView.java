@@ -30,6 +30,8 @@ public class MailAffichageView implements StaticRefs {
 	/** Les boutons de navigation */
 	private JButton retour, repondre;
 	
+	private MailType mail;
+	
 	/**
 	* Constructeur
 	* @param thePanel Le panel principal de l'application.
@@ -74,7 +76,7 @@ public class MailAffichageView implements StaticRefs {
 			}
 		
 			long identifMails = this.viewListe.getTransitionIds()[this.viewListe.getTableau().getSelectedRow()][1];
-			MailType mail = listeMail.get(Long.toString(identifMails));
+			mail = listeMail.get(Long.toString(identifMails));
 			
 			objet.setText(mail.getObject());
 			expediteur.setText(mail.getExpeditor());
@@ -112,6 +114,7 @@ public class MailAffichageView implements StaticRefs {
 	public void attacherReactions() {
 		MailAffichageCtrl controleur = new MailAffichageCtrl(this);
 		retour.addActionListener(controleur);
+		repondre.addActionListener(controleur);
 	}
 	
 	/**
@@ -144,5 +147,12 @@ public class MailAffichageView implements StaticRefs {
 	*/
 	public JButton getBoutonRepondre() {
 		return this.repondre;
+	}
+	
+	/**
+	* Retourne le mail actuellement affiché.
+	*/
+	public MailType getMail() {
+		return this.mail;
 	}
 }

@@ -30,5 +30,8 @@ public class MailAffichageCtrl implements ActionListener {
 		if(src == this.view.getBoutonRetour()) {
 			new MailListeView(this.view.getMainPanel(), this.view.getTheLastMode());
 		}
+		else if(src == this.view.getBoutonRepondre()) {
+			new MailCreerView(this.view.getMainPanel(), this.view.getMail());
+		}
 	}
 }
