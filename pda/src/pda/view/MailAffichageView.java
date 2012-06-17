@@ -42,8 +42,11 @@ public class MailAffichageView implements StaticRefs {
 		labExpediteur = new JLabel("Expéditeur : ");
 		
 		objet = new JTextField();
+		objet.setEditable(false);
 		expediteur = new JTextField();
+		expediteur.setEditable(false);
 		message = new JTextArea();
+		message.setEditable(false);
 		
 		try {
 			Mail liste = (Mail) myDB.charger(mailsFile);
