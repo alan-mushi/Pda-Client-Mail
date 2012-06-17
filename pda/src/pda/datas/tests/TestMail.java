@@ -98,5 +98,9 @@ public class TestMail implements StaticRefs {
 		catch ( java.io.FileNotFoundException e ) {
 			System.out.println( e.getMessage() ) ;
 		}
+
+		System.out.print( "[*] Suppression du fichier ..." ) ;
+		myDB.supprimer( mailsFile ) ;
+		System.out.println( "OK" ) ;
 	}
 }

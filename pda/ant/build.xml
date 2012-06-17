@@ -69,7 +69,7 @@
 	</target>
 
 	<!-- Exécution de l'application -->
-	<target name="run" depends="compileAll" description="executes the PDA application" >
+	<target name="run" depends="compileAll , runServer" description="executes the PDA application" >
 	  <java classname="pda.control.PdaCtrl" fork="true" dir="${work}">
 	    <jvmarg value="-Djava.net.preferIPv4Stack=true"/>
 	    <classpath refid="myCLASSPATH"/>
@@ -86,7 +86,7 @@
 	</target>
 
 	<!-- Exécution de tous les tests -->
-	<target name="runTests" depends="runTestClient,runTestDB,runTestFicheContact,runTestMail,runTestLogin,runTestMailType,runTestContacts,runTestSync" description="executes all the tests" >
+	<target name="runTests" depends="runServer , runTestClient,runTestDB,runTestFicheContact,runTestMail,runTestLogin,runTestMailType,runTestContacts,runTestSync" description="executes all the tests" >
 	  <echo message="[+] Tous les tests sont achevés." />
 	</target>
 
@@ -198,6 +198,7 @@
 	      <include name="src/**"/>
 	      <include name="lib/**"/>
 	      <include name="ww"/>
+	      <include name="server/**"/>
 	    </tarfileset>
 	  </tar>
 	</target>

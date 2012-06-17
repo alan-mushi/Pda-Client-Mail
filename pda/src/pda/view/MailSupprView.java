@@ -4,13 +4,14 @@ import pda.control.*;
 import pda.datas.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.util.*;
 
 /**
 * Classe gérant la suppression dans l'application pour les contacts et pour les mails.
 */
-public class MailSupprView implements StaticRefs {
+public class MailSupprView implements StaticRefs , ItemListener {
 
 	/** Le panel principal de l'application */
 	private JPanel mainPanel;
@@ -34,11 +35,20 @@ public class MailSupprView implements StaticRefs {
 	/** Les CheckBox sous forme de tableau pour pouvoir les identifier. */
 	private JCheckBox[] listeCheckBox;
 	
+	/** Selection de tous les mails pour suppression. */
+	private JCheckBox selectAll ;
+
+	/** Détermine l'état de sélection courante des JCheckBox. */
+	private boolean allMailsSelected ;
+	
 	/** Permet de spécifier le mode de suppression de mails */
 	public static final int MODE_SUPPRESSION_MAIL = 1;
 	
 	/** Permet de spécifier le mode de suppression de contacts */
 	public static final int MODE_SUPPRESSION_CONTACT = 2;
+
+	/** Map des transitons entre un id de mail et une position dans la <code>listeCheckBox</code>. */
+	private HashMap<Integer , String> transitionIds ;
 	
 	/**
 	* Constructeur
@@ -94,24 +104,19 @@ public class MailSupprView implements StaticRefs {
 				panelCentre.add( RAS ) ;
 			}
 			else {
+				selectAll = new JCheckBox( "Sélectionner tous les mails" ) ;
+				mainPanel.add( selectAll , BorderLayout.NORTH ) ;
+
 				listeCheckBox = new JCheckBox[mapEnvoyes.size()] ;
 				Object[] ids = mapEnvoyes.keySet().toArray() ;
+				this.transitionIds = new HashMap<Integer , String>(0) ;
+
 				for ( int i = 0 ; i < mapEnvoyes.size() ; i++ ) {
 					MailType email = mapEnvoyes.get((String) ids[i]) ;
-					// Si le seul mail est le message par défaut on ne l'affcihe pas
-					// La condition est longue car on vérifie que tous les champs 
-					// sont bien ceux du message par défaut.
-					if ( email.getObject().equals("object1") && email.getExpeditor().equals("from") && 
-						email.getRecipient().equals("to") && email.getText().equals("text") ) {
-						if ( mapEnvoyes.size() == 1 ) {
-							JLabel RAS = new JLabel( "Aucun message a supprimer." ) ;
-							panelCentre.add( RAS ) ;
-						}
-						continue ;
-					}
 					String toShow = email.getObject().concat( " ... Expéditeur : " ).concat( email.getExpeditor() ) ;
 					listeCheckBox[i] = new JCheckBox( toShow ) ;
 					panelCentre.add( listeCheckBox[i] ) ;
+					this.transitionIds.put( i , (String) ids[i] ) ;
 				}
 			}
 		}
@@ -185,7 +190,27 @@ public class MailSupprView implements StaticRefs {
 		MailSupprCtrl supprCtrl = new MailSupprCtrl(this);
 		retour.addActionListener(supprCtrl);
 		supprimer.addActionListener(supprCtrl);
+		if ( mode == MODE_SUPPRESSION_MAIL ) {
+			selectAll.addItemListener( this ) ;
+		}
 	}
+
+	/**
+	 * Permet de changer toutes les JCheckBox de la liste <code>listeCheckBox</code>
+	 * en posistion de sélection opposée.
+	 */
+	public void itemStateChanged( ItemEvent e ) {
+		for ( int i = 0 ; i < listeCheckBox.length ; i++ ) {
+			if ( allMailsSelected ) {
+				this.listeCheckBox[i].setSelected( false ) ;
+			}
+			else {
+				this.listeCheckBox[i].setSelected( true ) ;
+			}
+		}
+		this.allMailsSelected = ! allMailsSelected ;
+	}
+				
 	
 	/**
 	* Permet de récupérer le bouton retour.
@@ -233,5 +258,13 @@ public class MailSupprView implements StaticRefs {
 	*/
 	public JCheckBox[] getCheckBox() {
 		return this.listeCheckBox;
+	}
+
+	/**
+	 * Retourne la HashMap de correspondance entre les id des mails
+	 * et la position des checkBox.
+	 */
+	public HashMap<Integer , String> getTransitionIds() {
+		return ( this.transitionIds ) ;
 	}
 }
