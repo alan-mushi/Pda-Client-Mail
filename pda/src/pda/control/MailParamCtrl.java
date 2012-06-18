@@ -34,32 +34,23 @@ public class MailParamCtrl implements ActionListener , StaticRefs {
 			Config configuration = new Config();
 			configuration.setAdresseServeur(this.view.getHote().getText());
 			
-			int ok = 0;
-			for(int i=0; i<this.view.getPort().getText().length(); i++) {
-				if(Character.isDigit(this.view.getPort().getText().charAt(i)))
-					ok++;
+			try {
+				if(validerPort(this.view.getPort().getText()))
+					configuration.setPortServeur(this.view.getPort().getText());
+			}
+			catch(Exception erreur) {
+				System.err.println("Port du serveur : " + erreur.getMessage());
 			}
 			
-			if(ok == this.view.getPort().getText().length()) {
-				configuration.setPortServeur(this.view.getPort().getText());
-			}
-			else {
-				System.out.println("Le numéro de port du serveur n'est pas correct. Celui-ci va être remis par défaut.");
-			}
 			configuration.setProxy(this.view.getProxyUsed().isSelected());
 			configuration.setAdresseProxy(this.view.getAdresseProxy().getText());
 			
-			ok = 0;
-			for(int i=0; i<this.view.getPortProxy().getText().length(); i++) {
-				if(Character.isDigit(this.view.getPortProxy().getText().charAt(i)))
-					ok++;
+			try {
+				if(validerPort(this.view.getPortProxy().getText()))
+					configuration.setPortProxy(this.view.getPortProxy().getText());
 			}
-			
-			if(ok == this.view.getPortProxy().getText().length()) {
-				configuration.setPortProxy(this.view.getPortProxy().getText());
-			}
-			else {
-				System.out.println("Le numéro de port du proxy n'est pas correct. Celui-ci va être remis par défaut.");
+			catch(Exception erreur) {
+				System.err.println("Port du proxy : " + erreur.getMessage());
 			}
 			
 			try {
@@ -117,5 +108,28 @@ public class MailParamCtrl implements ActionListener , StaticRefs {
 			
 			new MailMenuView(this.view.getMainPanel());
 		}
+	}
+	
+	public boolean validerPort(String port) throws Exception {
+		int ok = 0;
+		boolean ret = false;
+		for(int i=0; i<port.length(); i++) {
+			if(Character.isDigit(port.charAt(i)))
+				ok++;
+		}
+		
+		if(ok == port.length()) {
+			if(Integer.parseInt(port) < 65536) {
+				ret = true;
+			}
+			else {
+				throw new Exception("Le numéro de port doit être compris entre 0 et 65535");
+			}	
+		}
+		else {
+			throw new Exception("Le numéro de port n'est pas correct.");
+		}
+		
+		return ret;
 	}
 }
