@@ -28,12 +28,22 @@ public class MailCreerView {
 	/** Le mail auquel on répond si réponse il y a */
 	private MailType mail;
 	
+	/** Le mode : réponse(1) ou rédaction de brouillon(2) */
+	private int mode;
+	
+	/** Permet de définir le mode de la classe pour une réponse à un mail */
+	public static final int MODE_REPONSE = 1;
+	
+	/** Permet de définir le mode de la classe pour le mode brouillon (et pouvoir continuer sa rédaction) */
+	public static final int MODE_BROUILLON = 2;
+	
 	/**
 	* Constructeur
 	* @param thePanel Le JPanel principal de l'application.
 	*/
 	public MailCreerView(JPanel thePanel) {
 		this.mainPanel = thePanel;
+		this.mode = -1;
 		mainPanel.removeAll();
 		mainPanel.updateUI();
 		initialiserGui();
@@ -45,10 +55,11 @@ public class MailCreerView {
 	* @param thePanel Le JPanel principal de l'application
 	* @param mail Le mail auquel l'utilisateur va répondre
 	*/
-	public MailCreerView(JPanel thePanel, MailType mail) {
+	public MailCreerView(JPanel thePanel, MailType mail, int mode) {
 		// On appel pas le premier constructeur car sinon l'ordre d'exécution posera problème.
 		this.mainPanel = thePanel;
 		this.mail = mail;
+		this.mode = mode;
 		mainPanel.removeAll();
 		mainPanel.updateUI();
 		initialiserGui();
@@ -64,8 +75,14 @@ public class MailCreerView {
 		objet = new JTextField(20);
 		message = new JTextArea(15, 20);
 		if(mail != null) {
-			objet.setText("Re : " + mail.getObject());
-			message.setText("\n\n\n\n===Message reçut par " + mail.getRecipient() + "===\n" + mail.getText());
+			if(mode == MODE_REPONSE) {
+				objet.setText("Re : " + mail.getObject());
+				message.setText("\n\n\n\n===Message reçut par " + mail.getRecipient() + "===\n" + mail.getText());
+			}
+			else if(mode == MODE_BROUILLON) {
+				objet.setText(mail.getObject());
+				message.setText(mail.getText());
+			}
 		}
 		JScrollPane defilementMessage = new JScrollPane(message);
 		sauver = new JButton("Sauver");
