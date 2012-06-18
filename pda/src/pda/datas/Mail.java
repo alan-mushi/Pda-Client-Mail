@@ -42,52 +42,16 @@ public class Mail implements StaticRefs , java.io.Serializable {
 		if ( dest == null ) {
 			throw new IllegalArgumentException( "La map correspondante n'a pas été trouvée." ) ;
 		}
-		if ( this.unique( email , type ) ) {
-			dest.put( id , new MailType( email , type ) ) ;
-			res = true ;
-		}
+		dest.put( id , new MailType( email , type ) ) ;
+		res = true ;
 		return ( res ) ;
 	}
+
 	/**
 	 * Ajoute un mail à la liste des messages a envoyer à la prochaine connection.
 	 */
 	public void addToSend( MailType email ) {
 		toSend.put( this.getNextMaxKey( MailType.TOSEND ) , email ) ;
-	}
-
-	/**
-	 * Regarde si le message existe déja dans la HashMap repérée par son type.
-	 * Utilisée par add() pour empêcher que le serveur n'envoie des messages au contenu
-	 * identique et a l'id différent.
-	 * @param mail Le mail a tester.
-	 * @param type Le type de l'email, sert à repérer la HashMap.
-	 * @return <code>true</code> si tous les éléments du mail ne sont pas déjà présents dans la 
-	 * HashMap désignée par son type, <code>false</code> sinon.
-	 * @throws IllegalArgumentException Si aucune map correspondante n'a été trouvée ou si un des
-	 * paramètres n'est pas valide.
-	 */
-	private boolean unique( MailContent mail , String type ) throws IllegalArgumentException {
-		boolean res = true ;
-		HashMap<String , MailType> map = this.whichMap( type ) ;
-		if ( map == null ) {
-			throw new IllegalArgumentException( "La map correspondante n'a pas été trouvée." ) ;
-		}
-		else if ( mail == null ) {
-			throw new IllegalArgumentException( "Le mail est vide." ) ;
-		}
-		else if ( map.size() > 0 ) {
-			Object[] ids = map.keySet().toArray() ;
-			String mailXML = mail.toXML() ;
-			for ( int i = 0 ; i < ids.length ; i++ ) {
-				String tmp = map.get( (String) ids[i] ).toXML() ;
-				// On se base sur le XML pour voir si un message existe déjà.
-				if ( tmp.equals( mailXML ) ) { 
-					res = false ; 
-					break ;
-				}
-			}
-		}
-		return ( res ) ;
 	}
 
 	/**

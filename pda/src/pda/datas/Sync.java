@@ -6,6 +6,7 @@ import pdaNetwork.misc.ProtocolException ;
 import pdaNetwork.misc.ConfigConst ;
 import java.util.ArrayList ;
 import java.util.HashMap ;
+import java.util.Iterator ;
 
 /**
  * Syncronise la liste des messages en local avec le serveur.
@@ -67,12 +68,31 @@ public class Sync implements StaticRefs {
 	private void getNewMails() throws ProtocolException {
 		MailClient receiver = new MailClient( this.user , this.passwd ) ;
 		ArrayList<String> newMails = receiver.getHeaders() ;
+		
+		// Construction d'une HashMap pour contenir tous les mails recus + lus.
+		HashMap<String , MailType> oldMails = myMail.getRecusMap() ;
+		HashMap<String , MailType> tmpMap = myMail.getLusMap() ;
+		Iterator it = tmpMap.keySet().iterator() ;
+		while ( it.hasNext() ) {
+			String cle = (String) it.next() ;
+			oldMails.put( cle, tmpMap.get(cle) ) ;
+		}
+		Object[] ids = oldMails.keySet().toArray() ;
+
 		if ( newMails != null && newMails.size() > 0 ) {
 			int j = 0 ; // Compte le nombre de mails réellement ajoutées (cf Mail.add() et Mail.unique() )
 			for ( int i = 0 ; i < newMails.size() ; i++ ) {
 				String id = newMails.get(i) ;
 				MailContent email = receiver.receive( id ) ;
-				if ( this.myMail.add( id , email , MailType.RECU ) ) { j++ ; }
+				int k ;
+				for ( k = 0 ; k < ids.length ; k++ ) {
+					if ( email.toXML().equals( oldMails.get( (String) ids[k] ).toXML() ) ) { break ; }
+				}
+				if ( k == ids.length ) {
+					// l'ajout est possible
+					this.myMail.add( id , email , MailType.RECU ) ;
+					j++ ;
+				}
 			}
 			System.out.println( "[+] " + j + " nouveau(x) mail(s) ajouté(s) aux mails recus." ) ;
 		}
