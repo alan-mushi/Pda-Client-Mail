@@ -51,7 +51,8 @@ public class MailListeCtrl extends MouseAdapter implements ActionListener, Stati
 				Mail liste = (Mail) myDB.charger(mailsFile);
 				HashMap<String, MailType> mailBrouillon = liste.getBrouillonsMap();
 				long[][] ids = this.view.getTransitionIds();
-				MailType mail = mailBrouillon.get(ids[this.view.getTableau().getSelectedRow()][1]);
+				System.out.println( "id du brouillon sélectionné : "+ ids[this.view.getTableau().getSelectedRow()][1]) ;
+				MailType mail = mailBrouillon.get(String.valueOf( ids[this.view.getTableau().getSelectedRow()][1]));
 				new MailCreerView(this.view.getMainPanel(), mail);
 			}
 			catch(FileNotFoundException erreur) {
