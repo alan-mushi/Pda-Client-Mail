@@ -66,7 +66,25 @@ public class MailListeView implements StaticRefs {
 	
 		JPanel panelCentre = new JPanel(new GridLayout(1, 1));
 		
-		String[] nomColones = { "Statut", "Objet", "Expéditeur" };
+		String[] nomColones;
+		
+		if(this.mode == MailListeView.MODE_BOITE_RECEPTION) {
+			nomColones = new String[3];
+			nomColones[0] = "Statut";
+			nomColones[1] = "Objet";
+			nomColones[2] = "Expéditeur";
+		}
+		else if(this.mode == MailListeView.MODE_BOITE_ENVOIE || this.mode == MailListeView.MODE_BROUILLON) {
+			nomColones = new String[2];
+			nomColones[0] = "Statut";
+			nomColones[1] = "Objet";
+		}
+		else {
+			nomColones = new String[3];
+			nomColones[0] = "";
+			nomColones[1] = "";
+			nomColones[2] = "";
+		}
 		
 		//La colone 0 doit comporter UNIQUEMENT des types Integer pour que les images puissent s'afficher correctement.
 		Object[][] data = liste();
@@ -165,7 +183,11 @@ public class MailListeView implements StaticRefs {
 		
 		Object[][] data;
 		if(sizeTab > 0) {
-			data = new Object[sizeTab][3];
+			if(this.mode == MODE_BOITE_RECEPTION)
+				data = new Object[sizeTab][3];
+			else
+				data = new Object[sizeTab][2];
+				
 			Integer nonLu = new Integer(0);
 			Integer lu = new Integer(1);
 			Integer brouillon = new Integer(2);
@@ -192,7 +214,9 @@ public class MailListeView implements StaticRefs {
 				System.out.println( "email n°"+i+" : " + tmpEmail.getObject() ) ;
 				System.out.println( "email n°"+i+" : " + tmpEmail.getExpeditor() ) ;
 				data[i][1] = tmpEmail.getObject() ;
-				data[i][2] = tmpEmail.getExpeditor() ;
+				if(mode == MODE_BOITE_RECEPTION) {
+					data[i][2] = tmpEmail.getExpeditor() ;
+				}
 				transitionIds[i][0] = i;
 				long id = Long.parseLong((String)iterator.next());
 				transitionIds[i][1] = id;
