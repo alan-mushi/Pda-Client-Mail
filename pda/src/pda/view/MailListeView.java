@@ -122,8 +122,9 @@ public class MailListeView implements StaticRefs {
 		
 		if(this.mode == MODE_BOITE_RECEPTION || this.mode == MODE_BOITE_ENVOIE)
 			nouveau.addActionListener(reception);
-		else
+		else {
 			editer.addActionListener(reception);
+		}
 		
 		supprimer.addActionListener(reception);
 		
@@ -277,5 +278,13 @@ public class MailListeView implements StaticRefs {
 	 */
 	public long[][] getTransitionIds() {
 		return this.transitionIds;
+	}
+	
+	/**
+	* Retourne le bouton pour éditer un brouillon.
+	* @return Le bouton éditer.
+	*/
+	public JButton getBoutonEditer() {
+		return this.editer;
 	}
 }

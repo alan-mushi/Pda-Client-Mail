@@ -35,7 +35,7 @@ public class MailAffichageView implements StaticRefs {
 	/**
 	* Constructeur
 	* @param thePanel Le panel principal de l'application.
-	* @param idMail L'identifiant pour récupérer le mail dans la BDD.
+	* @param viewListe La vue de la liste des mails.
 	*/
 	public MailAffichageView(JPanel thePanel, MailListeView viewListe) {
 		this.mainPanel = thePanel;

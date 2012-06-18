@@ -4,11 +4,13 @@ import pda.view.*;
 import pda.datas.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.HashMap;
+import java.io.FileNotFoundException;
 
 /**
 * Classe gérant les évènements pour les listes de mails (reçut/envoyés/brouillons)
 */
-public class MailListeCtrl extends MouseAdapter implements ActionListener {
+public class MailListeCtrl extends MouseAdapter implements ActionListener, StaticRefs {
 	
 	/** Une référence vers la vue */
 	private MailListeView view;
@@ -44,6 +46,18 @@ public class MailListeCtrl extends MouseAdapter implements ActionListener {
 				new MailSupprView(view.getMainPanel(), MailSupprView.MODE_SUPPRESSION_MAIL, MailListeView.MODE_BROUILLON);
 			}
 		}
+		else if(this.view.getMode() == MailListeView.MODE_BROUILLON && src == this.view.getBoutonEditer()) {
+			try {
+				Mail liste = (Mail) myDB.charger(mailsFile);
+				HashMap<String, MailType> mailBrouillon = liste.getBrouillonsMap();
+				long[][] ids = this.view.getTransitionIds();
+				MailType mail = mailBrouillon.get(ids[this.view.getTableau().getSelectedRow()][1]);
+				new MailCreerView(this.view.getMainPanel(), mail);
+			}
+			catch(FileNotFoundException erreur) {
+				System.err.println(erreur.getMessage());
+			}
+		}
 	}
 	
 	/**
@@ -51,8 +65,11 @@ public class MailListeCtrl extends MouseAdapter implements ActionListener {
 	* @param e L'évèment.
 	*/
 	public void mouseClicked(MouseEvent e) {
-		if(this.view.getTableau().isRowSelected(this.view.getTableau().getSelectedRow())) {
+		if(this.view.getTableau().isRowSelected(this.view.getTableau().getSelectedRow()) && (this.view.getMode() == MailListeView.MODE_BOITE_RECEPTION || this.view.getMode() == MailListeView.MODE_BOITE_ENVOIE )) {
 			new MailAffichageView(this.view.getMainPanel(), this.view);
+		}
+		else if(this.view.getTableau().isRowSelected(this.view.getTableau().getSelectedRow()) && (this.view.getMode() == MailListeView.MODE_BROUILLON)) {
+		
 		}
 	}
 }
