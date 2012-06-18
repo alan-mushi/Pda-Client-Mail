@@ -30,7 +30,7 @@ public class MailCreerCtrl implements ActionListener, StaticRefs {
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
 		if(src == this.view.getBoutonRetour()) {
-			new MailListeView(view.getMainPanel(), MailListeView.MODE_BOITE_RECEPTION);
+			new MailListeView(this.view.getMainPanel(), this.view.getTheLastMode());
 		}
 		else if(src == this.view.getBoutonSelectContact()) {
 			new MailSelectContactView(this.view.getMainPanel(), this.view.getObjet().getText(), this.view.getMessage().getText());
