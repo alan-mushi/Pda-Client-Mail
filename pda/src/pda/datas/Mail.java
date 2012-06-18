@@ -5,7 +5,7 @@ import java.util.HashMap ;
 import pdaNetwork.misc.MailContent ;
 
 /**
- * Cette classe rassemble les objets MailType dans 4 HashMaps
+ * Cette classe rassemble les objets MailType dans 5 HashMaps
  * et une ArrayList.
  * @see pda.datas.MailType
  */
@@ -144,13 +144,13 @@ public class Mail implements StaticRefs , java.io.Serializable {
 	/**
 	 * Retourne la clé la plus grande de la HashMap spécifiée par son type.
 	 */
-	private int getMaxKey( String type ) throws IllegalArgumentException {
+	private long getMaxKey( String type ) throws IllegalArgumentException {
 		HashMap<String , MailType> myMap = this.whichMap( type ) ;
 		if ( myMap != null ) {
 			Object[] tab = myMap.keySet().toArray() ;
 			if ( tab != null && tab.length > 0 ) {
 				java.util.Arrays.sort( tab ) ;
-				return ( Integer.parseInt((String) tab[tab.length-1]) ) ;
+				return ( Long.valueOf((String) tab[tab.length-1]) ) ;
 			}
 		}
 		return ( 0 ) ;
@@ -161,7 +161,7 @@ public class Mail implements StaticRefs , java.io.Serializable {
 	 * @see pda.datas.Mail#getMaxKey( java.lang.String type )
 	 */
 	public String getNextMaxKey( String type ) throws IllegalArgumentException {
-		int res = this.getMaxKey( type ) ;
+		long res = this.getMaxKey( type ) ;
 		res++ ;
 		return ( String.valueOf( res ) ) ;
 	}
