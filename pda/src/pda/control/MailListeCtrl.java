@@ -30,7 +30,7 @@ public class MailListeCtrl extends MouseAdapter implements ActionListener, Stati
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
 		if(src == this.view.getBoutonNouveau()) {
-			new MailCreerView(view.getMainPanel());
+			new MailCreerView(view.getMainPanel(), this.view.getMode());
 		}
 		else if(src == this.view.getBoutonRetour()) {
 			new MailMenuView(view.getMainPanel());
@@ -63,7 +63,7 @@ public class MailListeCtrl extends MouseAdapter implements ActionListener, Stati
 				long[][] ids = this.view.getTransitionIds();
 				System.out.println( "id du brouillon sélectionné : "+ ids[this.view.getTableau().getSelectedRow()][1]) ;
 				MailType mail = mailBrouillon.get(String.valueOf( ids[this.view.getTableau().getSelectedRow()][1]));
-				new MailCreerView(this.view.getMainPanel(), mail, MailCreerView.MODE_BROUILLON);
+				new MailCreerView(this.view.getMainPanel(), mail, MailCreerView.MODE_BROUILLON, MailListeView.MODE_BROUILLON);
 			}
 			catch(FileNotFoundException erreur) {
 				System.err.println(erreur.getMessage());

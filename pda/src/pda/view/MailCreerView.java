@@ -31,6 +31,9 @@ public class MailCreerView {
 	/** Le mode : réponse(1) ou rédaction de brouillon(2) */
 	private int mode;
 	
+	/** Le mode de la vue précédente */
+	private int theLastMode;
+	
 	/** Permet de définir le mode de la classe pour une réponse à un mail */
 	public static final int MODE_REPONSE = 1;
 	
@@ -40,10 +43,12 @@ public class MailCreerView {
 	/**
 	* Constructeur
 	* @param thePanel Le JPanel principal de l'application.
+	* @param theLastMode Le mode de la vue précédente.
 	*/
-	public MailCreerView(JPanel thePanel) {
+	public MailCreerView(JPanel thePanel, int theLastMode) {
 		this.mainPanel = thePanel;
 		this.mode = -1;
+		this.theLastMode = theLastMode;
 		mainPanel.removeAll();
 		mainPanel.updateUI();
 		initialiserGui();
@@ -55,11 +60,12 @@ public class MailCreerView {
 	* @param thePanel Le JPanel principal de l'application
 	* @param mail Le mail auquel l'utilisateur va répondre
 	*/
-	public MailCreerView(JPanel thePanel, MailType mail, int mode) {
+	public MailCreerView(JPanel thePanel, MailType mail, int mode, int theLastMode) {
 		// On appel pas le premier constructeur car sinon l'ordre d'exécution posera problème.
 		this.mainPanel = thePanel;
 		this.mail = mail;
 		this.mode = mode;
+		this.theLastMode = theLastMode;
 		mainPanel.removeAll();
 		mainPanel.updateUI();
 		initialiserGui();
@@ -206,5 +212,13 @@ public class MailCreerView {
 	*/
 	public JButton getBoutonSauver() {
 		return this.sauver;
+	}
+	
+	/**
+	* Permet de récupérer le mode de la classe précédente.
+	* @return Le mode de la classe précédente.
+	*/
+	public int getTheLastMode() {
+		return this.theLastMode;
 	}
 }
