@@ -46,19 +46,6 @@ public class MailListeCtrl extends MouseAdapter implements ActionListener, Stati
 				new MailSupprView(view.getMainPanel(), MailSupprView.MODE_SUPPRESSION_MAIL, MailListeView.MODE_BROUILLON);
 			}
 		}
-		else if(this.view.getMode() == MailListeView.MODE_BROUILLON && src == this.view.getBoutonEditer()) {
-			try {
-				Mail liste = (Mail) myDB.charger(mailsFile);
-				HashMap<String, MailType> mailBrouillon = liste.getBrouillonsMap();
-				long[][] ids = this.view.getTransitionIds();
-				System.out.println( "id du brouillon sélectionné : "+ ids[this.view.getTableau().getSelectedRow()][1]) ;
-				MailType mail = mailBrouillon.get(String.valueOf( ids[this.view.getTableau().getSelectedRow()][1]));
-				new MailCreerView(this.view.getMainPanel(), mail);
-			}
-			catch(FileNotFoundException erreur) {
-				System.err.println(erreur.getMessage());
-			}
-		}
 	}
 	
 	/**
@@ -70,7 +57,17 @@ public class MailListeCtrl extends MouseAdapter implements ActionListener, Stati
 			new MailAffichageView(this.view.getMainPanel(), this.view);
 		}
 		else if(this.view.getTableau().isRowSelected(this.view.getTableau().getSelectedRow()) && (this.view.getMode() == MailListeView.MODE_BROUILLON)) {
-			this.view.getBoutonEditer().setEnabled(true);
+			try {
+				Mail liste = (Mail) myDB.charger(mailsFile);
+				HashMap<String, MailType> mailBrouillon = liste.getBrouillonsMap();
+				long[][] ids = this.view.getTransitionIds();
+				System.out.println( "id du brouillon sélectionné : "+ ids[this.view.getTableau().getSelectedRow()][1]) ;
+				MailType mail = mailBrouillon.get(String.valueOf( ids[this.view.getTableau().getSelectedRow()][1]));
+				new MailCreerView(this.view.getMainPanel(), mail);
+			}
+			catch(FileNotFoundException erreur) {
+				System.err.println(erreur.getMessage());
+			}
 		}
 	}
 }

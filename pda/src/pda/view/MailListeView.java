@@ -18,7 +18,7 @@ public class MailListeView implements StaticRefs {
 	private JPanel mainPanel;
 	
 	/** Boutons de navigation */
-	private JButton nouveau, editer, supprimer, retour;
+	private JButton nouveau, supprimer, retour;
 	
 	/** La liste des mails affiché sous forme de tableau */
 	private JTable liste;
@@ -91,27 +91,11 @@ public class MailListeView implements StaticRefs {
 		JPanel panelBas = new JPanel(new GridLayout(1, 3));
 		panelBas.add(retour);
 		panelBas.add(supprimer);
-		try {
-			if(this.mode == MODE_BOITE_RECEPTION || this.mode == MODE_BOITE_ENVOIE) {
-				ImageIcon icon = new ImageIcon("data/img/mail/nouveau.png");
-				nouveau = new JButton(icon);
-				panelBas.add(nouveau);
-				editer = null;
-			}
-			else if(this.mode == MODE_BROUILLON) {
-				ImageIcon edit = new ImageIcon("data/img/mail/edit.png");
-				editer = new JButton(edit);
-				editer.setEnabled(false);
-				panelBas.add(editer);
-				nouveau = null;
-			}
-			else {
-				throw new Exception("Le type du bouton est indéterminé. Veuillez vérifier que vous avez spécifié le bon mode dans le constructeur.");
-			}
-		}
-		catch(Exception e) {
-			System.out.println("Une erreur est survenue :" + e.getMessage());
-		}
+			
+		ImageIcon icon = new ImageIcon("data/img/mail/nouveau.png");
+		nouveau = new JButton(icon);
+		panelBas.add(nouveau);
+		
 		mainPanel.add(panelBas, BorderLayout.SOUTH);
 	}
 	
@@ -121,11 +105,7 @@ public class MailListeView implements StaticRefs {
 	private void attacherReactions() {
 		MailListeCtrl reception = new MailListeCtrl(this);
 		
-		if(this.mode == MODE_BOITE_RECEPTION || this.mode == MODE_BOITE_ENVOIE)
-			nouveau.addActionListener(reception);
-		else {
-			editer.addActionListener(reception);
-		}
+		nouveau.addActionListener(reception);
 		
 		supprimer.addActionListener(reception);
 		
@@ -279,13 +259,5 @@ public class MailListeView implements StaticRefs {
 	 */
 	public long[][] getTransitionIds() {
 		return this.transitionIds;
-	}
-	
-	/**
-	* Retourne le bouton pour éditer un brouillon.
-	* @return Le bouton éditer.
-	*/
-	public JButton getBoutonEditer() {
-		return this.editer;
 	}
 }
