@@ -171,11 +171,12 @@
 	</target>
 
 	<!-- Génération de la documentation HTML -->
-	<target name="doc" depends="compileAll" description="build javaDoc documentation" >
+	<target name="doc" depends="resetJavaDoc" description="clean and build javaDoc documentation" >
 	  <javadoc destdir="${doc}" author="true" version="true" use="true" private="true" windowtitle="Test API">
 	    <fileset dir="${src}" defaultexcludes="yes">
               <exclude name="**/Readme"/>
               <exclude name="**/*.sh"/>
+              <exclude name="**/*.swp"/>
               <exclude name="**/*.gif"/>
               <exclude name="**/*.wav"/>
               <exclude name="**/TODO"/>
