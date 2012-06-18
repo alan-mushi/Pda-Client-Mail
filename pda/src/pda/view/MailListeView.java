@@ -101,6 +101,7 @@ public class MailListeView implements StaticRefs {
 			else if(this.mode == MODE_BROUILLON) {
 				ImageIcon edit = new ImageIcon("data/img/mail/edit.png");
 				editer = new JButton(edit);
+				editer.setEnabled(false);
 				panelBas.add(editer);
 				nouveau = null;
 			}

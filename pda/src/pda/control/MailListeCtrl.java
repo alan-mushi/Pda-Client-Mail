@@ -69,7 +69,7 @@ public class MailListeCtrl extends MouseAdapter implements ActionListener, Stati
 			new MailAffichageView(this.view.getMainPanel(), this.view);
 		}
 		else if(this.view.getTableau().isRowSelected(this.view.getTableau().getSelectedRow()) && (this.view.getMode() == MailListeView.MODE_BROUILLON)) {
-		
+			this.view.getBoutonEditer().setEnabled(true);
 		}
 	}
 }
