@@ -34,8 +34,9 @@ public class Sync implements StaticRefs {
 				this.deleteOnServer() ;
 				this.getNewMails() ;
 				this.sendNewMails() ;
+				this.lastConnectionSucced = true ;
 			}
-			this.lastConnectionSucced = true ;
+			this.lastConnectionSucced = false ;
 		} catch ( ProtocolException e ) {
 			this.lastConnectionSucced = false ;
 		}
@@ -51,7 +52,9 @@ public class Sync implements StaticRefs {
 			for ( int i = 0 ; i < toDel.size() ; i++ ) {
 				deleter.delete( toDel.get(i) ) ;
 			}
+			toDel.clear() ;
 			deleter.close() ;
+			System.out.println( "[+] " + toDel.size() + " mail(s) supprimé(s) sur le serveur." ) ;
 		}
 	}
 
@@ -61,12 +64,14 @@ public class Sync implements StaticRefs {
 	private void getNewMails() throws ProtocolException {
 		MailClient receiver = new MailClient( this.user , this.passwd ) ;
 		ArrayList<String> newMails = receiver.getHeaders() ;
-		if ( newMails != null ) {
+		if ( newMails != null && newMails.size() > 0 ) {
+			int j = 0 ; // Compte le nombre de mails réellement ajoutées (cf Mail.add() et Mail.unique() )
 			for ( int i = 0 ; i < newMails.size() ; i++ ) {
 				String id = newMails.get(i) ;
 				MailContent email = receiver.receive( id ) ;
-				this.myMail.add( id , email , MailType.RECU ) ;
+				if ( this.myMail.add( id , email , MailType.RECU ) ) { j++ ; }
 			}
+			System.out.println( "[+] " + j + " nouveau(x) mail(s) ajouté(s) aux mails recus." ) ;
 		}
 		receiver.close() ;
 	}
@@ -83,7 +88,9 @@ public class Sync implements StaticRefs {
 				sender.send( (MailContent) toSend.get( (String) ids[i] ) ) ;
 				this.myMail.changeTo( (String) ids[i] , MailType.ENVOYE ) ;
 			}
+			toSend.clear() ;
 			sender.close() ;
+			System.out.println( "[+] " + toSend.size() + " mail(s) envoyé(s)." ) ;
 		}
 	}
 
