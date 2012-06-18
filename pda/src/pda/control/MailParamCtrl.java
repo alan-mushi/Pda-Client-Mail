@@ -33,10 +33,35 @@ public class MailParamCtrl implements ActionListener , StaticRefs {
 		else if(src == this.view.getBoutonModifier()) {
 			Config configuration = new Config();
 			configuration.setAdresseServeur(this.view.getHote().getText());
-			configuration.setPortServeur(this.view.getPort().getText());
+			
+			int ok = 0;
+			for(int i=0; i<this.view.getPort().getText().length(); i++) {
+				if(Character.isDigit(this.view.getPort().getText().charAt(i)))
+					ok++;
+			}
+			
+			if(ok == this.view.getPort().getText().length()) {
+				configuration.setPortServeur(this.view.getPort().getText());
+			}
+			else {
+				System.out.println("Le numéro de port du serveur n'est pas correct. Celui-ci va être remis par défaut.");
+			}
 			configuration.setProxy(this.view.getProxyUsed().isSelected());
 			configuration.setAdresseProxy(this.view.getAdresseProxy().getText());
-			configuration.setPortProxy(this.view.getPortProxy().getText());
+			
+			ok = 0;
+			for(int i=0; i<this.view.getPortProxy().getText().length(); i++) {
+				if(Character.isDigit(this.view.getPortProxy().getText().charAt(i)))
+					ok++;
+			}
+			
+			if(ok == this.view.getPortProxy().getText().length()) {
+				configuration.setPortProxy(this.view.getPortProxy().getText());
+			}
+			else {
+				System.out.println("Le numéro de port du proxy n'est pas correct. Celui-ci va être remis par défaut.");
+			}
+			
 			try {
 				if(!configuration.sauvegarderConfig())
 					throw new Exception("Un problème est survenue lors de l'enregistrement du fichier de configuration.");
