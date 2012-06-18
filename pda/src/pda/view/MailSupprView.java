@@ -98,8 +98,8 @@ public class MailSupprView implements StaticRefs , ItemListener {
 			}
 		}
 		else if ( mode == MODE_SUPPRESSION_MAIL ) {
-			HashMap<String , MailType> mapEnvoyes = this.chargerMap() ;
-			if ( mapEnvoyes.size() == 0 ) {
+			HashMap<String , MailType> map = this.chargerMap() ;
+			if ( map.size() == 0 ) {
 				JLabel RAS = new JLabel( "Aucun message a supprimer." ) ;
 				panelCentre.add( RAS ) ;
 			}
@@ -107,12 +107,12 @@ public class MailSupprView implements StaticRefs , ItemListener {
 				selectAll = new JCheckBox( "Sélectionner tous les mails" ) ;
 				mainPanel.add( selectAll , BorderLayout.NORTH ) ;
 
-				listeCheckBox = new JCheckBox[mapEnvoyes.size()] ;
-				Object[] ids = mapEnvoyes.keySet().toArray() ;
+				listeCheckBox = new JCheckBox[map.size()] ;
+				Object[] ids = map.keySet().toArray() ;
 				this.transitionIds = new HashMap<Integer , String>(0) ;
 
-				for ( int i = 0 ; i < mapEnvoyes.size() ; i++ ) {
-					MailType email = mapEnvoyes.get((String) ids[i]) ;
+				for ( int i = 0 ; i < map.size() ; i++ ) {
+					MailType email = map.get((String) ids[i]) ;
 					String toShow = email.getObject().concat( " ... Expéditeur : " ).concat( email.getExpeditor() ) ;
 					listeCheckBox[i] = new JCheckBox( toShow ) ;
 					panelCentre.add( listeCheckBox[i] ) ;
@@ -171,8 +171,14 @@ public class MailSupprView implements StaticRefs , ItemListener {
 				res = myMail.getBrouillonsMap() ;
 			}
 			else if ( theLastMode == MailListeView.MODE_BOITE_RECEPTION ) {
+				
 				res = myMail.getLusMap() ;
-				res.putAll( myMail.getRecusMap() ) ;
+				HashMap<String , MailType> tmp = myMail.getRecusMap() ;
+				Iterator it = tmp.keySet().iterator() ;
+				while ( it.hasNext() ) {
+					String cle = (String) it.next() ;
+					res.put( cle, tmp.get(cle) ) ;
+				}
 			}
 			else { res = null ; }
 		} catch ( IllegalArgumentException e ) {
@@ -190,7 +196,7 @@ public class MailSupprView implements StaticRefs , ItemListener {
 		MailSupprCtrl supprCtrl = new MailSupprCtrl(this);
 		retour.addActionListener(supprCtrl);
 		supprimer.addActionListener(supprCtrl);
-		if ( mode == MODE_SUPPRESSION_MAIL ) {
+		if ( mode == MODE_SUPPRESSION_MAIL && this.chargerMap().size() != 0 ) {
 			selectAll.addItemListener( this ) ;
 		}
 	}

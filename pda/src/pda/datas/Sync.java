@@ -35,10 +35,13 @@ public class Sync implements StaticRefs {
 				this.getNewMails() ;
 				this.sendNewMails() ;
 				this.lastConnectionSucced = true ;
+				myDB.sauvegarder( this.myMail , mailsFile ) ;
 			}
-			this.lastConnectionSucced = false ;
 		} catch ( ProtocolException e ) {
 			this.lastConnectionSucced = false ;
+		} catch ( IllegalArgumentException e ) {
+			this.lastConnectionSucced = false ;
+			System.out.println( e.getMessage() ) ;
 		}
 	}
 

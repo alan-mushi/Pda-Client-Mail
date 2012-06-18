@@ -38,7 +38,7 @@ public class Mail implements StaticRefs , java.io.Serializable {
 	 */
 	public boolean add( String id , MailContent email , String type ) throws IllegalArgumentException {
 		boolean res = false ;
-		HashMap<String , MailType> dest = this.witchMap( type ) ;
+		HashMap<String , MailType> dest = this.whichMap( type ) ;
 		if ( dest == null ) {
 			throw new IllegalArgumentException( "La map correspondante n'a pas été trouvée." ) ;
 		}
@@ -68,7 +68,7 @@ public class Mail implements StaticRefs , java.io.Serializable {
 	 */
 	private boolean unique( MailContent mail , String type ) throws IllegalArgumentException {
 		boolean res = true ;
-		HashMap<String , MailType> map = this.witchMap( type ) ;
+		HashMap<String , MailType> map = this.whichMap( type ) ;
 		if ( map == null ) {
 			throw new IllegalArgumentException( "La map correspondante n'a pas été trouvée." ) ;
 		}
@@ -95,11 +95,11 @@ public class Mail implements StaticRefs , java.io.Serializable {
 	 * @throws IllegalArgumentException Si le type, l'id sont invalides.
 	 */
 	public void changeTo( String id , String type ) throws IllegalArgumentException {
-		HashMap<String , MailType> origin = this.inWitchMap( id ) ;
+		HashMap<String , MailType> origin = this.inWhichMap( id ) ;
 		if ( origin == null ) {
 			throw new IllegalArgumentException( "L'id n'a pas été trouvé..." ) ;
 		}
-		HashMap<String , MailType> dest = this.witchMap( type ) ;
+		HashMap<String , MailType> dest = this.whichMap( type ) ;
 		if ( dest == null ) {
 			throw new IllegalArgumentException( "La map correspondante n'a pas été trouvé..." ) ;
 		}
@@ -116,7 +116,7 @@ public class Mail implements StaticRefs , java.io.Serializable {
 	 * @throws IllegalArgumentException Si id est invalide.
 	 */
 	public void supprMail( String id ) throws IllegalArgumentException {
-		HashMap<String , MailType> origin = this.inWitchMap( id ) ;
+		HashMap<String , MailType> origin = this.inWhichMap( id ) ;
 		if ( origin == null ) {	
 			throw new IllegalArgumentException( "La map correspondante n'a pas été trouvée." ) ;
 		}
@@ -129,7 +129,7 @@ public class Mail implements StaticRefs , java.io.Serializable {
 	 * @return <code>null</code> si la map ne correspond pas.
 	 * @throws IllegalArgumentException Si le type est invalide.
 	 */
-	private HashMap<String , MailType> witchMap( String type ) throws IllegalArgumentException {
+	private HashMap<String , MailType> whichMap( String type ) throws IllegalArgumentException {
 		MailType.checkType( type ) ;
 		HashMap<String , MailType> res ;
 		if ( type.equals( MailType.RECU ) ) { res = this.recus ; }
@@ -145,7 +145,7 @@ public class Mail implements StaticRefs , java.io.Serializable {
 	 * Retourne la clé la plus grande de la HashMap spécifiée par son type.
 	 */
 	private int getMaxKey( String type ) throws IllegalArgumentException {
-		HashMap<String , MailType> myMap = this.witchMap( type ) ;
+		HashMap<String , MailType> myMap = this.whichMap( type ) ;
 		if ( myMap != null ) {
 			Object[] tab = myMap.keySet().toArray() ;
 			if ( tab != null && tab.length > 0 ) {
@@ -170,7 +170,7 @@ public class Mail implements StaticRefs , java.io.Serializable {
 	 * Recherche dans quelle HashMap est l'id.
 	 * @return La HashMap correspondante ou <code>null</code> si elle n'a pas été établie.
 	 */
-	private HashMap<String , MailType> inWitchMap( String id ) throws IllegalArgumentException {
+	private HashMap<String , MailType> inWhichMap( String id ) throws IllegalArgumentException {
 		HashMap<String , MailType> res ;
 		if ( id == null || id.isEmpty() ) {
 			throw new IllegalArgumentException( "L'id n'est pas valide." ) ;

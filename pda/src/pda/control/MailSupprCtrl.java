@@ -67,19 +67,21 @@ public class MailSupprCtrl implements ActionListener, StaticRefs {
 				Mail myMail = (Mail) myDB.charger( mailsFile ) ;
 				HashMap<Integer , String> transitionIds = this.view.getTransitionIds() ;
 				JCheckBox[] listeCheckBox = this.view.getCheckBox() ;
-				int j = 0 ; // Compte le nombre de cases cochées.
-				for ( int i = 0 ; i < listeCheckBox.length ; i++ ) {
-					if ( listeCheckBox[i].isSelected() ) {
-						myMail.supprMail( transitionIds.get( i ) ) ;
-						j++ ;
+				if ( listeCheckBox != null && listeCheckBox.length > 0 ) {
+					int j = 0 ; // Compte le nombre de cases cochées.
+					for ( int i = 0 ; i < listeCheckBox.length ; i++ ) {
+						if ( listeCheckBox[i].isSelected() ) {
+							myMail.supprMail( transitionIds.get( i ) ) ;
+							j++ ;
+						}
 					}
-				}
-				if ( j == 0 ) {
-					System.out.println( "[-] Vous devez sélectionner des mails/brouillons pour pouvoir en supprimer." ) ;
-				}
-				else { 
-					System.out.println( "[-] Suppression des mails effectuée." ) ;
-					myDB.sauvegarder( myMail , mailsFile ) ;
+					if ( j == 0 ) {
+						System.out.println( "[-] Vous devez sélectionner des mails/brouillons pour pouvoir en supprimer." ) ;
+					}
+					else { 
+						System.out.println( "[+] Suppression effectuée." ) ;
+						myDB.sauvegarder( myMail , mailsFile ) ;
+					}
 				}
 
 			} 
