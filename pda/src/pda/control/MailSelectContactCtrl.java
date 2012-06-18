@@ -40,18 +40,22 @@ public class MailSelectContactCtrl implements ActionListener, StaticRefs {
 				Login user = (Login) myDB.charger(loginFile);
 				Mail listeEnvoie = (Mail) myDB.charger(mailsFile);
 				Contacts contacts = (Contacts) myDB.charger(contactsFile);
+				boolean ok = false;
 				for(int i=0; i<listeCheckBox.length; i++) {
 					if(listeCheckBox[i].isSelected()) {
 						String email = contacts.consulter(listeCheckBox[i].getText()).getEmail();
 						MailType mail = new MailType(email, this.view.getObjet(), this.view.getMessage(), user.getUser(), MailType.ENVOYE);
 						listeEnvoie.addToSend(mail);
 						System.out.println("Le mail va être envoyé à " + listeCheckBox[i].getText() + ".");
+						ok = true;
 					}
 				}
 				Sync synchronisation = new Sync(listeEnvoie, user);
 				myDB.supprimer(mailsFile);
 				myDB.sauvegarder(listeEnvoie, mailsFile);
-				new MailMenuView(this.view.getMainPanel());
+				if(ok) {
+					new MailMenuView(this.view.getMainPanel());
+				}
 			}
 			catch(FileNotFoundException erreur) {
 				System.err.println(erreur.getMessage());
