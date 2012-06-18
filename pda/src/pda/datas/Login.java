@@ -1,6 +1,7 @@
 package pda.datas ;
 
 import pdaNetwork.client.network.Md5 ;
+import pdaNetwork.misc.ConfigConst ;
 
 /**
  * Cette classe gère la connection à l'application.
@@ -12,12 +13,28 @@ public class Login implements StaticRefs, java.io.Serializable {
 	/** Utilisé pour toujours savoir si on est loggué. */
 	private boolean loggedIn ;
 	private static final long serialVersionUID = 5L ;
+	/** 
+	 * Mode qui permet de passer en encryption simple.
+	 * Le mode encryption permet de ne pas envoyer son mot de passe
+	 * (pour une connexion au serveur) en clair. Il est alors envoyé sous forme 
+	 * de hash md5. <b>Le mode encryption ACTIVE nécessite de remplacer le fichier</b>
+	 * <b> des utilisateurs du serveur</b> : <code>pda/server/data/pdaServer/xml/users</code>.
+	 * <code>true</code> pour encryption, <code>false</code> pour sans encryption.
+	 * <br /><h2>Pensez a supprimer le fichier <code>"data/login.bin"</code> avant et après avoir changer de MODE_ENC.</h2>
+	 */
+	private static boolean MODE_ENC ;
 
 	/**
 	 * Initialise loggedIn à false.
 	 */
 	public Login() {
 		this.loggedIn = false ;
+		String fileName = "data/xml/pdaServer/configClient.xml" ;
+		ConfigConst.readConfigFile( fileName , false ) ;
+		if ( ConfigConst.getRemoteHost().equals( "localhost" ) || ConfigConst.getRemoteHost().equals( "127.0.0.1" ) ) {
+			this.MODE_ENC = true ;
+		}
+		else { this.MODE_ENC = false ; }
 	}
 
 	/**
@@ -42,12 +59,16 @@ public class Login implements StaticRefs, java.io.Serializable {
 	 * regarde si le mot de passe est identique à celui sauvegardé.
 	 * @throws IllegalArgumentException Si <code>clearPass</code> est invalide ou le mot de
 	 * passe est faux.
+	 * @return <code>true</code> si le mot de passe est correct, <code>false</code> sinon.
 	 */
 	private boolean passwdCorrect( String clearPass ) {
 		if ( clearPass == null || clearPass.isEmpty() ) {
 			throw new IllegalArgumentException( "Le mot de passe n'est pas valide" ) ;
 		}
-		else if ( this.passwd.equals( Md5.encode( clearPass ) ) ) {
+		else if ( MODE_ENC && this.passwd.equals( Md5.encode( clearPass ) ) ) {
+			return ( true ) ;
+		}
+		else if ( ! MODE_ENC && this.passwd.equals( clearPass ) ) {
 			return ( true ) ;
 		}
 		else {
@@ -124,8 +145,11 @@ public class Login implements StaticRefs, java.io.Serializable {
 		else if ( clearPass == null || clearPass.isEmpty() ) {
 			throw new IllegalArgumentException( "Le mot de passe n'est pas valide." ) ;
 		}
-		else {
+		else if ( MODE_ENC ) {
 			this.passwd = Md5.encode( clearPass ) ;
+		}
+		else {
+			this.passwd = clearPass ;
 		}
 	}
 
@@ -143,7 +167,10 @@ public class Login implements StaticRefs, java.io.Serializable {
 	}
 
 	/**
-	 * Retourne le mot de passe en md5.
+	 * Retourne le mot de passe en md5 si le mode MODE_ENC est activé,
+	 * sinon le mot de passe est retourné en clair.
+	 * @return Le mot de passe selon le mode <code>MODE_ENC</code> ou null si
+	 * l'utilisateur n'est pas authentifié.
 	 */
 	public String getPasswd() {
 		String res ;
@@ -152,5 +179,12 @@ public class Login implements StaticRefs, java.io.Serializable {
 		}
 		else { res = null ; }
 		return ( res ) ;
+	}
+
+	/**
+	 * Retourne le mode courant.
+	 */
+	public boolean getModeEnc() {
+		return ( this.MODE_ENC ) ;
 	}
 }

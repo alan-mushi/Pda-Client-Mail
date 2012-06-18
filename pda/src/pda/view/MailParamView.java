@@ -55,8 +55,13 @@ public class MailParamView implements StaticRefs , KeyListener , ActionListener 
 	 */
 	public void initialiserGui() {
 		mainPanel.setLayout(new BorderLayout());
-
-		JPanel panelUser = new JPanel(new GridLayout(6, 1));
+		JPanel panelUser ;
+		if ( this.login.getModeEnc() ) {
+			panelUser = new JPanel(new GridLayout(6, 1));
+		}
+		else {
+			 panelUser = new JPanel(new GridLayout(4, 1));
+		}
 		JPanel panelConnection = new JPanel(new GridLayout(4, 1));
 		JPanel panelProxy = new JPanel(new GridLayout(5, 1));
 		JPanel panelCentre = new JPanel(new GridLayout(3, 1));
@@ -68,16 +73,20 @@ public class MailParamView implements StaticRefs , KeyListener , ActionListener 
 
 		labUserName = new JLabel( "Utilisateur :" ) ;
 		motDePasseLabel = new JLabel( "Entrez votre nouveau mot de passe :" ) ;
-		labMdp = new JLabel("Mot de passe (md5) :");
+		if ( this.login.getModeEnc() ) {
+			labMdp = new JLabel("Mot de passe (md5) :");
+		}
 		labHote = new JLabel("Adresse :");
 		labPort = new JLabel("Port :");
 		labAdresseProxy = new JLabel("Adresse :");
 		labPortProxy = new JLabel("Port :");
 
 		clearPasswd = new JPasswordField( 15 ) ;
-		mdp = new JTextField(this.login.getPasswd());
-		mdp.setColumns(15);
-		mdp.setEditable( false ) ;
+		if ( this.login.getModeEnc() ) {
+			mdp = new JTextField(this.login.getPasswd());
+			mdp.setColumns(15);
+			mdp.setEditable( false ) ;
+		}
 		username = new JTextField( this.login.getUser() ) ;
 		username.setColumns(15);
 		hote = new JTextField( ConfigConst.getRemoteHost() );
@@ -104,8 +113,10 @@ public class MailParamView implements StaticRefs , KeyListener , ActionListener 
 		panelUser.add( username ) ;
 		panelUser.add( motDePasseLabel ) ;
 		panelUser.add( clearPasswd ) ;
-		panelUser.add(labMdp);
-		panelUser.add(mdp);
+		if ( this.login.getModeEnc() ) {
+			panelUser.add(labMdp);
+			panelUser.add(mdp);
+		}
 
 		panelConnection.add(labHote);
 		panelConnection.add(hote);
@@ -145,7 +156,9 @@ public class MailParamView implements StaticRefs , KeyListener , ActionListener 
 		retour.addActionListener(controleur);
 		modifier.addActionListener(controleur);
 		paramDefaut.addActionListener(controleur);
-		clearPasswd.addKeyListener( this ) ;
+		if ( this.login.getModeEnc() ) {
+			clearPasswd.addKeyListener( this ) ;
+		}
 		proxyUsed.addActionListener( this ) ;
 	}
 
@@ -158,6 +171,7 @@ public class MailParamView implements StaticRefs , KeyListener , ActionListener 
 	/**
 	 * Si des caractères sont tappés dans le champ de mot de passe,
 	 * le champ présentant le hash md5 est mis à jour.
+	 * Utilisé uniquement si MODE_ENC est à <code>true</code>.
 	 */
 	public void keyReleased( KeyEvent evt ) {
 		String tmp = new String( this.clearPasswd.getPassword() ) ;
@@ -231,7 +245,12 @@ public class MailParamView implements StaticRefs , KeyListener , ActionListener 
 	* @return Le champs du mot de passe.
 	*/
 	public JTextField getMdp() {
-		return this.mdp;
+		if ( this.login.getModeEnc() ) {
+			return this.mdp;
+		}
+		else {
+			return this.clearPasswd ;
+		}
 	}
 	
 	/**
