@@ -117,6 +117,7 @@ public class MailCreerView {
 	private void attacherReactions() {
 		MailCreerCtrl controleur = new MailCreerCtrl(this);
 		retour.addActionListener(controleur);
+		sauver.addActionListener(controleur);
 		
 		if(mail != null) {
 			envoyer.addActionListener(controleur);
@@ -180,5 +181,13 @@ public class MailCreerView {
 	*/
 	public MailType getMail() {
 		return this.mail;
+	}
+	
+	/**
+	* Retourne le bouton pour sauvegarder un mail dans les brouillons.
+	* @return Le bouton sauver.
+	*/
+	public JButton getBoutonSauver() {
+		return this.sauver;
 	}
 }
