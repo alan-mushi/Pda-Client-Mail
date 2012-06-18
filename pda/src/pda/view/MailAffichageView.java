@@ -78,7 +78,7 @@ public class MailAffichageView implements StaticRefs {
 			long identifMails = this.viewListe.getTransitionIds()[this.viewListe.getTableau().getSelectedRow()][1];
 			mail = listeMail.get(Long.toString(identifMails));
 			if(this.viewListe.getMode() == MailListeView.MODE_BOITE_RECEPTION) {
-				if(mail.getType() == MailType.RECU) {
+				if(mail.getType().equals( MailType.RECU) ) {
 					liste.changeTo(Long.toString(identifMails), MailType.LU);
 					myDB.sauvegarder(liste, mailsFile);
 				}
