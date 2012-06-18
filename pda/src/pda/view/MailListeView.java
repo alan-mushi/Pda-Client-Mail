@@ -138,7 +138,7 @@ public class MailListeView implements StaticRefs {
 	*/
 	private Object[][] liste() {
 		int sizeTab = 0;
-		HashMap<String , MailType> mails = null;
+		HashMap<String, MailType> mails = null;
 		try {
 			Login user = (Login) myDB.charger(loginFile);
 			Mail listeMail = (Mail) myDB.charger(mailsFile);
@@ -147,8 +147,23 @@ public class MailListeView implements StaticRefs {
 				myDB.sauvegarder(listeMail, mailsFile);
 			}
 			
-			if(mode == MODE_BOITE_RECEPTION) {
-				mails = listeMail.getRecusMap();
+			if(mode == MODE_BOITE_RECEPTION) { 
+				HashMap<String, MailType> listeRecut = listeMail.getRecusMap();
+				HashMap<String, MailType> listeLu = listeMail.getLusMap();
+				
+				mails = new HashMap<String, MailType>();
+				
+				Iterator iterator1 = listeRecut.keySet().iterator();
+				while(iterator1.hasNext()) {
+					String cle = (String)iterator1.next();
+					mails.put(cle, listeRecut.get(cle));
+				}
+				
+				Iterator iterator2 = listeLu.keySet().iterator();
+				while(iterator2.hasNext()) {
+					String cle = (String) iterator2.next();
+					mails.put(cle, listeRecut.get(cle));
+				}
 			}
 			else if(mode == MODE_BOITE_ENVOIE) {
 				mails = listeMail.getEnvoyesMap();
