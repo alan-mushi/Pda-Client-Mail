@@ -8,13 +8,16 @@ import java.awt.*;
 /**
 * Classe gérant le menu principal de l'application
 */
-public class MailMenuView {
+public class MailMenuView implements StaticRefs {
 
 	/** Le JPanel principal récupéré de la classe parente*/
 	private JPanel mainPanel;
 	
 	/** Boutons du menu permettant de naviguer dans l'application */
 	private JButton envoyes, reception, parametre, brouillons, contacts, notification;
+
+	/** Détermine si le bouton de notification doit être actif ou non. */
+	private boolean notifActived ;
 	
 	/**
 	* Constructeur
@@ -37,8 +40,43 @@ public class MailMenuView {
 		parametre = new JButton("Paramètres");
 		brouillons = new JButton("Brouillons");
 		contacts = new JButton("Contacts");
-		notification = new JButton("Pas de nouveaux mails");
-		notification.setEnabled(false);
+		// on établit la valeur du champ de notification en focntion d'une connection au serveur.
+		try {
+			Mail firstO = (Mail) myDB.charger( mailsFile ) ;
+			int tailleFirstO = firstO.getRecusMap().size() ;
+			Sync mySync = new Sync( firstO , (Login) myDB.charger( loginFile ) ) ;
+			if ( mySync.getLastConnectionSucced() ) {	
+				// On doit recharger l'objet Mail car il a été réécrit par Sync
+				Mail secondO = (Mail) myDB.charger( mailsFile ) ;
+				int diff = secondO.getRecusMap().size() - tailleFirstO ;
+				this.notifActived = false ;
+				if ( diff == 1 ) {
+					notification = new JButton( "Vous avez 1 nouveau mail." ) ;
+					this.notifActived = true ;
+				}
+				else if ( diff > 0 ) {
+					notification = new JButton( "Vous avez " + diff + " nouveaux mails." ) ;
+					this.notifActived = true ;
+				}
+				else {
+					notification = new JButton( "Vous n'avez pas de nouveaux mails." ) ;
+				}
+			}
+			else {
+				notification = new JButton( "Pas de connexion avec le serveur..." ) ;
+			}
+			if ( notifActived ) {
+				notification.setBackground( Color.red ) ;
+				notification.setEnabled( true ) ;
+			}
+			else { notification.setEnabled( false ) ; }
+		} catch ( IllegalArgumentException e ) {
+			System.out.println( e.getMessage() ) ;
+		} catch ( java.io.FileNotFoundException e ) {
+			System.out.println( e.getMessage() ) ;
+			notification = new JButton( "Le fichier \"mail.bin\" n'a pas été trouvé." ) ;
+			notification.setEnabled( false ) ;
+		}
 	
 		mainPanel.setLayout(new BorderLayout(15, 30));
 		JPanel panelBouton = new JPanel(new GridLayout(3, 2, 30, 30));
@@ -72,6 +110,9 @@ public class MailMenuView {
 		brouillons.addActionListener(menuControle);
 		contacts.addActionListener(menuControle);
 		parametre.addActionListener(menuControle);
+		if ( this.notifActived ) {
+			notification.addActionListener( menuControle ) ;
+		}
 	}
 	
 	/**

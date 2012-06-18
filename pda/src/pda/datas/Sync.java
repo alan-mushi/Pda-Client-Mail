@@ -6,6 +6,7 @@ import pdaNetwork.misc.ProtocolException ;
 import pdaNetwork.misc.ConfigConst ;
 import java.util.ArrayList ;
 import java.util.HashMap ;
+import java.util.Iterator ;
 
 /**
  * Syncronise la liste des messages en local avec le serveur.
@@ -34,10 +35,14 @@ public class Sync implements StaticRefs {
 				this.deleteOnServer() ;
 				this.getNewMails() ;
 				this.sendNewMails() ;
+				this.lastConnectionSucced = true ;
+				myDB.sauvegarder( this.myMail , mailsFile ) ;
 			}
-			this.lastConnectionSucced = true ;
 		} catch ( ProtocolException e ) {
 			this.lastConnectionSucced = false ;
+		} catch ( IllegalArgumentException e ) {
+			this.lastConnectionSucced = false ;
+			System.out.println( e.getMessage() ) ;
 		}
 	}
 
@@ -51,7 +56,9 @@ public class Sync implements StaticRefs {
 			for ( int i = 0 ; i < toDel.size() ; i++ ) {
 				deleter.delete( toDel.get(i) ) ;
 			}
+			toDel.clear() ;
 			deleter.close() ;
+			System.out.println( "[+] " + toDel.size() + " mail(s) supprimé(s) sur le serveur." ) ;
 		}
 	}
 
@@ -61,12 +68,33 @@ public class Sync implements StaticRefs {
 	private void getNewMails() throws ProtocolException {
 		MailClient receiver = new MailClient( this.user , this.passwd ) ;
 		ArrayList<String> newMails = receiver.getHeaders() ;
-		if ( newMails != null ) {
+		
+		// Construction d'une HashMap pour contenir tous les mails recus + lus.
+		HashMap<String , MailType> oldMails = myMail.getRecusMap() ;
+		HashMap<String , MailType> tmpMap = myMail.getLusMap() ;
+		Iterator it = tmpMap.keySet().iterator() ;
+		while ( it.hasNext() ) {
+			String cle = (String) it.next() ;
+			oldMails.put( cle, tmpMap.get(cle) ) ;
+		}
+		Object[] ids = oldMails.keySet().toArray() ;
+
+		if ( newMails != null && newMails.size() > 0 ) {
+			int j = 0 ; // Compte le nombre de mails réellement ajoutées (cf Mail.add() et Mail.unique() )
 			for ( int i = 0 ; i < newMails.size() ; i++ ) {
 				String id = newMails.get(i) ;
 				MailContent email = receiver.receive( id ) ;
-				this.myMail.add( id , email , MailType.RECU ) ;
+				int k ;
+				for ( k = 0 ; k < ids.length ; k++ ) {
+					if ( email.toXML().equals( oldMails.get( (String) ids[k] ).toXML() ) ) { break ; }
+				}
+				if ( k == ids.length ) {
+					// l'ajout est possible
+					this.myMail.add( id , email , MailType.RECU ) ;
+					j++ ;
+				}
 			}
+			System.out.println( "[+] " + j + " nouveau(x) mail(s) ajouté(s) aux mails recus." ) ;
 		}
 		receiver.close() ;
 	}
@@ -83,7 +111,9 @@ public class Sync implements StaticRefs {
 				sender.send( (MailContent) toSend.get( (String) ids[i] ) ) ;
 				this.myMail.changeTo( (String) ids[i] , MailType.ENVOYE ) ;
 			}
+			toSend.clear() ;
 			sender.close() ;
+			System.out.println( "[+] " + toSend.size() + " mail(s) envoyé(s)." ) ;
 		}
 	}
 

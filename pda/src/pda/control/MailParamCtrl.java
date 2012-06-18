@@ -33,10 +33,26 @@ public class MailParamCtrl implements ActionListener , StaticRefs {
 		else if(src == this.view.getBoutonModifier()) {
 			Config configuration = new Config();
 			configuration.setAdresseServeur(this.view.getHote().getText());
-			configuration.setPortServeur(this.view.getPort().getText());
+			
+			try {
+				if(validerPort(this.view.getPort().getText()))
+					configuration.setPortServeur(this.view.getPort().getText());
+			}
+			catch(Exception erreur) {
+				System.err.println("Port du serveur : " + erreur.getMessage());
+			}
+			
 			configuration.setProxy(this.view.getProxyUsed().isSelected());
 			configuration.setAdresseProxy(this.view.getAdresseProxy().getText());
-			configuration.setPortProxy(this.view.getPortProxy().getText());
+			
+			try {
+				if(validerPort(this.view.getPortProxy().getText()))
+					configuration.setPortProxy(this.view.getPortProxy().getText());
+			}
+			catch(Exception erreur) {
+				System.err.println("Port du proxy : " + erreur.getMessage());
+			}
+			
 			try {
 				if(!configuration.sauvegarderConfig())
 					throw new Exception("Un problème est survenue lors de l'enregistrement du fichier de configuration.");
@@ -92,5 +108,28 @@ public class MailParamCtrl implements ActionListener , StaticRefs {
 			
 			new MailMenuView(this.view.getMainPanel());
 		}
+	}
+	
+	public boolean validerPort(String port) throws Exception {
+		int ok = 0;
+		boolean ret = false;
+		for(int i=0; i<port.length(); i++) {
+			if(Character.isDigit(port.charAt(i)))
+				ok++;
+		}
+		
+		if(ok == port.length()) {
+			if(Integer.parseInt(port) < 65536) {
+				ret = true;
+			}
+			else {
+				throw new Exception("Le numéro de port doit être compris entre 0 et 65535");
+			}	
+		}
+		else {
+			throw new Exception("Le numéro de port n'est pas correct.");
+		}
+		
+		return ret;
 	}
 }

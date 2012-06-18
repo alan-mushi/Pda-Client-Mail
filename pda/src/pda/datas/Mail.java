@@ -5,7 +5,7 @@ import java.util.HashMap ;
 import pdaNetwork.misc.MailContent ;
 
 /**
- * Cette classe rassemble les objets MailType dans 4 HashMaps
+ * Cette classe rassemble les objets MailType dans 5 HashMaps
  * et une ArrayList.
  * @see pda.datas.MailType
  */
@@ -34,14 +34,19 @@ public class Mail implements StaticRefs , java.io.Serializable {
 	/**
 	 * Ajoute un mail à la liste appropiée (différenciation par type).
 	 * @throws IllegalArgumentException Si le type est invalide.
+	 * @return <code>true</code> si l'ajout c'est bien passé, <code>false</code> sinon.
 	 */
-	public void add( String id , MailContent email , String type ) throws IllegalArgumentException {
-		HashMap<String , MailType> dest = this.witchMap( type ) ;
+	public boolean add( String id , MailContent email , String type ) throws IllegalArgumentException {
+		boolean res = false ;
+		HashMap<String , MailType> dest = this.whichMap( type ) ;
 		if ( dest == null ) {
 			throw new IllegalArgumentException( "La map correspondante n'a pas été trouvée." ) ;
 		}
 		dest.put( id , new MailType( email , type ) ) ;
+		res = true ;
+		return ( res ) ;
 	}
+
 	/**
 	 * Ajoute un mail à la liste des messages a envoyer à la prochaine connection.
 	 */
@@ -54,11 +59,11 @@ public class Mail implements StaticRefs , java.io.Serializable {
 	 * @throws IllegalArgumentException Si le type, l'id sont invalides.
 	 */
 	public void changeTo( String id , String type ) throws IllegalArgumentException {
-		HashMap<String , MailType> origin = this.inWitchMap( id ) ;
+		HashMap<String , MailType> origin = this.inWhichMap( id ) ;
 		if ( origin == null ) {
 			throw new IllegalArgumentException( "L'id n'a pas été trouvé..." ) ;
 		}
-		HashMap<String , MailType> dest = this.witchMap( type ) ;
+		HashMap<String , MailType> dest = this.whichMap( type ) ;
 		if ( dest == null ) {
 			throw new IllegalArgumentException( "La map correspondante n'a pas été trouvé..." ) ;
 		}
@@ -75,7 +80,7 @@ public class Mail implements StaticRefs , java.io.Serializable {
 	 * @throws IllegalArgumentException Si id est invalide.
 	 */
 	public void supprMail( String id ) throws IllegalArgumentException {
-		HashMap<String , MailType> origin = this.inWitchMap( id ) ;
+		HashMap<String , MailType> origin = this.inWhichMap( id ) ;
 		if ( origin == null ) {	
 			throw new IllegalArgumentException( "La map correspondante n'a pas été trouvée." ) ;
 		}
@@ -88,7 +93,7 @@ public class Mail implements StaticRefs , java.io.Serializable {
 	 * @return <code>null</code> si la map ne correspond pas.
 	 * @throws IllegalArgumentException Si le type est invalide.
 	 */
-	private HashMap<String , MailType> witchMap( String type ) throws IllegalArgumentException {
+	private HashMap<String , MailType> whichMap( String type ) throws IllegalArgumentException {
 		MailType.checkType( type ) ;
 		HashMap<String , MailType> res ;
 		if ( type.equals( MailType.RECU ) ) { res = this.recus ; }
@@ -103,13 +108,13 @@ public class Mail implements StaticRefs , java.io.Serializable {
 	/**
 	 * Retourne la clé la plus grande de la HashMap spécifiée par son type.
 	 */
-	private int getMaxKey( String type ) throws IllegalArgumentException {
-		HashMap<String , MailType> myMap = this.witchMap( type ) ;
+	private long getMaxKey( String type ) throws IllegalArgumentException {
+		HashMap<String , MailType> myMap = this.whichMap( type ) ;
 		if ( myMap != null ) {
 			Object[] tab = myMap.keySet().toArray() ;
 			if ( tab != null && tab.length > 0 ) {
 				java.util.Arrays.sort( tab ) ;
-				return ( Integer.parseInt((String) tab[tab.length-1]) ) ;
+				return ( Long.valueOf((String) tab[tab.length-1]) ) ;
 			}
 		}
 		return ( 0 ) ;
@@ -120,7 +125,7 @@ public class Mail implements StaticRefs , java.io.Serializable {
 	 * @see pda.datas.Mail#getMaxKey( java.lang.String type )
 	 */
 	public String getNextMaxKey( String type ) throws IllegalArgumentException {
-		int res = this.getMaxKey( type ) ;
+		long res = this.getMaxKey( type ) ;
 		res++ ;
 		return ( String.valueOf( res ) ) ;
 	}
@@ -129,7 +134,7 @@ public class Mail implements StaticRefs , java.io.Serializable {
 	 * Recherche dans quelle HashMap est l'id.
 	 * @return La HashMap correspondante ou <code>null</code> si elle n'a pas été établie.
 	 */
-	private HashMap<String , MailType> inWitchMap( String id ) throws IllegalArgumentException {
+	private HashMap<String , MailType> inWhichMap( String id ) throws IllegalArgumentException {
 		HashMap<String , MailType> res ;
 		if ( id == null || id.isEmpty() ) {
 			throw new IllegalArgumentException( "L'id n'est pas valide." ) ;

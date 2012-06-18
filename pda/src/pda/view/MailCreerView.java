@@ -23,14 +23,49 @@ public class MailCreerView {
 	private JTextArea message;
 	
 	/** Boutons de navigation */
-	private JButton sauver, selectContact, retour;
+	private JButton sauver, selectContact, retour, envoyer;
+	
+	/** Le mail auquel on répond si réponse il y a */
+	private MailType mail;
+	
+	/** Le mode : réponse(1) ou rédaction de brouillon(2) */
+	private int mode;
+	
+	/** Le mode de la vue précédente */
+	private int theLastMode;
+	
+	/** Permet de définir le mode de la classe pour une réponse à un mail */
+	public static final int MODE_REPONSE = 1;
+	
+	/** Permet de définir le mode de la classe pour le mode brouillon (et pouvoir continuer sa rédaction) */
+	public static final int MODE_BROUILLON = 2;
 	
 	/**
 	* Constructeur
-	* @param thePanel Le JPanel principale de l'application.
+	* @param thePanel Le JPanel principal de l'application.
+	* @param theLastMode Le mode de la vue précédente.
 	*/
-	public MailCreerView(JPanel thePanel) {
+	public MailCreerView(JPanel thePanel, int theLastMode) {
 		this.mainPanel = thePanel;
+		this.mode = -1;
+		this.theLastMode = theLastMode;
+		mainPanel.removeAll();
+		mainPanel.updateUI();
+		initialiserGui();
+		attacherReactions();
+	}
+	
+	/**
+	* Constructeur
+	* @param thePanel Le JPanel principal de l'application
+	* @param mail Le mail auquel l'utilisateur va répondre
+	*/
+	public MailCreerView(JPanel thePanel, MailType mail, int mode, int theLastMode) {
+		// On appel pas le premier constructeur car sinon l'ordre d'exécution posera problème.
+		this.mainPanel = thePanel;
+		this.mail = mail;
+		this.mode = mode;
+		this.theLastMode = theLastMode;
 		mainPanel.removeAll();
 		mainPanel.updateUI();
 		initialiserGui();
@@ -45,9 +80,24 @@ public class MailCreerView {
 		labMessage = new JLabel("Message :");
 		objet = new JTextField(20);
 		message = new JTextArea(15, 20);
+		if(mail != null) {
+			if(mode == MODE_REPONSE) {
+				objet.setText("Re : " + mail.getObject());
+				message.setText("\n\n\n\n===Message reçut par " + mail.getRecipient() + "===\n" + mail.getText());
+			}
+			else if(mode == MODE_BROUILLON) {
+				objet.setText(mail.getObject());
+				message.setText(mail.getText());
+			}
+		}
 		JScrollPane defilementMessage = new JScrollPane(message);
 		sauver = new JButton("Sauver");
-		selectContact = new JButton("<html>Select.<br />contacts</html>");
+		if(mail != null) {
+			envoyer = new JButton("Répondre");
+		}
+		else {
+			selectContact = new JButton("<html>Select.<br />contacts</html>");
+		}
 		retour = new JButton("Retour");
 		
 		mainPanel.setLayout(new BorderLayout());
@@ -73,7 +123,12 @@ public class MailCreerView {
 		JPanel panelBas = new JPanel(new GridLayout(1, 3));
 		panelBas.add(retour);
 		panelBas.add(sauver);
-		panelBas.add(selectContact);
+		if(mail != null) {
+			panelBas.add(envoyer);
+		}
+		else {
+			panelBas.add(selectContact);
+		}
 		
 		mainPanel.add(panelCentre, BorderLayout.CENTER);
 		mainPanel.add(panelBas, BorderLayout.SOUTH);
@@ -83,9 +138,16 @@ public class MailCreerView {
 	* Permet de faire le lien entre la vue (cette classe) et son controleur.
 	*/
 	private void attacherReactions() {
-		MailCreerCtrl creer = new MailCreerCtrl(this);
-		retour.addActionListener(creer);
-		selectContact.addActionListener(creer);
+		MailCreerCtrl controleur = new MailCreerCtrl(this);
+		retour.addActionListener(controleur);
+		sauver.addActionListener(controleur);
+		
+		if(mail != null) {
+			envoyer.addActionListener(controleur);
+		}
+		else {
+			selectContact.addActionListener(controleur);
+		}
 	}
 	
 	/**
@@ -94,6 +156,14 @@ public class MailCreerView {
 	*/
 	public JButton getBoutonSelectContact() {
 		return this.selectContact;
+	}
+	
+	/**
+	* Renvoie le bouton permettant de répondre à un mail
+	* @return Le bouton pour répondre.
+	*/
+	public JButton getBoutonEnvoyer() {
+		return this.envoyer;
 	}
 	
 	/**
@@ -126,5 +196,29 @@ public class MailCreerView {
 	*/
 	public JTextArea getMessage() {
 		return this.message;
+	}
+	
+	/**
+	* Retourne le mail auquel on répond.
+	* @return Le mail de départ.
+	*/
+	public MailType getMail() {
+		return this.mail;
+	}
+	
+	/**
+	* Retourne le bouton pour sauvegarder un mail dans les brouillons.
+	* @return Le bouton sauver.
+	*/
+	public JButton getBoutonSauver() {
+		return this.sauver;
+	}
+	
+	/**
+	* Permet de récupérer le mode de la classe précédente.
+	* @return Le mode de la classe précédente.
+	*/
+	public int getTheLastMode() {
+		return this.theLastMode;
 	}
 }

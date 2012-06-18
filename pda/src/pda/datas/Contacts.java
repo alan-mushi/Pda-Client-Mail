@@ -1,11 +1,11 @@
 package pda.datas ;
 
-import java.util.HashMap ;
+import java.util.TreeMap ;
 import java.util.Set ;
 
 /**
  * Cette classe tient lieu d'annuaire. Les méthodes sont principalement des
- * surcouches pour les méthodes de HashMap.<br />
+ * surcouches pour les méthodes de TreeMap.<br />
  * Les intégritées des paramètres sont controlés dans toutes les méthodes
  * par les méthodes existe() et checkFiche().
  */
@@ -15,22 +15,22 @@ public class Contacts implements java.io.Serializable , StaticRefs {
 	 * Liste de toutes les fiches.<br />
 	 * Organisation : <code>Nom Prenom , FicheContact</code>.
 	 */
-	private HashMap<String , FicheContact> mapFiches ;
+	private TreeMap<String , FicheContact> mapFiches ;
 	private static final long serialVersionUID = 6L ;
 
 	/**
-	 * Le constructeur ne fait qu'initialiser la HashMap avec une taille de 0.
+	 * Le constructeur ne fait qu'initialiser la TreeMap avec une taille de 0.
 	 */
 	public Contacts() {
-		this.mapFiches = new HashMap<String , FicheContact>(0) ;
+		this.mapFiches = new TreeMap<String , FicheContact>() ;
 	}
 
 	/**
-	 * Retourne si oui ou non la cle est dans la HashMap.<br />
+	 * Retourne si oui ou non la cle est dans la TreeMap.<br />
 	 * La deuxième fonction indirecte de cette méthode est de vérifier
 	 * si la référence de la cle est non nulle et de taille non nulle.
 	 * @return <code>true</code> si la cle est intègre et présente dans
-	 * la HashMap, <code>false</code> si la cle n'est pas dans la HashMap.
+	 * la TreeMap, <code>false</code> si la cle n'est pas dans la TreeMap.
 	 * @throws IllegalArgumentException Si la cle n'est pas intègre.
 	 */
 	public boolean existe( String cle ) throws IllegalArgumentException {
@@ -50,7 +50,7 @@ public class Contacts implements java.io.Serializable , StaticRefs {
 	}
 
 	/**
-	 * Ajoute une FicheContact et sa clé correspondante à la HashMap.
+	 * Ajoute une FicheContact et sa clé correspondante à la TreeMap.
 	 * @param uneFicheContact La FicheContact a ajouter.
 	 * @throws IllegalArgumentException Si l'intégritée des paramètres n'est pas valide.
 	 */
@@ -63,7 +63,7 @@ public class Contacts implements java.io.Serializable , StaticRefs {
 			res = true ;
 		}
 		else {
-			throw new IllegalArgumentException( "La clé est déjà présente dans la HashMap." ) ;
+			throw new IllegalArgumentException( "La clé est déjà présente dans la TreeMap." ) ;
 		}
 		return ( res ) ;
 	}
@@ -77,18 +77,18 @@ public class Contacts implements java.io.Serializable , StaticRefs {
 	}
 
 	/**
-	 * Retourne la taille de la HashMap.
+	 * Retourne la taille de la TreeMap.
 	 */
 	public int taille() { 
 		return ( this.mapFiches.size() ) ; 
 	}
 
 	/**
-	 * Supprime une cle de la HashMap.
+	 * Supprime une cle de la TreeMap.
 	 */
 	public void supprimer( String cle ) throws IllegalArgumentException {
 		if ( ! this.existe( cle ) ) {
-			throw new IllegalArgumentException( "La cle n'est pas présente dans la HashMap." ) ;
+			throw new IllegalArgumentException( "La cle n'est pas présente dans la TreeMap." ) ;
 		}
 		else {
 			this.mapFiches.remove( cle ) ;
@@ -96,7 +96,7 @@ public class Contacts implements java.io.Serializable , StaticRefs {
 	}
 
 	/**
-	 * Modifie une FicheContact dans la HashMap en identifiant la cle.
+	 * Modifie une FicheContact dans la TreeMap en identifiant la cle.
 	 * @return <code>true</code> si l'action s'est déroulée avec succès, <code>false</code> sinon.
 	 */
 	public boolean modifier( String cle , FicheContact uneFicheContact ) throws IllegalArgumentException {
@@ -122,7 +122,7 @@ public class Contacts implements java.io.Serializable , StaticRefs {
 	}
 
 	/**
-	 * Retourne les valeurs des clées présentes dans la HashMap.
+	 * Retourne les valeurs des clées présentes dans la TreeMap.
 	 */
 	public Set<String> cles() {
 		return ( this.mapFiches.keySet() ) ;

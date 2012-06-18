@@ -18,7 +18,7 @@ public class TestContacts implements StaticRefs {
 		System.out.print( "\n[*] Construction d'un objet Contacts ... " ) ;
 		Contacts cont = new Contacts() ;
 		System.out.println( "FAIT" ) ;
-		System.out.print( "[*] Taille de la HashMap après l'instanciation ... " ) ;
+		System.out.print( "[*] Taille de la TreeMap après l'instanciation ... " ) ;
 		int tailleMap = cont.taille() ;
 		if ( tailleMap != 0 ) {
 			System.out.println( "FAUSSE" ) ;
@@ -86,7 +86,7 @@ public class TestContacts implements StaticRefs {
 			catch ( IllegalArgumentException e ) {
 				System.out.println( "FAIL" ) ;
 			}
-			System.out.print( "\n[*] Test basé sur une erreur (ajout d'une fiche déjà présente dans la HashMap) ... " ) ;
+			System.out.print( "\n[*] Test basé sur une erreur (ajout d'une fiche déjà présente dans la TreeMap) ... " ) ;
 			try {
 				cont.ajouter( fiche2 ) ;
 				System.out.println( "FAIL" ) ;
@@ -156,7 +156,7 @@ public class TestContacts implements StaticRefs {
 		}
 		//----------------------------Test cles---------------------------
 		java.util.Set<String> cles = cont.cles() ;
-		System.out.println( "\n[*] Test de la méthode cles (contenu de la HashMap) : " + cles.toString() ) ;
+		System.out.println( "\n[*] Test de la méthode cles (contenu de la TreeMap) : " + cles.toString() ) ;
 		//----------------------------Test consulter---------------------------
 		System.out.println( "\n---------------------------------------------" ) ;
 		System.out.println( "	Test de la méthode consulter." ) ;
@@ -176,9 +176,12 @@ public class TestContacts implements StaticRefs {
 			System.out.println( e.getMessage() ) ;
 		}
 
-		System.out.println( "\n[*] Test basé sur une erreur (clé non présente dans la HashMap) ... " ) ;
+		System.out.print( "\n[*] Test basé sur une erreur (clé non présente dans la TreeMap) ... " ) ;
 		try {
-			cont.consulter( "nom2 prenom2" ) ;
+			if ( cont.consulter( "nom2 prenom2" ) == null ) {
+				System.out.println( "OK" ) ;
+			}
+			else { System.out.println( "FAIL" ) ; }
 		}
 		catch ( IllegalArgumentException e ) {
 			System.out.println( e.getMessage() ) ;
@@ -196,7 +199,7 @@ public class TestContacts implements StaticRefs {
 		System.out.println( "\n---------------------------------------------" ) ;
 		System.out.println( "	Test de la méthode modifier." ) ;
 
-		System.out.print( "\n[*] Test basé sur une erreur (clé non présente dans la HashMap) ... " ) ;
+		System.out.print( "\n[*] Test basé sur une erreur (clé non présente dans la TreeMap) ... " ) ;
 		try {
 			FicheContact tmpFiche = new FicheContact( "nomModif" , "prenomModif" , "emailModif" ) ;
 			cont.modifier( "jhfdsjhfsdf" , tmpFiche ) ;
@@ -206,7 +209,7 @@ public class TestContacts implements StaticRefs {
 			System.out.println( "OK : \n" + e.getMessage() ) ;
 		}
 
-		System.out.print( "\n[*] Test basé SANS erreurs (modification de fiche dans la HashMap) ... " ) ;
+		System.out.print( "\n[*] Test basé SANS erreurs (modification de fiche dans la TreeMap) ... " ) ;
 		try {
 			FicheContact tmpFiche = new FicheContact( "nomModif" , "prenomModif" , "emailModif" ) ;
 			cont.modifier( "nom prenom" , tmpFiche ) ;
@@ -223,7 +226,7 @@ public class TestContacts implements StaticRefs {
 		cont.sauver() ;
 		System.out.println( "OK" ) ;
 		java.util.Set<String> oldSet = cont.cles() ;
-		System.out.println( "\n[*] Clés de la HashMap : " + oldSet ) ;
+		System.out.println( "\n[*] Clés de la TreeMap : " + oldSet ) ;
 
 		System.out.print( "\n[*] Restauration de l'objet Contacts depuis le fichier ... " ) ;
 		try {
@@ -231,7 +234,7 @@ public class TestContacts implements StaticRefs {
 			System.out.println( "OK" ) ;
 
 			java.util.Set<String> newSet = loaded.cles() ;
-			System.out.println( "\n[*] Cles présentes dans la HashMap de l'objet chargé : " + newSet ) ;
+			System.out.println( "\n[*] Cles présentes dans la TreeMap de l'objet chargé : " + newSet ) ;
 
 			if ( oldSet.equals( newSet ) ) {
 				System.out.println( "\n[+] Les deux Set sont identiques : la sauvegarde est valide." ) ;
