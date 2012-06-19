@@ -53,12 +53,16 @@ public class MailAffichageView implements StaticRefs {
 		mainPanel.setLayout(new BorderLayout());
 		
 		labObjet = new JLabel("Objet : ");
-		labExpediteur = new JLabel("Expéditeur : ");
+		if(this.viewListe.getMode() != MailListeView.MODE_BOITE_ENVOIE) {
+			labExpediteur = new JLabel("Expéditeur : ");
+		}
 		
 		objet = new JTextField();
 		objet.setEditable(false);
-		expediteur = new JTextField();
-		expediteur.setEditable(false);
+		if(this.viewListe.getMode() != MailListeView.MODE_BOITE_ENVOIE) {
+			expediteur = new JTextField();
+			expediteur.setEditable(false);
+		}
 		message = new JTextArea();
 		message.setEditable(false);
 		
@@ -85,7 +89,9 @@ public class MailAffichageView implements StaticRefs {
 			}
 
 			objet.setText(mail.getObject());
-			expediteur.setText(mail.getExpeditor());
+			if(this.viewListe.getMode() != MailListeView.MODE_BOITE_ENVOIE) {
+				expediteur.setText(mail.getExpeditor());
+			}
 			message.setText(mail.getText());
 		}
 		catch(FileNotFoundException e) {
@@ -95,9 +101,15 @@ public class MailAffichageView implements StaticRefs {
 		JScrollPane messageDef = new JScrollPane(message);
 		
 		JPanel panelCentre = new JPanel(new GridLayout(2, 1));
-		JPanel moitier = new JPanel(new GridLayout(4, 1));
-		moitier.add(labExpediteur);
-		moitier.add(expediteur);
+		JPanel moitier;
+		if(this.viewListe.getMode() == MailListeView.MODE_BOITE_ENVOIE) {
+			moitier = new JPanel(new GridLayout(4, 1));
+			moitier.add(labExpediteur);
+			moitier.add(expediteur);
+		}
+		else {
+			moitier = new JPanel(new GridLayout(2, 1));
+		}
 		moitier.add(labObjet);
 		moitier.add(objet);
 		

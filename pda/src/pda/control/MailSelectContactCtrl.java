@@ -32,7 +32,8 @@ public class MailSelectContactCtrl implements ActionListener, StaticRefs {
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
 		if(src == this.view.getBoutonRetour()) {
-			new MailCreerView(this.view.getMainPanel(), -1);
+			System.out.println(this.view.getTheLastMode());
+			new MailMenuView(this.view.getMainPanel());
 		}
 		else if(src == this.view.getBoutonEnvoyer()) {
 			try {

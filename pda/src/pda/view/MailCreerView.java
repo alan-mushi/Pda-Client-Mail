@@ -47,7 +47,7 @@ public class MailCreerView {
 	*/
 	public MailCreerView(JPanel thePanel, int theLastMode) {
 		this.mainPanel = thePanel;
-		this.mode = -1;
+		this.mode = MODE_BROUILLON;
 		this.theLastMode = theLastMode;
 		mainPanel.removeAll();
 		mainPanel.updateUI();
@@ -57,8 +57,10 @@ public class MailCreerView {
 	
 	/**
 	* Constructeur
-	* @param thePanel Le JPanel principal de l'application
-	* @param mail Le mail auquel l'utilisateur va répondre
+	* @param thePanel Le JPanel principal de l'application.
+	* @param mail Le mail auquel l'utilisateur va répondre.
+	* @param mode Le mode à utiliser.
+	* @param theLastMode Le mode de la classe gérant la liste des mails.
 	*/
 	public MailCreerView(JPanel thePanel, MailType mail, int mode, int theLastMode) {
 		// On appel pas le premier constructeur car sinon l'ordre d'exécution posera problème.

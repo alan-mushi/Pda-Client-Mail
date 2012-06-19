@@ -23,11 +23,17 @@ public class MailSelectContactView implements StaticRefs {
 	
 	/** Sauvegarde du mail le temps de la sélection des contacts */
 	private String objet, message;
+	
+	private int theLastMode;
+	
 	/**
 	* Constructeur
 	* @param thePanel Le panel principal de l'application.
+	* @param objet L'objet du mail.
+	* @param message Le message du mail.
 	*/
 	public MailSelectContactView(JPanel thePanel, String objet, String message) {
+		this.theLastMode = -1;
 		this.mainPanel = thePanel;
 		this.objet = objet;
 		this.message = message;
@@ -35,6 +41,18 @@ public class MailSelectContactView implements StaticRefs {
 		mainPanel.updateUI();
 		initialiserGui();
 		attacherReactions();
+	}
+	
+	/**
+	* Constructeur
+	* @param thePanel thePanel Le panel principal de l'application.
+	* @param objet L'objet du mail.
+	* @param message Le message du mail.
+	* @param theLastMode Le mode de la liste des mails.
+	*/
+	public MailSelectContactView(JPanel thePanel, String objet, String message, int theLastMode) {
+		this(thePanel, objet, message);
+		this.theLastMode = theLastMode;
 	}
 	
 	/**
@@ -159,5 +177,13 @@ public class MailSelectContactView implements StaticRefs {
 	*/
 	public String getMessage() {
 		return this.message;
+	}
+	
+	/**
+	* Retourne le mode de la liste des mails.
+	* @return Le mode de la liste des mails.
+	*/
+	public int getTheLastMode() {
+		return this.theLastMode;
 	}
 }
