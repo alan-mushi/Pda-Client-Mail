@@ -140,8 +140,8 @@ public class Mail implements StaticRefs , java.io.Serializable {
 			throw new IllegalArgumentException( "L'id n'est pas valide." ) ;
 		}
 		else {
-			if ( this.recus.containsKey( id ) ) { res = this.recus ; }
-			else if ( this.lus.containsKey( id ) ) { res = this.lus ; }
+			if ( this.lus.containsKey( id ) ) { res = this.lus ; }
+			else if ( this.recus.containsKey( id ) ) { res = this.recus ; }
 			else if ( this.envoyes.containsKey( id ) ) { res = this.envoyes ; }
 			else if ( this.brouillons.containsKey( id ) ) { res = this.brouillons ; }
 			else if ( this.toSend.containsKey( id ) ) { res = this.toSend ; }

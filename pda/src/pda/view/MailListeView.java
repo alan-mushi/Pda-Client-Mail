@@ -26,7 +26,7 @@ public class MailListeView implements StaticRefs {
 	/** Le mode de la classe :
 	*	Boite de réception : 1
 	*	Boite d'envoie : 2
-	*	Brouiilon : 3
+	*	Brouillon : 3
 	*/
 	private int mode;
 	
@@ -162,7 +162,7 @@ public class MailListeView implements StaticRefs {
 				Iterator iterator2 = listeLu.keySet().iterator();
 				while(iterator2.hasNext()) {
 					String cle = (String) iterator2.next();
-					mails.put(cle, listeRecut.get(cle));
+					mails.put(cle, listeLu.get(cle));
 				}
 			}
 			else if(mode == MODE_BOITE_ENVOIE) {
@@ -211,8 +211,6 @@ public class MailListeView implements StaticRefs {
 				else {
 					data[i][0] = nonLu ; 
 				}
-				System.out.println( "email n°"+i+" : " + tmpEmail.getObject() ) ;
-				System.out.println( "email n°"+i+" : " + tmpEmail.getExpeditor() ) ;
 				data[i][1] = tmpEmail.getObject() ;
 				if(mode == MODE_BOITE_RECEPTION) {
 					data[i][2] = tmpEmail.getExpeditor() ;

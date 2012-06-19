@@ -56,9 +56,9 @@ public class Sync implements StaticRefs {
 			for ( int i = 0 ; i < toDel.size() ; i++ ) {
 				deleter.delete( toDel.get(i) ) ;
 			}
-			toDel.clear() ;
 			deleter.close() ;
 			System.out.println( "[+] " + toDel.size() + " mail(s) supprimé(s) sur le serveur." ) ;
+			toDel.clear() ;
 		}
 	}
 
@@ -72,12 +72,20 @@ public class Sync implements StaticRefs {
 		// Construction d'une HashMap pour contenir tous les mails recus + lus.
 		HashMap<String , MailType> oldMails = myMail.getRecusMap() ;
 		HashMap<String , MailType> tmpMap = myMail.getLusMap() ;
+
+		HashMap<String , MailType> looky = new HashMap<String , MailType>(0) ;
+
 		Iterator it = tmpMap.keySet().iterator() ;
 		while ( it.hasNext() ) {
 			String cle = (String) it.next() ;
-			oldMails.put( cle, tmpMap.get(cle) ) ;
+			looky.put( cle, tmpMap.get(cle) ) ;
 		}
-		Object[] ids = oldMails.keySet().toArray() ;
+		Iterator it2 = oldMails.keySet().iterator() ;
+		while ( it2.hasNext() ) {
+			String cle = (String) it2.next() ;
+			looky.put( cle , oldMails.get(cle)) ;
+		}
+		Object[] ids = looky.keySet().toArray() ;
 
 		if ( newMails != null && newMails.size() > 0 ) {
 			int j = 0 ; // Compte le nombre de mails réellement ajoutées (cf Mail.add() et Mail.unique() )
@@ -86,7 +94,11 @@ public class Sync implements StaticRefs {
 				MailContent email = receiver.receive( id ) ;
 				int k ;
 				for ( k = 0 ; k < ids.length ; k++ ) {
-					if ( email.toXML().equals( oldMails.get( (String) ids[k] ).toXML() ) ) { break ; }
+					MailType tmpMail = looky.get( (String) ids[k] ) ;
+					if ( email.getExpeditor().equals( tmpMail.getExpeditor() ) &&
+						email.getObject().equals( tmpMail.getObject() ) &&
+						email.getRecipient().equals( tmpMail.getRecipient() ) &&
+						email.getText().equals( tmpMail.getText() ) ) { break ; }
 				}
 				if ( k == ids.length ) {
 					// l'ajout est possible
@@ -111,9 +123,9 @@ public class Sync implements StaticRefs {
 				sender.send( (MailContent) toSend.get( (String) ids[i] ) ) ;
 				this.myMail.changeTo( (String) ids[i] , MailType.ENVOYE ) ;
 			}
-			toSend.clear() ;
 			sender.close() ;
 			System.out.println( "[+] " + toSend.size() + " mail(s) envoyé(s)." ) ;
+			toSend.clear() ;
 		}
 	}
 

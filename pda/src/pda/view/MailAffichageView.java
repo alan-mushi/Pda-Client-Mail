@@ -5,6 +5,7 @@ import pda.datas.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
+import java.util.Iterator ;
 import java.io.FileNotFoundException;
 
 /**
@@ -69,8 +70,20 @@ public class MailAffichageView implements StaticRefs {
 		try {
 			Mail liste = (Mail) myDB.charger(mailsFile);
 			HashMap<String , MailType> listeMail = null;
-			if(this.viewListe.getMode() == MailListeView.MODE_BOITE_RECEPTION) {
-				listeMail = liste.getRecusMap();
+			if(this.viewListe.getMode() != MailListeView.MODE_BOITE_RECEPTION) {
+				listeMail = new HashMap<String, MailType>();
+				HashMap<String , MailType> listeRecut = liste.getRecusMap() ;
+				Iterator iterator1 = listeRecut.keySet().iterator();
+				while(iterator1.hasNext()) {
+					String cle = (String)iterator1.next();
+					listeMail.put(cle, listeRecut.get(cle));
+				}
+				HashMap<String , MailType> listeLu = liste.getLusMap() ;
+				Iterator iterator2 = listeLu.keySet().iterator();
+				while(iterator2.hasNext()) {
+					String cle = (String) iterator2.next();
+					listeMail.put(cle, listeLu.get(cle));
+				}
 			}
 			else if(this.viewListe.getMode() == MailListeView.MODE_BOITE_ENVOIE) {
 				listeMail = liste.getEnvoyesMap();
@@ -102,7 +115,7 @@ public class MailAffichageView implements StaticRefs {
 		
 		JPanel panelCentre = new JPanel(new GridLayout(2, 1));
 		JPanel moitier;
-		if(this.viewListe.getMode() != MailListeView.MODE_BOITE_ENVOIE) {
+		if(this.viewListe.getMode() == MailListeView.MODE_BOITE_ENVOIE) {
 			moitier = new JPanel(new GridLayout(4, 1));
 			moitier.add(labExpediteur);
 			moitier.add(expediteur);
