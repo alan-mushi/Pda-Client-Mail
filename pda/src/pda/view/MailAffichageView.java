@@ -70,7 +70,7 @@ public class MailAffichageView implements StaticRefs {
 		try {
 			Mail liste = (Mail) myDB.charger(mailsFile);
 			HashMap<String , MailType> listeMail = null;
-			if(this.viewListe.getMode() != MailListeView.MODE_BOITE_RECEPTION) {
+			if(this.viewListe.getMode() == MailListeView.MODE_BOITE_RECEPTION) {
 				listeMail = new HashMap<String, MailType>();
 				HashMap<String , MailType> listeRecut = liste.getRecusMap() ;
 				Iterator iterator1 = listeRecut.keySet().iterator();
