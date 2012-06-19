@@ -102,7 +102,7 @@ public class MailAffichageView implements StaticRefs {
 		
 		JPanel panelCentre = new JPanel(new GridLayout(2, 1));
 		JPanel moitier;
-		if(this.viewListe.getMode() == MailListeView.MODE_BOITE_ENVOIE) {
+		if(this.viewListe.getMode() != MailListeView.MODE_BOITE_ENVOIE) {
 			moitier = new JPanel(new GridLayout(4, 1));
 			moitier.add(labExpediteur);
 			moitier.add(expediteur);
