@@ -109,15 +109,16 @@ public class Mail implements StaticRefs , java.io.Serializable {
 	 * Retourne la clé la plus grande de la HashMap spécifiée par son type.
 	 */
 	private long getMaxKey( String type ) throws IllegalArgumentException {
+		long res = 0;
 		HashMap<String , MailType> myMap = this.whichMap( type ) ;
 		if ( myMap != null ) {
 			Object[] tab = myMap.keySet().toArray() ;
 			if ( tab != null && tab.length > 0 ) {
 				java.util.Arrays.sort( tab ) ;
-				return ( Long.valueOf((String) tab[tab.length-1]) ) ;
+				res = Long.valueOf((String) tab[tab.length-1]);
 			}
 		}
-		return ( 0 ) ;
+		return res;
 	}
 
 	/**
