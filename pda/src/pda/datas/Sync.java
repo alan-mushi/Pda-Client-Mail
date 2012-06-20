@@ -26,24 +26,24 @@ public class Sync implements StaticRefs {
 	 * @param myLog Objet Login qui contient les identifiants.
 	 */
 	public Sync( Mail MailObject , Login myLog ) {
-		try {
-			this.user = myLog.getUser() ;
-			this.passwd = myLog.getPasswd() ;
-			ConfigConst.readConfigFile( "data/xml/pdaServer/configClient.xml" , false ) ;
-			this.myMail = MailObject ;
-			if ( this.myMail != null ) {
+		this.user = myLog.getUser() ;
+		this.passwd = myLog.getPasswd() ;
+		ConfigConst.readConfigFile( "data/xml/pdaServer/configClient.xml" , false ) ;
+		this.myMail = MailObject ;
+		if ( this.myMail != null ) {
+			try {
 				this.deleteOnServer() ;
 				this.getNewMails() ;
 				this.sendNewMails() ;
 				this.lastConnectionSucced = true ;
 				myDB.sauvegarder( this.myMail , mailsFile ) ;
+			} catch ( ProtocolException e ) {
+				this.lastConnectionSucced = false ;
+				System.out.println( e.getMessage() ) ;
+			} catch ( IllegalArgumentException e ) {
+				this.lastConnectionSucced = false ;
+				System.out.println( e.getMessage() ) ;
 			}
-		} catch ( ProtocolException e ) {
-			this.lastConnectionSucced = false ;
-			System.out.println( e.getMessage() ) ;
-		} catch ( IllegalArgumentException e ) {
-			this.lastConnectionSucced = false ;
-			System.out.println( e.getMessage() ) ;
 		}
 	}
 
@@ -96,6 +96,8 @@ public class Sync implements StaticRefs {
 				int k ;
 				for ( k = 0 ; k < ids.length ; k++ ) {
 					MailType tmpMail = looky.get( (String) ids[k] ) ;
+					// Si les champs du mail sont déjà connus.
+					// La date est variable donc non testée.
 					if ( email.getExpeditor().equals( tmpMail.getExpeditor() ) &&
 						email.getObject().equals( tmpMail.getObject() ) &&
 						email.getRecipient().equals( tmpMail.getRecipient() ) &&

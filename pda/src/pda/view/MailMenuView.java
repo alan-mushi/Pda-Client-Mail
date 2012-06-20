@@ -110,7 +110,7 @@ public class MailMenuView implements StaticRefs {
 		brouillons.addActionListener(menuControle);
 		contacts.addActionListener(menuControle);
 		parametre.addActionListener(menuControle);
-		if ( this.notifActived ) {
+		if ( this.notifActived && this.notification != null ) {
 			notification.addActionListener( menuControle ) ;
 		}
 	}

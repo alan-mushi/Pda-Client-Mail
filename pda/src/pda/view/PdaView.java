@@ -57,6 +57,9 @@ public class PdaView extends JFrame {
     	/** help menu item */
     	private JMenu helpMenu = new JMenu("Help");
 
+	/** help menu item */
+    	public JMenuItem helpMI = new JMenuItem("Help me !");
+
     	/** start menu item */
     	public JMenuItem startMI = new JMenuItem("start Launcher");
     
@@ -188,11 +191,13 @@ public class PdaView extends JFrame {
 		fileMenu.add(startMI);
 		fileMenu.add(closeMI);
 		fileMenu.add(quitMI);
+		helpMenu.add( helpMI ) ;
 
 		// listeners to mouse click
 		startMI.addActionListener(ctrl);
 		closeMI.addActionListener(ctrl);
 		quitMI.addActionListener(ctrl);
+		helpMI.addActionListener(ctrl);
 
 		JLayeredPane layeredPane = new JLayeredPane();
 		skin = new JLabel ();

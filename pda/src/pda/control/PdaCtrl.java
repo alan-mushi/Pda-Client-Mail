@@ -92,6 +92,10 @@ public class PdaCtrl implements ActionListener {
 		if (source == view.quitMI) quit();
 		else if (source == view.startMI) startLauncher();
 		else if (source == view.closeMI) closeCurrentAppli();
+		// Pour la fenêtre d'aide
+		else if (source == view.helpMI) {
+			JOptionPane.showInternalMessageDialog( view.getContentPane() , "L'aide pour l'application Mail est\ndistribuée par le biais du manuel\nd'utilisateur." , "Help window" , JOptionPane.INFORMATION_MESSAGE ) ;
+		}
 
 	} // ---------------------------------------------------- actionPerformed()
 
