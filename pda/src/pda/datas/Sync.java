@@ -40,6 +40,7 @@ public class Sync implements StaticRefs {
 			}
 		} catch ( ProtocolException e ) {
 			this.lastConnectionSucced = false ;
+			System.out.println( e.getMessage() ) ;
 		} catch ( IllegalArgumentException e ) {
 			this.lastConnectionSucced = false ;
 			System.out.println( e.getMessage() ) ;
