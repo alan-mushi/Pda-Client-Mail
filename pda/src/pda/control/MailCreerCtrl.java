@@ -46,8 +46,6 @@ public class MailCreerCtrl implements ActionListener, StaticRefs {
 				System.out.println("Le mail va être envoyé à " + this.view.getMail().getExpeditor() + ".");
 
 				Sync synchronisation = new Sync(listeEnvoie, user);
-				myDB.supprimer(mailsFile);
-				myDB.sauvegarder(listeEnvoie, mailsFile);
 			}
 			catch(FileNotFoundException erreur) {
 				System.err.println(erreur.getMessage());

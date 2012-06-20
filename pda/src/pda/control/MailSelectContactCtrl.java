@@ -45,15 +45,13 @@ public class MailSelectContactCtrl implements ActionListener, StaticRefs {
 				for(int i=0; i<listeCheckBox.length; i++) {
 					if(listeCheckBox[i].isSelected()) {
 						String email = contacts.consulter(listeCheckBox[i].getText()).getEmail();
-						MailType mail = new MailType(email, this.view.getObjet(), this.view.getMessage(), user.getUser(), MailType.ENVOYE);
+						MailType mail = new MailType(email, this.view.getObjet(), this.view.getMessage(), user.getUser(), MailType.TOSEND);
 						listeEnvoie.addToSend(mail);
 						System.out.println("Le mail va être envoyé à " + listeCheckBox[i].getText() + ".");
 						ok = true;
 					}
 				}
 				Sync synchronisation = new Sync(listeEnvoie, user);
-				myDB.supprimer(mailsFile);
-				myDB.sauvegarder(listeEnvoie, mailsFile);
 				if(ok) {
 					new MailMenuView(this.view.getMainPanel());
 				}
