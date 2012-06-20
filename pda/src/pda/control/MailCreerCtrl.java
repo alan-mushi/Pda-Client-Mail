@@ -57,7 +57,7 @@ public class MailCreerCtrl implements ActionListener, StaticRefs {
 				Login user = (Login) myDB.charger(loginFile);
 				Mail liste = (Mail) myDB.charger(mailsFile);
 				MailContent mail = new MailContent("brouillon", this.view.getObjet().getText(), this.view.getMessage().getText(), user.getUser());
-				String id = liste.getNextMaxKey(MailType.BROUILLON);
+				String id = liste.getNextMaxKey();
 				long trueID = Long.parseLong(id) + 1;
 				String idFinal = Long.toString(trueID);
 				liste.add(idFinal, mail, MailType.BROUILLON);

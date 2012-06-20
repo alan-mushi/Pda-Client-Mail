@@ -25,18 +25,18 @@ public class TestMail implements StaticRefs {
 		System.out.println( "\n[*] Test basé sur une erreur (type = supprimes) ... " ) ;
 		try {
 			MailContent email = new MailContent( "to" , "object" , "text" , "from" , null ) ;
-			myMail.add( myMail.getNextMaxKey( MailType.SUPPR ) , email , MailType.SUPPR ) ;
+			myMail.add( myMail.getNextMaxKey() , email , MailType.SUPPR ) ;
 		}
 		catch ( IllegalArgumentException e ) { System.out.println( e.getMessage() ) ; }
 
 		System.out.println( "\n[*] Test basé SANS erreurs (insertion de mails dans la HashMap recus) ... " ) ;
 		try {
 			MailContent email1 = new MailContent( "to" , "object1" , "text" , "from" , null ) ;
-			myMail.add( myMail.getNextMaxKey( MailType.RECU ) , email1 , MailType.RECU ) ;
+			myMail.add( myMail.getNextMaxKey() , email1 , MailType.RECU ) ;
 			MailContent email2 = new MailContent( "to" , "object2" , "text" , "from" , null ) ;
-			myMail.add( myMail.getNextMaxKey( MailType.RECU ) , email2 , MailType.RECU ) ;
+			myMail.add( myMail.getNextMaxKey() , email2 , MailType.RECU ) ;
 			MailContent email3 = new MailContent( "to" , "object3" , "text" , "from" , null ) ;
-			myMail.add( myMail.getNextMaxKey( MailType.RECU ) , email3 , MailType.RECU ) ;
+			myMail.add( myMail.getNextMaxKey() , email3 , MailType.RECU ) ;
 			System.out.println( "contenu de la hashmap recu : \n"+ myMail.getRecusMap() ) ;
 		}
 		catch ( IllegalArgumentException e ) {

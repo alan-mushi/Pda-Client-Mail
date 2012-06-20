@@ -51,7 +51,7 @@ public class Mail implements StaticRefs , java.io.Serializable {
 	 * Ajoute un mail à la liste des messages a envoyer à la prochaine connection.
 	 */
 	public void addToSend( MailType email ) {
-		toSend.put( this.getNextMaxKey( MailType.TOSEND ) , email ) ;
+		toSend.put( this.getNextMaxKey() , email ) ;
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class Mail implements StaticRefs , java.io.Serializable {
 		MailType tmpMail = origin.remove( id ) ;
 		tmpMail.setType( type ) ;
 		if ( dest.containsKey( id ) ) {
-			id = String.valueOf( this.getNextMaxKey( type ) ) ;
+			id = this.getNextMaxKey() ;
 		}
 		dest.put( id , tmpMail ) ;
 	}
@@ -106,27 +106,45 @@ public class Mail implements StaticRefs , java.io.Serializable {
 	}
 
 	/**
-	 * Retourne la clé la plus grande de la HashMap spécifiée par son type.
+	 * Retourne la clé qui <b>sera</b> la plus grande de toutes les HashMaps.
 	 */
-	private long getMaxKey( String type ) throws IllegalArgumentException {
-		long res = 0;
-		HashMap<String , MailType> myMap = this.whichMap( type ) ;
-		if ( myMap != null ) {
-			Object[] tab = myMap.keySet().toArray() ;
-			if ( tab != null && tab.length > 0 ) {
-				java.util.Arrays.sort( tab ) ;
-				res = Long.valueOf((String) tab[tab.length-1]);
+	public String getNextMaxKey() throws IllegalArgumentException {
+		long res = 0 ;
+
+		if ( this.recus.size() > 0 ) {
+			Object[] ids = this.recus.keySet().toArray() ;
+			java.util.Arrays.sort( ids ) ;
+			res = Long.valueOf( (String) ids[ids.length-1] ) ;
+		}
+		if ( this.lus.size() > 0 ) {
+			Object[] ids = this.lus.keySet().toArray() ;
+			java.util.Arrays.sort( ids ) ;
+			if ( res < Long.valueOf( (String) ids[ids.length-1] ) ) {
+				res = Long.valueOf( (String) ids[ids.length-1] ) ;
 			}
 		}
-		return res;
-	}
-
-	/**
-	 * Retourne la clé qui <b>sera</b> la plus grande de la HashMap.
-	 * @see pda.datas.Mail#getMaxKey( java.lang.String type )
-	 */
-	public String getNextMaxKey( String type ) throws IllegalArgumentException {
-		long res = this.getMaxKey( type ) ;
+		if ( this.envoyes.size() > 0 ) {
+			Object[] ids = this.envoyes.keySet().toArray() ;
+			java.util.Arrays.sort( ids ) ;
+			if ( res < Long.valueOf( (String) ids[ids.length-1] ) ) {
+				res = Long.valueOf( (String) ids[ids.length-1] ) ;
+			}
+		}
+		if ( this.brouillons.size() > 0 ) {
+			Object[] ids = this.brouillons.keySet().toArray() ;
+			java.util.Arrays.sort( ids ) ;
+			if ( res < Long.valueOf( (String) ids[ids.length-1] ) ) {
+				res = Long.valueOf( (String) ids[ids.length-1] ) ;
+			}
+		}
+		if ( this.toSend.size() > 0 ) {
+			Object[] ids = this.toSend.keySet().toArray() ;
+			java.util.Arrays.sort( ids ) ;
+			if ( res < Long.valueOf( (String) ids[ids.length-1] ) ) {
+				res = Long.valueOf( (String) ids[ids.length-1] ) ;
+			}
+		}
+			
 		res++ ;
 		return ( String.valueOf( res ) ) ;
 	}
